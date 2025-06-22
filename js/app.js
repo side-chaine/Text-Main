@@ -2303,37 +2303,42 @@ class App {
     }
     
     /**
-     * Добавление кнопки режиссера в интерфейс
+     * Добавляет кнопку режиссера в интерфейс
      * @private
      */
     _addDirectorButton() {
-        // Ищем контейнер для кнопок режимов
-        const modesContainer = document.querySelector('.mode-buttons') || 
-                              document.querySelector('.modes-container') ||
-                              document.querySelector('#modes');
+        console.log('🎬 Добавление кнопки режиссера в область аватара...');
         
-        if (!modesContainer) {
-            console.warn('🎬 Контейнер для кнопок режимов не найден');
-            console.warn('Доступные контейнеры:', document.querySelectorAll('[class*="mode"]'));
+        // Ищем область аватара
+        const avatarArea = document.querySelector('.user-avatar');
+        if (!avatarArea) {
+            console.warn('⚠️ Область аватара не найдена, кнопка режиссера не добавлена');
             return;
         }
-        
+
+        // Проверяем, не существует ли уже кнопка
+        if (document.getElementById('director-mode-btn')) {
+            console.log('🎬 Кнопка режиссера уже существует');
+            return;
+        }
+
         // Создаем кнопку режиссера
         const directorButton = document.createElement('button');
         directorButton.id = 'director-mode-btn';
-        directorButton.className = 'mode-button btn-director';
-        directorButton.innerHTML = '🎬 Режиссер';
-        directorButton.title = 'AI-режиссер для создания шоу';
+        directorButton.className = 'director-avatar-btn';
+        directorButton.title = 'Режиссерская консоль - управление AI-эффектами';
+        directorButton.innerHTML = '🎬';
         
         // Добавляем обработчик клика
         directorButton.addEventListener('click', () => {
+            console.log('🎬 Клик по кнопке режиссера');
             this._toggleDirectorMode();
         });
+
+        // Добавляем кнопку в область аватара
+        avatarArea.appendChild(directorButton);
         
-        // Добавляем кнопку в контейнер
-        modesContainer.appendChild(directorButton);
-        
-        console.log('🎬 Кнопка режиссера добавлена в интерфейс');
+        console.log('🎬 Кнопка режиссера добавлена в область аватара');
     }
     
     /**

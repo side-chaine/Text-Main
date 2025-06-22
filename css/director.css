@@ -400,4 +400,72 @@ body.director-active {
 .btn-director.active {
     background: linear-gradient(135deg, #d63031 0%, #a4161a 100%);
     border-color: #ff6b6b;
+}
+
+/* Область аватара и профиля */
+.user-profile-area {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.user-avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.avatar-icon {
+    font-size: 20px;
+    color: white;
+    pointer-events: none;
+}
+
+/* Кнопка режиссера в области аватара */
+.director-avatar-btn {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.director-avatar-btn:hover {
+    background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.director-avatar-btn:active {
+    transform: scale(0.95);
+}
+
+.director-avatar-btn.active {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    animation: director-pulse 2s infinite;
 } 
