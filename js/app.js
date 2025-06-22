@@ -2236,10 +2236,21 @@ class App {
      * Инициализация кнопки настроек аудио
      */
     initAudioSettingsButton() {
+        console.log('🎛️ Инициализация кнопки настроек аудио...');
         const audioSettingsBtn = document.getElementById('audio-settings-btn');
+        console.log('🎛️ Кнопка найдена:', !!audioSettingsBtn);
+        console.log('🎛️ AudioSettingsUI доступен:', !!this.audioSettingsUI);
+        
         if (audioSettingsBtn && this.audioSettingsUI) {
             audioSettingsBtn.addEventListener('click', () => {
+                console.log('🎛️ Клик по кнопке настроек аудио');
                 this.audioSettingsUI.toggle();
+            });
+            console.log('🎛️ Обработчик клика добавлен успешно');
+        } else {
+            console.error('🎛️ Ошибка инициализации:', {
+                button: !!audioSettingsBtn,
+                ui: !!this.audioSettingsUI
             });
         }
     }

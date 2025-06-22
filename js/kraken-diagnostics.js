@@ -190,11 +190,11 @@ class KrakenDiagnostics {
             this.addLog('INFO', `✅ AudioRouter найден, статус: ${audioRouter.isInitialized ? 'инициализирован' : 'не инициализирован'}`);
 
             // Получаем список устройств
-            const devices = await audioRouter.getAvailableDevices();
+            const devices = audioRouter.getDevicesList();
             this.addLog('INFO', `📱 Найдено устройств: ${devices.length}`);
             
             devices.forEach((device, index) => {
-                this.addLog('INFO', `  ${index + 1}. ${device.label || 'Без названия'} (${device.deviceId.substring(0, 8)}...)`);
+                this.addLog('INFO', `  ${index + 1}. ${device.label || 'Без названия'} (${device.id.substring(0, 8)}...)`);
             });
 
             // Проверяем текущие настройки
@@ -343,14 +343,11 @@ class KrakenDiagnostics {
                 this.addLog('INFO', `🎵 Устройства: проверяем...`);
                 
                 // Асинхронная проверка устройств
-                router.getAvailableDevices().then(devices => {
-                    this.addLog('INFO', `📱 Найдено устройств: ${devices.length}`);
-                    if (devices.length === 0) {
-                        this.addLog('WARN', '⚠️ Устройства не найдены - возможно нужно разрешение браузера');
-                    }
-                }).catch(error => {
-                    this.addLog('ERROR', `❌ Ошибка получения устройств: ${error.message}`);
-                });
+                const devices = router.getDevicesList();
+                this.addLog('INFO', `📱 Найдено устройств: ${devices.length}`);
+                if (devices.length === 0) {
+                    this.addLog('WARN', '⚠️ Устройства не найдены - возможно нужно разрешение браузера');
+                }
             }
         }
 

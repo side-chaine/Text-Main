@@ -180,6 +180,7 @@ class AudioSettingsUI {
      * Переключить видимость панели
      */
     toggle() {
+        console.log('🎛️ Toggle вызван, текущее состояние:', this.isVisible);
         if (this.isVisible) {
             this.hide();
         } else {
@@ -192,7 +193,9 @@ class AudioSettingsUI {
      */
     async updateDevicesList() {
         try {
-            const devices = await this.audioRouter.getAvailableDevices();
+            console.log('🎛️ Обновление списка устройств...');
+            const devices = this.audioRouter.getDevicesList();
+            console.log('🎛️ Получено устройств:', devices.length);
             
             const mainSelector = this.panel.querySelector('#main-output-selector');
             const monitorSelector = this.panel.querySelector('#monitor-output-selector');
@@ -201,22 +204,22 @@ class AudioSettingsUI {
             mainSelector.innerHTML = '<option value="">Выберите устройство...</option>';
             monitorSelector.innerHTML = '<option value="">Выберите устройство...</option>';
             
-            // Добавляем устройства
+            // Добавляем устройства в селекторы
             devices.forEach(device => {
                 const option1 = document.createElement('option');
-                option1.value = device.deviceId;
-                option1.textContent = device.label || `Устройство ${device.deviceId.substring(0, 8)}`;
+                option1.value = device.id;
+                option1.textContent = device.label;
                 mainSelector.appendChild(option1);
                 
                 const option2 = document.createElement('option');
-                option2.value = device.deviceId;
-                option2.textContent = device.label || `Устройство ${device.deviceId.substring(0, 8)}`;
+                option2.value = device.id;
+                option2.textContent = device.label;
                 monitorSelector.appendChild(option2);
             });
             
-            console.log(`🎛️ Обновлен список устройств: ${devices.length} найдено`);
+            console.log('🎛️ Список устройств обновлен');
         } catch (error) {
-            console.error('❌ Ошибка при обновлении списка устройств:', error);
+            console.error('🎛️ Ошибка обновления списка устройств:', error);
         }
     }
 
