@@ -2308,19 +2308,20 @@ class App {
      */
     _addDirectorButton() {
         // Ищем контейнер для кнопок режимов
-        const modesContainer = document.querySelector('.modes-container') || 
-                              document.querySelector('.mode-buttons') ||
+        const modesContainer = document.querySelector('.mode-buttons') || 
+                              document.querySelector('.modes-container') ||
                               document.querySelector('#modes');
         
         if (!modesContainer) {
-            console.warn('Контейнер для кнопок режимов не найден');
+            console.warn('🎬 Контейнер для кнопок режимов не найден');
+            console.warn('Доступные контейнеры:', document.querySelectorAll('[class*="mode"]'));
             return;
         }
         
         // Создаем кнопку режиссера
         const directorButton = document.createElement('button');
         directorButton.id = 'director-mode-btn';
-        directorButton.className = 'mode-btn director-btn';
+        directorButton.className = 'mode-button btn-director';
         directorButton.innerHTML = '🎬 Режиссер';
         directorButton.title = 'AI-режиссер для создания шоу';
         

@@ -14,6 +14,10 @@
     overflow: hidden;
 }
 
+.director-page.hidden {
+    display: none;
+}
+
 /* Заголовок режиссера */
 .director-header {
     display: flex;
@@ -377,4 +381,23 @@ body.director-active #app > *:not(.director-page) {
 
 body.director-active {
     overflow: hidden;
+}
+
+/* Кнопка режиссера в панели режимов */
+.btn-director {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-director:hover {
+    background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(238, 90, 36, 0.4);
+}
+
+.btn-director.active {
+    background: linear-gradient(135deg, #d63031 0%, #a4161a 100%);
+    border-color: #ff6b6b;
 } 
