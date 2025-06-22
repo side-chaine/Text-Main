@@ -2,6 +2,7 @@
  * Audio Engine for Text application
  * Handles audio playback using single streaming HTML5 Audio (Sprint Engine).
  * Phase 1: Reliable instrumental-only playback to eliminate sync issues.
+ * 🐙 КРАКЕН: Интегрирован AudioRouter для локального мониторинга
  */
 
 class AudioEngine {
@@ -11,6 +12,10 @@ class AudioEngine {
         this.instrumentalGain = this.audioContext.createGain();
         this.vocalsGain = this.audioContext.createGain();
         this.microphoneGain = this.audioContext.createGain();
+        
+        // 🐙 КРАКЕН: Инициализация AudioRouter
+        this.audioRouter = null;
+        this._initializeAudioRouter();
         
         this.instrumentalGain.connect(this.audioContext.destination);
         this.vocalsGain.connect(this.audioContext.destination);
@@ -44,7 +49,131 @@ class AudioEngine {
         this.microphoneGain.gain.value = this.microphoneVolume;
         
         console.log("🚀 AudioEngine (Hybrid Engine) - Гибридная архитектура восстановлена");
+        console.log("🐙 КРАКЕН: AudioRouter интегрирован");
         this._setupEventListeners();
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Инициализация AudioRouter
+     * @private
+     */
+    async _initializeAudioRouter() {
+        try {
+            // Импортируем AudioRouter если он доступен
+            if (typeof AudioRouter !== 'undefined') {
+                this.audioRouter = new AudioRouter();
+                const success = await this.audioRouter.initialize(this.audioContext);
+                
+                if (success) {
+                    // Подключаем основные узлы к роутеру
+                    this._connectToRouter();
+                    console.log('🐙 AudioRouter успешно интегрирован');
+                } else {
+                    console.warn('⚠️ AudioRouter не удалось инициализировать');
+                }
+            } else {
+                console.warn('⚠️ AudioRouter не найден, работаем без роутинга');
+            }
+        } catch (error) {
+            console.error('❌ Ошибка инициализации AudioRouter:', error);
+        }
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Подключение аудио узлов к роутеру
+     * @private
+     */
+    _connectToRouter() {
+        if (!this.audioRouter || !this.audioRouter.isInitialized) return;
+        
+        try {
+            // Создаем мастер-микс узел
+            this.masterMix = this.audioContext.createGain();
+            
+            // Подключаем все источники к мастер-миксу
+            this.instrumentalGain.disconnect();
+            this.vocalsGain.disconnect();
+            this.microphoneGain.disconnect();
+            
+            this.instrumentalGain.connect(this.masterMix);
+            this.vocalsGain.connect(this.masterMix);
+            this.microphoneGain.connect(this.masterMix);
+            
+            // Подключаем мастер-микс к роутеру
+            this.audioRouter.connectSource(this.masterMix);
+            
+            console.log('🔗 Аудио узлы подключены к роутеру');
+        } catch (error) {
+            console.error('❌ Ошибка подключения к роутеру:', error);
+        }
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Получение экземпляра AudioRouter
+     * @returns {AudioRouter|null}
+     */
+    getAudioRouter() {
+        return this.audioRouter;
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Установка основного устройства вывода
+     * @param {string} deviceId - ID устройства
+     * @returns {Promise<boolean>}
+     */
+    async setMainOutputDevice(deviceId) {
+        if (!this.audioRouter) {
+            console.warn('⚠️ AudioRouter недоступен');
+            return false;
+        }
+        
+        return await this.audioRouter.setMainDevice(deviceId);
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Установка устройства мониторинга
+     * @param {string} deviceId - ID устройства
+     * @returns {Promise<boolean>}
+     */
+    async setMonitorOutputDevice(deviceId) {
+        if (!this.audioRouter) {
+            console.warn('⚠️ AudioRouter недоступен');
+            return false;
+        }
+        
+        return await this.audioRouter.setMonitorDevice(deviceId);
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Получение списка доступных устройств
+     * @returns {Array}
+     */
+    getAvailableOutputDevices() {
+        if (!this.audioRouter) {
+            return [{ id: 'default', label: 'Системное по умолчанию', kind: 'audiooutput' }];
+        }
+        
+        return this.audioRouter.getDevicesList();
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Управление уровнями мониторинга
+     * @param {number} volume - Уровень громкости (0-1)
+     */
+    setMonitorVolume(volume) {
+        if (this.audioRouter) {
+            this.audioRouter.setMonitorVolume(volume);
+        }
+    }
+    
+    /**
+     * 🐙 КРАКЕН: Управление основным уровнем
+     * @param {number} volume - Уровень громкости (0-1)
+     */
+    setMainVolume(volume) {
+        if (this.audioRouter) {
+            this.audioRouter.setMainVolume(volume);
+        }
     }
     
     _setupEventListeners() {

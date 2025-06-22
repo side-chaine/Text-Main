@@ -171,6 +171,15 @@ class App {
         this.currentScale = 100;
         this.currentBPM = 100; // Добавляем инициализацию BPM
         this.isPlaying = false;
+
+        this.audioEngine = new AudioEngine();
+        this.audioSettingsUI = null;
+        
+        // Инициализация после загрузки аудио движка
+        this.audioEngine.init().then(() => {
+            this.audioSettingsUI = new AudioSettingsUI(this.audioEngine);
+            this.initAudioSettingsButton();
+        });
     }
     
     _initUI() {
@@ -2220,6 +2229,18 @@ class App {
     _updateBPMDisplay() {
         if (this.bpmValueBtn) {
             this.bpmValueBtn.textContent = `${this.currentBPM}%`;
+        }
+    }
+
+    /**
+     * Инициализация кнопки настроек аудио
+     */
+    initAudioSettingsButton() {
+        const audioSettingsBtn = document.getElementById('audio-settings-btn');
+        if (audioSettingsBtn && this.audioSettingsUI) {
+            audioSettingsBtn.addEventListener('click', () => {
+                this.audioSettingsUI.toggle();
+            });
         }
     }
 }
