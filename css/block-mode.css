@@ -1,0 +1,40 @@
+/* 🎵 Block Mode Styles - Стили для блочного режима */
+
+.block-mode-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.block-mode-header {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.block-mode-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.block-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.block-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.block-item.active {
+    border-color: #4a9eff;
+    box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
+} 

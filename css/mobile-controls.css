@@ -1,0 +1,101 @@
+/* 📱 Mobile Controls - Мобильные элементы управления */
+
+@media (max-width: 768px) {
+    .mobile-controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+    }
+
+    .mobile-controls-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .mobile-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    .mobile-btn:hover,
+    .mobile-btn:active {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    .mobile-btn.active {
+        background: rgba(74, 158, 255, 0.6);
+        border-color: #4a9eff;
+    }
+
+    .mobile-volume-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .mobile-volume-slider {
+        flex: 1;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .mobile-volume-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #4a9eff;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .mobile-volume-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    /* Скрытие десктопных элементов на мобильных */
+    .desktop-only {
+        display: none !important;
+    }
+
+    /* Адаптация основных элементов для мобильных */
+    .app-header {
+        padding: 10px;
+    }
+
+    .mode-buttons {
+        gap: 5px;
+    }
+
+    .mode-button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    #lyrics-container {
+        padding-bottom: 120px; /* Место для мобильных контролов */
+    }
+} 

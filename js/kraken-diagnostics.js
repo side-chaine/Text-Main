@@ -18,6 +18,11 @@ class KrakenDiagnostics {
         this.interceptAudioRouterLogs();
         
         console.log('🔍 КРАКЕН: Диагностика активирована (Ctrl+Shift+D для открытия)');
+        
+        // Автоматическая проверка через 3 секунды после загрузки
+        setTimeout(() => {
+            this.runAutoCheck();
+        }, 3000);
     }
 
     /**
@@ -302,6 +307,63 @@ class KrakenDiagnostics {
         this.logHistory = [];
         this.updateLogDisplay();
         this.addLog('INFO', '🧹 Логи очищены');
+    }
+
+    /**
+     * Автоматическая проверка системы при запуске
+     */
+    runAutoCheck() {
+        this.addLog('INFO', '🔍 Автоматическая проверка системы...');
+        
+        // Проверяем основные компоненты
+        const checks = [
+            { name: 'AudioEngine', obj: window.audioEngine },
+            { name: 'AudioRouter', obj: window.audioEngine?.audioRouter },
+            { name: 'TrackCatalog', obj: window.trackCatalog },
+            { name: 'LyricsDisplay', obj: window.lyricsDisplay }
+        ];
+
+        let passedChecks = 0;
+        checks.forEach(check => {
+            if (check.obj) {
+                this.addLog('INFO', `✅ ${check.name}: найден`);
+                passedChecks++;
+            } else {
+                this.addLog('WARN', `⚠️ ${check.name}: не найден`);
+            }
+        });
+
+        // Проверяем AudioRouter детально
+        if (window.audioEngine?.audioRouter) {
+            const router = window.audioEngine.audioRouter;
+            this.addLog('INFO', `🎛️ AudioRouter статус: ${router.isInitialized ? 'инициализирован' : 'не инициализирован'}`);
+            
+            if (router.isInitialized) {
+                this.addLog('INFO', `🔊 Аудио контекст: ${router.audioContext ? 'активен' : 'неактивен'}`);
+                this.addLog('INFO', `🎵 Устройства: проверяем...`);
+                
+                // Асинхронная проверка устройств
+                router.getAvailableDevices().then(devices => {
+                    this.addLog('INFO', `📱 Найдено устройств: ${devices.length}`);
+                    if (devices.length === 0) {
+                        this.addLog('WARN', '⚠️ Устройства не найдены - возможно нужно разрешение браузера');
+                    }
+                }).catch(error => {
+                    this.addLog('ERROR', `❌ Ошибка получения устройств: ${error.message}`);
+                });
+            }
+        }
+
+        const percentage = Math.round((passedChecks / checks.length) * 100);
+        this.addLog('INFO', `📊 Проверка завершена: ${passedChecks}/${checks.length} компонентов (${percentage}%)`);
+        
+        if (percentage === 100) {
+            this.addLog('INFO', '🎉 Все системы работают! Кракен готов к использованию');
+        } else if (percentage >= 75) {
+            this.addLog('WARN', '⚠️ Большинство систем работает, но есть проблемы');
+        } else {
+            this.addLog('ERROR', '❌ Обнаружены серьезные проблемы в системе');
+        }
     }
 }
 
