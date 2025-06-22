@@ -173,13 +173,10 @@ class App {
         this.isPlaying = false;
 
         this.audioEngine = new AudioEngine();
-        this.audioSettingsUI = null;
         
-        // Инициализация после загрузки аудио движка
-        this.audioEngine.init().then(() => {
-            this.audioSettingsUI = new AudioSettingsUI(this.audioEngine);
-            this.initAudioSettingsButton();
-        });
+        // Инициализация AudioSettingsUI сразу после создания AudioEngine
+        this.audioSettingsUI = new AudioSettingsUI(this.audioEngine);
+        this.initAudioSettingsButton();
     }
     
     _initUI() {
