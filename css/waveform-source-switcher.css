@@ -1,0 +1,223 @@
+/* Waveform Source Switcher */
+.waveform-source-group {
+    display: flex;
+    gap: 2px;
+    margin-left: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* === ГОРИЗОНТАЛЬНОЕ РАСПОЛОЖЕНИЕ ПАНЕЛИ === */
+.waveform-footer-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+/* === НОВЫЕ ГРУППЫ УПРАВЛЕНИЯ === */
+.waveform-control-group {
+    display: flex;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    align-items: center;
+}
+
+/* BPM Display */
+.bpm-display {
+    min-width: 36px;
+    height: 28px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFD700;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.bpm-display:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-1px);
+}
+
+.bpm-display:focus {
+    background: rgba(255, 215, 0, 0.25);
+    border-color: #FFD700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+    user-select: text;
+    cursor: text;
+}
+
+/* Общие стили для кнопок управления */
+.waveform-btn.control-btn {
+    min-width: 28px;
+    height: 28px;
+    padding: 4px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.waveform-btn.control-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+.waveform-btn.control-btn.active {
+    background: #FF6B35;
+    color: white;
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3);
+}
+
+.waveform-btn.control-btn.active:hover {
+    background: #E55A2B;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(255, 107, 53, 0.4);
+}
+
+.waveform-source-group .source-btn {
+    min-width: 32px;
+    height: 28px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.waveform-source-group .source-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+.waveform-source-group .source-btn.active {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.waveform-source-group .source-btn.active:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(76, 175, 80, 0.4);
+}
+
+/* Специальные цвета для разных источников */
+.waveform-source-group .source-btn[data-source="vocals"].active {
+    background: #FFD700;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+.waveform-source-group .source-btn[data-source="vocals"].active:hover {
+    background: #FFC107;
+    box-shadow: 0 3px 6px rgba(255, 215, 0, 0.4);
+}
+
+.waveform-source-group .source-btn[data-source="instrumental"].active {
+    background: #2196F3;
+    color: white;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.waveform-source-group .source-btn[data-source="instrumental"].active:hover {
+    background: #1976D2;
+    box-shadow: 0 3px 6px rgba(33, 150, 243, 0.4);
+}
+
+.waveform-source-group .source-btn[data-source="master"].active {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.waveform-source-group .source-btn[data-source="master"].active:hover {
+    background: #45a049;
+    box-shadow: 0 3px 6px rgba(76, 175, 80, 0.4);
+}
+
+/* Notification styles for waveform */
+.waveform-notification {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 1000;
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
+    pointer-events: none;
+}
+
+.waveform-notification.success {
+    background: rgba(76, 175, 80, 0.9);
+    border: 1px solid #4CAF50;
+}
+
+.waveform-notification.error {
+    background: rgba(244, 67, 54, 0.9);
+    border: 1px solid #f44336;
+}
+
+.waveform-notification.warning {
+    background: rgba(255, 193, 7, 0.9);
+    border: 1px solid #FFC107;
+    color: #333;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+} 

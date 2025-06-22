@@ -1,0 +1,1071 @@
+rtf-parser.js:849 Updated marker for line 19: type=verse, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 20: type=verse, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 21: type=verse, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 26: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 27: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 28: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 29: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 30: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 31: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 32: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 33: type=chorus, color=#F44336
+rtf-parser.js:849 Updated marker for line 34: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 35: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 36: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 37: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 38: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 39: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 40: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 41: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 42: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 43: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 44: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 45: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 46: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 47: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 48: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 49: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 50: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 51: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 52: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 53: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 54: type=unknown, color=#4CAF50
+rtf-parser.js:849 Updated marker for line 55: type=unknown, color=#4CAF50
+rtf-parser.js:849 LyricsDisplay: Updated marker colors after loading blocks
+track-catalog.js:1292 ⏱️ LYRICS_PREPARE_TIME: 104.637939453125 ms
+track-catalog.js:1304 ⏱️ BLOB_CREATION_TIME: 41.508056640625 ms
+rtf-parser.js:849 🚀 ГИБРИД: Загрузка двойного потока
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 ⏹️ ГИБРИД: Остановлен и сброшен
+rtf-parser.js:849 🎚️ МАСТЕР: Создание микшированной дорожки...
+rtf-parser.js:849 🎚️ МАСТЕР: Инструментал URL: blob:null/5a615560-5a77-4686-8f7e-6edefa9489b4...
+rtf-parser.js:849 🎚️ МАСТЕР: Вокал URL: blob:null/05678593-ae9b-4065-ad99-2d2f4174190d...
+rtf-parser.js:849 🎚️ МАСТЕР: Загружаем аудиофайлы...
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+rtf-parser.js:849 🎚️ МАСТЕР: Конвертируем в ArrayBuffer...
+rtf-parser.js:849 🎚️ МАСТЕР: Инструментал размер: 11075962 байт
+rtf-parser.js:849 🎚️ МАСТЕР: Вокал размер: 11075962 байт
+ 🎚️ МАСТЕР: Декодируем аудиоданные...
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ ✅ ИНСТРУМЕНТАЛ ГОТОВ! Длительность: 276.82с
+ ⏱️ HYBRID_ENGINE_LOAD_TIME: 427.10009765625 ms
+ 🎯 ГИБРИД: Рассинхронизация устранена!
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ ⏱️ AUDIO_LOAD_TIME: 494.4609375 ms
+ Loading 34 markers for track Frank Sinatra-My Way [music]
+ Validating 34 markers for 34 lyric lines
+ Kept 34 valid markers out of 34
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🎵 АВТОПЛЕЙ: Запуск воспроизведения...
+ ✅ Track "Frank Sinatra-My Way [music]" loaded successfully
+ ✅ ВОКАЛ ГОТОВ! Длительность: 276.82с
+ 🎨 StateManager: Forcing text rerender in current mode
+ 🎤 Karaoke mode detected, should work correctly
+ ⏱️ FINAL_RENDER_TIME: 185.64306640625 ms
+ ⏱️ TOTAL_TRACK_LOAD_TIME: 1017.796875 ms
+ Auto-scroll re-enabled after scroll event
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ ✅ АВТОПЛЕЙ: Воспроизведение начато успешно
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ ⏸️ ИНСТРУМЕНТАЛ: Пауза
+ ⏸️ ВОКАЛ: Пауза
+ isPlaying property set to: false
+ Key pressed:  , key code: 32, waveform active: false
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ APP: Создаем вокальный URL для синхронизации трека: Frank Sinatra-My Way [music]
+ WaveformEditor: Starting high-fidelity audio load for sync: blob:null/418c7bd4-5b84-49db-961b-3e5589987157
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ 🎚️ МАСТЕР: Инструментал - каналов: 2, длина: 12207791, частота: 44100Hz
+ 🎚️ МАСТЕР: Вокал - каналов: 2, длина: 12207791, частота: 44100Hz
+ 🎚️ МАСТЕР: Создан буфер - каналов: 2, длина: 12207791
+ 🎚️ МАСТЕР: Начинаем микширование каналов...
+ 🎚️ МАСТЕР: Микширование завершено, конвертируем в blob...
+ 🎚️ МАСТЕР: Микшированная дорожка создана! URL: blob:null/ca7a819c-def2-47a3-97ce-151e2fa5b6e0...
+ 🎚️ МАСТЕР: Размер blob: 48831208 байт
+ 🎚️ МАСТЕР: Обновляем URL после создания микшированной дорожки
+ 🎚️ МАСТЕР URL обновлен: blob:null/ca7a819c-def2-47a3-97ce-151e2fa5b6e0...
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 276.82s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'And now, the end is near'
+ Rendering standard line [1]: 'And so I face the final curtain'
+ Rendering standard line [2]: 'My friend, I'll say it clear'
+ Rendering standard line [3]: 'I'll state my case, of which I'm certain'
+ Rendering standard line [4]: 'I've lived a life that's full'
+ Rendering standard line [5]: 'I traveled each and every highway'
+ Rendering standard line [6]: 'And more, much more than this, I did it my way'
+ Rendering standard line [7]: 'Regrets, I've had a few'
+ Rendering standard line [8]: 'But then again, too few to mention'
+ Rendering standard line [9]: 'I did what I had to do'
+ Rendering standard line [10]: 'And saw it through without exemption'
+ Rendering standard line [11]: 'I planned each charted course'
+ Rendering standard line [12]: 'Each careful step along the byway'
+ Rendering standard line [13]: 'And more, much more than this, I did it my way'
+ Rendering standard line [14]: 'Yes, there were times, I'm sure you knew'
+ Rendering standard line [15]: 'When I bit off more than I could chew'
+ Rendering standard line [16]: 'But through it all, when there was doubt'
+ Rendering standard line [17]: 'I ate it up and spit it out'
+ Rendering standard line [18]: 'I faced it all and I stood tall and did it my way'
+ Rendering standard line [19]: 'I've loved, I've laughed and cried'
+ Rendering standard line [20]: 'I've had my fill, my share of losing'
+ Rendering standard line [21]: 'And now, as tears subside'
+ Rendering standard line [22]: 'I find it all so amusing'
+ Rendering standard line [23]: 'To think I did all that'
+ Rendering standard line [24]: 'And may I say, not in a shy way'
+ Rendering standard line [25]: 'Oh, no, oh, no, not me, I did it my way'
+ Rendering standard line [26]: 'For what is a man, what has he got?'
+ Rendering standard line [27]: 'If not himself, then he has naught'
+ Rendering standard line [28]: 'To say the things he truly feels'
+ Rendering standard line [29]: 'And not the words of one who kneels'
+ Rendering standard line [30]: 'The record shows'
+ Rendering standard line [31]: 'I took the blows'
+ Rendering standard line [32]: 'And did it my way'
+ Rendering standard line [33]: 'Yes, it was my way'
+ TextStyleManager: Font scale for default set to 0.80
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'And now, the end is near'
+ Rendering standard line [1]: 'And so I face the final curtain'
+ Rendering standard line [2]: 'My friend, I'll say it clear'
+ Rendering standard line [3]: 'I'll state my case, of which I'm certain'
+ Rendering standard line [4]: 'I've lived a life that's full'
+ Rendering standard line [5]: 'I traveled each and every highway'
+ Rendering standard line [6]: 'And more, much more than this, I did it my way'
+ Rendering standard line [7]: 'Regrets, I've had a few'
+ Rendering standard line [8]: 'But then again, too few to mention'
+ Rendering standard line [9]: 'I did what I had to do'
+ Rendering standard line [10]: 'And saw it through without exemption'
+ Rendering standard line [11]: 'I planned each charted course'
+ Rendering standard line [12]: 'Each careful step along the byway'
+ Rendering standard line [13]: 'And more, much more than this, I did it my way'
+ Rendering standard line [14]: 'Yes, there were times, I'm sure you knew'
+ Rendering standard line [15]: 'When I bit off more than I could chew'
+ Rendering standard line [16]: 'But through it all, when there was doubt'
+ Rendering standard line [17]: 'I ate it up and spit it out'
+ Rendering standard line [18]: 'I faced it all and I stood tall and did it my way'
+ Rendering standard line [19]: 'I've loved, I've laughed and cried'
+ Rendering standard line [20]: 'I've had my fill, my share of losing'
+ Rendering standard line [21]: 'And now, as tears subside'
+ Rendering standard line [22]: 'I find it all so amusing'
+ Rendering standard line [23]: 'To think I did all that'
+ Rendering standard line [24]: 'And may I say, not in a shy way'
+ Rendering standard line [25]: 'Oh, no, oh, no, not me, I did it my way'
+ Rendering standard line [26]: 'For what is a man, what has he got?'
+ Rendering standard line [27]: 'If not himself, then he has naught'
+ Rendering standard line [28]: 'To say the things he truly feels'
+ Rendering standard line [29]: 'And not the words of one who kneels'
+ Rendering standard line [30]: 'The record shows'
+ Rendering standard line [31]: 'I took the blows'
+ Rendering standard line [32]: 'And did it my way'
+ Rendering standard line [33]: 'Yes, it was my way'
+ WaveformEditor: Shown
+ WaveformEditor: No audio data found, trying to load...
+ WaveformEditor: _loadAudioData is deprecated. Use loadAudioForSync() instead.
+_loadAudioData @ waveform-editor.js:1075
+ WaveformEditor: _activateFirstUnmarkedLine called.
+ WaveformEditor: Markers length: 34
+ WaveformEditor: Total lyric lines from lyricsDisplay: 34
+ [SETACTIVE] Called with index 0. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+ LoopBlockManager: Sync editor opened event received
+ WaveformEditor: Dispatched sync-editor-opened event Object
+ Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-capturexpression-26530062.jpg
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ Auto-scroll re-enabled after scroll event
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+index.html:1 Not allowed to load local resource: blob:null/35ed01e3-405c-4249-9fca-6a1a6e173a59
+index.html:1 Not allowed to load local resource: blob:null/431eac82-4b63-42f4-9e13-277612294046
+ 🔄 WaveformEditor: Начинаем переключение на источник: vocals
+ ✅ Using cached data for vocals
+ WaveformEditor notification: Переключено на Вокал
+ 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+ ✅ Using cached data for instrumental
+ WaveformEditor notification: Переключено на Инструментал
+ 🔄 WaveformEditor: Начинаем переключение на источник: master
+ WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+ WaveformEditor notification: Переключено на Мастер
+ WaveformEditor: Updating marker colors on activation...
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-suvan-chowdhury-37305-144429.jpg
+ Началось перетаскивание маркера: 1750293756651qbj12
+ Началось перетаскивание маркера: 1750293756651qbj12
+ Перетаскивание маркера 1750293756651qbj12 на 150.25s
+ Перетаскивание маркера 1750293756651qbj12 на 150.17s
+ Перетаскивание маркера 1750293756651qbj12 на 150.10s
+ Перетаскивание маркера 1750293756651qbj12 на 150.02s
+ Перетаскивание маркера 1750293756651qbj12 на 150.02s
+ Перетаскивание маркера 1750293756651qbj12 на 150.02s
+ Перетаскивание маркера 1750293756651qbj12 на 149.94s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 1750293756651qbj12
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 175029376388526vz9
+ Началось перетаскивание маркера: 175029376388526vz9
+ Перетаскивание маркера 175029376388526vz9 на 157.68s
+ Перетаскивание маркера 175029376388526vz9 на 157.52s
+ Перетаскивание маркера 175029376388526vz9 на 157.45s
+ Перетаскивание маркера 175029376388526vz9 на 157.37s
+ Перетаскивание маркера 175029376388526vz9 на 157.37s
+ Перетаскивание маркера 175029376388526vz9 на 157.22s
+ Перетаскивание маркера 175029376388526vz9 на 157.06s
+ Перетаскивание маркера 175029376388526vz9 на 156.83s
+ Перетаскивание маркера 175029376388526vz9 на 156.76s
+ Перетаскивание маркера 175029376388526vz9 на 156.68s
+ Перетаскивание маркера 175029376388526vz9 на 156.68s
+ Перетаскивание маркера 175029376388526vz9 на 156.68s
+ Перетаскивание маркера 175029376388526vz9 на 156.68s
+ Перетаскивание маркера 175029376388526vz9 на 156.68s
+ Перетаскивание маркера 175029376388526vz9 на 156.76s
+ Перетаскивание маркера 175029376388526vz9 на 156.76s
+ Перетаскивание маркера 175029376388526vz9 на 156.83s
+ Перетаскивание маркера 175029376388526vz9 на 156.91s
+ Перетаскивание маркера 175029376388526vz9 на 156.99s
+ Перетаскивание маркера 175029376388526vz9 на 156.99s
+ Перетаскивание маркера 175029376388526vz9 на 157.06s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 175029376388526vz9
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 1750293769918q5oxw
+ Началось перетаскивание маркера: 1750293769918q5oxw
+ Перетаскивание маркера 1750293769918q5oxw на 163.11s
+ Перетаскивание маркера 1750293769918q5oxw на 163.03s
+ Перетаскивание маркера 1750293769918q5oxw на 163.03s
+ Перетаскивание маркера 1750293769918q5oxw на 162.96s
+ Перетаскивание маркера 1750293769918q5oxw на 162.88s
+ Перетаскивание маркера 1750293769918q5oxw на 162.88s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 1750293769918q5oxw
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 175029371860142m0l
+ Началось перетаскивание маркера: 175029371860142m0l
+ Перетаскивание маркера 175029371860142m0l на 111.98s
+ Перетаскивание маркера 175029371860142m0l на 112.06s
+ Перетаскивание маркера 175029371860142m0l на 112.13s
+ Перетаскивание маркера 175029371860142m0l на 112.13s
+ Перетаскивание маркера 175029371860142m0l на 112.21s
+ Перетаскивание маркера 175029371860142m0l на 112.21s
+ Перетаскивание маркера 175029371860142m0l на 112.21s
+ Перетаскивание маркера 175029371860142m0l на 112.29s
+ Перетаскивание маркера 175029371860142m0l на 112.29s
+ Перетаскивание маркера 175029371860142m0l на 112.44s
+ Перетаскивание маркера 175029371860142m0l на 112.52s
+ Перетаскивание маркера 175029371860142m0l на 112.59s
+ Перетаскивание маркера 175029371860142m0l на 112.67s
+ Перетаскивание маркера 175029371860142m0l на 112.67s
+ Перетаскивание маркера 175029371860142m0l на 112.67s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 175029371860142m0l
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 1750293700151d6yeo
+ Началось перетаскивание маркера: 1750293700151d6yeo
+ Перетаскивание маркера 1750293700151d6yeo на 93.99s
+ Перетаскивание маркера 1750293700151d6yeo на 94.07s
+ Перетаскивание маркера 1750293700151d6yeo на 94.07s
+ Перетаскивание маркера 1750293700151d6yeo на 94.15s
+ Перетаскивание маркера 1750293700151d6yeo на 94.22s
+ Перетаскивание маркера 1750293700151d6yeo на 94.22s
+ Перетаскивание маркера 1750293700151d6yeo на 94.22s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 1750293700151d6yeo
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 1750293693527wb6my
+ Началось перетаскивание маркера: 1750293693527wb6my
+ Перетаскивание маркера 1750293693527wb6my на 87.26s
+ Перетаскивание маркера 1750293693527wb6my на 87.18s
+ Перетаскивание маркера 1750293693527wb6my на 87.11s
+ Перетаскивание маркера 1750293693527wb6my на 86.95s
+ Перетаскивание маркера 1750293693527wb6my на 86.72s
+ Перетаскивание маркера 1750293693527wb6my на 86.72s
+ Перетаскивание маркера 1750293693527wb6my на 86.80s
+ Перетаскивание маркера 1750293693527wb6my на 86.80s
+ Перетаскивание маркера 1750293693527wb6my на 86.88s
+ Перетаскивание маркера 1750293693527wb6my на 86.88s
+ Перетаскивание маркера 1750293693527wb6my на 86.95s
+ Перетаскивание маркера 1750293693527wb6my на 86.95s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 1750293693527wb6my
+ Ignoring click after marker drag
+ Track updated in database
+ Началось перетаскивание маркера: 1750293687507nvslp
+ Началось перетаскивание маркера: 1750293687507nvslp
+ Перетаскивание маркера 1750293687507nvslp на 81.14s
+ Перетаскивание маркера 1750293687507nvslp на 81.21s
+ Перетаскивание маркера 1750293687507nvslp на 81.21s
+ Перетаскивание маркера 1750293687507nvslp на 81.21s
+ Перетаскивание маркера 1750293687507nvslp на 81.29s
+ Перетаскивание маркера 1750293687507nvslp на 81.29s
+ Перетаскивание маркера 1750293687507nvslp на 81.29s
+ Перетаскивание маркера 1750293687507nvslp на 81.37s
+ Перетаскивание маркера 1750293687507nvslp на 81.37s
+ Перетаскивание маркера 1750293687507nvslp на 81.44s
+ Перетаскивание маркера 1750293687507nvslp на 81.44s
+ Saved 34 markers to track: Frank Sinatra-My Way [music]
+ Завершено перетаскивание маркера: 1750293687507nvslp
+ Ignoring click after marker drag
+ Track updated in database
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-amit-batra-3062797-4658541.jpg
+ Sync Editor: Restoring original style "karaoke" and scale 1.2
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ TextStyleManager: Font scale for karaoke set to 1.20
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LoopBlockManager: Sync editor closed event received
+ WaveformEditor: Dispatched sync-editor-closed event
+ WaveformEditor: Hidden
+ TrackCatalog: openCatalog() called
+ TrackCatalog: catalogContainer exists: true
+ TrackCatalog: catalogContainer classes before: hidden
+ TrackCatalog: catalogContainer classes after: 
+ TrackCatalog: Catalog should now be visible
+ Auto-scroll re-enabled after scroll event
+ 🔄 Loading track: "Linkin Park-With You [-]"
+ 🔄 StateManager: Starting HARD RESET of all components
+ 1. Resetting AudioEngine...
+ AudioEngine: Starting reset...
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🧹 СПРИНТЕР: Ресурсы очищены
+ AudioEngine: Reset completed successfully
+ ✅ AudioEngine reset complete
+ 2. Resetting LyricsDisplay...
+ 💥 LyricsDisplay: Performing full reset.
+ ✅ LyricsDisplay: Full reset complete. All lyric data and DOM elements cleared.
+ ✅ LyricsDisplay full reset complete
+ 3. Resetting TextStyleManager...
+ 💥 TextStyleManager: Full reset initiated.
+ ✅ TextStyleManager: Reset complete. All states and caches cleared.
+ ✅ TextStyleManager reset complete.
+ 🎉 StateManager: HARD RESET completed successfully
+ ✅ All components ready for new track
+ ⏱️ HARD_RESET_TIME: 24.443115234375 ms
+ TrackCatalog: Set waveformEditor.lastLoadedFile to Linkin Park - With You.rtf
+ TrackCatalog: Set waveformEditor.currentTrackId to 1750326094019
+ TrackCatalog: Found 8 blocks. Preparing them for rendering after audio load.
+ LyricsDisplay: Loading 8 imported blocks.
+ Block 0 loaded: id="block-1750360936211-0-0djer1cj2gyt", name="Block 1", lines=8
+ Block 1 loaded: id="1", name="Block 2", lines=6
+ Block 2 loaded: id="2", name="Block 3", lines=5
+ Block 3 loaded: id="3", name="Block 4", lines=8
+ Block 4 loaded: id="4", name="Block 5", lines=6
+ Block 5 loaded: id="5", name="Block 6", lines=10
+ Block 6 loaded: id="6", name="Block 7", lines=4
+ Block 7 loaded: id="7", name="Block 8", lines=10
+ LyricsDisplay: Skipping render as requested by shouldRender=false
+ LyricsDisplay: Successfully loaded 8 blocks, total lyric lines: 57.
+ Updated marker for line 8: type=chorus, color=#F44336
+ Updated marker for line 9: type=chorus, color=#F44336
+ Updated marker for line 10: type=chorus, color=#F44336
+ Updated marker for line 11: type=chorus, color=#F44336
+ Updated marker for line 12: type=chorus, color=#F44336
+ Updated marker for line 13: type=chorus, color=#F44336
+ Updated marker for line 26: type=verse, color=#4CAF50
+ LyricsDisplay: Updated marker colors after loading blocks
+ ⏱️ LYRICS_PREPARE_TIME: 137.68896484375 ms
+ ⏱️ BLOB_CREATION_TIME: 24.38720703125 ms
+ 🚀 ГИБРИД: Загрузка двойного потока
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🎚️ МАСТЕР: Создание микшированной дорожки...
+ 🎚️ МАСТЕР: Инструментал URL: blob:null/186eaf85-30ba-4f24-b4c7-f3eef5f40a99...
+ 🎚️ МАСТЕР: Вокал URL: blob:null/4d2cf3bf-ffb1-44e7-b707-9c4152547c1f...
+ 🎚️ МАСТЕР: Загружаем аудиофайлы...
+index.html:1 Not allowed to load local resource: blob:null/5a615560-5a77-4686-8f7e-6edefa9489b4
+index.html:1 Not allowed to load local resource: blob:null/05678593-ae9b-4065-ad99-2d2f4174190d
+ ❌ Ошибка загрузки инструментала: Event
+(анонимная) @ audio-engine.js:200
+ ⚠️ Ошибка загрузки вокала: Event
+(анонимная) @ audio-engine.js:230
+ 🎚️ МАСТЕР: Конвертируем в ArrayBuffer...
+ 🎚️ МАСТЕР: Инструментал размер: 8134574 байт
+ 🎚️ МАСТЕР: Вокал размер: 8134574 байт
+ 🎚️ МАСТЕР: Декодируем аудиоданные...
+ ✅ ИНСТРУМЕНТАЛ ГОТОВ! Длительность: 203.29с
+ ⏱️ HYBRID_ENGINE_LOAD_TIME: 424.948974609375 ms
+ 🎯 ГИБРИД: Рассинхронизация устранена!
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ ⏱️ AUDIO_LOAD_TIME: 512.791015625 ms
+ Loading 57 markers for track Linkin Park-With You [-]
+ Validating 57 markers for 57 lyric lines
+ Kept 57 valid markers out of 57
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🎵 АВТОПЛЕЙ: Запуск воспроизведения...
+ ✅ Track "Linkin Park-With You [-]" loaded successfully
+ ✅ ВОКАЛ ГОТОВ! Длительность: 203.29с
+ 🎨 StateManager: Forcing text rerender in current mode
+ 🎤 Karaoke mode detected, should work correctly
+ ⏱️ FINAL_RENDER_TIME: 102.422119140625 ms
+ ⏱️ TOTAL_TRACK_LOAD_TIME: 957.94189453125 ms
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ ✅ АВТОПЛЕЙ: Воспроизведение начато успешно
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ ⏸️ ИНСТРУМЕНТАЛ: Пауза
+ ⏸️ ВОКАЛ: Пауза
+ isPlaying property set to: false
+ Key pressed:  , key code: 32, waveform active: false
+ 🎚️ МАСТЕР: Инструментал - каналов: 2, длина: 8964911, частота: 44100Hz
+ 🎚️ МАСТЕР: Вокал - каналов: 2, длина: 8964911, частота: 44100Hz
+ 🎚️ МАСТЕР: Создан буфер - каналов: 2, длина: 8964911
+ 🎚️ МАСТЕР: Начинаем микширование каналов...
+ 🎚️ МАСТЕР: Микширование завершено, конвертируем в blob...
+ 🎚️ МАСТЕР: Микшированная дорожка создана! URL: blob:null/8b2ad2f6-0b1b-4b9c-84ee-1394ef414bd7...
+ 🎚️ МАСТЕР: Размер blob: 35859688 байт
+ 🎚️ МАСТЕР: Обновляем URL после создания микшированной дорожки
+ 🎚️ МАСТЕР URL обновлен: blob:null/8b2ad2f6-0b1b-4b9c-84ee-1394ef414bd7...
+ APP: Создаем вокальный URL для синхронизации трека: Linkin Park-With You [-]
+ WaveformEditor: Starting high-fidelity audio load for sync: blob:null/fd43edde-614d-479a-95dd-08668424a86e
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 203.29s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'I woke up in a dream today'
+ Rendering standard line [1]: 'To the cold of the static and put my cold feet on the floor'
+ Rendering standard line [2]: 'Forgot all about yesterday'
+ Rendering standard line [3]: 'Remembering I'm pretending to be where I'm not anymore'
+ Rendering standard line [4]: 'A little taste of hypocrisy'
+ Rendering standard line [5]: 'And I'm left in the wake of the mistake, slow to react'
+ Rendering standard line [6]: 'Even though you're so close to me'
+ Rendering standard line [7]: 'You're still so distant and I can't bring you back'
+ Rendering standard line [8]: 'It's true'
+ Rendering standard line [9]: 'The way I feel'
+ Rendering standard line [10]: 'Was promised by your face'
+ Rendering standard line [11]: 'The sound of your voice'
+ Rendering standard line [12]: 'Painted on my memories'
+ Rendering standard line [13]: 'Even if you're not with me'
+ Rendering standard line [14]: 'I'm with you'
+ Rendering standard line [15]: 'You now I see'
+ Rendering standard line [16]: 'Keeping everything inside (with you)'
+ Rendering standard line [17]: 'You now I see'
+ Rendering standard line [18]: 'Even when I close my eyes'
+ Rendering standard line [19]: 'I hit you and you hit me back'
+ Rendering standard line [20]: 'We fall to the floor, the rest of the day stands still'
+ Rendering standard line [21]: 'Fine line between this and that'
+ Rendering standard line [22]: 'When things go wrong I pretend that the past isn't real'
+ Rendering standard line [23]: 'Now I'm trapped in this memory'
+ Rendering standard line [24]: 'And I'm left in the wake of the mistake, slow to react'
+ Rendering standard line [25]: 'So even though you're close to me'
+ Rendering standard line [26]: 'You're still so distant and I can't bring you back'
+ Rendering standard line [27]: 'It's true'
+ Rendering standard line [28]: 'The way I feel'
+ Rendering standard line [29]: 'Was promised by your face'
+ Rendering standard line [30]: 'The sound of your voice'
+ Rendering standard line [31]: 'Painted on my memories'
+ Rendering standard line [32]: 'Even if you're not with me'
+ Rendering standard line [33]: 'I'm with you'
+ Rendering standard line [34]: 'You now I see'
+ Rendering standard line [35]: 'Keeping everything inside (with you)'
+ Rendering standard line [36]: 'You now I see'
+ Rendering standard line [37]: 'Even when I close my eyes'
+ Rendering standard line [38]: 'I'm with you'
+ Rendering standard line [39]: 'You now I see'
+ Rendering standard line [40]: 'Keeping everything inside (with you)'
+ Rendering standard line [41]: 'You now I see'
+ Rendering standard line [42]: 'Even when I close my eyes'
+ Rendering standard line [43]: 'No, no matter how far we've come'
+ Rendering standard line [44]: 'I can't wait to see tomorrow'
+ Rendering standard line [45]: 'No matter how far we've come I'
+ Rendering standard line [46]: 'I can't wait to see tomorrow'
+ Rendering standard line [47]: 'With you'
+ Rendering standard line [48]: 'You now I see'
+ Rendering standard line [49]: 'Keeping everything inside (with you)'
+ Rendering standard line [50]: 'You now I see'
+ Rendering standard line [51]: 'Even when I close my eyes'
+ Rendering standard line [52]: 'With you'
+ Rendering standard line [53]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [54]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [55]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [56]: 'Even when I close my eyes'
+rtf-parser.js:849 TextStyleManager: Font scale for default set to 0.80
+rtf-parser.js:849 Applying style: Стандартный with scale 0.80
+rtf-parser.js:849 TextStyleManager: Scaled font size from 1.8em to 1.44em
+rtf-parser.js:849 LyricsDisplay: Setting style to Стандартный
+rtf-parser.js:849 Rendering lyrics. Current style ID: default
+rtf-parser.js:849 Rendering standard line [0]: 'I woke up in a dream today'
+rtf-parser.js:849 Rendering standard line [1]: 'To the cold of the static and put my cold feet on the floor'
+rtf-parser.js:849 Rendering standard line [2]: 'Forgot all about yesterday'
+rtf-parser.js:849 Rendering standard line [3]: 'Remembering I'm pretending to be where I'm not anymore'
+rtf-parser.js:849 Rendering standard line [4]: 'A little taste of hypocrisy'
+rtf-parser.js:849 Rendering standard line [5]: 'And I'm left in the wake of the mistake, slow to react'
+rtf-parser.js:849 Rendering standard line [6]: 'Even though you're so close to me'
+rtf-parser.js:849 Rendering standard line [7]: 'You're still so distant and I can't bring you back'
+rtf-parser.js:849 Rendering standard line [8]: 'It's true'
+rtf-parser.js:849 Rendering standard line [9]: 'The way I feel'
+rtf-parser.js:849 Rendering standard line [10]: 'Was promised by your face'
+rtf-parser.js:849 Rendering standard line [11]: 'The sound of your voice'
+rtf-parser.js:849 Rendering standard line [12]: 'Painted on my memories'
+rtf-parser.js:849 Rendering standard line [13]: 'Even if you're not with me'
+rtf-parser.js:849 Rendering standard line [14]: 'I'm with you'
+rtf-parser.js:849 Rendering standard line [15]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [16]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [17]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [18]: 'Even when I close my eyes'
+rtf-parser.js:849 Rendering standard line [19]: 'I hit you and you hit me back'
+rtf-parser.js:849 Rendering standard line [20]: 'We fall to the floor, the rest of the day stands still'
+rtf-parser.js:849 Rendering standard line [21]: 'Fine line between this and that'
+rtf-parser.js:849 Rendering standard line [22]: 'When things go wrong I pretend that the past isn't real'
+rtf-parser.js:849 Rendering standard line [23]: 'Now I'm trapped in this memory'
+rtf-parser.js:849 Rendering standard line [24]: 'And I'm left in the wake of the mistake, slow to react'
+rtf-parser.js:849 Rendering standard line [25]: 'So even though you're close to me'
+rtf-parser.js:849 Rendering standard line [26]: 'You're still so distant and I can't bring you back'
+rtf-parser.js:849 Rendering standard line [27]: 'It's true'
+rtf-parser.js:849 Rendering standard line [28]: 'The way I feel'
+rtf-parser.js:849 Rendering standard line [29]: 'Was promised by your face'
+rtf-parser.js:849 Rendering standard line [30]: 'The sound of your voice'
+rtf-parser.js:849 Rendering standard line [31]: 'Painted on my memories'
+rtf-parser.js:849 Rendering standard line [32]: 'Even if you're not with me'
+rtf-parser.js:849 Rendering standard line [33]: 'I'm with you'
+rtf-parser.js:849 Rendering standard line [34]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [35]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [36]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [37]: 'Even when I close my eyes'
+rtf-parser.js:849 Rendering standard line [38]: 'I'm with you'
+rtf-parser.js:849 Rendering standard line [39]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [40]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [41]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [42]: 'Even when I close my eyes'
+rtf-parser.js:849 Rendering standard line [43]: 'No, no matter how far we've come'
+rtf-parser.js:849 Rendering standard line [44]: 'I can't wait to see tomorrow'
+rtf-parser.js:849 Rendering standard line [45]: 'No matter how far we've come I'
+rtf-parser.js:849 Rendering standard line [46]: 'I can't wait to see tomorrow'
+rtf-parser.js:849 Rendering standard line [47]: 'With you'
+rtf-parser.js:849 Rendering standard line [48]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [49]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [50]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [51]: 'Even when I close my eyes'
+rtf-parser.js:849 Rendering standard line [52]: 'With you'
+rtf-parser.js:849 Rendering standard line [53]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [54]: 'Keeping everything inside (with you)'
+rtf-parser.js:849 Rendering standard line [55]: 'You now I see'
+rtf-parser.js:849 Rendering standard line [56]: 'Even when I close my eyes'
+rtf-parser.js:849 WaveformEditor: Shown
+rtf-parser.js:849 WaveformEditor: No audio data found, trying to load...
+waveform-editor.js:1075 WaveformEditor: _loadAudioData is deprecated. Use loadAudioForSync() instead.
+_loadAudioData @ waveform-editor.js:1075
+rtf-parser.js:849 WaveformEditor: _activateFirstUnmarkedLine called.
+rtf-parser.js:849 WaveformEditor: Markers length: 57
+rtf-parser.js:849 WaveformEditor: Total lyric lines from lyricsDisplay: 57
+rtf-parser.js:849 [SETACTIVE] Called with index 0. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+rtf-parser.js:849 LoopBlockManager: Sync editor opened event received
+rtf-parser.js:849 WaveformEditor: Dispatched sync-editor-opened event Object
+rtf-parser.js:849 Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+rtf-parser.js:849 Seeking to 29.54s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 29.54с
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ Key pressed:  , key code: 32, waveform active: true
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 1. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 1 at TOP (teleprompter mode)
+ 🔄 WaveformEditor: Начинаем переключение на источник: vocals
+ ✅ Using cached data for vocals
+ WaveformEditor notification: Переключено на Вокал
+ [SETACTIVE] Called with index 2. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 2 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 3. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 3 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 4. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 4 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 5. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 5 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 6. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 6 at TOP (teleprompter mode)
+ 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+ ✅ Using cached data for instrumental
+ WaveformEditor notification: Переключено на Инструментал
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-clemlep-13659549.jpg
+ [SETACTIVE] Called with index 7. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 7 at TOP (teleprompter mode)
+ 🔄 WaveformEditor: Начинаем переключение на источник: master
+ WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+ WaveformEditor notification: Переключено на Мастер
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 8. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 8 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 9. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 9 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 10. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 10 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 11. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 11 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 12. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 12 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 13. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 13 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 14. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 14 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 15. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 15 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 16. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 16 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 17. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 17 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 18. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 18 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 19. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 19 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 20. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 20 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 21. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 21 at TOP (teleprompter mode)
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ ⏸️ ИНСТРУМЕНТАЛ: Пауза
+ ⏸️ ВОКАЛ: Пауза
+ isPlaying property set to: false
+ Key pressed:  , key code: 32, waveform active: true
+ Sync Editor: Restoring original style "karaoke" and scale 1.2
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ TextStyleManager: Font scale for karaoke set to 1.20
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LoopBlockManager: Sync editor closed event received
+ WaveformEditor: Dispatched sync-editor-closed event
+ WaveformEditor: Hidden
+ TrackCatalog: openCatalog() called
+ TrackCatalog: catalogContainer exists: true
+ TrackCatalog: catalogContainer classes before: hidden
+ TrackCatalog: catalogContainer classes after: 
+ TrackCatalog: Catalog should now be visible
+ 🔄 Loading track: "Linkin Park-Lying From You [-]"
+ 🔄 StateManager: Starting HARD RESET of all components
+ 1. Resetting AudioEngine...
+ AudioEngine: Starting reset...
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🧹 СПРИНТЕР: Ресурсы очищены
+ AudioEngine: Reset completed successfully
+ ✅ AudioEngine reset complete
+ 2. Resetting LyricsDisplay...
+ 💥 LyricsDisplay: Performing full reset.
+ ✅ LyricsDisplay: Full reset complete. All lyric data and DOM elements cleared.
+ ✅ LyricsDisplay full reset complete
+ 3. Resetting TextStyleManager...
+ 💥 TextStyleManager: Full reset initiated.
+ ✅ TextStyleManager: Reset complete. All states and caches cleared.
+ ✅ TextStyleManager reset complete.
+ 🎉 StateManager: HARD RESET completed successfully
+ ✅ All components ready for new track
+ ⏱️ HARD_RESET_TIME: 21.034912109375 ms
+ TrackCatalog: Set waveformEditor.lastLoadedFile to Linkin Park-Lying From You.rtf
+ TrackCatalog: Set waveformEditor.currentTrackId to 1750296242318
+ TrackCatalog: Found 11 blocks. Preparing them for rendering after audio load.
+ LyricsDisplay: Loading 11 imported blocks.
+ Block 0 loaded: id="block-1750361015642-0-o9j0s9l22ul", name="Block 1", lines=4
+ Block 1 loaded: id="1", name="Block 2", lines=4
+ Block 2 loaded: id="2", name="Block 3", lines=11
+ Block 3 loaded: id="3", name="Block 4", lines=4
+ Block 4 loaded: id="4", name="Block 5", lines=4
+ Block 5 loaded: id="5", name="Block 6", lines=11
+ Block 6 loaded: id="6", name="Block 7", lines=3
+ Block 7 loaded: id="7", name="Block 8", lines=3
+ Block 8 loaded: id="8", name="Block 9", lines=3
+ Block 9 loaded: id="9", name="Block 10", lines=3
+ Block 10 loaded: id="10", name="Block 11", lines=12
+ LyricsDisplay: Skipping render as requested by shouldRender=false
+ LyricsDisplay: Successfully loaded 11 blocks, total lyric lines: 62.
+ Updated marker for line 38: type=bridge, color=#6f42c1
+ Updated marker for line 39: type=bridge, color=#6f42c1
+ Updated marker for line 40: type=bridge, color=#6f42c1
+ Updated marker for line 41: type=bridge, color=#6f42c1
+ Updated marker for line 42: type=bridge, color=#6f42c1
+ Updated marker for line 47: type=bridge, color=#6f42c1
+ Updated marker for line 48: type=bridge, color=#6f42c1
+ Updated marker for line 49: type=bridge, color=#6f42c1
+ LyricsDisplay: Updated marker colors after loading blocks
+ ⏱️ LYRICS_PREPARE_TIME: 94.135009765625 ms
+ ⏱️ BLOB_CREATION_TIME: 63.2958984375 ms
+ 🚀 ГИБРИД: Загрузка двойного потока
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🎚️ МАСТЕР: Создание микшированной дорожки...
+ 🎚️ МАСТЕР: Инструментал URL: blob:null/a66019f9-c397-436c-b776-19dae543e933...
+ 🎚️ МАСТЕР: Вокал URL: blob:null/6a3ef689-2bda-42aa-825a-522711746d68...
+ 🎚️ МАСТЕР: Загружаем аудиофайлы...
+ 🎚️ МАСТЕР: Конвертируем в ArrayBuffer...
+ Auto-scroll re-enabled after scroll event
+ 🎚️ МАСТЕР: Инструментал размер: 6913089 байт
+ 🎚️ МАСТЕР: Вокал размер: 6913089 байт
+ 🎚️ МАСТЕР: Декодируем аудиоданные...
+ ✅ ИНСТРУМЕНТАЛ ГОТОВ! Длительность: 172.75с
+ ⏱️ HYBRID_ENGINE_LOAD_TIME: 521.51708984375 ms
+ 🎯 ГИБРИД: Рассинхронизация устранена!
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ ⏱️ AUDIO_LOAD_TIME: 549.85302734375 ms
+ Loading 19 markers for track Linkin Park-Lying From You [-]
+ Validating 19 markers for 62 lyric lines
+ Kept 19 valid markers out of 19
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🎵 АВТОПЛЕЙ: Запуск воспроизведения...
+ ✅ Track "Linkin Park-Lying From You [-]" loaded successfully
+ ✅ ВОКАЛ ГОТОВ! Длительность: 172.75с
+ 🎨 StateManager: Forcing text rerender in current mode
+ 🎤 Karaoke mode detected, should work correctly
+ ⏱️ FINAL_RENDER_TIME: 153.822021484375 ms
+ ⏱️ TOTAL_TRACK_LOAD_TIME: 1057.246826171875 ms
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ ✅ АВТОПЛЕЙ: Воспроизведение начато успешно
+ APP: Создаем вокальный URL для синхронизации трека: Linkin Park-Lying From You [-]
+ WaveformEditor: Starting high-fidelity audio load for sync: blob:null/3f24e2d4-2b15-48b9-b6b0-1ad91f114831
+ 🎚️ МАСТЕР: Инструментал - каналов: 2, длина: 7618364, частота: 44100Hz
+ 🎚️ МАСТЕР: Вокал - каналов: 2, длина: 7618364, частота: 44100Hz
+ 🎚️ МАСТЕР: Создан буфер - каналов: 2, длина: 7618364
+ 🎚️ МАСТЕР: Начинаем микширование каналов...
+ 🎚️ МАСТЕР: Микширование завершено, конвертируем в blob...
+ 🎚️ МАСТЕР: Микшированная дорожка создана! URL: blob:null/4f9abb8c-3125-4d22-8867-d57495aaadb0...
+ 🎚️ МАСТЕР: Размер blob: 30473500 байт
+ 🎚️ МАСТЕР: Обновляем URL после создания микшированной дорожки
+ 🎚️ МАСТЕР URL обновлен: blob:null/4f9abb8c-3125-4d22-8867-d57495aaadb0...
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 172.75s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [40]: 'Like this'
+ Rendering standard line [41]: 'This isn't what I wanted to be'
+ Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [43]: 'Like this'
+ Rendering standard line [44]: 'This isn't what I wanted to be'
+ Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [46]: 'Like this'
+ Rendering standard line [47]: 'This isn't what I wanted to be'
+ Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [49]: 'Like this'
+ Rendering standard line [50]: 'You'
+ Rendering standard line [51]: '(No turning back now)'
+ Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [53]: '(No, no turning back now)'
+ Rendering standard line [54]: 'Let me take back my life'
+ Rendering standard line [55]: 'I'd rather be all alone'
+ Rendering standard line [56]: '(No turning back now)'
+ Rendering standard line [57]: 'Anywhere on my own'
+ Rendering standard line [58]: ''Cause I can see'
+ Rendering standard line [59]: '(No, no turning back now)'
+ Rendering standard line [60]: 'The very worst part of you'
+ Rendering standard line [61]: 'The very worst part of you is me'
+ TextStyleManager: Font scale for default set to 0.80
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+rtf-parser.js:849 Rendering standard line [40]: 'Like this'
+rtf-parser.js:849 Rendering standard line [41]: 'This isn't what I wanted to be'
+rtf-parser.js:849 Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+rtf-parser.js:849 Rendering standard line [43]: 'Like this'
+rtf-parser.js:849 Rendering standard line [44]: 'This isn't what I wanted to be'
+rtf-parser.js:849 Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+rtf-parser.js:849 Rendering standard line [46]: 'Like this'
+rtf-parser.js:849 Rendering standard line [47]: 'This isn't what I wanted to be'
+rtf-parser.js:849 Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+rtf-parser.js:849 Rendering standard line [49]: 'Like this'
+rtf-parser.js:849 Rendering standard line [50]: 'You'
+rtf-parser.js:849 Rendering standard line [51]: '(No turning back now)'
+rtf-parser.js:849 Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+rtf-parser.js:849 Rendering standard line [53]: '(No, no turning back now)'
+rtf-parser.js:849 Rendering standard line [54]: 'Let me take back my life'
+rtf-parser.js:849 Rendering standard line [55]: 'I'd rather be all alone'
+rtf-parser.js:849 Rendering standard line [56]: '(No turning back now)'
+rtf-parser.js:849 Rendering standard line [57]: 'Anywhere on my own'
+rtf-parser.js:849 Rendering standard line [58]: ''Cause I can see'
+rtf-parser.js:849 Rendering standard line [59]: '(No, no turning back now)'
+rtf-parser.js:849 Rendering standard line [60]: 'The very worst part of you'
+rtf-parser.js:849 Rendering standard line [61]: 'The very worst part of you is me'
+rtf-parser.js:849 WaveformEditor: Shown
+rtf-parser.js:849 WaveformEditor: No audio data found, trying to load...
+waveform-editor.js:1075 WaveformEditor: _loadAudioData is deprecated. Use loadAudioForSync() instead.
+_loadAudioData @ waveform-editor.js:1075
+rtf-parser.js:849 WaveformEditor: _activateFirstUnmarkedLine called.
+rtf-parser.js:849 WaveformEditor: Markers length: 19
+rtf-parser.js:849 WaveformEditor: Total lyric lines from lyricsDisplay: 62
+rtf-parser.js:849 [SETACTIVE] Called with index 19. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 19 at TOP (teleprompter mode)
+rtf-parser.js:849 LoopBlockManager: Sync editor opened event received
+rtf-parser.js:849 WaveformEditor: Dispatched sync-editor-opened event Object
+rtf-parser.js:849 Sync Editor: Positioned line 19 at TOP (teleprompter mode)
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 Seeking to 167.49s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 167.49с
+rtf-parser.js:849 [SETACTIVE] Called with index 18. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 18 at TOP (teleprompter mode)
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-suvan-chowdhury-37305-144429.jpg
+rtf-parser.js:849 Seeking to 164.96s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 164.96с
+rtf-parser.js:849 Seeking to 159.06s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 159.06с
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: true
+rtf-parser.js:849 Seeking to 2.10s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 2.10с
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: true
+rtf-parser.js:849 ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+rtf-parser.js:849 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+rtf-parser.js:849 isPlaying property set to: true
+rtf-parser.js:849 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+rtf-parser.js:849 ✅ Using cached data for instrumental
+rtf-parser.js:849 WaveformEditor notification: Переключено на Инструментал
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: true
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: true
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: true
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-pixabay-164960.jpg

@@ -1,0 +1,52 @@
+/* BPM Controls - размещены перед кнопками режимов */
+.bpm-controls {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    position: absolute;
+    left: 200px; /* Позиционируем слева от режимов */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.bpm-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
+    border: 1px solid #ff6b35;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 45px;
+    min-width: 45px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.bpm-btn:hover {
+    background: linear-gradient(135deg, #ff8c42, #ffab73);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+.bpm-btn:active {
+    transform: translateY(0);
+}
+
+.bpm-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.bpm-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+} 

@@ -1,0 +1,1020 @@
+ Activating rehearsal line at index 23
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 23 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 89.09s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 89.49s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 89.92s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 380.0Hz → 196.9Hz за 53мс (ratio: 0.52)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 90.34s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 90.77s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 23 to 24
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 23 belongs to block: 3 Array(8)
+ Rehearsal: New line 24 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 23 to 24
+ [SETACTIVE] Called with index 24. Current style: rehearsal
+ Rehearsal mode: Setting active line 24
+ Activating rehearsal line at index 24
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 24 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 91.19s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 125.8Hz (0.50x от 251.0Hz, ясность: 79.8%)
+ ✅ Октавный переход разрешен: 251.0Hz → 72.1Hz за 187мс (ratio: 0.29)
+ BlockLoopControl: LOOP CHECK - Current: 91.64s, Start: 79.33s, End: 98.75s
+ 🚫 Октавный скачок заблокирован: 212.7Hz → 70.1Hz за 17мс (ratio: 0.33)
+ BlockLoopControl: LOOP CHECK - Current: 92.04s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 407.5Hz (2.01x от 202.8Hz, ясность: 71.2%)
+ 🎯 Высокая ясность (97.1%) - принимаем возможную гармонику: 408.5Hz
+ ✅ Октавный переход разрешен: 202.8Hz → 408.5Hz за 73мс (ratio: 2.01)
+ BlockLoopControl: LOOP CHECK - Current: 92.47s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 239.0Hz (0.49x от 484.9Hz, ясность: 85.9%)
+ 🚫 Блокирована очевидная гармоника: 236.3Hz (0.49x от 484.9Hz, ясность: 85.5%)
+ ✅ Октавный переход разрешен: 484.9Hz → 231.1Hz за 53мс (ratio: 0.48)
+ BlockLoopControl: LOOP CHECK - Current: 92.89s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 93.32s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 24 to 25
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 24 belongs to block: 3 Array(8)
+ Rehearsal: New line 25 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 24 to 25
+ [SETACTIVE] Called with index 25. Current style: rehearsal
+ Rehearsal mode: Setting active line 25
+ Activating rehearsal line at index 25
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 25 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 93.74s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.23s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.68s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 460.6Hz (2.00x от 230.3Hz, ясность: 85.6%)
+ BlockLoopControl: LOOP CHECK - Current: 95.10s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 95.62s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 25 to 26
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 25 belongs to block: 3 Array(8)
+ Rehearsal: New line 26 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 25 to 26
+ [SETACTIVE] Called with index 26. Current style: rehearsal
+ Rehearsal mode: Setting active line 26
+ Activating rehearsal line at index 26
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 26 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 96.04s, Start: 79.33s, End: 98.75s
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 98%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 94%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 77%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 74%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 72%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 71%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 67%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 60%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 42%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 30%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 26%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 25%
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 96.55s, Start: 79.33s, End: 98.75s
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 26%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 27%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 29%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 30%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 31%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 32%
+ 🎵 ИНСТРУМЕНТАЛ: Громкость установлена 33%
+ BlockLoopControl: LOOP CHECK - Current: 96.98s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 97.40s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 97.83s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 98.27s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 98.67s, Start: 79.33s, End: 98.75s
+ 🔄 BlockLoopControl: LOOP TRIGGER! End reached at 98.67s, jumping to start 79.33s
+ ⏰ СИНХРО: Позиция установлена 79.33с
+ Rehearsal: Line changing from 26 to 19
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 26 belongs to block: 3 Array(8)
+ Rehearsal: New line 19 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 26 to 19
+ [SETACTIVE] Called with index 19. Current style: rehearsal
+ Rehearsal mode: Setting active line 19
+ Activating rehearsal line at index 19
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 19 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🚫 Блокирована очевидная гармоника: 436.9Hz (0.50x от 877.6Hz, ясность: 74.6%)
+ BlockLoopControl: LOOP CHECK - Current: 79.57s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 433.2Hz (0.49x от 877.6Hz, ясность: 71.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 80.03s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 80.46s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 80.94s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 19 to 20
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 19 belongs to block: 3 Array(8)
+ Rehearsal: New line 20 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 19 to 20
+ [SETACTIVE] Called with index 20. Current style: rehearsal
+ Rehearsal mode: Setting active line 20
+ Activating rehearsal line at index 20
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 20 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 81.40s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 81.83s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 82.24s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 82.66s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 83.09s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 83.52s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 83.94s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 20 to 21
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 20 belongs to block: 3 Array(8)
+ Rehearsal: New line 21 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 20 to 21
+ [SETACTIVE] Called with index 21. Current style: rehearsal
+ Rehearsal mode: Setting active line 21
+ Activating rehearsal line at index 21
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 21 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 84.37s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 84.79s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 197.4Hz (1.97x от 100.0Hz, ясность: 73.6%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (95.1%) - принимаем возможную гармонику: 198.3Hz
+ 🚫 Блокирована очевидная гармоника: 220.0Hz (0.50x от 439.4Hz, ясность: 89.9%)
+ 🚫 Блокирована очевидная гармоника: 216.1Hz (0.49x от 439.4Hz, ясность: 85.7%)
+ ✅ Октавный переход разрешен: 439.4Hz → 205.9Hz за 82мс (ratio: 0.47)
+ BlockLoopControl: LOOP CHECK - Current: 85.21s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 85.64s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 873.5Hz (4.09x от 213.8Hz, ясность: 80.8%)
+ 🚫 Блокирована очевидная гармоника: 869.0Hz (4.06x от 213.8Hz, ясность: 81.8%)
+ 🚫 Блокирована очевидная гармоника: 866.2Hz (4.05x от 213.8Hz, ясность: 70.5%)
+ Rehearsal: Line changing from 21 to 22
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 21 belongs to block: 3 Array(8)
+ Rehearsal: New line 22 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 21 to 22
+ [SETACTIVE] Called with index 22. Current style: rehearsal
+ Rehearsal mode: Setting active line 22
+ Activating rehearsal line at index 22
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 22 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 86.07s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 210.1Hz (0.23x от 901.2Hz, ясность: 74.9%)
+ 🚫 Блокирована очевидная гармоника: 215.7Hz (0.24x от 901.2Hz, ясность: 71.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 217.9Hz (0.24x от 901.2Hz, ясность: 77.5%)
+ 🚫 Блокирована очевидная гармоника: 213.8Hz (0.24x от 901.2Hz, ясность: 70.6%)
+ 🚫 Блокирована очевидная гармоника: 218.1Hz (0.24x от 901.2Hz, ясность: 81.8%)
+ 🎯 Высокая ясность (92.7%) - принимаем возможную гармонику: 219.7Hz
+ BlockLoopControl: LOOP CHECK - Current: 86.49s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 86.92s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 87.34s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 87.77s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 88.19s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 88.62s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 22 to 23
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 22 belongs to block: 3 Array(8)
+ Rehearsal: New line 23 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 22 to 23
+ [SETACTIVE] Called with index 23. Current style: rehearsal
+ Rehearsal mode: Setting active line 23
+ Activating rehearsal line at index 23
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 23 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 89.06s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 89.48s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 89.89s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 380.0Hz → 195.8Hz за 48мс (ratio: 0.52)
+ BlockLoopControl: LOOP CHECK - Current: 90.32s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 90.75s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 23 to 24
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 23 belongs to block: 3 Array(8)
+ Rehearsal: New line 24 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 23 to 24
+ [SETACTIVE] Called with index 24. Current style: rehearsal
+ Rehearsal mode: Setting active line 24
+ Activating rehearsal line at index 24
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 24 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 91.17s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 125.8Hz (0.50x от 251.0Hz, ясность: 79.8%)
+ ✅ Октавный переход разрешен: 251.0Hz → 72.1Hz за 204мс (ratio: 0.29)
+ BlockLoopControl: LOOP CHECK - Current: 91.59s, Start: 79.33s, End: 98.75s
+ 🚫 Октавный скачок заблокирован: 212.7Hz → 70.1Hz за 17мс (ratio: 0.33)
+ BlockLoopControl: LOOP CHECK - Current: 92.03s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (94.9%) - принимаем возможную гармонику: 409.6Hz
+ BlockLoopControl: LOOP CHECK - Current: 92.44s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Октавный скачок заблокирован: 483.2Hz → 233.6Hz за 38мс (ratio: 0.48)
+ 🚫 Октавный скачок заблокирован: 483.2Hz → 232.5Hz за 39мс (ratio: 0.48)
+ BlockLoopControl: LOOP CHECK - Current: 92.89s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 93.30s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 93.72s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 24 to 25
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 24 belongs to block: 3 Array(8)
+ Rehearsal: New line 25 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 24 to 25
+ [SETACTIVE] Called with index 25. Current style: rehearsal
+ Rehearsal mode: Setting active line 25
+ Activating rehearsal line at index 25
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 25 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 94.15s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.58s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 458.5Hz (1.99x от 230.8Hz, ясность: 83.1%)
+ 🚫 Блокирована очевидная гармоника: 461.0Hz (2.00x от 230.8Hz, ясность: 84.0%)
+ BlockLoopControl: LOOP CHECK - Current: 95.04s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 95.46s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 121.1Hz (0.25x от 487.2Hz, ясность: 74.8%)
+ 🚫 Блокирована очевидная гармоника: 228.2Hz (2.02x от 113.2Hz, ясность: 76.2%)
+ 🚫 Блокирована очевидная гармоника: 227.8Hz (2.01x от 113.2Hz, ясность: 73.3%)
+ 🚫 Блокирована очевидная гармоника: 227.4Hz (2.01x от 113.2Hz, ясность: 75.8%)
+ 🚫 Блокирована очевидная гармоника: 225.9Hz (2.00x от 113.2Hz, ясность: 79.6%)
+ 🚫 Блокирована очевидная гармоника: 224.7Hz (1.98x от 113.2Hz, ясность: 81.7%)
+ 🚫 Блокирована очевидная гармоника: 226.7Hz (2.00x от 113.2Hz, ясность: 78.2%)
+ BlockLoopControl: LOOP CHECK - Current: 95.89s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 25 to 26
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 25 belongs to block: 3 Array(8)
+ Rehearsal: New line 26 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 25 to 26
+ [SETACTIVE] Called with index 26. Current style: rehearsal
+ Rehearsal mode: Setting active line 26
+ Activating rehearsal line at index 26
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 26 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 96.31s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 96.73s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 224.1Hz (0.49x от 454.7Hz, ясность: 88.2%)
+ 🚫 Октавный скачок заблокирован: 454.7Hz → 220.3Hz за 32мс (ratio: 0.48)
+ ✅ Октавный переход разрешен: 454.7Hz → 216.4Hz за 53мс (ratio: 0.48)
+ 🚫 Октавный скачок заблокирован: 248.1Hz → 486.8Hz за 15мс (ratio: 1.96)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 97.16s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 97.59s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 98.01s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 100.4Hz (0.50x от 201.2Hz, ясность: 75.5%)
+ BlockLoopControl: LOOP CHECK - Current: 98.44s, Start: 79.33s, End: 98.75s
+ 🔄 BlockLoopControl: LOOP TRIGGER! End reached at 98.65s, jumping to start 79.33s
+ ⏰ СИНХРО: Позиция установлена 79.33с
+ Rehearsal: Line changing from 26 to 19
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 26 belongs to block: 3 Array(8)
+ Rehearsal: New line 19 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 26 to 19
+ [SETACTIVE] Called with index 19. Current style: rehearsal
+ Rehearsal mode: Setting active line 19
+ Activating rehearsal line at index 19
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 19 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 79.38s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 437.8Hz (0.50x от 878.1Hz, ясность: 71.4%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 79.80s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 80.23s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 80.67s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 81.08s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 19 to 20
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 19 belongs to block: 3 Array(8)
+ Rehearsal: New line 20 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 19 to 20
+ [SETACTIVE] Called with index 20. Current style: rehearsal
+ Rehearsal mode: Setting active line 20
+ Activating rehearsal line at index 20
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 20 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 81.50s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 81.93s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 82.35s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 217.5Hz → 71.8Hz за 90мс (ratio: 0.33)
+ BlockLoopControl: LOOP CHECK - Current: 82.78s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 83.20s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 83.63s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 84.05s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 20 to 21
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 20 belongs to block: 3 Array(8)
+ Rehearsal: New line 21 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 20 to 21
+ [SETACTIVE] Called with index 21. Current style: rehearsal
+ Rehearsal mode: Setting active line 21
+ Activating rehearsal line at index 21
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 21 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 84.48s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 84.90s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 217.8Hz (0.50x от 438.5Hz, ясность: 88.2%)
+ ✅ Октавный переход разрешен: 438.5Hz → 212.1Hz за 51мс (ratio: 0.48)
+ BlockLoopControl: LOOP CHECK - Current: 85.33s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 85.75s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 865.9Hz (4.05x от 213.9Hz, ясность: 72.0%)
+ 🚫 Блокирована очевидная гармоника: 870.2Hz (4.07x от 213.9Hz, ясность: 84.0%)
+ 🚫 Блокирована очевидная гармоника: 869.9Hz (4.07x от 213.9Hz, ясность: 72.7%)
+ Rehearsal: Line changing from 21 to 22
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 21 belongs to block: 3 Array(8)
+ Rehearsal: New line 22 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 21 to 22
+ [SETACTIVE] Called with index 22. Current style: rehearsal
+ Rehearsal mode: Setting active line 22
+ Activating rehearsal line at index 22
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 22 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🚫 Блокирована очевидная гармоника: 207.9Hz (0.23x от 904.3Hz, ясность: 73.8%)
+ 🚫 Блокирована очевидная гармоника: 211.5Hz (0.23x от 904.3Hz, ясность: 74.6%)
+ 🚫 Блокирована очевидная гармоника: 216.7Hz (0.24x от 904.3Hz, ясность: 76.5%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 86.18s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 216.7Hz (0.24x от 904.3Hz, ясность: 74.5%)
+ 🎯 Высокая ясность (90.0%) - принимаем возможную гармонику: 219.5Hz
+ BlockLoopControl: LOOP CHECK - Current: 86.60s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 87.03s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 87.45s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 87.88s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 88.30s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 88.73s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 22 to 23
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 22 belongs to block: 3 Array(8)
+ Rehearsal: New line 23 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 22 to 23
+ [SETACTIVE] Called with index 23. Current style: rehearsal
+ Rehearsal mode: Setting active line 23
+ Activating rehearsal line at index 23
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 23 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 89.15s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 89.58s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 90.00s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 380.8Hz → 196.9Hz за 48мс (ratio: 0.52)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 90.43s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 90.85s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 23 to 24
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 23 belongs to block: 3 Array(8)
+ Rehearsal: New line 24 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 23 to 24
+ [SETACTIVE] Called with index 24. Current style: rehearsal
+ Rehearsal mode: Setting active line 24
+ Activating rehearsal line at index 24
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 24 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 91.28s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 91.70s, Start: 79.33s, End: 98.75s
+ 🚫 Октавный скачок заблокирован: 213.4Hz → 70.1Hz за 23мс (ratio: 0.33)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 92.13s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 92.55s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 237.3Hz (0.49x от 483.6Hz, ясность: 85.1%)
+ 🚫 Октавный скачок заблокирован: 483.6Hz → 233.6Hz за 34мс (ratio: 0.48)
+ ✅ Октавный переход разрешен: 483.6Hz → 231.1Hz за 48мс (ratio: 0.48)
+ BlockLoopControl: LOOP CHECK - Current: 92.98s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 93.40s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 24 to 25
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 24 belongs to block: 3 Array(8)
+ Rehearsal: New line 25 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 24 to 25
+ [SETACTIVE] Called with index 25. Current style: rehearsal
+ Rehearsal mode: Setting active line 25
+ Activating rehearsal line at index 25
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 25 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 93.83s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.25s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.68s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 460.6Hz (1.99x от 231.7Hz, ясность: 85.6%)
+ BlockLoopControl: LOOP CHECK - Current: 95.10s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 95.53s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 25 to 26
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 25 belongs to block: 3 Array(8)
+ Rehearsal: New line 26 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 25 to 26
+ [SETACTIVE] Called with index 26. Current style: rehearsal
+ Rehearsal mode: Setting active line 26
+ Activating rehearsal line at index 26
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 26 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 95.95s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 96.38s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 96.80s, Start: 79.33s, End: 98.75s
+ 🚫 Октавный скачок заблокирован: 251.1Hz → 489.9Hz за 22мс (ratio: 1.95)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 97.23s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 97.65s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 98.08s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 98.50s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔄 BlockLoopControl: LOOP TRIGGER! End reached at 98.67s, jumping to start 79.33s
+ ⏰ СИНХРО: Позиция установлена 79.33с
+ Rehearsal: Line changing from 26 to 19
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 26 belongs to block: 3 Array(8)
+ Rehearsal: New line 19 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 26 to 19
+ [SETACTIVE] Called with index 19. Current style: rehearsal
+ Rehearsal mode: Setting active line 19
+ Activating rehearsal line at index 19
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 19 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 79.43s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 877.6Hz (3.94x от 222.6Hz, ясность: 71.8%)
+ BlockLoopControl: LOOP CHECK - Current: 79.85s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 80.27s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 80.70s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 81.12s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 19 to 20
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 19 belongs to block: 3 Array(8)
+ Rehearsal: New line 20 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 19 to 20
+ [SETACTIVE] Called with index 20. Current style: rehearsal
+ Rehearsal mode: Setting active line 20
+ Activating rehearsal line at index 20
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 20 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 81.55s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 81.97s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 82.40s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 82.83s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 83.25s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 83.67s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 84.10s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 20 to 21
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 20 belongs to block: 3 Array(8)
+ Rehearsal: New line 21 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 20 to 21
+ [SETACTIVE] Called with index 21. Current style: rehearsal
+ Rehearsal mode: Setting active line 21
+ Activating rehearsal line at index 21
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 21 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 84.52s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 197.9Hz (1.98x от 100.0Hz, ясность: 74.8%)
+ ✅ Октавный переход разрешен: 100.0Hz → 196.2Hz за 167мс (ratio: 1.96)
+ BlockLoopControl: LOOP CHECK - Current: 84.95s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 217.8Hz (0.50x от 439.4Hz, ясность: 88.2%)
+ 🚫 Блокирована очевидная гармоника: 214.0Hz (0.49x от 439.4Hz, ясность: 84.5%)
+ ✅ Октавный переход разрешен: 439.4Hz → 208.4Hz за 67мс (ratio: 0.47)
+ BlockLoopControl: LOOP CHECK - Current: 85.37s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 85.80s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 865.9Hz (4.05x от 213.8Hz, ясность: 72.0%)
+ 🚫 Блокирована очевидная гармоника: 873.5Hz (4.09x от 213.8Hz, ясность: 80.8%)
+ 🚫 Блокирована очевидная гармоника: 870.4Hz (4.07x от 213.8Hz, ясность: 78.8%)
+ 🚫 Блокирована очевидная гармоника: 866.2Hz (4.05x от 213.8Hz, ясность: 70.5%)
+ Rehearsal: Line changing from 21 to 22
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 21 belongs to block: 3 Array(8)
+ Rehearsal: New line 22 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 21 to 22
+ [SETACTIVE] Called with index 22. Current style: rehearsal
+ Rehearsal mode: Setting active line 22
+ Activating rehearsal line at index 22
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 22 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🚫 Блокирована очевидная гармоника: 207.9Hz (0.23x от 904.3Hz, ясность: 73.8%)
+ 🚫 Блокирована очевидная гармоника: 211.5Hz (0.23x от 904.3Hz, ясность: 74.6%)
+ 🚫 Блокирована очевидная гармоника: 215.7Hz (0.24x от 904.3Hz, ясность: 71.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 216.7Hz (0.24x от 904.3Hz, ясность: 74.5%)
+ BlockLoopControl: LOOP CHECK - Current: 86.22s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 219.1Hz (0.24x от 904.3Hz, ясность: 84.9%)
+ 🎯 Высокая ясность (95.1%) - принимаем возможную гармонику: 219.9Hz
+ BlockLoopControl: LOOP CHECK - Current: 86.65s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 87.08s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 87.50s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 87.92s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 88.35s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 88.77s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 22 to 23
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 22 belongs to block: 3 Array(8)
+ Rehearsal: New line 23 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 22 to 23
+ [SETACTIVE] Called with index 23. Current style: rehearsal
+ Rehearsal mode: Setting active line 23
+ Activating rehearsal line at index 23
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 23 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 89.20s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 89.62s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 90.05s, Start: 79.33s, End: 98.75s
+ 🚫 Октавный скачок заблокирован: 380.0Hz → 196.9Hz за 34мс (ratio: 0.52)
+ ✅ Октавный переход разрешен: 380.0Hz → 194.7Hz за 53мс (ratio: 0.51)
+ BlockLoopControl: LOOP CHECK - Current: 90.47s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 90.90s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 23 to 24
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 23 belongs to block: 3 Array(8)
+ Rehearsal: New line 24 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 23 to 24
+ [SETACTIVE] Called with index 24. Current style: rehearsal
+ Rehearsal mode: Setting active line 24
+ Activating rehearsal line at index 24
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 24 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 91.32s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 241.8Hz → 125.5Hz за 76мс (ratio: 0.52)
+ BlockLoopControl: LOOP CHECK - Current: 91.75s, Start: 79.33s, End: 98.75s
+ ✅ Октавный переход разрешен: 214.1Hz → 70.1Hz за 78мс (ratio: 0.33)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 92.17s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 407.5Hz (2.01x от 202.8Hz, ясность: 71.2%)
+ 🎯 Высокая ясность (96.8%) - принимаем возможную гармонику: 408.3Hz
+ ✅ Октавный переход разрешен: 202.8Hz → 408.3Hz за 66мс (ratio: 2.01)
+ BlockLoopControl: LOOP CHECK - Current: 92.60s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 239.0Hz (0.49x от 483.6Hz, ясность: 85.9%)
+ 🚫 Блокирована очевидная гармоника: 235.2Hz (0.49x от 483.6Hz, ясность: 84.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 93.02s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 534.7Hz (2.00x от 267.7Hz, ясность: 83.2%)
+ BlockLoopControl: LOOP CHECK - Current: 93.45s, Start: 79.33s, End: 98.75s
+ Rehearsal: Line changing from 24 to 25
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 24 belongs to block: 3 Array(8)
+ Rehearsal: New line 25 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 24 to 25
+ [SETACTIVE] Called with index 25. Current style: rehearsal
+ Rehearsal mode: Setting active line 25
+ Activating rehearsal line at index 25
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 25 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ 🚫 Блокирована очевидная гармоника: 540.0Hz (2.00x от 269.9Hz, ясность: 70.1%)
+ BlockLoopControl: LOOP CHECK - Current: 93.87s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.30s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 94.72s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 459.3Hz (1.98x от 231.7Hz, ясность: 86.8%)
+ BlockLoopControl: LOOP CHECK - Current: 95.15s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: LOOP CHECK - Current: 95.59s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 25 to 26
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 25 belongs to block: 3 Array(8)
+ Rehearsal: New line 26 belongs to block: 3 Array(8)
+ Rehearsal: Same block (3), updating active line from 25 to 26
+ [SETACTIVE] Called with index 26. Current style: rehearsal
+ Rehearsal mode: Setting active line 26
+ Activating rehearsal line at index 26
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 26 принадлежит текущему зацикленному блоку Block 4, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 96.00s, Start: 79.33s, End: 98.75s
+ BlockLoopControl: LOOP CHECK - Current: 96.42s, Start: 79.33s, End: 98.75s
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 222.8Hz (0.49x от 454.7Hz, ясность: 88.9%)
+ ✅ Октавный переход разрешен: 454.7Hz → 216.3Hz за 53мс (ratio: 0.48)
+ BlockLoopControl: LOOP CHECK - Current: 96.87s, Start: 79.33s, End: 98.75s
+ 🚫 Блокирована очевидная гармоника: 489.9Hz (1.98x от 248.1Hz, ясность: 73.4%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: Остановка зацикливания
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 100.4Hz (0.50x от 201.5Hz, ясность: 75.5%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 26 to 27
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line 26 belongs to block: 3 Array(8)
+ Rehearsal: New line 27 belongs to block: 4 Array(6)
+ Rehearsal: *** BLOCK CHANGED *** from 3 to 4
+ Rehearsal: Line changed from 26 to 27
+ Rehearsal: Current block lines: Array(8)
+ Rehearsal: New block lines: Array(6)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 8" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Rehearsal: Current line: 27, Total blocks: 10
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750413910251-0-faxy62k1qhw): name="Block 1", lines=[0,1,2,3,4,5,6,7]
+     Content preview: "I woke up in a dream today
+To the cold of the static and put my cold feet on the floor
+Forgot all ab"
+       Line 0: "I woke up in a dream today"
+       Line 1: "To the cold of the static and put my cold feet on the floor"
+       Line 2: "Forgot all about yesterday"
+       Line 3: "Remembering I'm pretending to be where I'm not anymore"
+       Line 4: "A little taste of hypocrisy"
+       Line 5: "And I'm left in the wake of the mistake, slow to react"
+       Line 6: "Even though you're so close to me"
+       Line 7: "You're still so distant and I can't bring you back"
+   Block 1 (1): name="Block 2", lines=[8,9,10,11,12,13]
+     Content preview: "It's true
+The way I feel
+Was promised by your face"
+       Line 8: "It's true"
+       Line 9: "The way I feel"
+       Line 10: "Was promised by your face"
+       Line 11: "The sound of your voice"
+       Line 12: "Painted on my memories"
+       Line 13: "Even if you're not with me"
+   Block 2 (2): name="Block 3", lines=[14,15,16,17,18]
+     Content preview: "I'm with you
+You now I see
+Keeping everything inside (with you)"
+       Line 14: "I'm with you"
+       Line 15: "You now I see"
+       Line 16: "Keeping everything inside (with you)"
+       Line 17: "You now I see"
+       Line 18: "Even when I close my eyes"
+   Block 3 (3): name="Block 4", lines=[19,20,21,22,23,24,25,26]
+     Content preview: "I hit you and you hit me back
+We fall to the floor, the rest of the day stands still
+Fine line betwe"
+       Line 19: "I hit you and you hit me back"
+       Line 20: "We fall to the floor, the rest of the day stands still"
+       Line 21: "Fine line between this and that"
+       Line 22: "When things go wrong I pretend that the past isn't real"
+       Line 23: "Now I'm trapped in this memory"
+       Line 24: "And I'm left in the wake of the mistake, slow to react"
+       Line 25: "So even though you're close to me"
+       Line 26: "You're still so distant and I can't bring you back"
+   Block 4 (4): name="Block 5", lines=[27,28,29,30,31,32]
+     Content preview: "It's true
+The way I feel
+Was promised by your face"
+       Line 27: "It's true"
+       Line 28: "The way I feel"
+       Line 29: "Was promised by your face"
+       Line 30: "The sound of your voice"
+       Line 31: "Painted on my memories"
+       Line 32: "Even if you're not with me"
+rtf-parser.js:849   Block 5 (5-part-0): name="Block 6", lines=[33,34,35,36,37]
+rtf-parser.js:849     Content preview: "I'm with you
+You now I see
+Keeping everything inside (with you)"
+rtf-parser.js:849       Line 33: "I'm with you"
+rtf-parser.js:849       Line 34: "You now I see"
+rtf-parser.js:849       Line 35: "Keeping everything inside (with you)"
+rtf-parser.js:849       Line 36: "You now I see"
+rtf-parser.js:849       Line 37: "Even when I close my eyes"
+rtf-parser.js:849   Block 6 (5-part-1): name="Block 6 (продолжение 2)", lines=[38,39,40,41,42]
+rtf-parser.js:849     Content preview: "I'm with you
+You now I see
+Keeping everything inside (with you)"
+rtf-parser.js:849       Line 38: "I'm with you"
+rtf-parser.js:849       Line 39: "You now I see"
+rtf-parser.js:849       Line 40: "Keeping everything inside (with you)"
+rtf-parser.js:849       Line 41: "You now I see"
+rtf-parser.js:849       Line 42: "Even when I close my eyes"
+rtf-parser.js:849   Block 7 (6): name="Block 7", lines=[43,44,45,46]
+rtf-parser.js:849     Content preview: "No, no matter how far we've come
+I can't wait to see tomorrow
+No matter how far we've come I"
+rtf-parser.js:849       Line 43: "No, no matter how far we've come"
+rtf-parser.js:849       Line 44: "I can't wait to see tomorrow"
+rtf-parser.js:849       Line 45: "No matter how far we've come I"
+rtf-parser.js:849       Line 46: "I can't wait to see tomorrow"
+rtf-parser.js:849   Block 8 (7-part-0): name="Block 8", lines=[47,48,49,50,51]
+rtf-parser.js:849     Content preview: "With you
+You now I see
+Keeping everything inside (with you)"
+rtf-parser.js:849       Line 47: "With you"
+rtf-parser.js:849       Line 48: "You now I see"
+rtf-parser.js:849       Line 49: "Keeping everything inside (with you)"
+rtf-parser.js:849       Line 50: "You now I see"
+rtf-parser.js:849       Line 51: "Even when I close my eyes"
+rtf-parser.js:849   Block 9 (7-part-1): name="Block 8 (продолжение 2)", lines=[52,53,54,55,56]
+rtf-parser.js:849     Content preview: "With you
+You now I see
+Keeping everything inside (with you)"
+rtf-parser.js:849       Line 52: "With you"
+rtf-parser.js:849       Line 53: "You now I see"
+rtf-parser.js:849       Line 54: "Keeping everything inside (with you)"
+rtf-parser.js:849       Line 55: "You now I see"
+rtf-parser.js:849       Line 56: "Even when I close my eyes"
+rtf-parser.js:849 Rehearsal: Looking for block containing line 27
+rtf-parser.js:849   Checking block 0: lineIndices=[0,1,2,3,4,5,6,7]
+rtf-parser.js:849   ✗ Block 0 does NOT contain line 27
+rtf-parser.js:849   Checking block 1: lineIndices=[8,9,10,11,12,13]
+rtf-parser.js:849   ✗ Block 1 does NOT contain line 27
+rtf-parser.js:849   Checking block 2: lineIndices=[14,15,16,17,18]
+rtf-parser.js:849   ✗ Block 2 does NOT contain line 27
+rtf-parser.js:849   Checking block 3: lineIndices=[19,20,21,22,23,24,25,26]
+rtf-parser.js:849   ✗ Block 3 does NOT contain line 27
+rtf-parser.js:849   Checking block 4: lineIndices=[27,28,29,30,31,32]
+rtf-parser.js:849   ✓ Found! Block 4 contains line 27
+rtf-parser.js:849 Rehearsal: Found active block at index 4 with lines: Array(6)
+rtf-parser.js:849 Rehearsal: Active block 4: Object
+rtf-parser.js:849 >>> FONT_CALC_DEBUG >>> Lines: 6, FontSize: 2.38rem, LineHeight: 3.06rem
+rtf-parser.js:849 Rehearsal: Activated line 27 in block with transition: none
+rtf-parser.js:849 Rehearsal: Next block preview for block 5: Object
+rtf-parser.js:849 Rehearsal: Preview lines: Array(2)
+rtf-parser.js:849 Rehearsal: Adding preview line 33: "I'm with you"
+rtf-parser.js:849 Rehearsal: Adding preview line 34: "You now I see"
+rtf-parser.js:849 Rehearsal: Preview container added with 2 lines
+rtf-parser.js:849 Rehearsal mode: Rendered active block 4 with next block preview
+rtf-parser.js:849 BlockLoopControl: Обновление для текущего блока
+rtf-parser.js:849 BlockLoopControl: Блок изменился, останавливаем зацикливание
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(8)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 5
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 5
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 465.3Hz → 948.0Hz за 25мс (ratio: 2.04)
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: false
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: false
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: false

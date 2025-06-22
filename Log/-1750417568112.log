@@ -1,0 +1,887 @@
+ 🔧 DEBUG_CONFIG загружен. Используйте toggleDebugLogs(true) для включения логов
+ 📦 Utils module loaded
+ StateManager initialized
+ 📦 StateManager module loaded
+ 🚀 AudioEngine (Hybrid Engine) - Гибридная архитектура восстановлена
+ Space bar handler attached
+ LyricsDisplay initialized
+ RtfParserAdapter: Инициализация
+ - EnhancedRtfProcessor доступен: true
+ - Стандартный RtfParser доступен: true
+ TrackCatalog initialized
+ MarkerManager initialized
+ WaveformEditor loaded
+ WaveformEditor initialized
+ BlockLoopControl: Класс загружен
+ RTF Parser Integration: Инициализация интеграции улучшенного RTF-парсера (после определения объекта)
+ RTF Parser Integration: Начало интеграции
+ RTF Parser Integration: TrackCatalog уже использует RtfParserAdapter если он доступен
+ RTF Parser Integration: Интеграция завершена успешно
+ 🎹 Инициализация клавиатуры...
+ TrackCatalog: _finalizeUploadFromBlockEditor CALLED - should be obsolete now.
+ LiveFeed module loaded (placeholder)
+ Загружено 5 треков из базы данных
+ Проверка треков завершена успешно, проблем не обнаружено
+ ✅ Pitchy библиотека загружена в beLive
+ LiveMode: Автоматическая инициализация при загрузке документа
+ LiveMode: Создание нового экземпляра
+ LiveMode: Маски инициализированы без использования изображений
+ LiveMode: getUserMedia поддерживается: true
+ LiveMode: Безопасный контекст: true
+ LiveMode: Определен localhost, разрешен HTTP
+ LiveMode: Метод toggleStreaming не найден и не может быть привязан
+(анонимная) @ live-mode.js:521
+ LiveMode: Базовая инициализация завершена
+ LiveMode: Предварительная инициализация камеры...
+ LiveMode: экземпляр создан
+ LiveFeed initialized
+ DOM content loaded, waiting for components
+ ✅ Pitchy готов для точной детекции
+ 🎹 Кнопка найдена
+ 🔗 Настройка интеграции для точной детекции...
+ 🎤 Статус для точной детекции: false
+ 🎯 КАЛИБРОВКА: A4 = 440.00Hz (должно быть 440.00Hz)
+ 🎹 Создано 48 клавиш для точной детекции
+ 🎹 Piano Keyboard инициализирован
+ Application fully loaded, components initialized
+ All components ready, initializing app...
+ Initializing beLive App
+ WordAlignerV2 not found, creating placeholder
+App @ app.js:53
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Applied style 'Стандартный'
+ TextStyleManager: Проверка доступности LiveMode...
+ TextStyleManager: Класс LiveMode найден, предварительная инициализация камеры...
+ TextStyleManager: LiveMode уже инициализирован
+ TextStyleManager initialized with 8 styles and 29 total transitions
+ Text style manager initialized
+ Initializing Microphone UI...
+ Microphone UI initialized using existing DOM elements.
+ LoopBlockManager: Checking audio initialization...
+ LoopBlockManager: Audio buffer or context not available (check 0)
+_checkAudioAndInitialize @ loopblock-manager.js:137
+ LoopBlockManager: Initializing sync listeners
+ LoopBlockManager: progressBarContainer found - width: 1050px, height: 10px, overflow: visible
+ LoopBlockManager: progressBarContainer offsetWidth: 1050, offsetHeight: 10
+ LoopBlockManager: progressBarContainer children: 3
+ LoopBlockManager: Child 0: progress-bar-loaded, display: block, zIndex: 1
+ LoopBlockManager: Child 1: progress-bar, display: block, zIndex: 2
+ LoopBlockManager: Child 2: progress-tooltip, display: block, zIndex: 10
+ LoopBlockManager initialized
+ LoopBlockManager component ready
+ BlockLoopControl: Инициализирован
+ BlockLoopControl component ready
+ 🎭 MaskSystem: Инициализация продвинутой системы масок
+ 🎭 MaskSystem: Конструктор завершен
+ 🎭 MaskSystem создан
+ 🎭 MaskSystem component ready
+ Initializing LoopBlock controls
+ Audio not fully loaded yet, setting up delayed initialization
+ 🎭 MaskSystem: Обработчик кнопки подключен
+ 🚀 Инициализация Живой Ленты
+ ✅ Живая Лента инициализирована
+ 🚀 Показываю Живую Ленту
+ ✅ Живая Лента активирована
+ beLive App initialized
+ App initialized successfully
+ 🎭 MediaPipe: Начинаем загрузку библиотек...
+ 🎭 MediaPipe: Ожидание загрузки библиотек...
+ 🎭 MediaPipe: Все библиотеки загружены успешно
+ 🎭 MaskSystem: Официальный MediaPipe FaceMesh готов
+ 🏃 MaskSystem: MediaPipe Pose готов
+ ✋ MaskSystem: MediaPipe Hands готов
+ 🤖 MaskSystem: MediaPipe Holistic готов
+ 🎨 MaskSystem: MediaPipe Selfie Segmentation готов
+ 🎭 MaskSystem: MediaPipe готов к использованию
+ 🎯 Background Effects Engine v2.0 инициализирован
+ 🔄 Инициализация Background Effects Engine...
+ ✅ Background Effects Engine готов
+ 🎤 Запуск ТОЧНОГО анализа вокальной дорожки...
+ 🔊 Инициализация аудио для точной детекции...
+ ✅ Используем audioEngine.audioContext
+ ✅ Pitchy детектор готов для точной работы
+ ✅ Подключен к ВОКАЛЬНОМУ узлу: GainNode
+ ✅ ТОЧНЫЙ анализ запущен
+ LiveMode: Запуск предварительной инициализации камеры
+ LiveMode: Предварительная инициализация камеры...
+ LoopBlockManager: Проверка доступности аудио (попытка 2/5)
+ LoopBlockManager: Проверка доступности аудио (попытка 3/5)
+ 🎯 Начальная калибровка системы...
+ 🎯 ===== ЗАПУСК КАЛИБРОВОЧНЫХ ТЕСТОВ ПИТЧА =====
+ 📋 Тестируем расчет частот:
+ ✅ C4: рассчитано=261.63Hz, ожидается=261.63Hz, ошибка=0.002%
+ ✅ D4: рассчитано=293.66Hz, ожидается=293.66Hz, ошибка=0.002%
+ ✅ E4: рассчитано=329.63Hz, ожидается=329.63Hz, ошибка=0.001%
+ ✅ F4: рассчитано=349.23Hz, ожидается=349.23Hz, ошибка=0.001%
+ ✅ G4: рассчитано=392.00Hz, ожидается=392Hz, ошибка=0.001%
+ 🎯 КАЛИБРОВКА: A4 = 440.00Hz (должно быть 440.00Hz)
+ ✅ A4: рассчитано=440.00Hz, ожидается=440Hz, ошибка=0.000%
+ ✅ B4: рассчитано=493.88Hz, ожидается=493.88Hz, ошибка=0.001%
+ 📋 Тестируем обратное преобразование:
+ ✅ 261.63Hz → обнаружено="C4", ожидается="C4"
+ ✅ 293.66Hz → обнаружено="D4", ожидается="D4"
+ ✅ 329.63Hz → обнаружено="E4", ожидается="E4"
+ ✅ 349.23Hz → обнаружено="F4", ожидается="F4"
+ ✅ 392Hz → обнаружено="G4", ожидается="G4"
+ ✅ 440Hz → обнаружено="A4", ожидается="A4"
+ ✅ 493.88Hz → обнаружено="B4", ожидается="B4"
+ 📊 РЕЗУЛЬТАТЫ КАЛИБРОВКИ:
+    Пройдено тестов: 14/14
+    Процент успеха: 100.0%
+    Средняя ошибка: 0.001%
+ 🎯 ✅ КАЛИБРОВКА ПИТЧА ПРОШЛА УСПЕШНО!
+ 🎯 ===== КАЛИБРОВОЧНЫЕ ТЕСТЫ ЗАВЕРШЕНЫ =====
+ LiveMode: Доступ к камере получен при предварительной инициализации
+ LiveMode: Получено 1 видеотреков. Активный: FaceTime HD Camera
+ LiveMode: Предварительная инициализация камеры успешно завершена
+ LiveMode: Доступ к камере получен при предварительной инициализации
+ LiveMode: Получено 1 видеотреков. Активный: FaceTime HD Camera
+ LiveMode: Предварительная инициализация камеры успешно завершена
+ LiveMode: Предварительная инициализация камеры успешна
+ LoopBlockManager: Аудио не загружено после 5 попыток. Для работы функций зацикливания необходимо загрузить аудиофайл.
+_checkAudioAgain @ loopblock-manager.js:219
+ 🚀 Быстрый переход в режим: karaoke
+ Switching to karaoke mode
+ App: Сохраняем предыдущий режим: concert
+ Activating karaoke mode
+ Karaoke Background Manager: Starting slideshow...
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ Applied style class to lyrics-container: style-karaoke
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-katriengrevendonck-2101487.jpg
+ TrackCatalog: openCatalog() called
+ TrackCatalog: catalogContainer exists: true
+ TrackCatalog: catalogContainer classes before: hidden
+ TrackCatalog: catalogContainer classes after: 
+ TrackCatalog: Catalog should now be visible
+ 🔄 Loading track: "Linkin Park-Lying From You [-]"
+ 🔄 StateManager: Starting HARD RESET of all components
+ 1. Resetting AudioEngine...
+ AudioEngine: Starting reset...
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🧹 СПРИНТЕР: Ресурсы очищены
+ AudioEngine: Reset completed successfully
+ ✅ AudioEngine reset complete
+ 2. Resetting LyricsDisplay...
+ 💥 LyricsDisplay: Performing full reset.
+ ✅ LyricsDisplay: Full reset complete. All lyric data and DOM elements cleared.
+ ✅ LyricsDisplay full reset complete
+ 3. Resetting TextStyleManager...
+ 💥 TextStyleManager: Full reset initiated.
+ ✅ TextStyleManager: Reset complete. All states and caches cleared.
+ ✅ TextStyleManager reset complete.
+ 🎉 StateManager: HARD RESET completed successfully
+ ✅ All components ready for new track
+ ⏱️ HARD_RESET_TIME: 9.5048828125 ms
+ TrackCatalog: Set waveformEditor.lastLoadedFile to Linkin Park-Lying From You.rtf
+ TrackCatalog: Set waveformEditor.currentTrackId to 1750296242318
+ TrackCatalog: Found 11 blocks. Preparing them for rendering after audio load.
+ LyricsDisplay: Loading 11 imported blocks.
+ Block 0 loaded: id="block-1750417548000-0-sqtsocsx0zk", name="Block 1", lines=4
+ Block 1 loaded: id="1", name="Block 2", lines=4
+ Block 2 loaded: id="2", name="Block 3", lines=11
+ Block 3 loaded: id="3", name="Block 4", lines=4
+ Block 4 loaded: id="4", name="Block 5", lines=4
+ Block 5 loaded: id="5", name="Block 6", lines=11
+ Block 6 loaded: id="6", name="Block 7", lines=3
+ Block 7 loaded: id="7", name="Block 8", lines=3
+ Block 8 loaded: id="8", name="Block 9", lines=3
+ Block 9 loaded: id="9", name="Block 10", lines=3
+ Block 10 loaded: id="10", name="Block 11", lines=12
+ LyricsDisplay: Skipping render as requested by shouldRender=false
+ LyricsDisplay: Successfully loaded 11 blocks, total lyric lines: 62.
+ LyricsDisplay: Updated marker colors after loading blocks
+ ⏱️ LYRICS_PREPARE_TIME: 18.843994140625 ms
+ ⏱️ BLOB_CREATION_TIME: 32.80810546875 ms
+ 🚀 ГИБРИД: Загрузка двойного потока
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🎚️ МАСТЕР: Создание микшированной дорожки...
+ 🎚️ МАСТЕР: Инструментал URL: blob:null/af19e884-ade3-4c2a-a7c7-5dc7705f0e60...
+ 🎚️ МАСТЕР: Вокал URL: blob:null/51e7255f-ff35-4a98-b62c-9c3bf46bf812...
+ 🎚️ МАСТЕР: Загружаем аудиофайлы...
+ 🎚️ МАСТЕР: Конвертируем в ArrayBuffer...
+ 🎚️ МАСТЕР: Инструментал размер: 6913089 байт
+ 🎚️ МАСТЕР: Вокал размер: 6913089 байт
+ 🎚️ МАСТЕР: Декодируем аудиоданные...
+ ✅ ИНСТРУМЕНТАЛ ГОТОВ! Длительность: 172.75с
+ ⏱️ HYBRID_ENGINE_LOAD_TIME: 310.73583984375 ms
+ 🎯 ГИБРИД: Рассинхронизация устранена!
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ Track loaded event detected, initializing LoopBlockManager CustomEvent
+ LoopBlockManager already initialized
+ ⏱️ AUDIO_LOAD_TIME: 314.02392578125 ms
+ Loading 62 markers for track Linkin Park-Lying From You [-]
+ Validating 62 markers for 62 lyric lines
+ Kept 62 valid markers out of 62
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ Track loaded event detected, initializing LoopBlockManager CustomEvent
+ LoopBlockManager already initialized
+ 🎵 АВТОПЛЕЙ: Запуск воспроизведения...
+ ✅ Track "Linkin Park-Lying From You [-]" loaded successfully
+ ✅ ВОКАЛ ГОТОВ! Длительность: 172.75с
+ 🎤 ВОКАЛ ПОДКЛЮЧЕН к аудио-контексту
+ 🎨 StateManager: Forcing text rerender in current mode
+ 🎤 Karaoke mode detected, should work correctly
+ ⏱️ FINAL_RENDER_TIME: 145.4619140625 ms
+ ⏱️ TOTAL_TRACK_LOAD_TIME: 526.038818359375 ms
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ ✅ АВТОПЛЕЙ: Воспроизведение начато успешно
+ Audio ready detected via timer, initializing LoopBlockManager
+ LoopBlockManager already initialized
+ Switching to rehearsal mode
+ App: Сохраняем предыдущий режим: karaoke
+ Activating rehearsal mode
+ Karaoke Background Manager: Stopping slideshow...
+ Applying style: Репетиция with scale 1.00
+ LyricsDisplay: Setting style to Репетиция
+ Activating Rehearsal Display with blocks: Array(11)
+ Rendering lyrics. Current style ID: rehearsal
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line: 0, Total blocks: 14
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750417548000-0-sqtsocsx0zk): name="Block 1", lines=[0,1,2,3]
+     Content preview: "When I pretend, everything is what I want it to be
+I look exactly like what you had always wanted to"
+       Line 0: "When I pretend, everything is what I want it to be"
+       Line 1: "I look exactly like what you had always wanted to see"
+       Line 2: "When I pretend, I can forget about the criminal I am"
+       Line 3: "Stealing second after second just 'cause I know I can"
+   Block 1 (1): name="Block 2", lines=[4,5,6,7]
+     Content preview: "But I can't pretend this is the way it'll stay
+I'm just (trying to bend the truth)
+I can't pretend I"
+       Line 4: "But I can't pretend this is the way it'll stay"
+       Line 5: "I'm just (trying to bend the truth)"
+       Line 6: "I can't pretend I'm who you want me to be"
+       Line 7: "So I'm (lying my way from you)"
+   Block 2 (2-part-0): name="Block 3", lines=[8,9,10,11,12,13]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 8: "You"
+       Line 9: "(No turning back now)"
+       Line 10: "I wanna be pushed aside, so, let me go"
+       Line 11: "(No, no turning back now)"
+       Line 12: "Let me take back my life"
+       Line 13: "I'd rather be all alone"
+   Block 3 (2-part-1): name="Block 3 (продолжение 2)", lines=[14,15,16,17,18]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 14: "(No turning back now)"
+       Line 15: "Anywhere on my own"
+       Line 16: "'Cause I can see"
+       Line 17: "(No, no turning back now)"
+       Line 18: "The very worst part of you is me"
+   Block 4 (3): name="Block 4", lines=[19,20,21,22]
+     Content preview: "I remember what they taught to me
+Remember condescending talk of who I ought to be
+Remember listenin"
+       Line 19: "I remember what they taught to me"
+       Line 20: "Remember condescending talk of who I ought to be"
+       Line 21: "Remember listening to all of that and this again"
+       Line 22: "So I pretended up a person who was fittin' in"
+   Block 5 (4): name="Block 5", lines=[23,24,25,26]
+     Content preview: "And now you think this person really is me
+And I'm (trying to bend the truth)
+But the more I push th"
+       Line 23: "And now you think this person really is me"
+       Line 24: "And I'm (trying to bend the truth)"
+       Line 25: "But the more I push the more I'm pulling away"
+       Line 26: "'Cause I'm (lying my way from you)"
+   Block 6 (5-part-0): name="Block 6", lines=[27,28,29,30,31,32]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 27: "You"
+       Line 28: "(No turning back now)"
+       Line 29: "I wanna be pushed aside, so, let me go"
+       Line 30: "(No, no turning back now)"
+       Line 31: "Let me take back my life"
+       Line 32: "I'd rather be all alone"
+   Block 7 (5-part-1): name="Block 6 (продолжение 2)", lines=[33,34,35,36,37]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 33: "(No turning back now)"
+       Line 34: "Anywhere on my own"
+       Line 35: "'Cause I can see"
+       Line 36: "(No, no turning back now)"
+       Line 37: "The very worst part of you is me"
+   Block 8 (6): name="Block 7", lines=[38,39,40]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 38: "This isn't what I wanted to be"
+       Line 39: "I never thought that what I said would have you running from me"
+       Line 40: "Like this"
+   Block 9 (7): name="Block 8", lines=[41,42,43]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 41: "This isn't what I wanted to be"
+       Line 42: "I never thought that what I said would have you running from me"
+       Line 43: "Like this"
+   Block 10 (8): name="Block 9", lines=[44,45,46]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 44: "This isn't what I wanted to be"
+       Line 45: "I never thought that what I said would have you running from me"
+       Line 46: "Like this"
+   Block 11 (9): name="Block 10", lines=[47,48,49]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 47: "This isn't what I wanted to be"
+       Line 48: "I never thought that what I said would have you running from me"
+       Line 49: "Like this"
+   Block 12 (10-part-0): name="Block 11", lines=[50,51,52,53,54,55]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 50: "You"
+       Line 51: "(No turning back now)"
+       Line 52: "I wanna be pushed aside, so, let me go"
+       Line 53: "(No, no turning back now)"
+       Line 54: "Let me take back my life"
+       Line 55: "I'd rather be all alone"
+   Block 13 (10-part-1): name="Block 11 (продолжение 2)", lines=[56,57,58,59,60,61]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 56: "(No turning back now)"
+       Line 57: "Anywhere on my own"
+       Line 58: "'Cause I can see"
+       Line 59: "(No, no turning back now)"
+       Line 60: "The very worst part of you"
+       Line 61: "The very worst part of you is me"
+ Rehearsal: Looking for block containing line 0
+   Checking block 0: lineIndices=[0,1,2,3]
+   ✓ Found! Block 0 contains line 0
+ Rehearsal: Found active block at index 0 with lines: Array(4)
+ Rehearsal: Active block 0: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 4, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Activated line 0 in block with transition: none
+ Rehearsal: Next block preview for block 1: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 4: "But I can't pretend this is the way it'll stay"
+ Rehearsal: Adding preview line 5: "I'm just (trying to bend the truth)"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 0 with next block preview
+ BlockLoopControl: Активирован
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ 🎚️ МАСТЕР: Инструментал - каналов: 2, длина: 7618364, частота: 44100Hz
+ 🎚️ МАСТЕР: Вокал - каналов: 2, длина: 7618364, частота: 44100Hz
+ 🎚️ МАСТЕР: Создан буфер - каналов: 2, длина: 7618364
+ 🎚️ МАСТЕР: Начинаем микширование каналов...
+ 🎚️ МАСТЕР: Микширование завершено, конвертируем в blob...
+ 🎚️ МАСТЕР: Микшированная дорожка создана! URL: blob:null/baa1fd32-a87c-4dc7-8b12-47a3d74b1a01...
+ 🎚️ МАСТЕР: Размер blob: 30473500 байт
+ 🎚️ МАСТЕР: Обновляем URL после создания микшированной дорожки
+ 🎚️ МАСТЕР URL обновлен: blob:null/baa1fd32-a87c-4dc7-8b12-47a3d74b1a01...
+ ⏰ СИНХРО: Позиция установлена 26.32с
+ Rehearsal: Line changing from 0 to 1
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line 0 belongs to block: block-1750417548000-0-sqtsocsx0zk Array(4)
+ Rehearsal: New line 1 belongs to block: block-1750417548000-0-sqtsocsx0zk Array(4)
+ Rehearsal: Same block (block-1750417548000-0-sqtsocsx0zk), updating active line from 0 to 1
+ [SETACTIVE] Called with index 1. Current style: rehearsal
+ Rehearsal mode: Setting active line 1
+ Activating rehearsal line at index 1
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ 🚫 Блокирована очевидная гармоника: 351.7Hz (1.99x от 176.9Hz, ясность: 75.5%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ⏰ СИНХРО: Позиция установлена 35.54с
+ Rehearsal: Line changing from 1 to 4
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line 1 belongs to block: block-1750417548000-0-sqtsocsx0zk Array(4)
+ Rehearsal: New line 4 belongs to block: 1 Array(4)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750417548000-0-sqtsocsx0zk to 1
+ Rehearsal: Line changed from 1 to 4
+ Rehearsal: Current block lines: Array(4)
+ Rehearsal: New block lines: Array(4)
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line: 4, Total blocks: 14
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750417548000-0-sqtsocsx0zk): name="Block 1", lines=[0,1,2,3]
+     Content preview: "When I pretend, everything is what I want it to be
+I look exactly like what you had always wanted to"
+       Line 0: "When I pretend, everything is what I want it to be"
+       Line 1: "I look exactly like what you had always wanted to see"
+       Line 2: "When I pretend, I can forget about the criminal I am"
+       Line 3: "Stealing second after second just 'cause I know I can"
+   Block 1 (1): name="Block 2", lines=[4,5,6,7]
+     Content preview: "But I can't pretend this is the way it'll stay
+I'm just (trying to bend the truth)
+I can't pretend I"
+       Line 4: "But I can't pretend this is the way it'll stay"
+       Line 5: "I'm just (trying to bend the truth)"
+       Line 6: "I can't pretend I'm who you want me to be"
+       Line 7: "So I'm (lying my way from you)"
+   Block 2 (2-part-0): name="Block 3", lines=[8,9,10,11,12,13]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 8: "You"
+       Line 9: "(No turning back now)"
+       Line 10: "I wanna be pushed aside, so, let me go"
+       Line 11: "(No, no turning back now)"
+       Line 12: "Let me take back my life"
+       Line 13: "I'd rather be all alone"
+   Block 3 (2-part-1): name="Block 3 (продолжение 2)", lines=[14,15,16,17,18]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 14: "(No turning back now)"
+       Line 15: "Anywhere on my own"
+       Line 16: "'Cause I can see"
+       Line 17: "(No, no turning back now)"
+       Line 18: "The very worst part of you is me"
+   Block 4 (3): name="Block 4", lines=[19,20,21,22]
+     Content preview: "I remember what they taught to me
+Remember condescending talk of who I ought to be
+Remember listenin"
+       Line 19: "I remember what they taught to me"
+       Line 20: "Remember condescending talk of who I ought to be"
+       Line 21: "Remember listening to all of that and this again"
+       Line 22: "So I pretended up a person who was fittin' in"
+   Block 5 (4): name="Block 5", lines=[23,24,25,26]
+     Content preview: "And now you think this person really is me
+And I'm (trying to bend the truth)
+But the more I push th"
+       Line 23: "And now you think this person really is me"
+       Line 24: "And I'm (trying to bend the truth)"
+       Line 25: "But the more I push the more I'm pulling away"
+       Line 26: "'Cause I'm (lying my way from you)"
+   Block 6 (5-part-0): name="Block 6", lines=[27,28,29,30,31,32]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 27: "You"
+       Line 28: "(No turning back now)"
+       Line 29: "I wanna be pushed aside, so, let me go"
+       Line 30: "(No, no turning back now)"
+       Line 31: "Let me take back my life"
+       Line 32: "I'd rather be all alone"
+   Block 7 (5-part-1): name="Block 6 (продолжение 2)", lines=[33,34,35,36,37]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 33: "(No turning back now)"
+       Line 34: "Anywhere on my own"
+       Line 35: "'Cause I can see"
+       Line 36: "(No, no turning back now)"
+       Line 37: "The very worst part of you is me"
+   Block 8 (6): name="Block 7", lines=[38,39,40]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 38: "This isn't what I wanted to be"
+       Line 39: "I never thought that what I said would have you running from me"
+       Line 40: "Like this"
+   Block 9 (7): name="Block 8", lines=[41,42,43]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 41: "This isn't what I wanted to be"
+       Line 42: "I never thought that what I said would have you running from me"
+       Line 43: "Like this"
+   Block 10 (8): name="Block 9", lines=[44,45,46]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 44: "This isn't what I wanted to be"
+       Line 45: "I never thought that what I said would have you running from me"
+       Line 46: "Like this"
+   Block 11 (9): name="Block 10", lines=[47,48,49]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 47: "This isn't what I wanted to be"
+       Line 48: "I never thought that what I said would have you running from me"
+       Line 49: "Like this"
+   Block 12 (10-part-0): name="Block 11", lines=[50,51,52,53,54,55]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 50: "You"
+       Line 51: "(No turning back now)"
+       Line 52: "I wanna be pushed aside, so, let me go"
+       Line 53: "(No, no turning back now)"
+       Line 54: "Let me take back my life"
+       Line 55: "I'd rather be all alone"
+   Block 13 (10-part-1): name="Block 11 (продолжение 2)", lines=[56,57,58,59,60,61]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 56: "(No turning back now)"
+       Line 57: "Anywhere on my own"
+       Line 58: "'Cause I can see"
+       Line 59: "(No, no turning back now)"
+       Line 60: "The very worst part of you"
+       Line 61: "The very worst part of you is me"
+ Rehearsal: Looking for block containing line 4
+   Checking block 0: lineIndices=[0,1,2,3]
+   ✗ Block 0 does NOT contain line 4
+   Checking block 1: lineIndices=[4,5,6,7]
+   ✓ Found! Block 1 contains line 4
+ Rehearsal: Found active block at index 1 with lines: Array(4)
+ Rehearsal: Active block 1: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 4, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Activated line 4 in block with transition: none
+ Rehearsal: Next block preview for block 2: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 8: "You"
+ Rehearsal: Adding preview line 9: "(No turning back now)"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 1 with next block preview
+ BlockLoopControl: Обновление для текущего блока
+ BlockLoopControl: Блок изменился, останавливаем зацикливание
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 2
+ BlockLoopControl: _createLoopButton called for block: Block 2
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 2
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ⏰ СИНХРО: Позиция установлена 45.08с
+ Rehearsal: Line changing from 4 to 7
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line 4 belongs to block: 1 Array(4)
+ Rehearsal: New line 7 belongs to block: 1 Array(4)
+ Rehearsal: Same block (1), updating active line from 4 to 7
+ [SETACTIVE] Called with index 7. Current style: rehearsal
+ Rehearsal mode: Setting active line 7
+ Activating rehearsal line at index 7
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 2
+ BlockLoopControl: _createLoopButton called for block: Block 2
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 2
+ ✅ Октавный переход разрешен: 130.4Hz → 253.9Hz за 135мс (ratio: 1.95)
+ ⏰ СИНХРО: Позиция установлена 53.14с
+ Rehearsal: Line changing from 7 to 10
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line 7 belongs to block: 1 Array(4)
+ Rehearsal: New line 10 belongs to block: 2-part-0 Array(6)
+ Rehearsal: *** BLOCK CHANGED *** from 1 to 2-part-0
+ Rehearsal: Line changed from 7 to 10
+ Rehearsal: Current block lines: Array(4)
+ Rehearsal: New block lines: Array(6)
+ Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-10 (5 lines)
+ Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+   Part 1: lines 0-5 (6 lines)
+   Part 2: lines 6-11 (6 lines)
+ Rehearsal: Current line: 10, Total blocks: 14
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750417548000-0-sqtsocsx0zk): name="Block 1", lines=[0,1,2,3]
+     Content preview: "When I pretend, everything is what I want it to be
+I look exactly like what you had always wanted to"
+       Line 0: "When I pretend, everything is what I want it to be"
+       Line 1: "I look exactly like what you had always wanted to see"
+       Line 2: "When I pretend, I can forget about the criminal I am"
+       Line 3: "Stealing second after second just 'cause I know I can"
+   Block 1 (1): name="Block 2", lines=[4,5,6,7]
+     Content preview: "But I can't pretend this is the way it'll stay
+I'm just (trying to bend the truth)
+I can't pretend I"
+       Line 4: "But I can't pretend this is the way it'll stay"
+       Line 5: "I'm just (trying to bend the truth)"
+       Line 6: "I can't pretend I'm who you want me to be"
+       Line 7: "So I'm (lying my way from you)"
+   Block 2 (2-part-0): name="Block 3", lines=[8,9,10,11,12,13]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 8: "You"
+       Line 9: "(No turning back now)"
+       Line 10: "I wanna be pushed aside, so, let me go"
+       Line 11: "(No, no turning back now)"
+       Line 12: "Let me take back my life"
+       Line 13: "I'd rather be all alone"
+   Block 3 (2-part-1): name="Block 3 (продолжение 2)", lines=[14,15,16,17,18]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 14: "(No turning back now)"
+       Line 15: "Anywhere on my own"
+       Line 16: "'Cause I can see"
+       Line 17: "(No, no turning back now)"
+       Line 18: "The very worst part of you is me"
+   Block 4 (3): name="Block 4", lines=[19,20,21,22]
+     Content preview: "I remember what they taught to me
+Remember condescending talk of who I ought to be
+Remember listenin"
+       Line 19: "I remember what they taught to me"
+       Line 20: "Remember condescending talk of who I ought to be"
+       Line 21: "Remember listening to all of that and this again"
+       Line 22: "So I pretended up a person who was fittin' in"
+   Block 5 (4): name="Block 5", lines=[23,24,25,26]
+     Content preview: "And now you think this person really is me
+And I'm (trying to bend the truth)
+But the more I push th"
+       Line 23: "And now you think this person really is me"
+       Line 24: "And I'm (trying to bend the truth)"
+       Line 25: "But the more I push the more I'm pulling away"
+       Line 26: "'Cause I'm (lying my way from you)"
+   Block 6 (5-part-0): name="Block 6", lines=[27,28,29,30,31,32]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 27: "You"
+       Line 28: "(No turning back now)"
+       Line 29: "I wanna be pushed aside, so, let me go"
+       Line 30: "(No, no turning back now)"
+       Line 31: "Let me take back my life"
+       Line 32: "I'd rather be all alone"
+   Block 7 (5-part-1): name="Block 6 (продолжение 2)", lines=[33,34,35,36,37]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 33: "(No turning back now)"
+       Line 34: "Anywhere on my own"
+       Line 35: "'Cause I can see"
+       Line 36: "(No, no turning back now)"
+       Line 37: "The very worst part of you is me"
+   Block 8 (6): name="Block 7", lines=[38,39,40]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 38: "This isn't what I wanted to be"
+       Line 39: "I never thought that what I said would have you running from me"
+       Line 40: "Like this"
+   Block 9 (7): name="Block 8", lines=[41,42,43]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 41: "This isn't what I wanted to be"
+       Line 42: "I never thought that what I said would have you running from me"
+       Line 43: "Like this"
+   Block 10 (8): name="Block 9", lines=[44,45,46]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 44: "This isn't what I wanted to be"
+       Line 45: "I never thought that what I said would have you running from me"
+       Line 46: "Like this"
+   Block 11 (9): name="Block 10", lines=[47,48,49]
+     Content preview: "This isn't what I wanted to be
+I never thought that what I said would have you running from me
+Like "
+       Line 47: "This isn't what I wanted to be"
+       Line 48: "I never thought that what I said would have you running from me"
+       Line 49: "Like this"
+   Block 12 (10-part-0): name="Block 11", lines=[50,51,52,53,54,55]
+     Content preview: "You
+(No turning back now)
+I wanna be pushed aside, so, let me go"
+       Line 50: "You"
+       Line 51: "(No turning back now)"
+       Line 52: "I wanna be pushed aside, so, let me go"
+       Line 53: "(No, no turning back now)"
+       Line 54: "Let me take back my life"
+       Line 55: "I'd rather be all alone"
+   Block 13 (10-part-1): name="Block 11 (продолжение 2)", lines=[56,57,58,59,60,61]
+     Content preview: "(No turning back now)
+Anywhere on my own
+'Cause I can see"
+       Line 56: "(No turning back now)"
+       Line 57: "Anywhere on my own"
+       Line 58: "'Cause I can see"
+       Line 59: "(No, no turning back now)"
+       Line 60: "The very worst part of you"
+       Line 61: "The very worst part of you is me"
+ Rehearsal: Looking for block containing line 10
+   Checking block 0: lineIndices=[0,1,2,3]
+   ✗ Block 0 does NOT contain line 10
+   Checking block 1: lineIndices=[4,5,6,7]
+   ✗ Block 1 does NOT contain line 10
+   Checking block 2: lineIndices=[8,9,10,11,12,13]
+   ✓ Found! Block 2 contains line 10
+ Rehearsal: Found active block at index 2 with lines: Array(6)
+ Rehearsal: Active block 2: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 6, FontSize: 2.38rem, LineHeight: 3.06rem
+ Rehearsal: Activated line 10 in block with transition: none
+ Rehearsal: Next block preview for block 3: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 14: "(No turning back now)"
+ Rehearsal: Adding preview line 15: "Anywhere on my own"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 2 with next block preview
+ BlockLoopControl: Обновление для текущего блока
+rtf-parser.js:849 BlockLoopControl: Блок изменился, останавливаем зацикливание
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 3
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 3
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 3
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 891.9Hz (1.98x от 450.1Hz, ясность: 90.0%)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 450.1Hz → 885.0Hz за 33мс (ratio: 1.97)
+rtf-parser.js:849 🎯 Высокая ясность (90.7%) - принимаем возможную гармонику: 436.0Hz
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 843.4Hz (2.00x от 421.9Hz, ясность: 87.3%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 842.4Hz (2.00x от 421.9Hz, ясность: 88.6%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 839.8Hz (1.99x от 421.9Hz, ясность: 88.5%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 838.7Hz (1.99x от 421.9Hz, ясность: 87.2%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 834.2Hz (1.98x от 421.9Hz, ясность: 87.3%)
+rtf-parser.js:849 🎯 Высокая ясность (90.3%) - принимаем возможную гармонику: 834.7Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 421.9Hz → 834.7Hz за 116мс (ratio: 1.98)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 927.8Hz → 483.6Hz за 15мс (ratio: 0.52)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 492.6Hz (0.51x от 973.6Hz, ясность: 85.7%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 484.6Hz (0.50x от 973.6Hz, ясность: 70.6%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 938.2Hz → 485.3Hz за 184мс (ratio: 0.52)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 963.6Hz (1.99x от 483.7Hz, ясность: 86.1%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 957.9Hz (1.98x от 483.7Hz, ясность: 87.6%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 955.9Hz (1.98x от 483.7Hz, ясность: 82.3%)
+rtf-parser.js:849 Rehearsal: Line changing from 10 to 11
+rtf-parser.js:849 Splitting block "Block 3" (11 lines) into 2 parts with ~6 lines each
+rtf-parser.js:849   Part 1: lines 0-5 (6 lines)
+rtf-parser.js:849   Part 2: lines 6-10 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (11 lines) into 2 parts with ~6 lines each
+rtf-parser.js:849   Part 1: lines 0-5 (6 lines)
+rtf-parser.js:849   Part 2: lines 6-10 (5 lines)
+rtf-parser.js:849 Splitting block "Block 11" (12 lines) into 2 parts with ~6 lines each
+rtf-parser.js:849   Part 1: lines 0-5 (6 lines)
+rtf-parser.js:849   Part 2: lines 6-11 (6 lines)
+rtf-parser.js:849 Rehearsal: Current line 10 belongs to block: 2-part-0 Array(6)
+rtf-parser.js:849 Rehearsal: New line 11 belongs to block: 2-part-0 Array(6)
+rtf-parser.js:849 Rehearsal: Same block (2-part-0), updating active line from 10 to 11
+rtf-parser.js:849 [SETACTIVE] Called with index 11. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 11
+rtf-parser.js:849 Activating rehearsal line at index 11
+rtf-parser.js:849 BlockLoopControl: Активный блок изменился
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 3
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 3
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 3
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 241.6Hz (0.50x от 484.2Hz, ясность: 79.5%)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 240.4Hz (0.50x от 484.2Hz, ясность: 84.4%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 243.2Hz (0.50x от 482.1Hz, ясность: 71.6%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 951.8Hz (1.97x от 482.1Hz, ясность: 73.3%)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: false
+rtf-parser.js:849 🔍 Статический анализ: 481.4Hz (62.2%)
+rtf-parser.js:849 🔍 Статический анализ: 482.1Hz (52.0%)
+rtf-parser.js:849 🔍 Статический анализ: 482.1Hz (52.0%)
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: false
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: false
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: false

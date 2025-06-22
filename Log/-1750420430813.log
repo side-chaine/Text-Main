@@ -1,0 +1,1026 @@
+css/block-mode.css:1  Failed to load resource: net::ERR_FILE_NOT_FOUND
+css/karaoke-mode.css:1  Failed to load resource: net::ERR_FILE_NOT_FOUND
+ Rehearsal: Line changing from 6 to 7
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 6 belongs to block: block-1750420254553-1-44hkrl3qg0g-part-0 Array(5)
+ Rehearsal: New line 7 belongs to block: block-1750420254553-1-44hkrl3qg0g-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254553-1-44hkrl3qg0g-part-0), updating active line from 6 to 7
+ [SETACTIVE] Called with index 7. Current style: rehearsal
+ Rehearsal mode: Setting active line 7
+ Rehearsal line with index 7 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 7 принадлежит текущему зацикленному блоку Block 2, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 29.23s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: LOOP CHECK - Current: 29.66s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: LOOP CHECK - Current: 30.09s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: LOOP CHECK - Current: 30.51s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: LOOP CHECK - Current: 30.94s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: LOOP CHECK - Current: 31.36s, Start: 24.42s, End: 37.21s
+ Rehearsal: Line changing from 7 to 8
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 7 belongs to block: block-1750420254553-1-44hkrl3qg0g-part-0 Array(5)
+ Rehearsal: New line 8 belongs to block: block-1750420254553-1-44hkrl3qg0g-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254553-1-44hkrl3qg0g-part-0), updating active line from 7 to 8
+ [SETACTIVE] Called with index 8. Current style: rehearsal
+ Rehearsal mode: Setting active line 8
+ Rehearsal line with index 8 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: Строка 8 принадлежит текущему зацикленному блоку Block 2, зацикливание продолжается
+ BlockLoopControl: LOOP CHECK - Current: 31.85s, Start: 24.42s, End: 37.21s
+ BlockLoopControl: Остановка зацикливания
+ ⏰ СИНХРО: Позиция установлена 52.93с
+ Rehearsal: Line changing from 8 to 16
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 8 belongs to block: block-1750420254553-1-44hkrl3qg0g-part-0 Array(5)
+ Rehearsal: New line 16 belongs to block: block-1750420254556-2-6bxiz6pd3wx-part-0 Array(5)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254553-1-44hkrl3qg0g-part-0 to block-1750420254556-2-6bxiz6pd3wx-part-0
+ Rehearsal: Line changed from 8 to 16
+ Rehearsal: Current block lines: Array(5)
+ Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Line changing from 16 to 17
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 16 belongs to block: block-1750420254556-2-6bxiz6pd3wx-part-0 Array(5)
+ Rehearsal: New line 17 belongs to block: block-1750420254556-2-6bxiz6pd3wx-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254556-2-6bxiz6pd3wx-part-0), updating active line from 16 to 17
+ [SETACTIVE] Called with index 17. Current style: rehearsal
+ Rehearsal mode: Setting active line 17
+ Rehearsal line with index 17 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 3
+ BlockLoopControl: _createLoopButton called for block: Block 3
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 3
+ ⏰ СИНХРО: Позиция установлена 69.99с
+ Rehearsal: Line changing from 17 to 24
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 17 belongs to block: block-1750420254556-2-6bxiz6pd3wx-part-0 Array(5)
+ Rehearsal: New line 24 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254556-2-6bxiz6pd3wx-part-0 to block-1750420254556-3-dnkg7afrrdo
+ Rehearsal: Line changed from 17 to 24
+ Rehearsal: Current block lines: Array(5)
+ Rehearsal: New block lines: Array(6)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 6, FontSize: 2.38rem, LineHeight: 3.06rem
+ ⏰ СИНХРО: Позиция установлена 78.77с
+ Rehearsal: Line changing from 24 to 25
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 24 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: New line 25 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: Same block (block-1750420254556-3-dnkg7afrrdo), updating active line from 24 to 25
+ [SETACTIVE] Called with index 25. Current style: rehearsal
+ Rehearsal mode: Setting active line 25
+ Rehearsal line with index 25 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 4
+ BlockLoopControl: _createLoopButton called for block: Block 4
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 4
+ ⏰ СИНХРО: Позиция установлена 92.56с
+ Rehearsal: Line changing from 25 to 28
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 25 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: New line 28 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: Same block (block-1750420254556-3-dnkg7afrrdo), updating active line from 25 to 28
+ [SETACTIVE] Called with index 28. Current style: rehearsal
+ Rehearsal mode: Setting active line 28
+ Rehearsal line with index 28 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 4
+ BlockLoopControl: _createLoopButton called for block: Block 4
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 4
+ ⏰ СИНХРО: Позиция установлена 101.85с
+ Rehearsal: Line changing from 28 to 29
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 28 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: New line 29 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: Same block (block-1750420254556-3-dnkg7afrrdo), updating active line from 28 to 29
+ [SETACTIVE] Called with index 29. Current style: rehearsal
+ Rehearsal mode: Setting active line 29
+ Rehearsal line with index 29 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 4
+ BlockLoopControl: _createLoopButton called for block: Block 4
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 4
+ Rehearsal: Line changing from 29 to 30
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 29 belongs to block: block-1750420254556-3-dnkg7afrrdo Array(6)
+ Rehearsal: New line 30 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254556-3-dnkg7afrrdo to block-1750420254558-4-xixr53wne8-part-0
+ Rehearsal: Line changed from 29 to 30
+ Rehearsal: Current block lines: Array(6)
+ Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Line changing from 30 to 31
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 30 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: New line 31 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-0), updating active line from 30 to 31
+ [SETACTIVE] Called with index 31. Current style: rehearsal
+ Rehearsal mode: Setting active line 31
+ Rehearsal line with index 31 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5
+ BlockLoopControl: _createLoopButton called for block: Block 5
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5
+ Rehearsal: Line changing from 31 to 32
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 31 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: New line 32 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-0), updating active line from 31 to 32
+ [SETACTIVE] Called with index 32. Current style: rehearsal
+ Rehearsal mode: Setting active line 32
+ Rehearsal line with index 32 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5
+ BlockLoopControl: _createLoopButton called for block: Block 5
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5
+ Rehearsal: Line changing from 32 to 33
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 32 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: New line 33 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-0), updating active line from 32 to 33
+ [SETACTIVE] Called with index 33. Current style: rehearsal
+ Rehearsal mode: Setting active line 33
+ Rehearsal line with index 33 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5
+ BlockLoopControl: _createLoopButton called for block: Block 5
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5
+ Rehearsal: Line changing from 33 to 34
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 33 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: New line 34 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-0), updating active line from 33 to 34
+ [SETACTIVE] Called with index 34. Current style: rehearsal
+ Rehearsal mode: Setting active line 34
+ Rehearsal line with index 34 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5
+ BlockLoopControl: _createLoopButton called for block: Block 5
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5
+ Rehearsal: Line changing from 34 to 35
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 34 belongs to block: block-1750420254558-4-xixr53wne8-part-0 Array(5)
+ Rehearsal: New line 35 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254558-4-xixr53wne8-part-0 to block-1750420254558-4-xixr53wne8-part-1
+ Rehearsal: Line changed from 34 to 35
+ Rehearsal: Current block lines: Array(5)
+ Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Line changing from 35 to 36
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 35 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: New line 36 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-1), updating active line from 35 to 36
+ [SETACTIVE] Called with index 36. Current style: rehearsal
+ Rehearsal mode: Setting active line 36
+ Rehearsal line with index 36 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 5 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5 (продолжение 2)
+ Rehearsal: Line changing from 36 to 37
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 36 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: New line 37 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-1), updating active line from 36 to 37
+ [SETACTIVE] Called with index 37. Current style: rehearsal
+ Rehearsal mode: Setting active line 37
+ Rehearsal line with index 37 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 5 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5 (продолжение 2)
+ Rehearsal: Line changing from 37 to 38
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 37 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: New line 38 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-1), updating active line from 37 to 38
+ [SETACTIVE] Called with index 38. Current style: rehearsal
+ Rehearsal mode: Setting active line 38
+ Rehearsal line with index 38 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 5 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5 (продолжение 2)
+ Rehearsal: Line changing from 38 to 39
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 38 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: New line 39 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-4-xixr53wne8-part-1), updating active line from 38 to 39
+ [SETACTIVE] Called with index 39. Current style: rehearsal
+ Rehearsal mode: Setting active line 39
+ Rehearsal line with index 39 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 5 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 5 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 5 (продолжение 2)
+ Rehearsal: Line changing from 39 to 40
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 39 belongs to block: block-1750420254558-4-xixr53wne8-part-1 Array(5)
+ Rehearsal: New line 40 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254558-4-xixr53wne8-part-1 to block-1750420254558-5-von1e3ytt-part-0
+ Rehearsal: Line changed from 39 to 40
+ Rehearsal: Current block lines: Array(5)
+ Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Line changing from 40 to 41
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 40 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: New line 41 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-0), updating active line from 40 to 41
+ [SETACTIVE] Called with index 41. Current style: rehearsal
+ Rehearsal mode: Setting active line 41
+ Rehearsal line with index 41 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6
+ BlockLoopControl: _createLoopButton called for block: Block 6
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6
+ Rehearsal: Line changing from 41 to 42
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 41 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: New line 42 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-0), updating active line from 41 to 42
+ [SETACTIVE] Called with index 42. Current style: rehearsal
+ Rehearsal mode: Setting active line 42
+ Rehearsal line with index 42 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6
+ BlockLoopControl: _createLoopButton called for block: Block 6
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6
+ Rehearsal: Line changing from 42 to 43
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 42 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: New line 43 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-0), updating active line from 42 to 43
+ [SETACTIVE] Called with index 43. Current style: rehearsal
+ Rehearsal mode: Setting active line 43
+ Rehearsal line with index 43 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6
+ BlockLoopControl: _createLoopButton called for block: Block 6
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6
+ Rehearsal: Line changing from 43 to 44
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 43 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: New line 44 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-0), updating active line from 43 to 44
+ [SETACTIVE] Called with index 44. Current style: rehearsal
+ Rehearsal mode: Setting active line 44
+ Rehearsal line with index 44 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6
+ BlockLoopControl: _createLoopButton called for block: Block 6
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6
+ Rehearsal: Line changing from 44 to 45
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 44 belongs to block: block-1750420254558-5-von1e3ytt-part-0 Array(5)
+ Rehearsal: New line 45 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750420254558-5-von1e3ytt-part-0 to block-1750420254558-5-von1e3ytt-part-1
+ Rehearsal: Line changed from 44 to 45
+ Rehearsal: Current block lines: Array(5)
+ Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Line changing from 45 to 46
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 45 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+ Rehearsal: New line 46 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-1), updating active line from 45 to 46
+ [SETACTIVE] Called with index 46. Current style: rehearsal
+ Rehearsal mode: Setting active line 46
+ Rehearsal line with index 46 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 6 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6 (продолжение 2)
+ Rehearsal: Line changing from 46 to 47
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 46 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+ Rehearsal: New line 47 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+ Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-1), updating active line from 46 to 47
+ [SETACTIVE] Called with index 47. Current style: rehearsal
+ Rehearsal mode: Setting active line 47
+ Rehearsal line with index 47 not found
+_activateLineInBlock @ lyrics-display.js:3243
+ BlockLoopControl: Активный блок изменился
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6 (продолжение 2)
+ BlockLoopControl: _createLoopButton called for block: Block 6 (продолжение 2)
+ BlockLoopControl: blockElement found: true
+ BlockLoopControl: Кнопка создана для блока: Block 6 (продолжение 2)
+ Rehearsal: Line changing from 47 to 48
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 47 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+rtf-parser.js:849 Rehearsal: New line 48 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+rtf-parser.js:849 Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-1), updating active line from 47 to 48
+rtf-parser.js:849 [SETACTIVE] Called with index 48. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 48
+lyrics-display.js:3243 Rehearsal line with index 48 not found
+_activateLineInBlock @ lyrics-display.js:3243
+rtf-parser.js:849 BlockLoopControl: Активный блок изменился
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6 (продолжение 2)
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 6 (продолжение 2)
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 6 (продолжение 2)
+rtf-parser.js:849 Rehearsal: Line changing from 48 to 49
+rtf-parser.js:849 Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 48 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+rtf-parser.js:849 Rehearsal: New line 49 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+rtf-parser.js:849 Rehearsal: Same block (block-1750420254558-5-von1e3ytt-part-1), updating active line from 48 to 49
+rtf-parser.js:849 [SETACTIVE] Called with index 49. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 49
+lyrics-display.js:3243 Rehearsal line with index 49 not found
+_activateLineInBlock @ lyrics-display.js:3243
+rtf-parser.js:849 BlockLoopControl: Активный блок изменился
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 6 (продолжение 2)
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 6 (продолжение 2)
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 6 (продолжение 2)
+rtf-parser.js:849 Rehearsal: Line changing from 49 to 50
+rtf-parser.js:849 Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 49 belongs to block: block-1750420254558-5-von1e3ytt-part-1 Array(5)
+rtf-parser.js:849 Rehearsal: New line 50 belongs to block: block-1750420254559-6-lsv8kunvzwq Array(5)
+rtf-parser.js:849 Rehearsal: *** BLOCK CHANGED *** from block-1750420254558-5-von1e3ytt-part-1 to block-1750420254559-6-lsv8kunvzwq
+rtf-parser.js:849 Rehearsal: Line changed from 49 to 50
+rtf-parser.js:849 Rehearsal: Current block lines: Array(5)
+rtf-parser.js:849 Rehearsal: New block lines: Array(5)
+ Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-9 (5 lines)
+ Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 >>> FONT_CALC_DEBUG >>> Lines: 5, FontSize: 2.66rem, LineHeight: 3.23rem
+rtf-parser.js:849 🎵 AudioEngine: Установка скорости воспроизведения: 100%
+rtf-parser.js:849 Rehearsal: Line changing from 50 to 51
+rtf-parser.js:849 Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 50 belongs to block: block-1750420254559-6-lsv8kunvzwq Array(5)
+rtf-parser.js:849 Rehearsal: New line 51 belongs to block: block-1750420254559-6-lsv8kunvzwq Array(5)
+rtf-parser.js:849 Rehearsal: Same block (block-1750420254559-6-lsv8kunvzwq), updating active line from 50 to 51
+rtf-parser.js:849 [SETACTIVE] Called with index 51. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 51
+lyrics-display.js:3243 Rehearsal line with index 51 not found
+_activateLineInBlock @ lyrics-display.js:3243
+rtf-parser.js:849 BlockLoopControl: Активный блок изменился
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 7
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 7
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 7
+rtf-parser.js:849 Rehearsal: Line changing from 51 to 52
+rtf-parser.js:849 Splitting block "Block 2" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Splitting block "Block 3" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 5" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 6" (10 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-9 (5 lines)
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 51 belongs to block: block-1750420254559-6-lsv8kunvzwq Array(5)
+rtf-parser.js:849 Rehearsal: New line 52 belongs to block: block-1750420254559-6-lsv8kunvzwq Array(5)
+rtf-parser.js:849 Rehearsal: Same block (block-1750420254559-6-lsv8kunvzwq), updating active line from 51 to 52
+rtf-parser.js:849 [SETACTIVE] Called with index 52. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 52
+lyrics-display.js:3243 Rehearsal line with index 52 not found
+_activateLineInBlock @ lyrics-display.js:3243
+rtf-parser.js:849 BlockLoopControl: Активный блок изменился
+rtf-parser.js:849 BlockLoopControl: _createLoopButtonForCurrentBlock called
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+rtf-parser.js:849 BlockLoopControl: lyricsDisplay.textBlocks: Array(11)
+rtf-parser.js:849 BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 7
+rtf-parser.js:849 BlockLoopControl: _createLoopButton called for block: Block 7
+rtf-parser.js:849 BlockLoopControl: blockElement found: true
+rtf-parser.js:849 BlockLoopControl: Кнопка создана для блока: Block 7
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: false
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: false
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: false

@@ -1,0 +1,1004 @@
+ 🚫 Блокирована очевидная гармоника: 473.8Hz (0.50x от 953.3Hz, ясность: 70.4%)
+ 🚫 Блокирована очевидная гармоника: 473.6Hz (0.50x от 953.3Hz, ясность: 74.0%)
+ ✅ Октавный переход разрешен: 944.3Hz → 191.7Hz за 530мс (ratio: 0.20)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 477.2Hz (2.00x от 238.4Hz, ясность: 72.7%)
+ 🚫 Блокирована очевидная гармоника: 480.6Hz (2.02x от 238.4Hz, ясность: 70.9%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 172.75s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [40]: 'Like this'
+ Rendering standard line [41]: 'This isn't what I wanted to be'
+ Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [43]: 'Like this'
+ Rendering standard line [44]: 'This isn't what I wanted to be'
+ Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [46]: 'Like this'
+ Rendering standard line [47]: 'This isn't what I wanted to be'
+ Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [49]: 'Like this'
+ Rendering standard line [50]: 'You'
+ Rendering standard line [51]: '(No turning back now)'
+ Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [53]: '(No, no turning back now)'
+ Rendering standard line [54]: 'Let me take back my life'
+ Rendering standard line [55]: 'I'd rather be all alone'
+ Rendering standard line [56]: '(No turning back now)'
+ Rendering standard line [57]: 'Anywhere on my own'
+ Rendering standard line [58]: ''Cause I can see'
+ Rendering standard line [59]: '(No, no turning back now)'
+ Rendering standard line [60]: 'The very worst part of you'
+ Rendering standard line [61]: 'The very worst part of you is me'
+ [SETACTIVE] Called with index 10. Current style: default
+ Scrolled to active line: 1170.3333333333333px (line 10)
+ TextStyleManager: Font scale for default set to 0.80
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [40]: 'Like this'
+ Rendering standard line [41]: 'This isn't what I wanted to be'
+ Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [43]: 'Like this'
+ Rendering standard line [44]: 'This isn't what I wanted to be'
+ Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [46]: 'Like this'
+ Rendering standard line [47]: 'This isn't what I wanted to be'
+ Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [49]: 'Like this'
+ Rendering standard line [50]: 'You'
+ Rendering standard line [51]: '(No turning back now)'
+ Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [53]: '(No, no turning back now)'
+ Rendering standard line [54]: 'Let me take back my life'
+ Rendering standard line [55]: 'I'd rather be all alone'
+ Rendering standard line [56]: '(No turning back now)'
+ Rendering standard line [57]: 'Anywhere on my own'
+ Rendering standard line [58]: ''Cause I can see'
+ Rendering standard line [59]: '(No, no turning back now)'
+ Rendering standard line [60]: 'The very worst part of you'
+ Rendering standard line [61]: 'The very worst part of you is me'
+ [SETACTIVE] Called with index 10. Current style: default
+ Scrolled to active line: 1170.3333333333333px (line 10)
+ WaveformEditor: Shown
+ WaveformEditor: No audio data found, trying to load...
+ WaveformEditor: _loadAudioData is deprecated. Use loadAudioForSync() instead.
+_loadAudioData @ waveform-editor.js:1205
+ [SETACTIVE] Called with index 10. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 10 at TOP (teleprompter mode)
+ Sync mode: activating line at current time position: 10
+ LoopBlockManager: Sync editor opened event received
+ WaveformEditor: Dispatched sync-editor-opened event Object
+ Sync Editor: Positioned line 10 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 159.1Hz (0.49x от 322.0Hz, ясность: 72.9%)
+ 🚫 Блокирована очевидная гармоника: 159.3Hz (0.50x от 318.8Hz, ясность: 82.3%)
+ 🚫 Блокирована очевидная гармоника: 638.5Hz (1.99x от 320.9Hz, ясность: 86.4%)
+ 🚫 Блокирована очевидная гармоника: 634.9Hz (1.98x от 320.9Hz, ясность: 89.2%)
+ 🚫 Блокирована очевидная гармоника: 897.0Hz (1.98x от 453.2Hz, ясность: 85.8%)
+ ✅ Октавный переход разрешен: 453.2Hz → 884.2Hz за 41мс (ratio: 1.95)
+ 🎯 Высокая ясность (91.9%) - принимаем возможную гармонику: 438.3Hz
+ 🚫 Октавный скачок заблокирован: 884.2Hz → 438.3Hz за 13мс (ratio: 0.50)
+ 🚫 Октавный скачок заблокирован: 884.2Hz → 428.7Hz за 33мс (ratio: 0.48)
+ ✅ Октавный переход разрешен: 884.2Hz → 424.1Hz за 53мс (ratio: 0.48)
+ 🚫 Блокирована очевидная гармоника: 841.8Hz (1.98x от 424.1Hz, ясность: 88.1%)
+ 🚫 Блокирована очевидная гармоника: 841.9Hz (1.98x от 424.1Hz, ясность: 88.7%)
+ 🚫 Блокирована очевидная гармоника: 840.7Hz (1.98x от 424.1Hz, ясность: 89.1%)
+ ✅ Октавный переход разрешен: 424.1Hz → 834.4Hz за 100мс (ratio: 1.97)
+ 🚫 Блокирована очевидная гармоника: 492.5Hz (0.50x от 980.4Hz, ясность: 83.1%)
+ 🚫 Блокирована очевидная гармоника: 481.8Hz (0.49x от 980.4Hz, ясность: 71.7%)
+ 🚫 Блокирована очевидная гармоника: 485.4Hz (0.51x от 945.0Hz, ясность: 73.2%)
+ 🚫 Блокирована очевидная гармоника: 485.2Hz (0.51x от 945.0Hz, ясность: 81.4%)
+ 🎯 Высокая ясность (91.5%) - принимаем возможную гармонику: 480.6Hz
+ 🚫 Октавный скачок заблокирован: 961.0Hz → 480.6Hz за 16мс (ratio: 0.50)
+ ✅ Октавный переход разрешен: 961.0Hz → 481.9Hz за 52мс (ratio: 0.50)
+ [SETACTIVE] Called with index 11. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 11 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ ✅ Октавный переход разрешен: 481.3Hz → 947.9Hz за 100мс (ratio: 1.97)
+ ✅ Октавный переход разрешен: 947.9Hz → 191.3Hz за 82мс (ratio: 0.20)
+ 🚫 Блокирована очевидная гармоника: 95.5Hz (0.50x от 191.3Hz, ясность: 81.5%)
+ 🚫 Блокирована очевидная гармоника: 477.0Hz (1.98x от 240.5Hz, ясность: 82.0%)
+ 🚫 Блокирована очевидная гармоника: 477.3Hz (1.98x от 240.5Hz, ясность: 85.2%)
+ 🚫 Блокирована очевидная гармоника: 479.2Hz (1.99x от 240.5Hz, ясность: 79.0%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 241.7Hz (0.26x от 927.5Hz, ясность: 71.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 12. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 12 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Октавный переход разрешен: 499.2Hz → 160.2Hz за 105мс (ratio: 0.32)
+ [SETACTIVE] Called with index 13. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 13 at TOP (teleprompter mode)
+ ✅ Октавный переход разрешен: 485.8Hz → 954.5Hz за 217мс (ratio: 1.96)
+ 🚫 Блокирована очевидная гармоника: 486.1Hz (0.51x от 947.2Hz, ясность: 75.7%)
+ 🚫 Блокирована очевидная гармоника: 474.7Hz (0.50x от 947.2Hz, ясность: 70.6%)
+ ✅ Октавный переход разрешен: 823.4Hz → 379.1Hz за 175мс (ratio: 0.46)
+ 🚫 Блокирована очевидная гармоника: 769.1Hz (2.03x от 379.1Hz, ясность: 72.8%)
+ 🚫 Блокирована очевидная гармоника: 474.5Hz (0.49x от 958.9Hz, ясность: 80.9%)
+ 🚫 Блокирована очевидная гармоника: 475.9Hz (0.50x от 958.9Hz, ясность: 76.4%)
+ 🚫 Блокирована очевидная гармоника: 244.7Hz (0.26x от 958.9Hz, ясность: 84.6%)
+ 🚫 Блокирована очевидная гармоника: 244.7Hz (0.26x от 958.9Hz, ясность: 84.6%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🚫 Октавный скачок заблокирован: 506.8Hz → 973.6Hz за 36мс (ratio: 1.92)
+ ✅ Октавный переход разрешен: 506.8Hz → 977.1Hz за 49мс (ratio: 1.93)
+ [SETACTIVE] Called with index 14. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 14 at TOP (teleprompter mode)
+ 🚫 Блокирована очевидная гармоника: 485.4Hz (0.50x от 976.2Hz, ясность: 90.0%)
+ ✅ Октавный переход разрешен: 976.2Hz → 192.5Hz за 304мс (ratio: 0.20)
+ 🚫 Блокирована очевидная гармоника: 968.7Hz (2.00x от 485.4Hz, ясность: 74.7%)
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-pixabay-164879.jpg
+ 🚫 Блокирована очевидная гармоника: 968.3Hz (1.99x от 485.4Hz, ясность: 70.2%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 15. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 15 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Октавный переход разрешен: 481.9Hz → 158.6Hz за 165мс (ratio: 0.33)
+ 🚫 Октавный скачок заблокирован: 468.4Hz → 907.8Hz за 17мс (ratio: 1.94)
+ [SETACTIVE] Called with index 16. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 16 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (91.8%) - принимаем возможную гармонику: 419.8Hz
+ 🚫 Октавный скачок заблокирован: 853.1Hz → 419.8Hz за 32мс (ratio: 0.49)
+ [SETACTIVE] Called with index 17. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 17 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 237.5Hz (0.25x от 953.7Hz, ясность: 86.2%)
+ ✅ Октавный переход разрешен: 944.6Hz → 189.1Hz за 150мс (ratio: 0.20)
+ 🚫 Блокирована очевидная гармоника: 945.6Hz (1.99x от 474.9Hz, ясность: 72.9%)
+ 🚫 Блокирована очевидная гармоника: 947.6Hz (2.00x от 474.9Hz, ясность: 71.9%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 18. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 18 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Октавный переход разрешен: 484.6Hz → 933.1Hz за 191мс (ratio: 1.93)
+ ✅ Октавный переход разрешен: 933.1Hz → 489.3Hz за 73мс (ratio: 0.52)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 951.6Hz (2.01x от 474.3Hz, ясность: 84.4%)
+ 🚫 Блокирована очевидная гармоника: 950.2Hz (2.00x от 474.3Hz, ясность: 80.7%)
+ ✅ Октавный переход разрешен: 967.8Hz → 502.5Hz за 53мс (ratio: 0.52)
+ 🚫 Октавный скачок заблокирован: 500.7Hz → 984.6Hz за 27мс (ratio: 1.97)
+ 🚫 Блокирована очевидная гармоника: 490.1Hz (0.50x от 984.6Hz, ясность: 81.8%)
+ 🚫 Блокирована очевидная гармоника: 478.0Hz (0.49x от 984.6Hz, ясность: 74.4%)
+ 🚫 Блокирована очевидная гармоника: 478.3Hz (0.49x от 984.6Hz, ясность: 80.3%)
+ ✅ Октавный переход разрешен: 500.7Hz → 962.8Hz за 150мс (ratio: 1.92)
+ 🚫 Блокирована очевидная гармоника: 490.0Hz (0.51x от 962.8Hz, ясность: 82.4%)
+ 🚫 Блокирована очевидная гармоника: 490.0Hz (0.51x от 962.8Hz, ясность: 82.4%)
+ 🚫 Блокирована очевидная гармоника: 482.3Hz (0.50x от 962.8Hz, ясность: 89.6%)
+ 🎯 Высокая ясность (90.7%) - принимаем возможную гармонику: 480.7Hz
+ ✅ Октавный переход разрешен: 962.8Hz → 480.7Hz за 68мс (ratio: 0.50)
+ ✅ Октавный переход разрешен: 480.7Hz → 977.2Hz за 178мс (ratio: 2.03)
+ 🚫 Блокирована очевидная гармоника: 483.6Hz (0.49x от 977.2Hz, ясность: 87.1%)
+ 🚫 Блокирована очевидная гармоника: 476.2Hz (0.49x от 977.2Hz, ясность: 88.0%)
+ Auto-scroll re-enabled after scroll event
+ 🎯 Высокая ясность (93.6%) - принимаем возможную гармонику: 480.2Hz
+ ✅ Октавный переход разрешен: 977.2Hz → 480.2Hz за 75мс (ratio: 0.49)
+ 🎯 Высокая ясность (90.4%) - принимаем возможную гармонику: 962.2Hz
+ ✅ Октавный переход разрешен: 484.4Hz → 962.2Hz за 106мс (ratio: 1.99)
+ 🚫 Блокирована очевидная гармоника: 487.0Hz (0.51x от 956.6Hz, ясность: 72.3%)
+ 🚫 Блокирована очевидная гармоника: 328.7Hz (0.51x от 639.3Hz, ясность: 78.7%)
+ ✅ Октавный переход разрешен: 639.3Hz → 332.7Hz за 89мс (ratio: 0.52)
+ 🎯 Высокая ясность (94.7%) - принимаем возможную гармонику: 318.1Hz
+ 🚫 Октавный скачок заблокирован: 640.2Hz → 318.1Hz за 37мс (ratio: 0.50)
+ 🚫 Блокирована очевидная гармоника: 639.2Hz (2.01x от 318.1Hz, ясность: 83.7%)
+ 🎯 Высокая ясность (93.0%) - принимаем возможную гармонику: 325.8Hz
+ ✅ Октавный переход разрешен: 661.8Hz → 325.8Hz за 71мс (ratio: 0.49)
+ 🚫 Блокирована очевидная гармоника: 645.1Hz (1.99x от 324.8Hz, ясность: 88.1%)
+ ✅ Октавный переход разрешен: 322.0Hz → 655.5Hz за 106мс (ratio: 2.04)
+ 🎯 Высокая ясность (91.7%) - принимаем возможную гармонику: 326.8Hz
+ 🚫 Октавный скачок заблокирован: 655.5Hz → 326.8Hz за 29мс (ratio: 0.50)
+ 🚫 Блокирована очевидная гармоника: 657.1Hz (2.01x от 326.8Hz, ясность: 79.9%)
+ ✅ Октавный переход разрешен: 665.4Hz → 322.3Hz за 96мс (ratio: 0.48)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 651.0Hz (1.99x от 327.7Hz, ясность: 81.9%)
+ 🎯 Высокая ясность (91.2%) - принимаем возможную гармонику: 655.1Hz
+ 🚫 Блокирована очевидная гармоника: 324.5Hz (0.51x от 640.3Hz, ясность: 83.9%)
+ ✅ Октавный переход разрешен: 640.3Hz → 302.1Hz за 90мс (ratio: 0.47)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 19. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 19 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 20. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 20 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🚫 Блокирована очевидная гармоника: 193.5Hz (0.49x от 394.2Hz, ясность: 88.7%)
+ 🚫 Блокирована очевидная гармоника: 192.3Hz (0.49x от 394.2Hz, ясность: 87.8%)
+ ✅ Октавный переход разрешен: 394.2Hz → 186.6Hz за 94мс (ratio: 0.47)
+ [SETACTIVE] Called with index 21. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 21 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 22. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 22 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 23. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 23 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 24. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 24 at TOP (teleprompter mode)
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 25. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 25 at TOP (teleprompter mode)
+ 🚫 Октавный скачок заблокирован: 269.4Hz → 554.4Hz за 32мс (ratio: 2.06)
+ ✅ Октавный переход разрешен: 269.4Hz → 546.6Hz за 64мс (ratio: 2.03)
+ 🚫 Октавный скачок заблокирован: 546.6Hz → 260.0Hz за 13мс (ratio: 0.48)
+ 🚫 Октавный скачок заблокирован: 546.6Hz → 260.0Hz за 15мс (ratio: 0.48)
+ ✅ Октавный переход разрешен: 546.6Hz → 264.0Hz за 170мс (ratio: 0.48)
+ [SETACTIVE] Called with index 26. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 26 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Октавный скачок заблокирован: 713.4Hz → 230.8Hz за 30мс (ratio: 0.32)
+ 🚫 Октавный скачок заблокирован: 713.4Hz → 231.6Hz за 38мс (ratio: 0.32)
+ 🚫 Октавный скачок заблокирован: 713.4Hz → 231.6Hz за 39мс (ratio: 0.32)
+ ✅ Октавный переход разрешен: 713.4Hz → 233.9Hz за 75мс (ratio: 0.33)
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 27. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 27 at TOP (teleprompter mode)
+ 🚫 Блокирована очевидная гармоника: 426.7Hz (0.50x от 854.2Hz, ясность: 89.1%)
+ 🚫 Блокирована очевидная гармоника: 939.4Hz (1.98x от 474.1Hz, ясность: 70.0%)
+ 🚫 Блокирована очевидная гармоника: 943.1Hz (1.99x от 474.1Hz, ясность: 71.7%)
+ [SETACTIVE] Called with index 28. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 28 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 475.2Hz (2.00x от 237.4Hz, ясность: 79.5%)
+ 🚫 Блокирована очевидная гармоника: 477.5Hz (2.01x от 237.4Hz, ясность: 78.2%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 29. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 29 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 159.0Hz (0.50x от 319.1Hz, ясность: 72.9%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (92.1%) - принимаем возможную гармонику: 634.0Hz
+ ✅ Октавный переход разрешен: 319.6Hz → 634.0Hz за 50мс (ratio: 1.98)
+ 🚫 Блокирована очевидная гармоника: 323.5Hz (0.51x от 634.0Hz, ясность: 89.9%)
+ 🚫 Октавный скачок заблокирован: 634.0Hz → 326.9Hz за 36мс (ratio: 0.52)
+ ✅ Октавный переход разрешен: 371.5Hz → 757.6Hz за 115мс (ratio: 2.04)
+ 🚫 Блокирована очевидная гармоника: 887.6Hz (1.98x от 447.6Hz, ясность: 89.7%)
+ ✅ Октавный переход разрешен: 429.6Hz → 842.3Hz за 89мс (ratio: 1.96)
+ Sync Editor: Restoring original style "karaoke" and scale 1.2
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ TextStyleManager: Font scale for karaoke set to 1.20
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LoopBlockManager: Sync editor closed event received
+ WaveformEditor: Dispatched sync-editor-closed event
+ WaveformEditor: Hidden
+ 🚫 Блокирована очевидная гармоника: 488.1Hz (0.50x от 974.2Hz, ясность: 81.2%)
+ 🚫 Блокирована очевидная гармоника: 481.5Hz (0.49x от 974.2Hz, ясность: 74.8%)
+ 🚫 Блокирована очевидная гармоника: 485.9Hz (0.50x от 974.2Hz, ясность: 71.9%)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🚫 Блокирована очевидная гармоника: 485.2Hz (0.51x от 943.9Hz, ясность: 85.7%)
+ 🚫 Блокирована очевидная гармоника: 483.0Hz (0.50x от 959.0Hz, ясность: 87.5%)
+ 🚫 Блокирована очевидная гармоника: 483.3Hz (0.50x от 959.0Hz, ясность: 82.6%)
+ 🚫 Блокирована очевидная гармоника: 485.0Hz (0.51x от 959.0Hz, ясность: 73.4%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 478.0Hz (1.98x от 241.2Hz, ясность: 75.3%)
+ 🚫 Блокирована очевидная гармоника: 477.5Hz (1.98x от 241.2Hz, ясность: 75.5%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 957.5Hz (4.00x от 239.4Hz, ясность: 72.3%)
+ 🚫 Блокирована очевидная гармоника: 947.3Hz (3.96x от 239.4Hz, ясность: 75.5%)
+ 🚫 Блокирована очевидная гармоника: 952.7Hz (3.98x от 239.4Hz, ясность: 75.0%)
+ 🚫 Блокирована очевидная гармоника: 951.0Hz (3.97x от 239.4Hz, ясность: 76.9%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 952.3Hz (3.98x от 239.4Hz, ясность: 81.8%)
+ 🚫 Блокирована очевидная гармоника: 950.7Hz (3.97x от 239.4Hz, ясность: 76.2%)
+ 🚫 Блокирована очевидная гармоника: 961.1Hz (4.02x от 239.4Hz, ясность: 74.2%)
+ 🎤 ВОКАЛ: Громкость установлена 91%
+ 🎤 ВОКАЛ: Громкость установлена 82%
+ 🎤 ВОКАЛ: Громкость установлена 74%
+ 🚫 Блокирована очевидная гармоника: 477.4Hz (1.99x от 239.9Hz, ясность: 85.1%)
+ 🎤 ВОКАЛ: Громкость установлена 65%
+ 🚫 Блокирована очевидная гармоника: 478.3Hz (1.99x от 239.9Hz, ясность: 83.3%)
+ 🎤 ВОКАЛ: Громкость установлена 61%
+ 🎤 ВОКАЛ: Громкость установлена 58%
+ 🚫 Блокирована очевидная гармоника: 478.0Hz (1.99x от 239.9Hz, ясность: 83.9%)
+ 🎤 ВОКАЛ: Громкость установлена 57%
+ 🚫 Блокирована очевидная гармоника: 477.1Hz (1.99x от 239.9Hz, ясность: 86.2%)
+ 🎤 ВОКАЛ: Громкость установлена 56%
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎤 ВОКАЛ: Громкость установлена 55%
+ 🚫 Блокирована очевидная гармоника: 482.1Hz (2.01x от 239.9Hz, ясность: 70.0%)
+ 🚫 Блокирована очевидная гармоника: 483.9Hz (2.02x от 239.9Hz, ясность: 79.2%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎤 ВОКАЛ: Громкость установлена 54%
+ 🎤 ВОКАЛ: Громкость установлена 53%
+ 🎤 ВОКАЛ: Громкость установлена 51%
+ 🎤 ВОКАЛ: Громкость установлена 48%
+ 🎤 ВОКАЛ: Громкость установлена 45%
+ 🎤 ВОКАЛ: Громкость установлена 42%
+ 🎤 ВОКАЛ: Громкость установлена 41%
+ 🎤 ВОКАЛ: Громкость установлена 40%
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎤 ВОКАЛ: Громкость установлена 39%
+ 🚫 Блокирована очевидная гармоника: 980.4Hz (1.97x от 496.6Hz, ясность: 82.5%)
+ ✅ Октавный переход разрешен: 496.6Hz → 973.5Hz за 57мс (ratio: 1.96)
+ 🚫 Блокирована очевидная гармоника: 476.3Hz (0.50x от 954.9Hz, ясность: 73.8%)
+ 🚫 Октавный скачок заблокирован: 501.7Hz → 161.7Hz за 14мс (ratio: 0.32)
+ 🚫 Октавный скачок заблокирован: 501.7Hz → 161.5Hz за 31мс (ratio: 0.32)
+ Auto-scroll re-enabled after scroll event
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🚫 Блокирована очевидная гармоника: 953.6Hz (1.99x от 478.8Hz, ясность: 84.5%)
+ 🚫 Блокирована очевидная гармоника: 947.3Hz (1.98x от 478.8Hz, ясность: 86.6%)
+ 🚫 Блокирована очевидная гармоника: 948.8Hz (1.98x от 478.8Hz, ясность: 85.7%)
+ 🚫 Блокирована очевидная гармоника: 951.1Hz (1.99x от 478.8Hz, ясность: 82.5%)
+ ✅ Октавный переход разрешен: 472.2Hz → 964.1Hz за 184мс (ratio: 2.04)
+ 🚫 Блокирована очевидная гармоника: 635.1Hz (2.00x от 318.2Hz, ясность: 76.7%)
+ 🚫 Блокирована очевидная гармоника: 396.1Hz (0.49x от 816.2Hz, ясность: 79.5%)
+ ✅ Октавный переход разрешен: 816.2Hz → 379.1Hz за 175мс (ratio: 0.46)
+ 🚫 Блокирована очевидная гармоника: 765.3Hz (2.02x от 378.8Hz, ясность: 71.4%)
+ 🚫 Октавный скачок заблокирован: 493.6Hz → 970.4Hz за 38мс (ratio: 1.97)
+ ✅ Октавный переход разрешен: 493.6Hz → 977.3Hz за 80мс (ratio: 1.98)
+ 🚫 Блокирована очевидная гармоника: 481.5Hz (0.50x от 970.5Hz, ясность: 75.7%)
+ 🚫 Блокирована очевидная гармоника: 477.5Hz (0.50x от 957.5Hz, ясность: 75.0%)
+ 🚫 Блокирована очевидная гармоника: 476.5Hz (0.50x от 957.5Hz, ясность: 76.7%)
+ 🚫 Октавный скачок заблокирован: 501.8Hz → 978.6Hz за 34мс (ratio: 1.95)
+ ✅ Октавный переход разрешен: 501.8Hz → 979.0Hz за 51мс (ratio: 1.95)
+ 🎯 Высокая ясность (90.6%) - принимаем возможную гармонику: 486.7Hz
+ ✅ Октавный переход разрешен: 974.9Hz → 486.7Hz за 154мс (ratio: 0.50)
+ 🚫 Блокирована очевидная гармоника: 966.4Hz (1.99x от 486.7Hz, ясность: 82.4%)
+ 🚫 Блокирована очевидная гармоника: 967.8Hz (1.99x от 486.7Hz, ясность: 89.6%)
+ 🎯 Высокая ясность (91.1%) - принимаем возможную гармонику: 972.5Hz
+ ✅ Октавный переход разрешен: 486.7Hz → 972.5Hz за 51мс (ratio: 2.00)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🚫 Блокирована очевидная гармоника: 239.3Hz (0.25x от 966.4Hz, ясность: 84.1%)
+ 🚫 Блокирована очевидная гармоника: 240.7Hz (0.25x от 950.4Hz, ясность: 85.7%)
+ 🚫 Блокирована очевидная гармоника: 240.5Hz (0.25x от 950.4Hz, ясность: 88.1%)
+ 🚫 Блокирована очевидная гармоника: 485.6Hz (0.51x от 950.4Hz, ясность: 71.2%)
+ 🚫 Блокирована очевидная гармоника: 488.3Hz (0.51x от 950.4Hz, ясность: 77.1%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Октавный скачок заблокирован: 409.9Hz → 193.9Hz за 32мс (ratio: 0.47)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 977.9Hz (2.03x от 482.5Hz, ясность: 72.5%)
+ 🚫 Блокирована очевидная гармоника: 953.3Hz (1.99x от 478.5Hz, ясность: 82.5%)
+ 🚫 Блокирована очевидная гармоника: 237.7Hz (0.50x от 479.3Hz, ясность: 70.7%)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🚫 Блокирована очевидная гармоника: 158.4Hz (0.49x от 321.5Hz, ясность: 77.1%)
+ ✅ Октавный переход разрешен: 811.0Hz → 382.6Hz за 110мс (ratio: 0.47)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 854.3Hz (2.02x от 423.7Hz, ясность: 87.9%)
+ 🚫 Блокирована очевидная гармоника: 853.4Hz (2.01x от 423.7Hz, ясность: 85.8%)
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ ✅ Октавный переход разрешен: 957.5Hz → 191.7Hz за 84мс (ratio: 0.20)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 949.3Hz (3.98x от 238.7Hz, ясность: 84.6%)
+ 🚫 Блокирована очевидная гармоника: 952.5Hz (3.99x от 238.7Hz, ясность: 85.4%)
+ 🚫 Блокирована очевидная гармоника: 939.9Hz (3.94x от 238.7Hz, ясность: 74.6%)
+ 🚫 Блокирована очевидная гармоника: 941.5Hz (3.94x от 238.7Hz, ясность: 79.5%)
+ 🚫 Блокирована очевидная гармоника: 945.9Hz (3.97x от 238.0Hz, ясность: 83.2%)
+ 🚫 Блокирована очевидная гармоника: 946.8Hz (3.98x от 238.0Hz, ясность: 88.5%)
+ APP: Создаем вокальный URL для синхронизации трека: Linkin Park-Lying From You [-]
+ WaveformEditor: Starting high-fidelity audio load for sync: blob:null/dc61b3b5-7f65-4983-a561-6f5613c1115b
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 469.7Hz (0.50x от 937.2Hz, ясность: 86.3%)
+ ✅ Октавный переход разрешен: 937.2Hz → 502.8Hz за 99мс (ratio: 0.54)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 961.3Hz (1.98x от 485.1Hz, ясность: 89.1%)
+ 🚫 Блокирована очевидная гармоника: 952.3Hz (1.97x от 483.1Hz, ясность: 86.2%)
+ ✅ Октавный переход разрешен: 488.1Hz → 950.0Hz за 359мс (ratio: 1.95)
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 172.75s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [40]: 'Like this'
+ Rendering standard line [41]: 'This isn't what I wanted to be'
+ Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [43]: 'Like this'
+ Rendering standard line [44]: 'This isn't what I wanted to be'
+ Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [46]: 'Like this'
+ Rendering standard line [47]: 'This isn't what I wanted to be'
+ Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [49]: 'Like this'
+ Rendering standard line [50]: 'You'
+ Rendering standard line [51]: '(No turning back now)'
+ Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [53]: '(No, no turning back now)'
+ Rendering standard line [54]: 'Let me take back my life'
+ Rendering standard line [55]: 'I'd rather be all alone'
+ Rendering standard line [56]: '(No turning back now)'
+ Rendering standard line [57]: 'Anywhere on my own'
+ Rendering standard line [58]: ''Cause I can see'
+ Rendering standard line [59]: '(No, no turning back now)'
+ Rendering standard line [60]: 'The very worst part of you'
+ Rendering standard line [61]: 'The very worst part of you is me'
+ [SETACTIVE] Called with index 37. Current style: default
+ Scrolled to active line: 4150.333333333333px (line 37)
+ TextStyleManager: Font scale for default set to 0.80
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'When I pretend, everything is what I want it to be'
+ Rendering standard line [1]: 'I look exactly like what you had always wanted to see'
+ Rendering standard line [2]: 'When I pretend, I can forget about the criminal I am'
+ Rendering standard line [3]: 'Stealing second after second just 'cause I know I can'
+ Rendering standard line [4]: 'But I can't pretend this is the way it'll stay'
+ Rendering standard line [5]: 'I'm just (trying to bend the truth)'
+ Rendering standard line [6]: 'I can't pretend I'm who you want me to be'
+ Rendering standard line [7]: 'So I'm (lying my way from you)'
+ Rendering standard line [8]: 'You'
+ Rendering standard line [9]: '(No turning back now)'
+ Rendering standard line [10]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [11]: '(No, no turning back now)'
+ Rendering standard line [12]: 'Let me take back my life'
+ Rendering standard line [13]: 'I'd rather be all alone'
+ Rendering standard line [14]: '(No turning back now)'
+ Rendering standard line [15]: 'Anywhere on my own'
+ Rendering standard line [16]: ''Cause I can see'
+ Rendering standard line [17]: '(No, no turning back now)'
+ Rendering standard line [18]: 'The very worst part of you is me'
+ Rendering standard line [19]: 'I remember what they taught to me'
+ Rendering standard line [20]: 'Remember condescending talk of who I ought to be'
+ Rendering standard line [21]: 'Remember listening to all of that and this again'
+ Rendering standard line [22]: 'So I pretended up a person who was fittin' in'
+ Rendering standard line [23]: 'And now you think this person really is me'
+ Rendering standard line [24]: 'And I'm (trying to bend the truth)'
+ Rendering standard line [25]: 'But the more I push the more I'm pulling away'
+ Rendering standard line [26]: ''Cause I'm (lying my way from you)'
+ Rendering standard line [27]: 'You'
+ Rendering standard line [28]: '(No turning back now)'
+ Rendering standard line [29]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [30]: '(No, no turning back now)'
+ Rendering standard line [31]: 'Let me take back my life'
+ Rendering standard line [32]: 'I'd rather be all alone'
+ Rendering standard line [33]: '(No turning back now)'
+ Rendering standard line [34]: 'Anywhere on my own'
+ Rendering standard line [35]: ''Cause I can see'
+ Rendering standard line [36]: '(No, no turning back now)'
+ Rendering standard line [37]: 'The very worst part of you is me'
+ Rendering standard line [38]: 'This isn't what I wanted to be'
+ Rendering standard line [39]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [40]: 'Like this'
+ Rendering standard line [41]: 'This isn't what I wanted to be'
+ Rendering standard line [42]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [43]: 'Like this'
+ Rendering standard line [44]: 'This isn't what I wanted to be'
+ Rendering standard line [45]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [46]: 'Like this'
+ Rendering standard line [47]: 'This isn't what I wanted to be'
+ Rendering standard line [48]: 'I never thought that what I said would have you running from me'
+ Rendering standard line [49]: 'Like this'
+ Rendering standard line [50]: 'You'
+ Rendering standard line [51]: '(No turning back now)'
+ Rendering standard line [52]: 'I wanna be pushed aside, so, let me go'
+ Rendering standard line [53]: '(No, no turning back now)'
+ Rendering standard line [54]: 'Let me take back my life'
+ Rendering standard line [55]: 'I'd rather be all alone'
+ Rendering standard line [56]: '(No turning back now)'
+ Rendering standard line [57]: 'Anywhere on my own'
+ Rendering standard line [58]: ''Cause I can see'
+ Rendering standard line [59]: '(No, no turning back now)'
+ Rendering standard line [60]: 'The very worst part of you'
+ Rendering standard line [61]: 'The very worst part of you is me'
+ [SETACTIVE] Called with index 37. Current style: default
+ Scrolled to active line: 4150.333333333333px (line 37)
+ WaveformEditor: Shown
+ ✅ Октавный переход разрешен: 960.9Hz → 498.8Hz за 307мс (ratio: 0.52)
+ WaveformEditor: No audio data found, trying to load...
+ WaveformEditor: _loadAudioData is deprecated. Use loadAudioForSync() instead.
+_loadAudioData @ waveform-editor.js:1205
+ [SETACTIVE] Called with index 37. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 37 at TOP (teleprompter mode)
+ Sync mode: activating line at current time position: 37
+ LoopBlockManager: Sync editor opened event received
+ WaveformEditor: Dispatched sync-editor-opened event Object
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Sync Editor: Positioned line 37 at TOP (teleprompter mode)
+ 🎯 Высокая ясность (91.0%) - принимаем возможную гармонику: 484.1Hz
+ 🚫 Октавный скачок заблокирован: 962.8Hz → 484.1Hz за 23мс (ratio: 0.50)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 482.1Hz (0.51x от 949.5Hz, ясность: 86.2%)
+ ✅ Октавный переход разрешен: 949.5Hz → 501.0Hz за 81мс (ratio: 0.53)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (90.4%) - принимаем возможную гармонику: 480.9Hz
+ 🚫 Октавный скачок заблокирован: 957.2Hz → 480.9Hz за 31мс (ratio: 0.50)
+ 🎯 Высокая ясность (94.6%) - принимаем возможную гармонику: 954.9Hz
+ 🚫 Блокирована очевидная гармоника: 485.4Hz (0.51x от 954.9Hz, ясность: 70.6%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-suvan-chowdhury-37305-144429.jpg
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 38. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 38 at TOP (teleprompter mode)
+ [SETACTIVE] Called with index 39. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 39 at TOP (teleprompter mode)
+ 🚫 Блокирована очевидная гармоника: 229.8Hz (0.24x от 947.4Hz, ясность: 74.8%)
+ 🚫 Блокирована очевидная гармоника: 240.2Hz (0.25x от 947.4Hz, ясность: 71.5%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Seeking to 10.88s by canvas click
+ ⏰ СИНХРО: Позиция установлена 10.88с
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Seeking to 10.88s by canvas click
+ ⏰ СИНХРО: Позиция установлена 10.88с
+ Seeking to 12.12s by canvas click
+ ⏰ СИНХРО: Позиция установлена 12.12с
+ Seeking to 12.12s by canvas click
+ ⏰ СИНХРО: Позиция установлена 12.12с
+ Seeking to 12.12s by canvas click
+ ⏰ СИНХРО: Позиция установлена 12.12с
+ Seeking to 12.12s by canvas click
+ ⏰ СИНХРО: Позиция установлена 12.12с
+ [SETACTIVE] Called with index 0. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ WaveformEditor notification: Сетка включена
+ Auto-scroll re-enabled after scroll event
+ [SETACTIVE] Called with index 1. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 1 at TOP (teleprompter mode)
+ 🚫 Блокирована очевидная гармоника: 353.1Hz (2.00x от 176.9Hz, ясность: 80.7%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 2. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 2 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🚫 Блокирована очевидная гармоника: 144.4Hz (0.50x от 287.0Hz, ясность: 83.7%)
+ 🚫 Блокирована очевидная гармоника: 147.5Hz (0.51x от 287.0Hz, ясность: 80.8%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Октавный переход разрешен: 656.8Hz → 186.9Hz за 43мс (ratio: 0.28)
+ [SETACTIVE] Called with index 3. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 3 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 4. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 4 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 5. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 5 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 6. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 6 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Auto-scroll re-enabled after scroll event
+ ✅ Октавный переход разрешен: 416.3Hz → 192.8Hz за 70мс (ratio: 0.46)
+ [SETACTIVE] Called with index 7. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 7 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 8. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 8 at TOP (teleprompter mode)
+ 🚫 Блокирована очевидная гармоника: 854.4Hz (1.99x от 428.5Hz, ясность: 86.9%)
+ 🚫 Блокирована очевидная гармоника: 846.8Hz (1.98x от 428.5Hz, ясность: 86.5%)
+ 🚫 Блокирована очевидная гармоника: 857.7Hz (2.00x от 428.5Hz, ясность: 85.0%)
+ 🚫 Блокирована очевидная гармоника: 858.0Hz (2.00x от 428.5Hz, ясность: 83.3%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 854.9Hz (2.00x от 428.5Hz, ясность: 83.5%)
+ Auto-scroll re-enabled after scroll event
+ 🚫 Блокирована очевидная гармоника: 239.8Hz (0.25x от 953.3Hz, ясность: 71.1%)
+ 🚫 Блокирована очевидная гармоника: 472.5Hz (0.50x от 953.3Hz, ясность: 70.0%)
+ 🚫 Блокирована очевидная гармоника: 238.3Hz (0.25x от 943.2Hz, ясность: 80.1%)
+ [SETACTIVE] Called with index 9. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 9 at TOP (teleprompter mode)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 237.4Hz (0.25x от 943.2Hz, ясность: 74.3%)
+ 🚫 Блокирована очевидная гармоника: 321.2Hz (2.02x от 159.3Hz, ясность: 75.2%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [SETACTIVE] Called with index 10. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 10 at TOP (teleprompter mode)
+ 🎯 Высокая ясность (90.0%) - принимаем возможную гармонику: 485.4Hz
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 634.0Hz (1.98x от 320.7Hz, ясность: 89.8%)
+ Auto-scroll re-enabled after scroll event
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ Октавный переход разрешен: 451.3Hz → 886.9Hz за 69мс (ratio: 1.97)
+ 🚫 Блокирована очевидная гармоника: 433.3Hz (0.49x от 886.9Hz, ясность: 89.9%)
+ ✅ Октавный переход разрешен: 886.9Hz → 422.7Hz за 62мс (ratio: 0.48)
+ 🚫 Блокирована очевидная гармоника: 842.1Hz (1.99x от 422.7Hz, ясность: 88.2%)
+ 🚫 Блокирована очевидная гармоника: 840.4Hz (1.99x от 422.7Hz, ясность: 88.5%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 833.6Hz (1.97x от 422.7Hz, ясность: 87.7%)
+rtf-parser.js:849 🎯 Высокая ясность (93.2%) - принимаем возможную гармонику: 842.9Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 422.7Hz → 842.9Hz за 143мс (ratio: 1.99)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 495.5Hz (0.50x от 983.1Hz, ясность: 87.7%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 939.4Hz → 484.3Hz за 180мс (ratio: 0.52)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 962.0Hz (1.99x от 484.3Hz, ясность: 86.1%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 957.1Hz (1.98x от 484.3Hz, ясность: 82.8%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 957.1Hz (1.98x от 484.3Hz, ясность: 80.4%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 957.1Hz (1.98x от 484.3Hz, ясность: 80.4%)
+rtf-parser.js:849 [SETACTIVE] Called with index 11. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 11 at TOP (teleprompter mode)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 240.1Hz (0.25x от 972.6Hz, ясность: 77.8%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 481.9Hz (0.50x от 972.6Hz, ясность: 80.2%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 476.4Hz (1.99x от 239.6Hz, ясность: 82.1%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 476.9Hz (1.99x от 239.6Hz, ясность: 80.7%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 476.4Hz (1.99x от 239.6Hz, ясность: 85.2%)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 241.7Hz (0.26x от 927.1Hz, ясность: 78.0%)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 [SETACTIVE] Called with index 12. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 12 at TOP (teleprompter mode)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/istockphoto-1206780681-1024x1024.jpg
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 ✅ Октавный переход разрешен: 508.6Hz → 161.7Hz за 50мс (ratio: 0.32)
+rtf-parser.js:849 [SETACTIVE] Called with index 13. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 13 at TOP (teleprompter mode)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 971.7Hz (1.98x от 489.6Hz, ясность: 85.0%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 489.6Hz → 954.4Hz за 170мс (ratio: 1.95)
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 ✅ Октавный переход разрешен: 818.5Hz → 377.9Hz за 110мс (ratio: 0.46)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 475.7Hz (0.50x от 955.6Hz, ясность: 78.1%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 475.1Hz (0.50x от 955.6Hz, ясность: 80.7%)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 475.9Hz (0.50x от 955.6Hz, ясность: 76.5%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 937.4Hz → 432.9Hz за 173мс (ratio: 0.46)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 432.9Hz → 142.6Hz за 37мс (ratio: 0.33)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 432.9Hz → 142.5Hz за 119мс (ratio: 0.33)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 504.8Hz → 969.4Hz за 33мс (ratio: 1.92)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 504.8Hz → 973.6Hz за 72мс (ratio: 1.93)
+rtf-parser.js:849 [SETACTIVE] Called with index 14. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 14 at TOP (teleprompter mode)
+rtf-parser.js:849 🎯 Высокая ясность (90.2%) - принимаем возможную гармонику: 488.4Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 970.1Hz → 488.4Hz за 160мс (ratio: 0.50)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 964.4Hz (1.97x от 488.4Hz, ясность: 87.9%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 488.4Hz → 960.0Hz за 96мс (ratio: 1.97)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 938.6Hz (1.97x от 476.3Hz, ясность: 73.4%)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 476.3Hz → 935.3Hz за 57мс (ratio: 1.96)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 [SETACTIVE] Called with index 15. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 15 at TOP (teleprompter mode)
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 955.3Hz (2.01x от 475.9Hz, ясность: 80.2%)
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: true
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 61.43с
+rtf-parser.js:849 [SETACTIVE] Called with index 14. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 14 at TOP (teleprompter mode)
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Seeking to 52.53s by canvas click
+rtf-parser.js:849 ⏰ СИНХРО: Позиция установлена 52.53с
+rtf-parser.js:849 [SETACTIVE] Called with index 10. Current style: default
+rtf-parser.js:849 Sync Editor: Skipping standard scroll - using forced centering only
+rtf-parser.js:849 Sync Editor: Positioned line 10 at TOP (teleprompter mode)
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: true
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: true
+rtf-parser.js:849 ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/pexels-suvan-chowdhury-37305-144429.jpg
+rtf-parser.js:849 Auto-scroll re-enabled after scroll event

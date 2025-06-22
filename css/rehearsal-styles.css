@@ -1,0 +1,7 @@
+/* CSS-стили для режима "Репетиция" */
+
+#lyrics-container.style-rehearsal #lyrics-display {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgba(20, 20, 30, 0.8);
+    color: #E0E0E0;
+} 
