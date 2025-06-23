@@ -1,9 +1,0 @@
-stretch-lab.html:1 Access to script at 'https://unpkg.com/web-audio-beat-detector@0.2.1/build/es/index.js' from origin 'http://localhost:8000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-unpkg.com/web-audio-beat-detector@0.2.1/build/es/index.js:1 
-            
-            
-           Failed to load resource: net::ERR_FAILED
-favicon.ico:1 
-            
-            
-           Failed to load resource: the server responded with a status of 404 (File not found)

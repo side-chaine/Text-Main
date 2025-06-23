@@ -177,16 +177,6 @@ class App {
         // Инициализация AudioSettingsUI сразу после создания AudioEngine
         this.audioSettingsUI = new AudioSettingsUI(this.audioEngine);
         this.initAudioSettingsButton();
-
-        // Система маскирования
-        this.maskSystem = new MaskSystem(this.liveMode);
-        
-        // Система режиссера
-        this.directorSystem = null;
-        this.directorPage = null;
-        
-        // Инициализация системы режиссера
-        this._initializeDirectorSystem();
     }
     
     _initUI() {
@@ -2259,102 +2249,6 @@ class App {
                 button: !!audioSettingsBtn,
                 ui: !!this.audioSettingsUI
             });
-        }
-    }
-
-    /**
-     * Инициализация системы режиссера
-     * @private
-     */
-    async _initializeDirectorSystem() {
-        try {
-            console.log('🎬 Инициализация системы режиссера...');
-            
-            // Проверяем доступность классов
-            if (typeof DirectorSystem === 'undefined') {
-                console.warn('DirectorSystem не найден, создаем заглушку');
-                return;
-            }
-            
-            // Создаем систему режиссера
-            this.directorSystem = new DirectorSystem();
-            
-            // Инициализируем с существующими системами
-            await this.directorSystem.initialize({
-                audioEngine: this.audioEngine,
-                maskSystem: this.maskSystem,
-                lyricsDisplay: this.lyricsDisplay,
-                trackCatalog: this.trackCatalog
-            });
-            
-            // Создаем UI страницу режиссера
-            if (typeof DirectorPage !== 'undefined') {
-                this.directorPage = new DirectorPage(this.directorSystem);
-            }
-            
-            // Добавляем кнопку режиссера в интерфейс
-            this._addDirectorButton();
-            
-            console.log('✅ Система режиссера инициализирована');
-            
-        } catch (error) {
-            console.error('❌ Ошибка инициализации системы режиссера:', error);
-        }
-    }
-    
-    /**
-     * Добавляет кнопку режиссера в интерфейс
-     * @private
-     */
-    _addDirectorButton() {
-        console.log('🎬 Добавление кнопки режиссера в область аватара...');
-        
-        // Ищем область аватара
-        const avatarArea = document.querySelector('.user-avatar');
-        if (!avatarArea) {
-            console.warn('⚠️ Область аватара не найдена, кнопка режиссера не добавлена');
-            return;
-        }
-
-        // Проверяем, не существует ли уже кнопка
-        if (document.getElementById('director-mode-btn')) {
-            console.log('🎬 Кнопка режиссера уже существует');
-            return;
-        }
-
-        // Создаем кнопку режиссера
-        const directorButton = document.createElement('button');
-        directorButton.id = 'director-mode-btn';
-        directorButton.className = 'director-avatar-btn';
-        directorButton.title = 'Режиссерская консоль - управление AI-эффектами';
-        directorButton.innerHTML = '🎬';
-        
-        // Добавляем обработчик клика
-        directorButton.addEventListener('click', () => {
-            console.log('🎬 Клик по кнопке режиссера');
-            this._toggleDirectorMode();
-        });
-
-        // Добавляем кнопку в область аватара
-        avatarArea.appendChild(directorButton);
-        
-        console.log('🎬 Кнопка режиссера добавлена в область аватара');
-    }
-    
-    /**
-     * Переключение режима режиссера
-     * @private
-     */
-    _toggleDirectorMode() {
-        if (!this.directorPage) {
-            console.warn('Страница режиссера не инициализирована');
-            return;
-        }
-        
-        if (this.directorPage.isVisible) {
-            this.directorPage.hide();
-        } else {
-            this.directorPage.show();
         }
     }
 }

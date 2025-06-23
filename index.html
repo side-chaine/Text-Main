@@ -46,9 +46,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;700&family=PT+Serif:wght@400;700&family=Oswald:wght@400;700&family=Lobster&family=Pacifico&family=Caveat&display=swap" rel="stylesheet">
-
-    <!-- Existing stylesheets -->
-    <link rel="stylesheet" href="css/director.css">
 </head>
 <body>
     <div class="app-container">
@@ -87,13 +84,6 @@
                         <button class="scale-btn" id="scale-down" title="Уменьшить шрифт">-</button>
                         <button class="scale-btn scale-value-btn" id="scale-value" title="Сбросить масштаб">100%</button>
                         <button class="scale-btn" id="scale-up" title="Увеличить шрифт">+</button>
-                    </div>
-                    <!-- Область аватара и профиля -->
-                    <div class="user-profile-area">
-                        <div class="user-avatar" id="user-avatar" title="Профиль пользователя">
-                            <span class="avatar-icon">👤</span>
-                            <!-- Кнопка режиссера будет добавлена сюда динамически -->
-                        </div>
                     </div>
                     <button id="catalog-btn" class="animated-gradient-btn">Catalog</button>
                 </div>
@@ -569,12 +559,6 @@
     <!-- Live Mode Scripts -->
     <script src="js/live-mode.js"></script>
     <script src="js/live-feed.js"></script>
-    <script src="js/audio-settings-ui.js"></script>
-
-    <!-- Director System Scripts -->
-    <script src="js/director-system/director-core.js"></script>
-    <script src="js/director-system/train-timeline-controller.js"></script>
-    <script src="js/director-ui/director-page.js"></script>
 
     <!-- 🚀 MAIN APPLICATION SCRIPT -->
     <script src="js/app.js"></script>
@@ -585,5 +569,6 @@
         <div class="loading-spinner"></div>
         <p>Загрузка трека...</p>
     </div>
+    <script src="js/audio-settings-ui.js"></script>
 </body>
 </html> 
