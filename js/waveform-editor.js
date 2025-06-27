@@ -20,7 +20,7 @@ class WaveformEditor {
         this.zoom = 100;              // Default zoom level (percentage)
         this.scrollPosition = 0;      // Scroll position in pixels
         this.pixelsPerSecond = 100;   // Default value, will be recalculated
-        this.followPlayhead = true;  // Auto-scroll with playhead
+        this.followPlayhead = false;  // Auto-scroll with playhead
         this.centeredPlayhead = false; // Whether playhead stays centered
         this.playheadReachedCenter = false; // Flag for centered mode logic
         this.lastKnownPosition = 0; // Track last known audio position
@@ -68,14 +68,16 @@ class WaveformEditor {
         
         // Waveform source switching
         this.currentWaveformSource = 'vocals'; // По умолчанию показываем вокал
-        this.currentWaveformColor = '#FF0080'; // Неоновый розовый для вокала
+        this.currentWaveformColor = '#FFD700'; // Золотой цвет для вокала
         this.sourceButtons = {};
         
         // Кэш для данных волновых форм
         this.vocalAudioData = null;
         this.instrumentalAudioData = null;
+        this.masterAudioData = null; // Данные мастер-дорожки
         this.rawVocalData = null;
         this.rawInstrumentalData = null;
+        this.rawMasterData = null; // Сырые данные мастер-дорожки
         
         this._createUI();
         this._attachEventListeners();
@@ -520,118 +522,80 @@ class WaveformEditor {
         waveformSourceGroup.appendChild(instrumentalBtn);
         waveformSourceGroup.appendChild(masterBtn);
 
-        // === BPM CONTROL GROUP ===
-        const bpmControlGroup = document.createElement('div');
-        bpmControlGroup.className = 'waveform-control-group';
+        // Кнопка выбора цвета
+        const colorPickerBtn = document.createElement('button');
+        colorPickerBtn.className = 'color-picker-button';
+        colorPickerBtn.title = 'Выбор цветовой схемы волн';
+        colorPickerBtn.innerHTML = '🎨';
         
-        // BPM Display/Input
-        const bpmDisplay = document.createElement('div');
-        bpmDisplay.className = 'bpm-display';
-        bpmDisplay.textContent = '120';
-        bpmDisplay.title = 'BPM - Темп композиции (клик для редактирования)';
-        bpmDisplay.contentEditable = true;
-        bpmDisplay.spellcheck = false;
+        console.log('🎨 Создаю кнопку выбора цвета, ColorService доступен:', !!window.colorService);
         
-        // Обработчики для интерактивного BPM
-        bpmDisplay.addEventListener('click', (e) => {
-            e.target.focus();
-            e.target.select();
-        });
+        // Выпадающее меню цветов
+        const colorDropdown = document.createElement('div');
+        colorDropdown.className = 'color-dropdown';
         
-        bpmDisplay.addEventListener('keydown', (e) => {
-            // Разрешаем только цифры, Backspace, Delete, Enter, Tab, стрелки
-            const allowedKeys = ['Backspace', 'Delete', 'Enter', 'Tab', 'ArrowLeft', 'ArrowRight'];
-            const isNumber = /^[0-9]$/.test(e.key);
+        // Создаем элементы цветовых схем
+        if (window.colorService) {
+            console.log('🎨 ColorService найден, создаю схемы...');
+            const schemes = window.colorService.getColorSchemes();
+            const currentScheme = window.colorService.getCurrentScheme();
             
-            if (!isNumber && !allowedKeys.includes(e.key)) {
-                e.preventDefault();
-                return;
-            }
+            console.log('🎨 Доступные схемы:', schemes.length);
             
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                this._updateBPMFromInput(bpmDisplay);
-                bpmDisplay.blur();
+            schemes.forEach(scheme => {
+                const schemeItem = document.createElement('div');
+                schemeItem.className = `color-scheme-item ${scheme.id === currentScheme.id ? 'active' : ''}`;
+                schemeItem.dataset.schemeId = scheme.id;
+                
+                // Превью цветов
+                const preview = window.colorService.createPreviewCanvas(scheme);
+                preview.className = 'color-preview';
+                
+                // Название схемы
+                const schemeName = document.createElement('span');
+                schemeName.className = 'scheme-name';
+                schemeName.textContent = scheme.name;
+                
+                schemeItem.appendChild(preview);
+                schemeItem.appendChild(schemeName);
+                
+                // Обработчик клика
+                schemeItem.addEventListener('click', () => {
+                    console.log('🎨 Выбрана схема:', scheme.name);
+                    window.colorService.setColorScheme(scheme.id);
+                    this._updateColorDropdown();
+                    this._hideColorDropdown();
+                });
+                
+                colorDropdown.appendChild(schemeItem);
+            });
+        } else {
+            console.warn('🎨 ColorService не найден при создании UI');
+        }
+        
+        // Обработчики для кнопки и меню
+        colorPickerBtn.addEventListener('click', (e) => {
+            console.log('🎨 Клик по кнопке выбора цвета');
+            e.stopPropagation();
+            this._toggleColorDropdown();
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!colorPickerBtn.contains(e.target) && !colorDropdown.contains(e.target)) {
+                this._hideColorDropdown();
             }
         });
         
-        bpmDisplay.addEventListener('blur', () => {
-            this._updateBPMFromInput(bpmDisplay);
-        });
-        
-        bpmDisplay.addEventListener('input', (e) => {
-            // Ограничиваем длину ввода
-            const text = e.target.textContent;
-            if (text.length > 3) {
-                e.target.textContent = text.slice(0, 3);
-                // Устанавливаем курсор в конец
-                const range = document.createRange();
-                const sel = window.getSelection();
-                range.selectNodeContents(e.target);
-                range.collapse(false);
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
-        });
-        
-        bpmControlGroup.appendChild(bpmDisplay);
-        
-        // BPM Reset Button
-        const bpmResetBtn = document.createElement('button');
-        bpmResetBtn.textContent = 'R';
-        bpmResetBtn.title = 'Reset BPM - Сброс темпа';
-        bpmResetBtn.className = 'waveform-btn control-btn';
-        bpmResetBtn.addEventListener('click', () => {
-            this._resetBPM();
-        });
-        
-        bpmControlGroup.appendChild(bpmResetBtn);
+        // ИСПРАВЛЯЕМ: добавляем меню в waveformSourceGroup, а не в кнопку
+        waveformSourceGroup.appendChild(colorPickerBtn);
+        waveformSourceGroup.appendChild(colorDropdown); // Меню рядом с кнопкой, не внутри!
 
-        // === GRID CONTROL GROUP ===
-        const gridControlGroup = document.createElement('div');
-        gridControlGroup.className = 'waveform-control-group';
-        
-        // Grid Toggle Button
-        const gridBtn = document.createElement('button');
-        gridBtn.textContent = 'G';
-        gridBtn.title = 'Grid - Сетка времени';
-        gridBtn.className = 'waveform-btn control-btn';
-        gridBtn.addEventListener('click', () => {
-            this._toggleGrid();
-        });
-        
-        // Snap Toggle Button
-        const snapBtn = document.createElement('button');
-        snapBtn.textContent = 'S';
-        snapBtn.title = 'Snap - Привязка к сетке';
-        snapBtn.className = 'waveform-btn control-btn';
-        snapBtn.addEventListener('click', () => {
-            this._toggleSnap();
-        });
-        
-        gridControlGroup.appendChild(gridBtn);
-        gridControlGroup.appendChild(snapBtn);
+        // Сохраняем ссылки для управления
+        this.colorPickerBtn = colorPickerBtn;
+        this.colorDropdown = colorDropdown;
 
-        // === METRONOME GROUP ===
-        const metronomeGroup = document.createElement('div');
-        metronomeGroup.className = 'waveform-control-group';
-        
-        // Metronome Button
-        const metronomeBtn = document.createElement('button');
-        metronomeBtn.textContent = '♪';
-        metronomeBtn.title = 'Metronome - Метроном';
-        metronomeBtn.className = 'waveform-btn control-btn';
-        metronomeBtn.addEventListener('click', () => {
-            this._toggleMetronome();
-        });
-        
-        metronomeGroup.appendChild(metronomeBtn);
-
-        // Добавляем все группы на панель
         footerControls.appendChild(waveformSourceGroup);
-        footerControls.appendChild(bpmControlGroup);
-        footerControls.appendChild(gridControlGroup);
-        footerControls.appendChild(metronomeGroup);
 
         // Сохраняем ссылки на кнопки для обновления состояния
         this.sourceButtons = {
@@ -639,18 +603,6 @@ class WaveformEditor {
             instrumental: instrumentalBtn,
             master: masterBtn
         };
-
-        // Сохраняем ссылки на новые элементы управления
-        this.controlElements = {
-            bpmDisplay: bpmDisplay,
-            bpmResetBtn: bpmResetBtn,
-            gridBtn: gridBtn,
-            snapBtn: snapBtn,
-            metronomeBtn: metronomeBtn
-        };
-
-        // Инициализация состояний кнопок
-        this._initializeControlStates();
 
         contentContainer.appendChild(footerControls);
         
@@ -663,6 +615,9 @@ class WaveformEditor {
         // Set initial canvas dimensions
         this._resizeCanvas();
         
+        // Инициализируем слушателя цветовых изменений
+        this._initColorServiceListener();
+        
         // Initial draw
         this._drawWaveform();
     }
@@ -671,18 +626,11 @@ class WaveformEditor {
     _attachEventListeners() {
         // Double-click on canvas to add marker
         this.canvas.addEventListener('dblclick', (e) => {
+            if (!this.markerManager || !this.showMarkers) return;
+            
             const rect = this.canvas.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const clickTime = this._pixelsToTime(clickX);
-            
-            // === НОВАЯ ЛОГИКА: Установка downbeat для ритмической сетки ===
-            if (this.gridState === this.GRID_STATES.WAITING_DOWNBEAT) {
-                this._setDownbeat(clickTime);
-                return;
-            }
-            
-            // Существующая логика для маркеров
-            if (!this.markerManager || !this.showMarkers) return;
             
             // Find closest line to this time position and add marker
             this._addMarkerAtTime(clickTime);
@@ -1278,17 +1226,50 @@ class WaveformEditor {
     
     // Draw waveform on canvas
     _drawWaveform() {
-        if (!this.canvas || !this.canvas.getContext) return;
+        if (!this.canvas) return;
         
         const ctx = this.canvas.getContext('2d');
-        ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+        const width = this.canvas.width;
+        const height = this.canvas.height;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // Определяем какие данные использовать для отрисовки
+        let audioData = null;
+        let waveformColor = this.currentWaveformColor || '#FFD700';
+
+        switch (this.currentWaveformSource) {
+            case 'vocals':
+                audioData = this.vocalAudioData;
+                waveformColor = '#FFD700'; // Золотой для вокала
+                break;
+            case 'instrumental':
+                audioData = this.instrumentalAudioData;
+                waveformColor = '#00CED1'; // Бирюзовый для инструментала
+                break;
+            case 'master':
+                audioData = this.masterAudioData;
+                waveformColor = '#FF6B6B'; // Красный для мастер-дорожки
+                break;
+            default:
+                // Fallback на первые доступные данные
+                audioData = this.vocalAudioData || this.instrumentalAudioData || this.masterAudioData || this.audioData;
+                break;
+        }
+
+        // Если нет данных, показываем mock волну
+        if (!audioData) {
+            audioData = this._createMockAudioData();
+            waveformColor = '#666666'; // Серый для mock данных
+        }
         
         // Draw background with gradient
-        const bgGradient = ctx.createLinearGradient(0, 0, 0, this.canvasHeight);
+        const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
         bgGradient.addColorStop(0, '#1e1e1e');
         bgGradient.addColorStop(1, '#171717');
         ctx.fillStyle = bgGradient;
-        ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+        ctx.fillRect(0, 0, width, height);
         
         // Refresh audio peaks based on current zoom and scroll for all loaded tracks
         if (this.rawInstrumentalData && this.audioDuration) {
@@ -1296,6 +1277,9 @@ class WaveformEditor {
         }
         if (this.rawVocalData && this.audioDuration) {
             this.vocalAudioData = this._generatePeaks(this.rawVocalData);
+        }
+        if (this.rawMasterData && this.audioDuration) {
+            this.masterAudioData = this._generatePeaks(this.rawMasterData);
         }
         
         // Draw grid lines
@@ -1335,63 +1319,12 @@ class WaveformEditor {
      * @private
      */
     _drawGrid(ctx) {
-        // Проверяем, включена ли сетка
-        if (!this.gridEnabled || !this.audioDuration) return;
+        if (!this.audioDuration) return;
             
             // Calculate time range visible in view
             const startTime = this.scrollPosition / this.pixelsPerSecond;
             const endTime = (this.scrollPosition + this.canvasWidth) / this.pixelsPerSecond;
             
-        // === НОВАЯ ЛОГИКА: Ритмическая сетка ===
-        if (this.rhythmGridEnabled && this.downbeatTime !== null) {
-            const rhythmLines = this._calculateRhythmGridLines(startTime, endTime);
-            
-            rhythmLines.forEach(line => {
-                const x = this._timeToPixels(line.time);
-                if (x >= 0 && x <= this.canvasWidth) {
-                    
-                    if (line.isMeasureStart) {
-                        // Линия начала такта - яркая и толстая
-                        ctx.strokeStyle = 'rgba(255, 215, 0, 0.8)'; // Золотой цвет
-                        ctx.lineWidth = 2;
-                        
-                        // Рисуем линию
-                        ctx.beginPath();
-                        ctx.moveTo(x, 0);
-                        ctx.lineTo(x, this.canvasHeight);
-                        ctx.stroke();
-                        
-                        // Добавляем номер такта
-                        const measureNumber = Math.floor((line.time - this.downbeatTime) / (this.gridInterval * 4)) + 1;
-                        ctx.fillStyle = 'rgba(255, 215, 0, 0.9)';
-                        ctx.font = 'bold 12px Arial';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(`${measureNumber}`, x, 15);
-                        
-                    } else {
-                        // Промежуточные биты - тонкие линии
-                        ctx.strokeStyle = 'rgba(100, 200, 255, 0.6)'; // Голубой цвет
-                        ctx.lineWidth = 1;
-                        
-                        ctx.beginPath();
-                        ctx.moveTo(x, 0);
-                        ctx.lineTo(x, this.canvasHeight);
-                        ctx.stroke();
-                        
-                        // Добавляем номер бита в такте
-                        const beatInMeasure = Math.floor((line.time - this.downbeatTime) / this.gridInterval) % 4 + 1;
-                        ctx.fillStyle = 'rgba(100, 200, 255, 0.7)';
-                        ctx.font = '10px Arial';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(`${beatInMeasure}`, x, 28);
-                    }
-                }
-            });
-            
-            return; // Выходим, если используем ритмическую сетку
-        }
-        
-        // === СУЩЕСТВУЮЩАЯ ЛОГИКА: Временная сетка ===
             // Determine appropriate grid interval based on zoom level
             let gridInterval = this.gridInterval;
         let minorInterval = 0.2; // Small tick interval
@@ -1490,34 +1423,57 @@ class WaveformEditor {
         const middle = this.canvas.height / 2;
 
         if (this.currentWaveformSource === 'master') {
-            // Мастер-трек: накладываем неоновый розовый вокал на электрический циан инструментал
-            if (this.instrumentalAudioData) {
-                // Основа - электрический циан инструментал (полная яркость)
-                this._drawSingleWaveform(ctx, middle, this.instrumentalAudioData, '#00FFFF', 1.0);
+            // Мастер-вид: Сначала рисуем инструментал, затем "вырезаем" место и рисуем вокал.
+            if (this.instrumentalAudioData && this.vocalAudioData) {
+                if (window.colorService && window.colorService.getCurrentScheme) {
+                    console.log(`🎨 Master view: Drawing instrumental, then punching out and drawing vocals.`);
+
+                    // 1. Рисуем инструментал с полной непрозрачностью
+                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.instrumentalAudioData, window.colorService.getColor('instrumental'), 1.0, false);
+
+                    // 2. Рисуем вокал с полной непрозрачностью, но с предварительной "вырезкой" фона.
+                    // Это гарантирует, что цвет вокала будет одинаковым везде.
+                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.vocalAudioData, window.colorService.getColor('vocals'), 1.0, true);
+                } else {
+                    // Fallback
+                    console.warn('WaveformEditor: ColorService недоступен, используем fallback цвета');
+                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.instrumentalAudioData, '#2196F3', 1.0, false);
+                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.vocalAudioData, '#FFD700', 1.0, true);
+                }
+            } else {
+                console.warn('WaveformEditor: Нет аудио данных для мастер-вида');
+                // Рисуем любые доступные данные как fallback
+                const fallbackData = this.instrumentalAudioData || this.vocalAudioData || this.audioData;
+                if (fallbackData) {
+                    const fallbackColor = window.colorService ? window.colorService.getColor('instrumental') : '#2196F3';
+                    this._drawSingleWaveform(ctx, this.canvas.height / 2, fallbackData, fallbackColor, 1.0, false);
+                }
             }
+        } else if (this.currentWaveformSource === 'vocals') {
+            // Отображаем только вокал
             if (this.vocalAudioData) {
-                // Поверх - неоновый розовый вокал (высокая прозрачность для наложения)
-                this._drawSingleWaveform(ctx, middle, this.vocalAudioData, '#FF0080', 0.85);
+                const vocalsColor = window.colorService ? window.colorService.getVocalsColor() : '#FFD700';
+                this._drawSingleWaveform(ctx, middle, this.vocalAudioData, vocalsColor, 1.0, false);
+            } else {
+                console.warn('WaveformEditor: Vocal audio data not available');
+            }
+        } else if (this.currentWaveformSource === 'instrumental') {
+            // Отображаем только инструментал  
+            if (this.instrumentalAudioData) {
+                const instrumentalColor = window.colorService ? window.colorService.getInstrumentalColor() : '#2196F3';
+                this._drawSingleWaveform(ctx, middle, this.instrumentalAudioData, instrumentalColor, 1.0, false);
+        } else {
+                console.warn('WaveformEditor: Instrumental audio data not available');
             }
         } else {
-            // Для отдельных источников используем их данные с полной яркостью
-            let color, audioData;
-            
-            if (this.currentWaveformSource === 'vocals') {
-                color = '#FF0080'; // Неоновый розовый для вокала
-                audioData = this.vocalAudioData;
-            } else if (this.currentWaveformSource === 'instrumental') {
-                color = '#00FFFF'; // Электрический циан для инструментала
-                audioData = this.instrumentalAudioData;
-            }
-
-            if (audioData) {
-                this._drawSingleWaveform(ctx, middle, audioData, color, 1.0);
+            // Fallback: используем любые доступные данные
+            const fallbackData = this.vocalAudioData || this.instrumentalAudioData || this.masterAudioData || this.audioData;
+            if (fallbackData) {
+                this._drawSingleWaveform(ctx, middle, fallbackData, '#666666', 1.0, false);
+            } else {
+                console.warn('WaveformEditor: No audio data available for waveform display');
             }
         }
-
-        // Рисуем маркеры поверх всего
-        this._drawMarkers(ctx);
     }
     
     /**
@@ -1526,56 +1482,67 @@ class WaveformEditor {
      * @param {number} middle - Средняя линия canvas
      * @param {string} color - Цвет в формате hex
      * @param {number} alpha - Прозрачность (0-1)
+     * @param {boolean} isMasterVocal - Флаг, указывающий, является ли это вокалом для мастер-трека
      * @private
      */
-    _drawSingleWaveform(ctx, middle, audioData, color, alpha) {
+    _drawSingleWaveform(ctx, middle, audioData, color, alpha, isMasterVocal = false) {
         if (!audioData) return;
 
         // Извлекаем RGB компоненты из hex цвета
         const rgb = this._hexToRgb(color) || { r: 65, g: 150, b: 255 };
         
-        // Создаем яркий градиент для неоновых цветов
-        const gradient = ctx.createLinearGradient(0, 0, 0, this.canvasHeight);
-        gradient.addColorStop(0, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha * 0.9})`);  // Яркий сверху
-        gradient.addColorStop(0.5, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`);  // Максимум в центре
-        gradient.addColorStop(1, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha * 0.9})`);  // Яркий снизу
-        
-        ctx.fillStyle = gradient;
-        
-        // Рисуем волновую форму как заполненную область
+        // Draw waveform as a filled area
         ctx.beginPath();
         ctx.moveTo(0, middle);
             
-        for (let i = 0; i < audioData.length; i++) {
-            const [min, max] = audioData[i];
-            const minY = middle + (min * middle * 0.95);  // Увеличиваем до 95% высоты
-            const maxY = middle + (max * middle * 0.95);
-                
-            if (i === 0) {
+            for (let i = 0; i < audioData.length; i++) {
+                const [min, max] = audioData[i];
+            const maxY = middle + (max * middle * 0.9); // Scale to 90% of height
                 ctx.lineTo(i, maxY);
-            } else {
-                ctx.lineTo(i, maxY);
-            }
         }
         
-        // Завершаем форму, проходя обратно через минимальные значения
+        // Complete the shape by going back through the minimum values
         for (let i = audioData.length - 1; i >= 0; i--) {
             const [min, max] = audioData[i];
-            const minY = middle + (min * middle * 0.95);
-            
+            const minY = middle + (min * middle * 0.9);
             ctx.lineTo(i, minY);
         }
         
         ctx.lineTo(0, middle);
         ctx.closePath();
-        ctx.fill();
+
+        // Если это вокал для мастер-дорожки, сначала "вырезаем" фон
+        if (isMasterVocal) {
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, this.canvasHeight);
+            bgGradient.addColorStop(0, '#1e1e1e');
+            bgGradient.addColorStop(1, '#171717');
+            ctx.fillStyle = bgGradient;
+            ctx.fill(); // Заполняем путь фоном, "стирая" все, что под ним
+        }
         
-        // Добавляем яркий контур для неонового эффекта
-        ctx.strokeStyle = `rgba(${Math.min(255, rgb.r + 20)}, ${Math.min(255, rgb.g + 20)}, ${Math.min(255, rgb.b + 20)}, ${alpha * 0.8})`;
-        ctx.lineWidth = 1;
+        // Используем градиент для всех дорожек (включая мастер-вид)
+        const gradient = ctx.createLinearGradient(0, 0, 0, this.canvasHeight);
+        gradient.addColorStop(0, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha * 0.6})`);  // Light at top
+        gradient.addColorStop(0.5, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`);  // Bright in middle
+        gradient.addColorStop(1, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha * 0.6})`);  // Light at bottom
+        ctx.fillStyle = gradient;
+        
+        ctx.fill(); // Заполняем тот же путь основным цветом
+        
+        // Добавляем контур для всех дорожек
+        ctx.strokeStyle = `rgba(${Math.max(0, rgb.r - 35)}, ${Math.max(0, rgb.g - 50)}, ${Math.max(0, rgb.b - 55)}, ${alpha * 0.5})`;
+        ctx.lineWidth = 0.5;
                 ctx.stroke();
         
-        // Убираем reflection эффект для более четкого вида
+        // Добавляем reflection эффект для всех дорожек
+        ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha * 0.1})`;
+        for (let i = 0; i < audioData.length; i++) {
+            const [min, max] = audioData[i];
+            const maxY = middle + (max * middle * 0.9);
+            
+            // Draw a small rectangle for reflection
+            ctx.fillRect(i, this.canvasHeight - 20, 1, -(this.canvasHeight - maxY) * 0.1);
+        }
     }
     
     /**
@@ -1906,6 +1873,9 @@ class WaveformEditor {
             
             this.container.style.display = 'flex';
             this.isVisible = true;
+
+            // 🎯 NEW: По умолчанию переключаемся на мастер-трек при открытии
+            setTimeout(() => this._switchWaveformSource('master'), 100);
             
             // Добавляем слушатель для центровки при каждом изменении активной строки
             this._syncEditorCenteringHandler = () => {
@@ -2992,37 +2962,35 @@ class WaveformEditor {
 
         try {
             if (source === 'master') {
-                this._showNotification(`Загружаем компоненты для Мастер-вида...`, 'info');
+                // Для мастер-дорожки используем наложение инструментальной и вокальной волн
+                this._showNotification('Загружаем компоненты для Мастер-вида...', 'info');
                 
-                // Загружаем инструментал, если его нет в кэше
-                if (!this.instrumentalAudioData) {
-                    const instrumentalUrl = this.audioEngine.hybridEngine.instrumentalUrl;
-                    if (!instrumentalUrl) throw new Error("Instrumental URL is missing");
-                    console.log('Master view requires instrumental, loading...');
-                    const buffer = await this._loadBufferFromUrl(instrumentalUrl);
-                    if (!this.audioDuration) this.audioDuration = buffer.duration;
-                    if (!this.sampleRate) this.sampleRate = buffer.sampleRate;
-                    this.rawInstrumentalData = buffer.getChannelData(0); // Сохраняем сырые данные
+                // Убеждаемся что у нас есть данные для обеих волн
+                let needsInstrumentalLoad = !this.instrumentalAudioData;
+                let needsVocalLoad = !this.vocalAudioData;
+                
+                // Загружаем недостающие данные
+                if (needsInstrumentalLoad && this.audioEngine.hybridEngine.instrumentalUrl) {
+                    const instrumentalBuffer = await this._loadBufferFromUrl(this.audioEngine.hybridEngine.instrumentalUrl);
+                    if (!this.audioDuration) this.audioDuration = instrumentalBuffer.duration;
+                    if (!this.sampleRate) this.sampleRate = instrumentalBuffer.sampleRate;
+                    this.rawInstrumentalData = instrumentalBuffer.getChannelData(0);
                     this.instrumentalAudioData = this._generatePeaks(this.rawInstrumentalData);
-                    console.log('Instrumental for master view loaded.');
-                }
-
-                // Загружаем вокал, если его нет в кэше
-                if (!this.vocalAudioData) {
-                    const vocalUrl = this.audioEngine.hybridEngine.vocalsUrl;
-                    if (!vocalUrl) throw new Error("Vocal URL is missing");
-                    console.log('Master view requires vocals, loading...');
-                    const buffer = await this._loadBufferFromUrl(vocalUrl);
-                    if (!this.audioDuration) this.audioDuration = buffer.duration;
-                    this.rawVocalData = buffer.getChannelData(0); // Сохраняем сырые данные
-                    this.vocalAudioData = this._generatePeaks(this.rawVocalData);
-                    console.log('Vocals for master view loaded.');
+                    console.log('✅ Instrumental data loaded for master view');
                 }
                 
-                // Данные готовы, перерисовываем
+                if (needsVocalLoad && this.audioEngine.hybridEngine.vocalsUrl) {
+                    const vocalBuffer = await this._loadBufferFromUrl(this.audioEngine.hybridEngine.vocalsUrl);
+                    if (!this.audioDuration) this.audioDuration = vocalBuffer.duration;
+                    if (!this.sampleRate) this.sampleRate = vocalBuffer.sampleRate;
+                    this.rawVocalData = vocalBuffer.getChannelData(0);
+                    this.vocalAudioData = this._generatePeaks(this.rawVocalData);
+                    console.log('✅ Vocal data loaded for master view');
+                }
+                
+                console.log('✅ WaveformEditor: Master view prepared with overlay waves');
                 this._drawWaveform();
-                this._showNotification(`Переключено на Мастер`, 'success');
-
+                this._showNotification('Переключено на Мастер', 'success');
             } else { // Обработка для 'vocals' и 'instrumental'
                 const isVocal = source === 'vocals';
                 const targetDataProp = isVocal ? 'vocalAudioData' : 'instrumentalAudioData';
@@ -3063,16 +3031,44 @@ class WaveformEditor {
      * @private
      */
     async _loadBufferFromUrl(audioUrl) {
+        console.log(`🔄 WaveformEditor: Загружаем аудио из URL: ${audioUrl.substring(0, 50)}...`);
+        
+        // Проверяем на некорректные blob URL
+        if (audioUrl.includes('blob:null/')) {
+            console.warn('❌ WaveformEditor: Обнаружен некорректный blob:null URL, пропускаем загрузку');
+            throw new Error('Invalid blob:null URL detected');
+        }
+        
+        try {
+            // Для data URL используем прямое декодирование
+            if (audioUrl.startsWith('data:')) {
+                console.log('📊 WaveformEditor: Обрабатываем data URL...');
+                const response = await fetch(audioUrl);
+                const arrayBuffer = await response.arrayBuffer();
+                
+                const offlineContext = new OfflineAudioContext(1, 1, 44100);
+                const audioBuffer = await offlineContext.decodeAudioData(arrayBuffer);
+                console.log(`✅ WaveformEditor: Data URL декодирован, длительность: ${audioBuffer.duration.toFixed(2)}с`);
+                return audioBuffer;
+            }
+            
+            // Обычная загрузка для http/https/blob URL
         const response = await fetch(audioUrl);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         
         const arrayBuffer = await response.arrayBuffer();
-
         const offlineContext = new OfflineAudioContext(1, 1, 44100);
         const audioBuffer = await offlineContext.decodeAudioData(arrayBuffer);
+            
+            console.log(`✅ WaveformEditor: URL загружен, длительность: ${audioBuffer.duration.toFixed(2)}с`);
         return audioBuffer;
+            
+        } catch (error) {
+            console.error(`❌ WaveformEditor: Ошибка загрузки из URL ${audioUrl.substring(0, 50)}:`, error);
+            throw error;
+        }
     }
 
     /**
@@ -3140,413 +3136,109 @@ class WaveformEditor {
      * @returns {string} - Hex цвет
      */
     _getSourceColor(source) {
+        if (window.colorService) {
+            switch (source) {
+                case 'vocals':
+                    return window.colorService.getVocalsColor();
+                case 'instrumental':
+                    return window.colorService.getInstrumentalColor();
+                case 'master':
+                    // Для мастера возвращаем цвет инструментала (базовый цвет)
+                    return window.colorService.getInstrumentalColor();
+                default:
+                    return '#2196F3';
+            }
+        }
+        
+        // Fallback цвета если ColorService недоступен
         switch (source) {
-            case 'vocals': 
-                return '#FFD700'; // Золотой для вокала
-            case 'instrumental': 
-                return '#2196F3'; // Синий для инструментала
-            case 'master': 
-                return '#4CAF50'; // Зеленый для мастера
-            default: 
-                return '#4CAF50';
-        }
-    }
-
-    // === НОВЫЕ МЕТОДЫ УПРАВЛЕНИЯ ===
-
-    /**
-     * Initialize control states
-     * @private
-     */
-    _initializeControlStates() {
-        // Инициализация BPM
-        this.currentBPM = 120;
-        this.controlElements.bpmDisplay.textContent = this.currentBPM;
-        
-        // Начальные состояния для элементов управления
-        this.gridEnabled = false;
-        this.snapToGrid = false;
-        this.metronomeEnabled = false;
-        
-        // === Система состояний ритмической сетки ===
-        this.GRID_STATES = {
-            GRID_OFF: 'off',
-            WAITING_DOWNBEAT: 'waiting',
-            GRID_ACTIVE: 'active'
-        };
-        
-        this.gridState = this.GRID_STATES.GRID_OFF;
-        this.downbeatTime = null;
-        this.rhythmGridEnabled = false;
-        
-        // Обновляем состояния кнопок
-        this._updateControlButtonStates();
-    }
-
-    /**
-     * Set downbeat time and activate rhythm grid
-     * @param {number} time - Time in seconds for the first beat
-     * @private
-     */
-    _setDownbeat(time) {
-        this.downbeatTime = time;
-        this.gridState = this.GRID_STATES.GRID_ACTIVE;
-        this.rhythmGridEnabled = true;
-        
-        // Обновляем визуальное состояние кнопки Grid
-        this._updateGridButtonForRhythm();
-        
-        // Перерисовываем волновую форму
-        this._drawWaveform();
-        
-        // Показываем уведомление
-        if (window.showNotification) {
-            window.showNotification(`Downbeat установлен на ${time.toFixed(2)}s`, 'success');
-        }
-        
-        console.log(`Rhythm grid activated with downbeat at ${time.toFixed(2)}s, BPM: ${this.currentBPM}`);
-    }
-
-    /**
-     * Calculate rhythm grid lines for visible time range
-     * @param {number} startTime - Start time in seconds
-     * @param {number} endTime - End time in seconds
-     * @returns {Array} Array of rhythm line objects
-     * @private
-     */
-    _calculateRhythmGridLines(startTime, endTime) {
-        if (!this.downbeatTime || !this.currentBPM) return [];
-        
-        const beatInterval = 60 / this.currentBPM; // Seconds between beats
-        const lines = [];
-        
-        // Находим первый такт в видимой области
-        const firstBeatTime = this.downbeatTime;
-        let currentTime = firstBeatTime;
-        
-        // Идем назад к началу видимой области
-        while (currentTime > startTime) {
-            currentTime -= beatInterval * 4; // 4 beats per measure
-        }
-        
-        let measureNumber = Math.floor((currentTime - firstBeatTime) / (beatInterval * 4)) + 1;
-        
-        // Генерируем линии для видимой области
-        while (currentTime <= endTime) {
-            if (currentTime >= startTime && currentTime >= 0) {
-                const beatInMeasure = Math.floor((currentTime - firstBeatTime) / beatInterval) % 4;
-                const isMeasureStart = Math.abs(beatInMeasure) < 0.01;
-                
-                lines.push({
-                    time: currentTime,
-                    isMeasureStart: isMeasureStart,
-                    measureNumber: measureNumber,
-                    beatNumber: beatInMeasure + 1
-                });
-            }
-            
-            currentTime += beatInterval;
-            
-            // Переходим к следующему такту
-            if (Math.abs((currentTime - firstBeatTime) % (beatInterval * 4)) < beatInterval * 0.1) {
-                measureNumber++;
-            }
-        }
-        
-        return lines;
-    }
-
-    /**
-     * Update grid interval based on current BPM
-     * @private
-     */
-    _updateGridInterval() {
-        if (this.currentBPM) {
-            this.gridInterval = 60 / this.currentBPM; // Seconds between beats
+            case 'vocals':
+                return '#FFD700';
+            case 'instrumental':
+                return '#2196F3';
+            case 'master':
+                return '#2196F3';
+            default:
+                return '#2196F3';
         }
     }
 
     /**
-     * Обновление визуального состояния кнопок управления
+     * Переключить отображение выпадающего меню цветов
      */
-    _updateControlButtonStates() {
-        if (!this.controlElements) return;
-
-        // Grid button
-        if (this.gridEnabled) {
-            this.controlElements.gridBtn.classList.add('active');
-        } else {
-            this.controlElements.gridBtn.classList.remove('active');
-        }
-
-        // Snap button
-        if (this.snapEnabled) {
-            this.controlElements.snapBtn.classList.add('active');
-        } else {
-            this.controlElements.snapBtn.classList.remove('active');
-        }
-
-        // Metronome button
-        if (this.metronomeEnabled) {
-            this.controlElements.metronomeBtn.classList.add('active');
-        } else {
-            this.controlElements.metronomeBtn.classList.remove('active');
-        }
-    }
-
-    /**
-     * Сброс BPM к значению по умолчанию
-     */
-    _resetBPM() {
-        this.currentBPM = 120;
-        this.controlElements.bpmDisplay.textContent = this.currentBPM.toString();
+    _toggleColorDropdown() {
+        console.log('🎨 _toggleColorDropdown вызван, colorDropdown:', !!this.colorDropdown);
         
-        // Обновляем интервал сетки на основе нового BPM
-        this._updateGridInterval();
-        this._drawWaveform();
-        
-        this._showNotification('BPM сброшен на 120', 'success');
-    }
-
-    /**
-     * Обновление BPM из пользовательского ввода с валидацией
-     */
-    _updateBPMFromInput(bpmElement) {
-        const inputValue = bpmElement.textContent.trim();
-        const newBPM = parseInt(inputValue, 10);
-        
-        // Валидация: BPM должен быть числом от 60 до 200
-        if (isNaN(newBPM) || newBPM < 60 || newBPM > 200) {
-            // Возвращаем предыдущее значение при неверном вводе
-            bpmElement.textContent = this.currentBPM.toString();
-            this._showNotification('BPM должен быть от 60 до 200', 'warning');
+        if (!this.colorDropdown) {
+            console.warn('🎨 colorDropdown не найден!');
             return;
         }
-        
-        // Если значение не изменилось, ничего не делаем
-        if (newBPM === this.currentBPM) {
-            bpmElement.textContent = this.currentBPM.toString();
-            return;
-        }
-        
-        // Обновляем BPM
-        this.currentBPM = newBPM;
-        bpmElement.textContent = this.currentBPM.toString();
-        
-        // === НОВАЯ ЛОГИКА РИТМИЧЕСКОЙ СЕТКИ ===
-        // При изменении BPM активируем режим ожидания downbeat
-        this.gridState = this.GRID_STATES.WAITING_DOWNBEAT;
-        this.downbeatTime = null;
-        this.rhythmGridEnabled = false;
-        
-        // Обновляем визуальное состояние кнопки Grid
-        this._updateGridButtonForRhythm();
-        
-        // Обновляем все зависимые системы
-        this._updateGridInterval();
-        this._drawWaveform();
-        
-        // Если метроном активен, перезапускаем его с новым темпом
-        if (this.metronomeEnabled) {
-            this._stopMetronome();
-            this._startMetronome();
-        }
-        
-        this._showNotification(`BPM ${newBPM} установлен. Дважды кликните на сильную долю для настройки ритм-сетки`, 'info');
-    }
 
-    /**
-     * Переключение отображения сетки
-     */
-    _toggleGrid() {
-        this.gridEnabled = !this.gridEnabled;
-        this._updateControlButtonStates();
-        this._drawWaveform(); // Перерисовываем для обновления сетки
+        const isCurrentlyActive = this.colorDropdown.classList.contains('active');
+        console.log('🎨 Текущее состояние меню:', isCurrentlyActive ? 'активно' : 'скрыто');
         
-        const status = this.gridEnabled ? 'включена' : 'выключена';
-        this._showNotification(`Сетка ${status}`, 'success');
-    }
-    
-    /**
-     * Обновление визуального состояния кнопки Grid для ритмической сетки
-     */
-    _updateGridButtonForRhythm() {
-        if (!this.controlElements) return;
-        
-        const gridBtn = this.controlElements.gridBtn;
-        
-        // Удаляем все классы состояний
-        gridBtn.classList.remove('active', 'waiting', 'rhythm-active');
-        
-        switch (this.gridState) {
-            case this.GRID_STATES.GRID_OFF:
-                // Обычное состояние - зависит от gridEnabled
-                if (this.gridEnabled) {
-                    gridBtn.classList.add('active');
-                }
-                gridBtn.title = 'Grid - Сетка времени';
-                break;
-                
-            case this.GRID_STATES.WAITING_DOWNBEAT:
-                gridBtn.classList.add('waiting');
-                gridBtn.title = 'Ожидание установки первого бита - дважды кликните на сильную долю';
-                break;
-                
-            case this.GRID_STATES.GRID_ACTIVE:
-                gridBtn.classList.add('rhythm-active');
-                gridBtn.title = `Ритм-сетка активна (${this.currentBPM} BPM)`;
-                break;
-        }
-    }
-
-    /**
-     * Переключение привязки к сетке
-     */
-    _toggleSnap() {
-        this.snapEnabled = !this.snapEnabled;
-        this.snapToGrid = this.snapEnabled; // Обновляем существующее свойство
-        this._updateControlButtonStates();
-        
-        const status = this.snapEnabled ? 'включена' : 'выключена';
-        this._showNotification(`Привязка к сетке ${status}`, 'success');
-    }
-
-    /**
-     * Переключение метронома
-     */
-    _toggleMetronome() {
-        this.metronomeEnabled = !this.metronomeEnabled;
-        this._updateControlButtonStates();
-        
-        if (this.metronomeEnabled) {
-            this._startMetronome();
+        if (isCurrentlyActive) {
+            // Закрываем меню
+            this.colorDropdown.classList.remove('active');
+            console.log('🎨 Меню закрыто');
         } else {
-            this._stopMetronome();
+            // Открываем меню
+            this.colorDropdown.classList.add('active');
+            console.log('🎨 Меню открыто');
         }
         
-        const status = this.metronomeEnabled ? 'включен' : 'выключен';
-        this._showNotification(`Метроном ${status}`, 'success');
+        // Проверяем позицию и размеры для отладки
+        const rect = this.colorDropdown.getBoundingClientRect();
+        console.log('🎨 Позиция меню:', {
+            x: rect.x,
+            y: rect.y,
+            width: rect.width,
+            height: rect.height,
+            visible: isCurrentlyActive ? 'закрыто' : 'открыто'
+        });
     }
 
     /**
-     * Обновление интервала сетки на основе BPM
+     * Скрыть выпадающее меню цветов
      */
-    _updateGridInterval() {
-        // Рассчитываем интервал на основе BPM (четвертные ноты)
-        const beatsPerSecond = this.currentBPM / 60;
-        this.gridInterval = 1 / beatsPerSecond; // Секунды между битами
+    _hideColorDropdown() {
+        console.log('🎨 _hideColorDropdown вызван');
+        if (this.colorDropdown) {
+            this.colorDropdown.classList.remove('active');
+        }
     }
 
     /**
-     * Установка времени первого бита (downbeat) для ритмической сетки
-     * @param {number} time - Время в секундах
+     * Обновить состояние выпадающего меню цветов
      */
-    _setDownbeat(time) {
-        this.downbeatTime = time;
-        this.gridState = this.GRID_STATES.GRID_ACTIVE;
-        this.rhythmGridEnabled = true;
+    _updateColorDropdown() {
+        if (!this.colorDropdown || !window.colorService) return;
         
-        // Обновляем визуальное состояние кнопки
-        this._updateGridButtonForRhythm();
+        const currentScheme = window.colorService.getCurrentScheme();
+        const items = this.colorDropdown.querySelectorAll('.color-scheme-item');
         
-        // Перерисовываем сетку
+        items.forEach(item => {
+            if (item.dataset.schemeId === currentScheme.id) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+        
+        // Обновляем отображение волн с новыми цветами
         this._drawWaveform();
         
-        this._showNotification(`Первый бит установлен на ${time.toFixed(2)}с. Ритм-сетка активна!`, 'success');
-    }
-    
-    /**
-     * Расчет позиций ритмических линий сетки
-     * @param {number} startTime - Начальное время видимой области
-     * @param {number} endTime - Конечное время видимой области
-     * @returns {Array} Массив объектов {time, isMeasureStart}
-     */
-    _calculateRhythmGridLines(startTime, endTime) {
-        if (!this.rhythmGridEnabled || this.downbeatTime === null) {
-            return [];
-        }
-        
-        const beatInterval = this.gridInterval; // Интервал между битами
-        const measureInterval = beatInterval * 4; // Интервал между тактами (4/4)
-        
-        const lines = [];
-        
-        // Находим первую линию такта в видимой области
-        const firstMeasureTime = Math.floor((startTime - this.downbeatTime) / measureInterval) * measureInterval + this.downbeatTime;
-        
-        // Генерируем линии тактов и битов
-        for (let measureTime = firstMeasureTime; measureTime <= endTime + measureInterval; measureTime += measureInterval) {
-            if (measureTime < 0) continue;
-            
-            // Добавляем линию начала такта
-            if (measureTime >= startTime - beatInterval) {
-                lines.push({ time: measureTime, isMeasureStart: true });
-            }
-            
-            // Добавляем промежуточные биты в такте
-            for (let beat = 1; beat < 4; beat++) {
-                const beatTime = measureTime + beat * beatInterval;
-                if (beatTime >= startTime - beatInterval && beatTime <= endTime + beatInterval && beatTime >= 0) {
-                    lines.push({ time: beatTime, isMeasureStart: false });
-                }
-            }
-        }
-        
-        return lines.sort((a, b) => a.time - b.time);
+        console.log(`🎨 Цветовая схема обновлена: ${currentScheme.name}`);
     }
 
     /**
-     * Запуск метронома
+     * Инициализация слушателя изменений цветовой схемы
      */
-    _startMetronome() {
-        if (this.metronomeInterval) {
-            clearInterval(this.metronomeInterval);
-        }
-
-        const intervalMs = (60 / this.currentBPM) * 1000; // Миллисекунды между битами
-        
-        this.metronomeInterval = setInterval(() => {
-            if (this.audioEngine && this.audioEngine.isPlaying) {
-                this._playMetronomeClick();
-            }
-        }, intervalMs);
-    }
-
-    /**
-     * Остановка метронома
-     */
-    _stopMetronome() {
-        if (this.metronomeInterval) {
-            clearInterval(this.metronomeInterval);
-            this.metronomeInterval = null;
-        }
-    }
-
-    /**
-     * Воспроизведение клика метронома
-     */
-    _playMetronomeClick() {
-        if (!this.audioEngine || !this.audioEngine.audioContext) return;
-
-        try {
-            const ctx = this.audioEngine.audioContext;
-            const oscillator = ctx.createOscillator();
-            const gainNode = ctx.createGain();
-
-            oscillator.connect(gainNode);
-            gainNode.connect(ctx.destination);
-
-            oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-            oscillator.type = 'square';
-
-            gainNode.gain.setValueAtTime(0, ctx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.01);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-
-            oscillator.start(ctx.currentTime);
-            oscillator.stop(ctx.currentTime + 0.1);
-        } catch (error) {
-            console.warn('Ошибка воспроизведения метронома:', error);
+    _initColorServiceListener() {
+        if (window.colorService) {
+            window.colorService.addListener((scheme) => {
+                this._updateColorDropdown();
+            });
         }
     }
 }
