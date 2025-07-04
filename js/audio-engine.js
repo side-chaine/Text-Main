@@ -2,7 +2,6 @@
  * Audio Engine for Text application
  * Handles audio playback using single streaming HTML5 Audio (Sprint Engine).
  * Phase 1: Reliable instrumental-only playback to eliminate sync issues.
- * 🐙 КРАКЕН: Интегрирован AudioRouter для локального мониторинга
  */
 
 class AudioEngine {
@@ -12,10 +11,6 @@ class AudioEngine {
         this.instrumentalGain = this.audioContext.createGain();
         this.vocalsGain = this.audioContext.createGain();
         this.microphoneGain = this.audioContext.createGain();
-        
-        // 🐙 КРАКЕН: Инициализация AudioRouter
-        this.audioRouter = null;
-        this._initializeAudioRouter();
         
         this.instrumentalGain.connect(this.audioContext.destination);
         this.vocalsGain.connect(this.audioContext.destination);
@@ -49,131 +44,7 @@ class AudioEngine {
         this.microphoneGain.gain.value = this.microphoneVolume;
         
         console.log("🚀 AudioEngine (Hybrid Engine) - Гибридная архитектура восстановлена");
-        console.log("🐙 КРАКЕН: AudioRouter интегрирован");
         this._setupEventListeners();
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Инициализация AudioRouter
-     * @private
-     */
-    async _initializeAudioRouter() {
-        try {
-            // Импортируем AudioRouter если он доступен
-            if (typeof AudioRouter !== 'undefined') {
-                this.audioRouter = new AudioRouter();
-                const success = await this.audioRouter.initialize(this.audioContext);
-                
-                if (success) {
-                    // Подключаем основные узлы к роутеру
-                    this._connectToRouter();
-                    console.log('🐙 AudioRouter успешно интегрирован');
-                } else {
-                    console.warn('⚠️ AudioRouter не удалось инициализировать');
-                }
-            } else {
-                console.warn('⚠️ AudioRouter не найден, работаем без роутинга');
-            }
-        } catch (error) {
-            console.error('❌ Ошибка инициализации AudioRouter:', error);
-        }
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Подключение аудио узлов к роутеру
-     * @private
-     */
-    _connectToRouter() {
-        if (!this.audioRouter || !this.audioRouter.isInitialized) return;
-        
-        try {
-            // Создаем мастер-микс узел
-            this.masterMix = this.audioContext.createGain();
-            
-            // Подключаем все источники к мастер-миксу
-            this.instrumentalGain.disconnect();
-            this.vocalsGain.disconnect();
-            this.microphoneGain.disconnect();
-            
-            this.instrumentalGain.connect(this.masterMix);
-            this.vocalsGain.connect(this.masterMix);
-            this.microphoneGain.connect(this.masterMix);
-            
-            // Подключаем мастер-микс к роутеру
-            this.audioRouter.connectSource(this.masterMix);
-            
-            console.log('🔗 Аудио узлы подключены к роутеру');
-        } catch (error) {
-            console.error('❌ Ошибка подключения к роутеру:', error);
-        }
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Получение экземпляра AudioRouter
-     * @returns {AudioRouter|null}
-     */
-    getAudioRouter() {
-        return this.audioRouter;
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Установка основного устройства вывода
-     * @param {string} deviceId - ID устройства
-     * @returns {Promise<boolean>}
-     */
-    async setMainOutputDevice(deviceId) {
-        if (!this.audioRouter) {
-            console.warn('⚠️ AudioRouter недоступен');
-            return false;
-        }
-        
-        return await this.audioRouter.setMainDevice(deviceId);
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Установка устройства мониторинга
-     * @param {string} deviceId - ID устройства
-     * @returns {Promise<boolean>}
-     */
-    async setMonitorOutputDevice(deviceId) {
-        if (!this.audioRouter) {
-            console.warn('⚠️ AudioRouter недоступен');
-            return false;
-        }
-        
-        return await this.audioRouter.setMonitorDevice(deviceId);
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Получение списка доступных устройств
-     * @returns {Array}
-     */
-    getAvailableOutputDevices() {
-        if (!this.audioRouter) {
-            return [{ id: 'default', label: 'Системное по умолчанию', kind: 'audiooutput' }];
-        }
-        
-        return this.audioRouter.getDevicesList();
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Управление уровнями мониторинга
-     * @param {number} volume - Уровень громкости (0-1)
-     */
-    setMonitorVolume(volume) {
-        if (this.audioRouter) {
-            this.audioRouter.setMonitorVolume(volume);
-        }
-    }
-    
-    /**
-     * 🐙 КРАКЕН: Управление основным уровнем
-     * @param {number} volume - Уровень громкости (0-1)
-     */
-    setMainVolume(volume) {
-        if (this.audioRouter) {
-            this.audioRouter.setMainVolume(volume);
-        }
     }
     
     _setupEventListeners() {
@@ -334,11 +205,20 @@ class AudioEngine {
         // Set source to start loading instrumental
         this.instrumentalAudio.src = instrumentalUrl;
 
-        // Инициализируем hybridEngine с базовыми URL
+        // Создаем безопасные URL для WaveformEditor СРАЗУ
+        const safeInstrumentalUrl = await this._createSafeUrlFromOriginal(instrumentalUrl);
+        let safeVocalsUrl = null;
+        
+        if (vocalsUrl) {
+            safeVocalsUrl = await this._createSafeUrlFromOriginal(vocalsUrl);
+        }
+
+        // Инициализируем hybridEngine с безопасными URL
         this.hybridEngine = {
-            instrumentalUrl: instrumentalUrl,
-            vocalsUrl: vocalsUrl,
-            masterUrl: instrumentalUrl // Временно используем инструментал
+            instrumentalUrl: safeInstrumentalUrl,  // Безопасный URL для WaveformEditor
+            vocalsUrl: safeVocalsUrl,             // Безопасный URL для WaveformEditor
+            originalInstrumentalUrl: instrumentalUrl,  // Исходный URL для воспроизведения
+            originalVocalsUrl: vocalsUrl              // Исходный URL для воспроизведения
         };
 
         // Load vocals in parallel if provided
@@ -362,15 +242,6 @@ class AudioEngine {
             });
 
             this.vocalsAudio.src = vocalsUrl;
-            
-            // Создаем мастер-дорожку асинхронно и обновляем URL после создания
-            this._createMasterTrack(instrumentalUrl, vocalsUrl).then(masterUrl => {
-                console.log('🎚️ МАСТЕР: Обновляем URL после создания микшированной дорожки');
-                this.hybridEngine.masterUrl = masterUrl;
-                console.log(`🎚️ МАСТЕР URL обновлен: ${masterUrl.substring(0, 50)}...`);
-            }).catch(error => {
-                console.error('❌ МАСТЕР: Ошибка создания, используем инструментал:', error);
-            });
         }
 
         // Wait for instrumental to be ready (vocals can load in background)
@@ -402,140 +273,6 @@ class AudioEngine {
             duration: this.duration,
             hasVocals: !!vocalsUrl
         };
-    }
-    
-    /**
-     * Создает мастер-дорожку путем микширования инструментала и вокала
-     * @param {string} instrumentalUrl - URL инструментальной дорожки
-     * @param {string} vocalsUrl - URL вокальной дорожки
-     * @returns {Promise<string>} - URL созданной мастер-дорожки
-     * @private
-     */
-    async _createMasterTrack(instrumentalUrl, vocalsUrl) {
-        try {
-            console.log('🎚️ МАСТЕР: Создание микшированной дорожки...');
-            console.log(`🎚️ МАСТЕР: Инструментал URL: ${instrumentalUrl.substring(0, 50)}...`);
-            console.log(`🎚️ МАСТЕР: Вокал URL: ${vocalsUrl.substring(0, 50)}...`);
-            
-            // Загружаем оба аудиофайла как ArrayBuffer
-            console.log('🎚️ МАСТЕР: Загружаем аудиофайлы...');
-            const [instrumentalResponse, vocalsResponse] = await Promise.all([
-                fetch(instrumentalUrl),
-                fetch(vocalsUrl)
-            ]);
-            
-            console.log('🎚️ МАСТЕР: Конвертируем в ArrayBuffer...');
-            const [instrumentalArrayBuffer, vocalsArrayBuffer] = await Promise.all([
-                instrumentalResponse.arrayBuffer(),
-                vocalsResponse.arrayBuffer()
-            ]);
-            
-            console.log(`🎚️ МАСТЕР: Инструментал размер: ${instrumentalArrayBuffer.byteLength} байт`);
-            console.log(`🎚️ МАСТЕР: Вокал размер: ${vocalsArrayBuffer.byteLength} байт`);
-            
-            // Декодируем аудиоданные
-            console.log('🎚️ МАСТЕР: Декодируем аудиоданные...');
-            const [instrumentalBuffer, vocalsBuffer] = await Promise.all([
-                this.audioContext.decodeAudioData(instrumentalArrayBuffer.slice()),
-                this.audioContext.decodeAudioData(vocalsArrayBuffer.slice())
-            ]);
-            
-            console.log(`🎚️ МАСТЕР: Инструментал - каналов: ${instrumentalBuffer.numberOfChannels}, длина: ${instrumentalBuffer.length}, частота: ${instrumentalBuffer.sampleRate}Hz`);
-            console.log(`🎚️ МАСТЕР: Вокал - каналов: ${vocalsBuffer.numberOfChannels}, длина: ${vocalsBuffer.length}, частота: ${vocalsBuffer.sampleRate}Hz`);
-            
-            // Создаем новый буфер для мастер-дорожки
-            const masterBuffer = this.audioContext.createBuffer(
-                Math.max(instrumentalBuffer.numberOfChannels, vocalsBuffer.numberOfChannels),
-                Math.max(instrumentalBuffer.length, vocalsBuffer.length),
-                instrumentalBuffer.sampleRate
-            );
-            
-            console.log(`🎚️ МАСТЕР: Создан буфер - каналов: ${masterBuffer.numberOfChannels}, длина: ${masterBuffer.length}`);
-            
-            // Микшируем каналы
-            console.log('🎚️ МАСТЕР: Начинаем микширование каналов...');
-            for (let channel = 0; channel < masterBuffer.numberOfChannels; channel++) {
-                const masterData = masterBuffer.getChannelData(channel);
-                const instrumentalData = instrumentalBuffer.getChannelData(Math.min(channel, instrumentalBuffer.numberOfChannels - 1));
-                const vocalsData = vocalsBuffer.getChannelData(Math.min(channel, vocalsBuffer.numberOfChannels - 1));
-                
-                for (let i = 0; i < masterData.length; i++) {
-                    const instrumentalSample = i < instrumentalData.length ? instrumentalData[i] : 0;
-                    const vocalsSample = i < vocalsData.length ? vocalsData[i] : 0;
-                    
-                    // Микшируем с небольшим сжатием для предотвращения клиппинга
-                    masterData[i] = (instrumentalSample + vocalsSample) * 0.7;
-                }
-            }
-            
-            console.log('🎚️ МАСТЕР: Микширование завершено, конвертируем в blob...');
-            
-            // Конвертируем обратно в blob
-            const masterBlob = await this._audioBufferToBlob(masterBuffer);
-            const masterUrl = URL.createObjectURL(masterBlob);
-            
-            // Добавляем в список для очистки
-            if (masterUrl.startsWith('blob:')) this.activeBlobUrls.push(masterUrl);
-            
-            console.log(`🎚️ МАСТЕР: Микшированная дорожка создана! URL: ${masterUrl.substring(0, 50)}...`);
-            console.log(`🎚️ МАСТЕР: Размер blob: ${masterBlob.size} байт`);
-            
-            return masterUrl;
-            
-        } catch (error) {
-            console.error('❌ МАСТЕР: Ошибка создания микшированной дорожки:', error);
-            console.error('❌ МАСТЕР: Stack trace:', error.stack);
-            return instrumentalUrl; // Возвращаем инструментал как fallback
-        }
-    }
-    
-    /**
-     * Конвертирует AudioBuffer в Blob
-     * @param {AudioBuffer} audioBuffer - буфер для конвертации
-     * @returns {Promise<Blob>} - результирующий blob
-     * @private
-     */
-    async _audioBufferToBlob(audioBuffer) {
-        const numberOfChannels = audioBuffer.numberOfChannels;
-        const sampleRate = audioBuffer.sampleRate;
-        const length = audioBuffer.length;
-        
-        // Создаем WAV заголовок
-        const arrayBuffer = new ArrayBuffer(44 + length * numberOfChannels * 2);
-        const view = new DataView(arrayBuffer);
-        
-        // WAV заголовок
-        const writeString = (offset, string) => {
-            for (let i = 0; i < string.length; i++) {
-                view.setUint8(offset + i, string.charCodeAt(i));
-            }
-        };
-        
-        writeString(0, 'RIFF');
-        view.setUint32(4, 36 + length * numberOfChannels * 2, true);
-        writeString(8, 'WAVE');
-        writeString(12, 'fmt ');
-        view.setUint32(16, 16, true);
-        view.setUint16(20, 1, true);
-        view.setUint16(22, numberOfChannels, true);
-        view.setUint32(24, sampleRate, true);
-        view.setUint32(28, sampleRate * numberOfChannels * 2, true);
-        view.setUint16(32, numberOfChannels * 2, true);
-        view.setUint16(34, 16, true);
-        writeString(36, 'data');
-        view.setUint32(40, length * numberOfChannels * 2, true);
-        
-        // Записываем аудиоданные
-        let offset = 44;
-        for (let i = 0; i < length; i++) {
-            for (let channel = 0; channel < numberOfChannels; channel++) {
-                const sample = Math.max(-1, Math.min(1, audioBuffer.getChannelData(channel)[i]));
-                view.setInt16(offset, sample * 0x7FFF, true);
-                offset += 2;
-            }
-        }
-        
-        return new Blob([arrayBuffer], { type: 'audio/wav' });
     }
     
     /**
@@ -940,25 +677,30 @@ class AudioEngine {
     }
 
     /**
-     * Set playback rate (speed) without changing pitch
-     * @param {number} rate - Playback rate (1.0 = normal, 0.5 = half speed, 2.0 = double speed)
+     * Set playback rate (speed) for both audio streams
+     * @param {number} rate - Playback rate (0.5 = half speed, 1.0 = normal, 2.0 = double speed)
      */
     setPlaybackRate(rate) {
-        if (rate <= 0) {
-            console.warn('AudioEngine: Playback rate must be positive');
-            return;
-        }
+        // Validate rate (clamp between 0.25 and 4.0)
+        const clampedRate = Math.max(0.25, Math.min(4.0, rate));
         
-        console.log(`🎵 AudioEngine: Установка скорости воспроизведения: ${(rate * 100).toFixed(0)}%`);
-        
-        // Apply to both instrumental and vocal tracks
         if (this.instrumentalAudio) {
-            this.instrumentalAudio.playbackRate = rate;
+            this.instrumentalAudio.playbackRate = clampedRate;
+            console.log(`🎵 ИНСТРУМЕНТАЛ: Скорость установлена ${(clampedRate * 100).toFixed(0)}%`);
         }
         
         if (this.vocalsAudio) {
-            this.vocalsAudio.playbackRate = rate;
+            this.vocalsAudio.playbackRate = clampedRate;
+            console.log(`🎤 ВОКАЛ: Скорость установлена ${(clampedRate * 100).toFixed(0)}%`);
         }
+        
+        // Notify about playback rate change
+        const event = new CustomEvent('playback-rate-changed', {
+            detail: { rate: clampedRate }
+        });
+        document.dispatchEvent(event);
+        
+        console.log(`⚡ BPM: Скорость воспроизведения ${(clampedRate * 100).toFixed(0)}%`);
     }
     
     /**
@@ -966,10 +708,45 @@ class AudioEngine {
      * @returns {number} Current playback rate
      */
     getPlaybackRate() {
-        if (this.instrumentalAudio) {
-            return this.instrumentalAudio.playbackRate;
+        return this.instrumentalAudio ? this.instrumentalAudio.playbackRate : 1.0;
+    }
+
+    /**
+     * Создает безопасный URL из исходного blob URL для WaveformEditor
+     * @param {string} originalUrl - исходный URL (может быть blob:null)
+     * @returns {Promise<string>} - безопасный URL
+     * @private
+     */
+    async _createSafeUrlFromOriginal(originalUrl) {
+        try {
+            if (!originalUrl) return null;
+            
+            // Если это не blob URL или это корректный blob URL, возвращаем как есть
+            if (!originalUrl.startsWith('blob:') || !originalUrl.includes('blob:null/')) {
+                return originalUrl;
+            }
+            
+            console.log(`🔧 БЕЗОПАСНЫЙ URL: Конвертируем blob:null в data URL: ${originalUrl.substring(0, 50)}...`);
+            
+            // Загружаем данные из blob:null URL
+            const response = await fetch(originalUrl);
+            const blob = await response.blob();
+            
+            // Создаем data URL как fallback
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    console.log(`✅ БЕЗОПАСНЫЙ URL: Создан data URL размером ${blob.size} байт`);
+                    resolve(reader.result);
+                };
+                reader.onerror = () => reject(new Error('Failed to create data URL from blob'));
+                reader.readAsDataURL(blob);
+            });
+            
+        } catch (error) {
+            console.error('❌ БЕЗОПАСНЫЙ URL: Ошибка конвертации:', error);
+            return originalUrl; // Возвращаем исходный URL в случае ошибки
         }
-        return 1.0;
     }
 }
 

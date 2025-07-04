@@ -1,0 +1,1075 @@
+ 🔧 DEBUG_CONFIG загружен. Используйте toggleDebugLogs(true) для включения логов
+ 📦 Utils module loaded
+ StateManager initialized
+ 📦 StateManager module loaded
+ 🚀 AudioEngine (Hybrid Engine) - Гибридная архитектура восстановлена
+ Space bar handler attached
+ LyricsDisplay initialized
+ RtfParserAdapter: Инициализация
+ - EnhancedRtfProcessor доступен: true
+ - Стандартный RtfParser доступен: true
+ TrackCatalog initialized
+ MarkerManager initialized
+ WaveformEditor loaded
+ 🎨 Создаю кнопку выбора цвета, ColorService доступен: true
+ 🎨 ColorService найден, создаю схемы...
+ 🎨 Доступные схемы: 7
+ WaveformEditor: Vocal audio data not available
+_drawWaveformData @ waveform-editor.js:1467
+ WaveformEditor initialized
+ TrackCatalog: _finalizeUploadFromBlockEditor CALLED - should be obsolete now.
+ BlockLoopControl: Класс загружен
+ RTF Parser Integration: Инициализация интеграции улучшенного RTF-парсера (после определения объекта)
+ RTF Parser Integration: Начало интеграции
+ RTF Parser Integration: TrackCatalog уже использует RtfParserAdapter если он доступен
+ RTF Parser Integration: Интеграция завершена успешно
+ 🎹 Инициализация клавиатуры...
+ LiveFeed module loaded (placeholder)
+ Загружено 3 треков из базы данных
+ ✅ Pitchy библиотека загружена в beLive
+ LiveMode: Автоматическая инициализация при загрузке документа
+ LiveMode: Создание нового экземпляра
+ LiveMode: Маски инициализированы без использования изображений
+ LiveMode: getUserMedia поддерживается: true
+ LiveMode: Безопасный контекст: true
+ LiveMode: Определен localhost, разрешен HTTP
+ LiveMode: Метод toggleStreaming не найден и не может быть привязан
+(анонимная) @ live-mode.js:521
+ LiveMode: Базовая инициализация завершена
+ LiveMode: Предварительная инициализация камеры...
+ LiveMode: экземпляр создан
+ LiveFeed initialized
+ DOM content loaded, waiting for components
+ Application fully loaded, components initialized
+ ✅ Pitchy готов для точной детекции
+ 🎹 Кнопка найдена
+ 🔗 Настройка интеграции для точной детекции...
+ 🎤 Статус для точной детекции: false
+ 🎯 КАЛИБРОВКА: A4 = 440.00Hz (должно быть 440.00Hz)
+ 🎹 Создано 48 клавиш для точной детекции
+ 🎹 Piano Keyboard инициализирован
+ All components ready, initializing app...
+ Initializing beLive App
+ StateManager initialized
+ StateManager component ready
+ 🎛️ ViewManager: Конструктор выполнен
+ 🔗 ViewManager: Инициализация с зависимостями
+ ✅ ViewManager: Зависимости успешно подключены
+ ViewManager component ready
+ 🎯 ViewManager: Инициализация обработчиков событий
+ ✅ ViewManager: Обработчик кнопки аватара (основное приложение) подключен
+ ✅ ViewManager: Обработчик кнопки аватара в Live Feed подключен
+ ✅ ViewManager: Обработчик кнопки возврата подключен
+ ✅ ViewManager: Обработчик кнопки beLIVE в Avatar Studio подключен
+ 🎵 ViewManager: Карусель треков инициализирована
+ 🎵 ViewManager: Карусель треков инициализирована
+ 🎯 ViewManager: Все обработчики событий готовы
+ 🎯 ViewManager event handlers initialized
+ WordAlignerV2 not found, creating placeholder
+App @ app.js:84
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Applied style 'Стандартный'
+ TextStyleManager: Проверка доступности LiveMode...
+ TextStyleManager: Класс LiveMode найден, предварительная инициализация камеры...
+ TextStyleManager: LiveMode уже инициализирован
+ TextStyleManager initialized with 8 styles and 29 total transitions
+ Text style manager initialized
+ Initializing Microphone UI...
+ Microphone UI initialized using existing DOM elements.
+ LoopBlockManager: Checking audio initialization...
+ LoopBlockManager: Audio buffer or context not available (check 0)
+_checkAudioAndInitialize @ loopblock-manager.js:137
+ LoopBlockManager: Initializing sync listeners
+ LoopBlockManager: progressBarContainer found - width: 1050px, height: 10px, overflow: visible
+ LoopBlockManager: progressBarContainer offsetWidth: 1050, offsetHeight: 10
+ LoopBlockManager: progressBarContainer children: 3
+ LoopBlockManager: Child 0: progress-bar-loaded, display: block, zIndex: 1
+ LoopBlockManager: Child 1: progress-bar, display: block, zIndex: 2
+ LoopBlockManager: Child 2: progress-tooltip, display: block, zIndex: 10
+ LoopBlockManager initialized
+ LoopBlockManager component ready
+ [DragBoundary] Инициализирован с интерактивными линиями и предпоказом
+ 🎛️ BlockLoopControl initialized with seeking flag and seek buffer
+ BlockLoopControl component ready
+ 🎭 MaskSystem: Инициализация продвинутой системы масок
+ 🎭 MaskSystem: Конструктор завершен
+ 🎭 MaskSystem создан
+ 🎭 MaskSystem component ready
+ Initializing LoopBlock controls
+ Audio not fully loaded yet, setting up delayed initialization
+ 🎭 MaskSystem: Обработчик кнопки подключен
+ 🚀 Инициализация Живой Ленты
+ ✅ Живая Лента инициализирована
+ 🚀 Показываю Живую Ленту
+ ✅ Живая Лента активирована
+ beLive App initialized
+ App initialized successfully
+ 🎭 MediaPipe: Начинаем загрузку библиотек...
+ 🎭 MediaPipe: Ожидание загрузки библиотек...
+ 🎭 MediaPipe: Все библиотеки загружены успешно
+ 🎭 MaskSystem: Официальный MediaPipe FaceMesh готов
+ 🏃 MaskSystem: MediaPipe Pose готов
+ ✋ MaskSystem: MediaPipe Hands готов
+ 🤖 MaskSystem: MediaPipe Holistic готов
+ 🎨 MaskSystem: MediaPipe Selfie Segmentation готов
+ 🎭 MaskSystem: MediaPipe готов к использованию
+ 🎯 Background Effects Engine v2.0 инициализирован
+ 🔄 Инициализация Background Effects Engine...
+ ✅ Background Effects Engine готов
+ 🎤 Запуск ТОЧНОГО анализа вокальной дорожки...
+ 🔊 Инициализация аудио для точной детекции...
+ ✅ Используем audioEngine.audioContext
+ ✅ Pitchy детектор готов для точной работы
+ ✅ Подключен к ВОКАЛЬНОМУ узлу: GainNode
+ ✅ ТОЧНЫЙ анализ запущен
+ Проверка треков завершена успешно, проблем не обнаружено
+ LiveMode: Запуск предварительной инициализации камеры
+ LiveMode: Предварительная инициализация камеры...
+ LoopBlockManager: Проверка доступности аудио (попытка 2/5)
+ LoopBlockManager: Проверка доступности аудио (попытка 3/5)
+ 🎯 Начальная калибровка системы...
+ 🎯 ===== ЗАПУСК КАЛИБРОВОЧНЫХ ТЕСТОВ ПИТЧА =====
+ 📋 Тестируем расчет частот:
+ ✅ C4: рассчитано=261.63Hz, ожидается=261.63Hz, ошибка=0.002%
+ ✅ D4: рассчитано=293.66Hz, ожидается=293.66Hz, ошибка=0.002%
+rtf-parser.js:849 ✅ E4: рассчитано=329.63Hz, ожидается=329.63Hz, ошибка=0.001%
+rtf-parser.js:849 ✅ F4: рассчитано=349.23Hz, ожидается=349.23Hz, ошибка=0.001%
+rtf-parser.js:849 ✅ G4: рассчитано=392.00Hz, ожидается=392Hz, ошибка=0.001%
+rtf-parser.js:849 🎯 КАЛИБРОВКА: A4 = 440.00Hz (должно быть 440.00Hz)
+rtf-parser.js:849 ✅ A4: рассчитано=440.00Hz, ожидается=440Hz, ошибка=0.000%
+rtf-parser.js:849 ✅ B4: рассчитано=493.88Hz, ожидается=493.88Hz, ошибка=0.001%
+rtf-parser.js:849 📋 Тестируем обратное преобразование:
+rtf-parser.js:849 ✅ 261.63Hz → обнаружено="C4", ожидается="C4"
+rtf-parser.js:849 ✅ 293.66Hz → обнаружено="D4", ожидается="D4"
+rtf-parser.js:849 ✅ 329.63Hz → обнаружено="E4", ожидается="E4"
+rtf-parser.js:849 ✅ 349.23Hz → обнаружено="F4", ожидается="F4"
+rtf-parser.js:849 ✅ 392Hz → обнаружено="G4", ожидается="G4"
+rtf-parser.js:849 ✅ 440Hz → обнаружено="A4", ожидается="A4"
+rtf-parser.js:849 ✅ 493.88Hz → обнаружено="B4", ожидается="B4"
+rtf-parser.js:849 📊 РЕЗУЛЬТАТЫ КАЛИБРОВКИ:
+rtf-parser.js:849    Пройдено тестов: 14/14
+rtf-parser.js:849    Процент успеха: 100.0%
+rtf-parser.js:849    Средняя ошибка: 0.001%
+rtf-parser.js:849 🎯 ✅ КАЛИБРОВКА ПИТЧА ПРОШЛА УСПЕШНО!
+rtf-parser.js:849 🎯 ===== КАЛИБРОВОЧНЫЕ ТЕСТЫ ЗАВЕРШЕНЫ =====
+rtf-parser.js:849 LiveMode: Доступ к камере получен при предварительной инициализации
+rtf-parser.js:849 LiveMode: Получено 1 видеотреков. Активный: FaceTime HD Camera
+rtf-parser.js:849 LiveMode: Предварительная инициализация камеры успешно завершена
+rtf-parser.js:849 LiveMode: Доступ к камере получен при предварительной инициализации
+rtf-parser.js:849 LiveMode: Получено 1 видеотреков. Активный: FaceTime HD Camera
+rtf-parser.js:849 LiveMode: Предварительная инициализация камеры успешно завершена
+rtf-parser.js:849 LiveMode: Предварительная инициализация камеры успешна
+rtf-parser.js:849 🚀 Быстрый переход в режим: karaoke
+rtf-parser.js:849 Switching to karaoke mode
+rtf-parser.js:849 App: Сохраняем предыдущий режим: concert
+rtf-parser.js:849 Activating karaoke mode
+rtf-parser.js:849 Applying style: Караоке with scale 1.20
+rtf-parser.js:849 TextStyleManager: Scaled font size from 1.4em to 1.68em
+rtf-parser.js:849 LyricsDisplay: Setting style to Караоке
+rtf-parser.js:849 [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+rtf-parser.js:849 TextStyleManager: Scaled font size from 1.4em to 1.68em
+rtf-parser.js:849 Applied style class to lyrics-container: style-karaoke
+rtf-parser.js:849 Karaoke Background Manager: Starting slideshow...
+rtf-parser.js:849 🚀 Скрываю Живую Ленту
+rtf-parser.js:849 ✅ Возврат в классический зал
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/prince-abid-LeZItQhwFks-unsplash.jpg
+loopblock-manager.js:219 LoopBlockManager: Аудио не загружено после 5 попыток. Для работы функций зацикливания необходимо загрузить аудиофайл.
+_checkAudioAgain @ loopblock-manager.js:219
+rtf-parser.js:849 TrackCatalog: openCatalog() called
+rtf-parser.js:849 TrackCatalog: catalogContainer exists: true
+rtf-parser.js:849 TrackCatalog: catalogContainer classes before: hidden
+rtf-parser.js:849 TrackCatalog: catalogContainer classes after: 
+rtf-parser.js:849 TrackCatalog: Catalog should now be visible
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 🔄 Loading track: "Linkin Park - When They Come For Me[-]"
+rtf-parser.js:849 🔄 StateManager: Starting HARD RESET of all components
+rtf-parser.js:849 1. Resetting AudioEngine...
+rtf-parser.js:849 AudioEngine: Starting reset...
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 ⏹️ ГИБРИД: Остановлен и сброшен
+rtf-parser.js:849 🧹 СПРИНТЕР: Ресурсы очищены
+rtf-parser.js:849 AudioEngine: Reset completed successfully
+rtf-parser.js:849 ✅ AudioEngine reset complete
+rtf-parser.js:849 2. Resetting LyricsDisplay...
+rtf-parser.js:849 💥 LyricsDisplay: Performing full reset.
+rtf-parser.js:849 ✅ LyricsDisplay: Full reset complete. All lyric data and DOM elements cleared.
+rtf-parser.js:849 ✅ LyricsDisplay full reset complete
+rtf-parser.js:849 3. Resetting TextStyleManager...
+rtf-parser.js:849 💥 TextStyleManager: Full reset initiated.
+rtf-parser.js:849 ✅ TextStyleManager: Reset complete. All states and caches cleared.
+rtf-parser.js:849 ✅ TextStyleManager reset complete.
+rtf-parser.js:849 🎉 StateManager: HARD RESET completed successfully
+rtf-parser.js:849 ✅ All components ready for new track
+track-catalog.js:1259 ⏱️ HARD_RESET_TIME: 14.195068359375 ms
+rtf-parser.js:849 TrackCatalog: Set waveformEditor.lastLoadedFile to Linkin Park-When They Come for Me.rtf
+rtf-parser.js:849 TrackCatalog: Set waveformEditor.currentTrackId to 1750901713330
+rtf-parser.js:849 TrackCatalog: Found 15 blocks. Preparing them for rendering after audio load.
+rtf-parser.js:849 LyricsDisplay: Loading 15 imported blocks.
+rtf-parser.js:849 Block 0 loaded: id="block-1750944559030-0-5sevyuo8eyf", name="Block 1", lines=8
+rtf-parser.js:849 Block 1 loaded: id="1", name="Block 2", lines=4
+rtf-parser.js:849 Block 2 loaded: id="2", name="Block 3", lines=5
+rtf-parser.js:849 Block 3 loaded: id="3", name="Block 4", lines=1
+rtf-parser.js:849 Block 4 loaded: id="4", name="Block 5", lines=1
+rtf-parser.js:849 Block 5 loaded: id="5", name="Block 6", lines=8
+ Block 6 loaded: id="6", name="Block 7", lines=5
+ Block 7 loaded: id="7", name="Block 8", lines=1
+ Block 8 loaded: id="8", name="Block 9", lines=1
+ Block 9 loaded: id="9", name="Block 10", lines=9
+ Block 10 loaded: id="10", name="Block 11", lines=1
+ Block 11 loaded: id="11", name="Block 12", lines=1
+ Block 12 loaded: id="12", name="Block 13", lines=1
+ Block 13 loaded: id="13", name="Block 14", lines=1
+ Block 14 loaded: id="14", name="Block 15", lines=2
+ LyricsDisplay: Skipping render as requested by shouldRender=false
+ LyricsDisplay: Successfully loaded 15 blocks, total lyric lines: 49.
+ LyricsDisplay: Updated marker colors after loading blocks
+ ⏱️ LYRICS_PREPARE_TIME: 4.216064453125 ms
+ ⏱️ BLOB_CREATION_TIME: 110.31787109375 ms
+ 🚀 ГИБРИД: Загрузка двойного потока
+ isPlaying property set to: false
+ ⏹️ ГИБРИД: Остановлен и сброшен
+ 🔧 БЕЗОПАСНЫЙ URL: Конвертируем blob:null в data URL: blob:null/d1293017-e779-49bb-9a13-1aa997cf7704...
+ 🎨 _hideColorDropdown вызван
+ ✅ ИНСТРУМЕНТАЛ ГОТОВ! Длительность: 295.60с
+ ✅ БЕЗОПАСНЫЙ URL: Создан data URL размером 58360130 байт
+ 🔧 БЕЗОПАСНЫЙ URL: Конвертируем blob:null в data URL: blob:null/e12acff8-84b2-4c6c-9db1-9fb4dd614a14...
+ Audio ready detected via timer, initializing LoopBlockManager
+ LoopBlockManager already initialized
+ ✅ БЕЗОПАСНЫЙ URL: Создан data URL размером 11826198 байт
+ ⏱️ HYBRID_ENGINE_LOAD_TIME: 1437.18017578125 ms
+ 🎯 ГИБРИД: Рассинхронизация устранена!
+ WaveformEditor: Vocal audio data not available
+_drawWaveformData @ waveform-editor.js:1467
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ [KARAOKE] DOM not found or empty in _renderLyrics, creating it.
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ ⏱️ AUDIO_LOAD_TIME: 1439.39306640625 ms
+ Loading 49 markers for track Linkin Park - When They Come For Me[-]
+ Validating 49 markers for 49 lyric lines
+ Kept 49 valid markers out of 49
+ WaveformEditor: Vocal audio data not available
+_drawWaveformData @ waveform-editor.js:1467
+ 🚀 Скрываю Живую Ленту
+ ✅ Возврат в классический зал
+ Applying style: Караоке with scale 1.20
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ LyricsDisplay: Setting style to Караоке
+ TextStyleManager: Scaled font size from 1.4em to 1.68em
+ 🎵 АВТОПЛЕЙ: Запуск воспроизведения...
+ ✅ Track "Linkin Park - When They Come For Me[-]" loaded successfully
+ ✅ ВОКАЛ ГОТОВ! Длительность: 295.60с
+ 🎤 ВОКАЛ ПОДКЛЮЧЕН к аудио-контексту
+ 🎨 StateManager: Forcing text rerender in current mode
+ 🎤 Karaoke mode detected, should work correctly
+ ⏱️ FINAL_RENDER_TIME: 103.130859375 ms
+ ⏱️ TOTAL_TRACK_LOAD_TIME: 1674.76904296875 ms
+ ▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато
+ 🎤 ВОКАЛ: Синхронизирован и воспроизводится
+ isPlaying property set to: true
+ ✅ АВТОПЛЕЙ: Воспроизведение начато успешно
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ ⏸️ ИНСТРУМЕНТАЛ: Пауза
+ ⏸️ ВОКАЛ: Пауза
+ isPlaying property set to: false
+ Key pressed:  , key code: 32, waveform active: false
+ 🎨 _hideColorDropdown вызван
+ APP: Создаем вокальный URL для синхронизации трека: Linkin Park - When They Come For Me[-]
+ WaveformEditor: Starting high-fidelity audio load for sync: blob:null/d3207395-961f-426d-8ca5-f6b6b1970f4c
+ 🎨 _hideColorDropdown вызван
+ WaveformEditor: High-fidelity audio loaded successfully. Duration: 295.60s
+ APP: Аудио для WaveformEditor загружено, открываем редактор.
+ Sync Editor: Stored original style "karaoke" and scale 1.2. Applying "default" editor style and 0.8 scale.
+ Applying style: Стандартный with scale 1.00
+ TextStyleManager: Scaled font size from 1.8em to 1.80em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'I am not a pattern to be followed'
+ Rendering standard line [1]: 'The pill that I'm on is a tough one to swallow'
+ Rendering standard line [2]: 'I'm not a criminal, not a role model'
+ Rendering standard line [3]: 'Not a born leader I'm a tough act to follow'
+ Rendering standard line [4]: 'I am not the fortune and the fame'
+ Rendering standard line [5]: 'Nor the same person telling you to forfeit the game'
+ Rendering standard line [6]: 'I came in the ring like a dog on a chain'
+ Rendering standard line [7]: 'And I found out the underbelly's sicker than it seems'
+ Rendering standard line [8]: 'And it seems ugly, but it can get worse'
+ Rendering standard line [9]: 'use even a blueprint is a gift and a curse'
+ Rendering standard line [10]: 'use once you got a theory of how the thing works'
+ Rendering standard line [11]: 'Everybody wants the next thing to be just like the first'
+ Rendering standard line [12]: 'And I'm not a robot'
+ Rendering standard line [13]: 'I'm not a monkey'
+ Rendering standard line [14]: 'I will not dance even if the beat's funky'
+ Rendering standard line [15]: 'Opposite of lazy, far from a punk'
+ Rendering standard line [16]: 'Ya'll ought to stop talking start trying to catch up motherfucker'
+ Rendering standard line [17]: 'And all the people say'
+ Rendering standard line [18]: 'Try to catch up motherfucker'
+ Rendering standard line [19]: 'Lauryn said, money change a situation'
+ Rendering standard line [20]: 'Big said, it increase the complication'
+ Rendering standard line [21]: 'Kane said, don't step, I ain't the one'
+ Rendering standard line [22]: 'Chuck said, that uzi weigh a motherfuckin' ton'
+ Rendering standard line [23]: 'And I'm just a student of the game that they taught me'
+ Rendering standard line [24]: 'Rockin' every stage in every place that it brought me'
+ Rendering standard line [25]: 'I'm awfully underrated, but came here to correct it'
+ Rendering standard line [26]: 'And so it ain't mistaken I'ma state it for the record'
+ Rendering standard line [27]: 'I am the opposite of wack, opposite of weak'
+ Rendering standard line [28]: 'Opposite of slack, synonym of heat'
+ Rendering standard line [29]: 'Synonym of crack, closest to a peak'
+ Rendering standard line [30]: 'Far from a punk'
+ Rendering standard line [31]: 'Ya'll ought to stop talking, start trying to catch up motherfucker'
+ Rendering standard line [32]: 'And all the people say'
+ Rendering standard line [33]: 'Try to catch up motherfucker'
+ Rendering standard line [34]: 'Oh, when they come for me'
+ Rendering standard line [35]: 'Come for me'
+ Rendering standard line [36]: 'I'll be gone'
+ Rendering standard line [37]: 'Oh, when they come for me'
+ Rendering standard line [38]: 'Come for me'
+ Rendering standard line [39]: 'I'll be gone'
+ Rendering standard line [40]: 'Oh, when they come for me'
+ Rendering standard line [41]: 'Come for me'
+ Rendering standard line [42]: 'I'll be gone'
+ Rendering standard line [43]: 'And all the people say'
+ Rendering standard line [44]: 'Try to catch up motherfucker'
+ Rendering standard line [45]: 'And all the people say'
+ Rendering standard line [46]: 'Try to catch up motherfucker'
+ Rendering standard line [47]: 'Presten atenciуn todos'
+ Rendering standard line [48]: 'Toda la gente preste atenciуn, escъchenme ahora mismo'
+ TextStyleManager: Font scale for default set to 0.80
+ Applying style: Стандартный with scale 0.80
+ TextStyleManager: Scaled font size from 1.8em to 1.44em
+ LyricsDisplay: Setting style to Стандартный
+ Rendering lyrics. Current style ID: default
+ Rendering standard line [0]: 'I am not a pattern to be followed'
+ Rendering standard line [1]: 'The pill that I'm on is a tough one to swallow'
+ Rendering standard line [2]: 'I'm not a criminal, not a role model'
+ Rendering standard line [3]: 'Not a born leader I'm a tough act to follow'
+ Rendering standard line [4]: 'I am not the fortune and the fame'
+ Rendering standard line [5]: 'Nor the same person telling you to forfeit the game'
+ Rendering standard line [6]: 'I came in the ring like a dog on a chain'
+ Rendering standard line [7]: 'And I found out the underbelly's sicker than it seems'
+ Rendering standard line [8]: 'And it seems ugly, but it can get worse'
+ Rendering standard line [9]: 'use even a blueprint is a gift and a curse'
+ Rendering standard line [10]: 'use once you got a theory of how the thing works'
+ Rendering standard line [11]: 'Everybody wants the next thing to be just like the first'
+ Rendering standard line [12]: 'And I'm not a robot'
+ Rendering standard line [13]: 'I'm not a monkey'
+ Rendering standard line [14]: 'I will not dance even if the beat's funky'
+ Rendering standard line [15]: 'Opposite of lazy, far from a punk'
+ Rendering standard line [16]: 'Ya'll ought to stop talking start trying to catch up motherfucker'
+ Rendering standard line [17]: 'And all the people say'
+ Rendering standard line [18]: 'Try to catch up motherfucker'
+ Rendering standard line [19]: 'Lauryn said, money change a situation'
+ Rendering standard line [20]: 'Big said, it increase the complication'
+ Rendering standard line [21]: 'Kane said, don't step, I ain't the one'
+ Rendering standard line [22]: 'Chuck said, that uzi weigh a motherfuckin' ton'
+ Rendering standard line [23]: 'And I'm just a student of the game that they taught me'
+ Rendering standard line [24]: 'Rockin' every stage in every place that it brought me'
+ Rendering standard line [25]: 'I'm awfully underrated, but came here to correct it'
+ Rendering standard line [26]: 'And so it ain't mistaken I'ma state it for the record'
+ Rendering standard line [27]: 'I am the opposite of wack, opposite of weak'
+ Rendering standard line [28]: 'Opposite of slack, synonym of heat'
+ Rendering standard line [29]: 'Synonym of crack, closest to a peak'
+ Rendering standard line [30]: 'Far from a punk'
+ Rendering standard line [31]: 'Ya'll ought to stop talking, start trying to catch up motherfucker'
+ Rendering standard line [32]: 'And all the people say'
+ Rendering standard line [33]: 'Try to catch up motherfucker'
+ Rendering standard line [34]: 'Oh, when they come for me'
+ Rendering standard line [35]: 'Come for me'
+ Rendering standard line [36]: 'I'll be gone'
+ Rendering standard line [37]: 'Oh, when they come for me'
+ Rendering standard line [38]: 'Come for me'
+ Rendering standard line [39]: 'I'll be gone'
+ Rendering standard line [40]: 'Oh, when they come for me'
+ Rendering standard line [41]: 'Come for me'
+ Rendering standard line [42]: 'I'll be gone'
+ Rendering standard line [43]: 'And all the people say'
+ Rendering standard line [44]: 'Try to catch up motherfucker'
+ Rendering standard line [45]: 'And all the people say'
+ Rendering standard line [46]: 'Try to catch up motherfucker'
+ Rendering standard line [47]: 'Presten atenciуn todos'
+ Rendering standard line [48]: 'Toda la gente preste atenciуn, escъchenme ahora mismo'
+ WaveformEditor: Shown
+ WaveformEditor: Audio data already loaded, skipping _loadAudioData
+ WaveformEditor: _activateFirstUnmarkedLine called.
+ WaveformEditor: Markers length: 49
+ WaveformEditor: Total lyric lines from lyricsDisplay: 49
+ [SETACTIVE] Called with index 0. Current style: default
+ Sync Editor: Skipping standard scroll - using forced centering only
+ Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+ LoopBlockManager: Sync editor opened event received
+ WaveformEditor: Dispatched sync-editor-opened event Object
+ Sync Editor: Positioned line 0 at TOP (teleprompter mode)
+ 🔄 WaveformEditor: Начинаем переключение на источник: master
+ WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+ 🔄 WaveformEditor: Загружаем аудио из URL: data:audio/flac;base64,ZkxhQwAAACISABIAACefAFrJCsR...
+ 📊 WaveformEditor: Обрабатываем data URL...
+ 🎨 _hideColorDropdown вызван
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ Auto-scroll re-enabled after scroll event
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ WaveformEditor: Нет аудио данных для мастер-вида
+_drawWaveformData @ waveform-editor.js:1454
+ ✅ WaveformEditor: Data URL декодирован, длительность: 295.60с
+ ✅ Instrumental data loaded for master view
+ ✅ WaveformEditor: Master view prepared with overlay waves
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ WaveformEditor notification: Переключено на Мастер
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ Key pressed: MetaLeft
+ Key pressed: Meta, key code: 91, waveform active: true
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ Key pressed: ShiftLeft
+ Key pressed: Shift, key code: 16, waveform active: true
+ LoopBlockManager: Shift key pressed, multiple selection mode active
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ LoopBlockManager: Shift key released, multiple selection mode deactivated
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🔄 WaveformEditor: Начинаем переключение на источник: vocals
+ ✅ Using cached data for vocals
+ WaveformEditor notification: Переключено на Вокал
+ 🎨 _hideColorDropdown вызван
+ 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+ ✅ Using cached data for instrumental
+ WaveformEditor notification: Переключено на Инструментал
+ 🎨 _hideColorDropdown вызван
+ 🔄 WaveformEditor: Начинаем переключение на источник: master
+ WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+ ✅ WaveformEditor: Master view prepared with overlay waves
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ WaveformEditor notification: Переключено на Мастер
+ 🎨 _hideColorDropdown вызван
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+ 🔄 WaveformEditor: Начинаем переключение на источник: vocals
+ ✅ Using cached data for vocals
+ WaveformEditor notification: Переключено на Вокал
+ 🎨 _hideColorDropdown вызван
+ 🎨 Клик по кнопке выбора цвета
+ 🎨 _toggleColorDropdown вызван, colorDropdown: true
+ 🎨 Текущее состояние меню: скрыто
+ 🎨 Меню открыто
+ 🎨 Позиция меню: Object
+ 🎨 Выбрана схема: Sunset Vibes
+ 🎨 Цветовая схема обновлена: Sunset Vibes
+ 🎨 Цветовая схема изменена на: Sunset Vibes
+ 🎨 Цветовая схема обновлена: Sunset Vibes
+ 🎨 _hideColorDropdown вызван
+ 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+ ✅ Using cached data for instrumental
+ WaveformEditor notification: Переключено на Инструментал
+ 🎨 _hideColorDropdown вызван
+ 🔄 WaveformEditor: Начинаем переключение на источник: master
+rtf-parser.js:849 WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+rtf-parser.js:849 ✅ WaveformEditor: Master view prepared with overlay waves
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 WaveformEditor notification: Переключено на Мастер
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Клик по кнопке выбора цвета
+rtf-parser.js:849 🎨 _toggleColorDropdown вызван, colorDropdown: true
+rtf-parser.js:849 🎨 Текущее состояние меню: скрыто
+rtf-parser.js:849 🎨 Меню открыто
+rtf-parser.js:849 🎨 Позиция меню: Object
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.6
+rtf-parser.js:849 🎨 Выбрана схема: Neon Cyber
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Цветовая схема обновлена: Neon Cyber
+rtf-parser.js:849 🎨 Цветовая схема изменена на: Neon Cyber
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Цветовая схема обновлена: Neon Cyber
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Клик по кнопке выбора цвета
+rtf-parser.js:849 🎨 _toggleColorDropdown вызван, colorDropdown: true
+rtf-parser.js:849 🎨 Текущее состояние меню: скрыто
+rtf-parser.js:849 🎨 Меню открыто
+rtf-parser.js:849 🎨 Позиция меню: Object
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 ✅ Karaoke Background Manager: SUCCESSFULLY set background to Karaoke/boliviainteligente-NFY0BeronrE-unsplash.jpg
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.7, vocals alpha=0.7
+rtf-parser.js:849 🎨 Выбрана схема: Forest Fire
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Цветовая схема обновлена: Forest Fire
+rtf-parser.js:849 🎨 Цветовая схема изменена на: Forest Fire
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Цветовая схема обновлена: Forest Fire
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🔄 WaveformEditor: Начинаем переключение на источник: vocals
+rtf-parser.js:849 ✅ Using cached data for vocals
+rtf-parser.js:849 WaveformEditor notification: Переключено на Вокал
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 🔄 WaveformEditor: Начинаем переключение на источник: instrumental
+rtf-parser.js:849 ✅ Using cached data for instrumental
+rtf-parser.js:849 WaveformEditor notification: Переключено на Инструментал
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 🔄 WaveformEditor: Начинаем переключение на источник: master
+rtf-parser.js:849 WaveformEditor notification: Загружаем компоненты для Мастер-вида...
+rtf-parser.js:849 ✅ WaveformEditor: Master view prepared with overlay waves
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 WaveformEditor notification: Переключено на Мастер
+rtf-parser.js:849 🎨 _hideColorDropdown вызван
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: true
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: true
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: true
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: true
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7
+rtf-parser.js:849 🎨 Master view: instrumental alpha=0.8, vocals alpha=0.7

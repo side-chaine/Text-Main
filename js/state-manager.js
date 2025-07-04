@@ -123,4 +123,7 @@ class StateManager {
 const stateManager = new StateManager();
 window.stateManager = stateManager;
 
+// ИСПРАВЛЕНИЕ: Добавляем класс в верхнем регистре для совместимости с app.js
+window.StateManager = StateManager;
+
 console.log('📦 StateManager module loaded'); 

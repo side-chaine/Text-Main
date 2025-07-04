@@ -1,0 +1,1047 @@
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🎯 Высокая ясность (93.0%) - принимаем возможную гармонику: 193.2Hz
+ 🚫 Октавный скачок заблокирован: 380.6Hz → 193.2Hz за 18мс (ratio: 0.51)
+ ✅ Октавный переход разрешен: 380.6Hz → 197.2Hz за 52мс (ratio: 0.52)
+ 🎯 Высокая ясность (91.5%) - принимаем возможную гармонику: 493.4Hz
+ ✅ Октавный переход разрешен: 246.4Hz → 493.4Hz за 85мс (ratio: 2.00)
+ 🎯 Высокая ясность (99.3%) - принимаем возможную гармонику: 245.4Hz
+ 🚫 Октавный скачок заблокирован: 493.4Hz → 245.4Hz за 27мс (ratio: 0.50)
+ 🚫 Октавный скачок заблокирован: 493.4Hz → 245.3Hz за 36мс (ratio: 0.50)
+ ✅ Октавный переход разрешен: 493.4Hz → 245.0Hz за 52мс (ratio: 0.50)
+ Rehearsal: Line changing from 1 to 2
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 1 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 2 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 1 to 2
+ [SETACTIVE] Called with index 2. Current style: rehearsal
+ Rehearsal mode: Setting active line 2
+ Activating rehearsal line at index 2
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🚫 Октавный скачок заблокирован: 198.5Hz → 387.7Hz за 21мс (ratio: 1.95)
+ ✅ Октавный переход разрешен: 198.5Hz → 382.0Hz за 54мс (ratio: 1.92)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎨 _hideColorDropdown вызван
+ 🚫 Блокирована очевидная гармоника: 474.8Hz (2.01x от 236.6Hz, ясность: 86.9%)
+ 🎯 Высокая ясность (95.5%) - принимаем возможную гармонику: 432.3Hz
+ ✅ Октавный переход разрешен: 217.2Hz → 432.3Hz за 86мс (ratio: 1.99)
+ 🎯 Высокая ясность (93.5%) - принимаем возможную гармонику: 217.1Hz
+ ✅ Октавный переход разрешен: 431.3Hz → 217.1Hz за 64мс (ratio: 0.50)
+ Rehearsal: Line changing from 2 to 3
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 2 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 3 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 2 to 3
+ [SETACTIVE] Called with index 3. Current style: rehearsal
+ Rehearsal mode: Setting active line 3
+ Activating rehearsal line at index 3
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ ✅ Октавный переход разрешен: 204.6Hz → 399.8Hz за 53мс (ratio: 1.95)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Октавный скачок заблокирован: 835.1Hz → 235.7Hz за 35мс (ratio: 0.28)
+ ✅ Октавный переход разрешен: 835.1Hz → 234.7Hz за 51мс (ratio: 0.28)
+ Rehearsal: Line changing from 3 to 4
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 3 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 4 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 3 to 4
+ [SETACTIVE] Called with index 4. Current style: rehearsal
+ Rehearsal mode: Setting active line 4
+ Activating rehearsal line at index 4
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 123.2Hz (0.49x от 253.6Hz, ясность: 83.9%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ✅ AUTO RECOVERY: Loop health OK (check #550)
+    Loop active: false
+    Current time: 66.2s
+ 🚫 Блокирована очевидная гармоника: 502.2Hz (1.99x от 252.8Hz, ясность: 89.3%)
+ Rehearsal: Line changing from 4 to 5
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 4 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 5 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 4 to 5
+ [SETACTIVE] Called with index 5. Current style: rehearsal
+ Rehearsal mode: Setting active line 5
+ Activating rehearsal line at index 5
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ ✅ Октавный переход разрешен: 221.4Hz → 428.7Hz за 171мс (ratio: 1.94)
+ 🚫 Блокирована очевидная гармоника: 429.4Hz (2.01x от 214.0Hz, ясность: 89.2%)
+ 🚫 Блокирована очевидная гармоника: 428.0Hz (2.00x от 214.0Hz, ясность: 76.6%)
+ 🎯 Высокая ясность (95.8%) - принимаем возможную гармонику: 477.1Hz
+ 🚫 Октавный скачок заблокирован: 240.2Hz → 477.1Hz за 33мс (ratio: 1.99)
+ ✅ Октавный переход разрешен: 240.2Hz → 472.5Hz за 51мс (ratio: 1.97)
+ 🚫 Блокирована очевидная гармоника: 231.8Hz (0.49x от 470.5Hz, ясность: 89.9%)
+ 🎯 Высокая ясность (93.5%) - принимаем возможную гармонику: 232.4Hz
+ ✅ Октавный переход разрешен: 470.5Hz → 232.4Hz за 52мс (ratio: 0.49)
+ 🚫 Блокирована очевидная гармоника: 237.1Hz (0.50x от 469.7Hz, ясность: 74.4%)
+ 🚫 Блокирована очевидная гармоника: 236.9Hz (0.50x от 469.7Hz, ясность: 79.4%)
+ ✅ Октавный переход разрешен: 469.7Hz → 243.6Hz за 85мс (ratio: 0.52)
+ 🚫 Блокирована очевидная гармоника: 506.6Hz (1.99x от 254.2Hz, ясность: 85.5%)
+ Rehearsal: Line changing from 5 to 6
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 5 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 6 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 5 to 6
+ [SETACTIVE] Called with index 6. Current style: rehearsal
+ Rehearsal mode: Setting active line 6
+ Activating rehearsal line at index 6
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ [DragBoundary] Начато перетаскивание end линии
+ [DragBoundary] Drag начат для end границы
+ ✅ Октавный переход разрешен: 216.2Hz → 424.9Hz за 168мс (ratio: 1.97)
+ [DragBoundary] Показан призрачный предпоказ для строки 3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Окончание перетаскивания
+ [DragBoundary] Применение изменения: end -> 3
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Уведомляем BlockLoopControl об изменении границ
+ [DragBoundary] Новые границы: 0-3
+ [DragBoundary] Перетаскивание завершено
+ Rehearsal: Line changing from 6 to 7
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 6 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 7 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 6 to 7
+ [SETACTIVE] Called with index 7. Current style: rehearsal
+ Rehearsal mode: Setting active line 7
+ Activating rehearsal line at index 7
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ [DragBoundary] Начато перетаскивание end линии
+ [DragBoundary] Drag начат для end границы
+ [DragBoundary] Окончание перетаскивания
+ [DragBoundary] Применение изменения: end -> 3
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Уведомляем BlockLoopControl об изменении границ
+ [DragBoundary] Новые границы: 0-3
+ [DragBoundary] Перетаскивание завершено
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 7 to 8
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 7 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 8 belongs to block: 1 Array(4)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750956652235-0-gvnye9f93yv to 1
+ Rehearsal: Line changed from 7 to 8
+ Rehearsal: Current block lines: Array(8)
+ Rehearsal: New block lines: Array(4)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line: 8, Total blocks: 16
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750956652235-0-gvnye9f93yv): name="Block 1", lines=[0,1,2,3,4,5,6,7]
+     Content preview: "I am not a pattern to be followed
+The pill that I'm on is a tough one to swallow
+I'm not a criminal,"
+       Line 0: "I am not a pattern to be followed"
+       Line 1: "The pill that I'm on is a tough one to swallow"
+       Line 2: "I'm not a criminal, not a role model"
+       Line 3: "Not a born leader I'm a tough act to follow"
+       Line 4: "I am not the fortune and the fame"
+       Line 5: "Nor the same person telling you to forfeit the game"
+       Line 6: "I came in the ring like a dog on a chain"
+       Line 7: "And I found out the underbelly's sicker than it seems"
+   Block 1 (1): name="Block 2", lines=[8,9,10,11]
+     Content preview: "And it seems ugly, but it can get worse
+use even a blueprint is a gift and a curse
+use once you got "
+       Line 8: "And it seems ugly, but it can get worse"
+       Line 9: "use even a blueprint is a gift and a curse"
+       Line 10: "use once you got a theory of how the thing works"
+       Line 11: "Everybody wants the next thing to be just like the first"
+   Block 2 (2): name="Block 3", lines=[12,13,14,15,16]
+     Content preview: "And I'm not a robot
+I'm not a monkey
+I will not dance even if the beat's funky"
+       Line 12: "And I'm not a robot"
+       Line 13: "I'm not a monkey"
+       Line 14: "I will not dance even if the beat's funky"
+       Line 15: "Opposite of lazy, far from a punk"
+       Line 16: "Ya'll ought to stop talking start trying to catch up motherfucker"
+   Block 3 (3): name="Block 4", lines=[17]
+     Content preview: "And all the people say"
+       Line 17: "And all the people say"
+   Block 4 (4): name="Block 5", lines=[18]
+     Content preview: "Try to catch up motherfucker"
+       Line 18: "Try to catch up motherfucker"
+   Block 5 (5): name="Block 6", lines=[19,20,21,22,23,24,25,26]
+     Content preview: "Lauryn said, money change a situation
+Big said, it increase the complication
+Kane said, don't step, "
+       Line 19: "Lauryn said, money change a situation"
+       Line 20: "Big said, it increase the complication"
+       Line 21: "Kane said, don't step, I ain't the one"
+       Line 22: "Chuck said, that uzi weigh a motherfuckin' ton"
+       Line 23: "And I'm just a student of the game that they taught me"
+       Line 24: "Rockin' every stage in every place that it brought me"
+       Line 25: "I'm awfully underrated, but came here to correct it"
+       Line 26: "And so it ain't mistaken I'ma state it for the record"
+   Block 6 (6): name="Block 7", lines=[27,28,29,30,31]
+     Content preview: "I am the opposite of wack, opposite of weak
+Opposite of slack, synonym of heat
+Synonym of crack, clo"
+       Line 27: "I am the opposite of wack, opposite of weak"
+       Line 28: "Opposite of slack, synonym of heat"
+       Line 29: "Synonym of crack, closest to a peak"
+       Line 30: "Far from a punk"
+       Line 31: "Ya'll ought to stop talking, start trying to catch up motherfucker"
+   Block 7 (7): name="Block 8", lines=[32]
+     Content preview: "And all the people say"
+       Line 32: "And all the people say"
+   Block 8 (8): name="Block 9", lines=[33]
+     Content preview: "Try to catch up motherfucker"
+       Line 33: "Try to catch up motherfucker"
+   Block 9 (9-part-0): name="Block 10", lines=[34,35,36,37,38]
+     Content preview: "Oh, when they come for me
+Come for me
+I'll be gone"
+       Line 34: "Oh, when they come for me"
+       Line 35: "Come for me"
+       Line 36: "I'll be gone"
+       Line 37: "Oh, when they come for me"
+       Line 38: "Come for me"
+   Block 10 (9-part-1): name="Block 10 (продолжение 2)", lines=[39,40,41,42]
+     Content preview: "I'll be gone
+Oh, when they come for me
+Come for me"
+       Line 39: "I'll be gone"
+       Line 40: "Oh, when they come for me"
+       Line 41: "Come for me"
+       Line 42: "I'll be gone"
+   Block 11 (10): name="Block 11", lines=[43]
+     Content preview: "And all the people say"
+       Line 43: "And all the people say"
+   Block 12 (11): name="Block 12", lines=[44]
+     Content preview: "Try to catch up motherfucker"
+       Line 44: "Try to catch up motherfucker"
+   Block 13 (12): name="Block 13", lines=[45]
+     Content preview: "And all the people say"
+       Line 45: "And all the people say"
+   Block 14 (13): name="Block 14", lines=[46]
+     Content preview: "Try to catch up motherfucker"
+       Line 46: "Try to catch up motherfucker"
+   Block 15 (14): name="Block 15", lines=[47,48]
+     Content preview: "Presten atenciуn todos
+Toda la gente preste atenciуn, escъchenme ahora mismo"
+       Line 47: "Presten atenciуn todos"
+       Line 48: "Toda la gente preste atenciуn, escъchenme ahora mismo"
+ Rehearsal: Looking for block containing line 8
+   Checking block 0: lineIndices=[0,1,2,3,4,5,6,7]
+   ✗ Block 0 does NOT contain line 8
+   Checking block 1: lineIndices=[8,9,10,11]
+   ✓ Found! Block 1 contains line 8
+ Rehearsal: Found active block at index 1 with lines: Array(4)
+ Rehearsal: Active block 1: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 4, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Activated line 8 in block with transition: none
+ Rehearsal: Next block preview for block 2: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 12: "And I'm not a robot"
+ Rehearsal: Adding preview line 13: "I'm not a monkey"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 1 with next block preview
+ BlockLoopControl: Обновление для текущего блока
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 8 to 11
+ BlockLoopControl: Found start marker for line 8: 74.75s
+ BlockLoopControl: Searching for end marker after line 11
+ BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+ BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+ BlockLoopControl: Блок изменился, останавливаем зацикливание
+ BlockLoopControl: Текущий блок лупа: Block 1
+ BlockLoopControl: Новый активный блок: Block 2
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 2
+ BlockLoopControl: _createLoopButton called for block: Block 2
+ BlockLoopControl: Сохранены пользовательские границы: Object
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Активация для блока: Block 2
+ [DragBoundary] Применены переданные границы: Object
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Контроллер активирован
+ BlockLoopControl: Создана кнопка для блока: Block 2
+ BlockLoopControl: Кнопка создана для блока: Block 2
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 434.0Hz (2.00x от 217.5Hz, ясность: 89.0%)
+ 🚫 Блокирована очевидная гармоника: 436.5Hz (2.01x от 217.5Hz, ясность: 77.1%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (98.6%) - принимаем возможную гармонику: 245.4Hz
+ 🚫 Октавный скачок заблокирован: 496.0Hz → 245.4Hz за 33мс (ratio: 0.49)
+ ✅ Октавный переход разрешен: 496.0Hz → 243.2Hz за 58мс (ratio: 0.49)
+ 🎯 Высокая ясность (94.1%) - принимаем возможную гармонику: 504.1Hz
+ ✅ Октавный переход разрешен: 254.3Hz → 504.1Hz за 72мс (ratio: 1.98)
+ 🎯 Высокая ясность (98.4%) - принимаем возможную гармонику: 240.4Hz
+ ✅ Октавный переход разрешен: 484.9Hz → 240.4Hz за 44мс (ratio: 0.50)
+ 🚫 Октавный скачок заблокирован: 235.7Hz → 458.4Hz за 34мс (ratio: 1.94)
+ 🚫 Октавный скачок заблокирован: 450.0Hz → 217.6Hz за 19мс (ratio: 0.48)
+ ✅ Октавный переход разрешен: 450.0Hz → 209.6Hz за 50мс (ratio: 0.47)
+ Rehearsal: Line changing from 8 to 9
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 8 belongs to block: 1 Array(4)
+ Rehearsal: New line 9 belongs to block: 1 Array(4)
+ Rehearsal: Same block (1), updating active line from 8 to 9
+ [SETACTIVE] Called with index 9. Current style: rehearsal
+ Rehearsal mode: Setting active line 9
+ Activating rehearsal line at index 9
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 2 (ID: 1)
+    New active block: Block 2 (ID: 1)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [10,11,8,9]
+    New block lines: [10,11,8,9]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 8 to 11
+ BlockLoopControl: Found start marker for line 8: 74.75s
+ BlockLoopControl: Searching for end marker after line 11
+ BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+ BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+ BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 8 to 11
+ BlockLoopControl: Found start marker for line 8: 74.75s
+ BlockLoopControl: Searching for end marker after line 11
+ BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+ BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+    Current time range: 74.745s - 85.253s
+    New time range: 74.745s - 85.253s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ ⏰ СИНХРО: Позиция установлена 67.00с
+ 🎨 _hideColorDropdown вызван
+ Rehearsal: Line changing from 9 to 5
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 9 belongs to block: 1 Array(4)
+ Rehearsal: New line 5 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: *** BLOCK CHANGED *** from 1 to block-1750956652235-0-gvnye9f93yv
+ Rehearsal: Line changed from 9 to 5
+ Rehearsal: Current block lines: Array(4)
+ Rehearsal: New block lines: Array(8)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line: 5, Total blocks: 16
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750956652235-0-gvnye9f93yv): name="Block 1", lines=[0,1,2,3,4,5,6,7]
+     Content preview: "I am not a pattern to be followed
+The pill that I'm on is a tough one to swallow
+I'm not a criminal,"
+       Line 0: "I am not a pattern to be followed"
+       Line 1: "The pill that I'm on is a tough one to swallow"
+       Line 2: "I'm not a criminal, not a role model"
+       Line 3: "Not a born leader I'm a tough act to follow"
+       Line 4: "I am not the fortune and the fame"
+       Line 5: "Nor the same person telling you to forfeit the game"
+       Line 6: "I came in the ring like a dog on a chain"
+       Line 7: "And I found out the underbelly's sicker than it seems"
+   Block 1 (1): name="Block 2", lines=[10,11,8,9]
+     Content preview: "use once you got a theory of how the thing works
+Everybody wants the next thing to be just like the "
+       Line 10: "use once you got a theory of how the thing works"
+       Line 11: "Everybody wants the next thing to be just like the first"
+       Line 8: "And it seems ugly, but it can get worse"
+       Line 9: "use even a blueprint is a gift and a curse"
+   Block 2 (2): name="Block 3", lines=[12,13,14,15,16]
+     Content preview: "And I'm not a robot
+I'm not a monkey
+I will not dance even if the beat's funky"
+       Line 12: "And I'm not a robot"
+       Line 13: "I'm not a monkey"
+       Line 14: "I will not dance even if the beat's funky"
+       Line 15: "Opposite of lazy, far from a punk"
+       Line 16: "Ya'll ought to stop talking start trying to catch up motherfucker"
+   Block 3 (3): name="Block 4", lines=[17]
+     Content preview: "And all the people say"
+       Line 17: "And all the people say"
+   Block 4 (4): name="Block 5", lines=[18]
+     Content preview: "Try to catch up motherfucker"
+       Line 18: "Try to catch up motherfucker"
+   Block 5 (5): name="Block 6", lines=[19,20,21,22,23,24,25,26]
+     Content preview: "Lauryn said, money change a situation
+Big said, it increase the complication
+Kane said, don't step, "
+       Line 19: "Lauryn said, money change a situation"
+       Line 20: "Big said, it increase the complication"
+       Line 21: "Kane said, don't step, I ain't the one"
+       Line 22: "Chuck said, that uzi weigh a motherfuckin' ton"
+       Line 23: "And I'm just a student of the game that they taught me"
+       Line 24: "Rockin' every stage in every place that it brought me"
+       Line 25: "I'm awfully underrated, but came here to correct it"
+       Line 26: "And so it ain't mistaken I'ma state it for the record"
+   Block 6 (6): name="Block 7", lines=[27,28,29,30,31]
+     Content preview: "I am the opposite of wack, opposite of weak
+Opposite of slack, synonym of heat
+Synonym of crack, clo"
+       Line 27: "I am the opposite of wack, opposite of weak"
+       Line 28: "Opposite of slack, synonym of heat"
+       Line 29: "Synonym of crack, closest to a peak"
+       Line 30: "Far from a punk"
+       Line 31: "Ya'll ought to stop talking, start trying to catch up motherfucker"
+   Block 7 (7): name="Block 8", lines=[32]
+     Content preview: "And all the people say"
+       Line 32: "And all the people say"
+   Block 8 (8): name="Block 9", lines=[33]
+     Content preview: "Try to catch up motherfucker"
+       Line 33: "Try to catch up motherfucker"
+   Block 9 (9-part-0): name="Block 10", lines=[34,35,36,37,38]
+     Content preview: "Oh, when they come for me
+Come for me
+I'll be gone"
+       Line 34: "Oh, when they come for me"
+       Line 35: "Come for me"
+       Line 36: "I'll be gone"
+       Line 37: "Oh, when they come for me"
+       Line 38: "Come for me"
+   Block 10 (9-part-1): name="Block 10 (продолжение 2)", lines=[39,40,41,42]
+     Content preview: "I'll be gone
+Oh, when they come for me
+Come for me"
+       Line 39: "I'll be gone"
+       Line 40: "Oh, when they come for me"
+       Line 41: "Come for me"
+       Line 42: "I'll be gone"
+   Block 11 (10): name="Block 11", lines=[43]
+     Content preview: "And all the people say"
+       Line 43: "And all the people say"
+   Block 12 (11): name="Block 12", lines=[44]
+     Content preview: "Try to catch up motherfucker"
+       Line 44: "Try to catch up motherfucker"
+   Block 13 (12): name="Block 13", lines=[45]
+     Content preview: "And all the people say"
+       Line 45: "And all the people say"
+   Block 14 (13): name="Block 14", lines=[46]
+     Content preview: "Try to catch up motherfucker"
+       Line 46: "Try to catch up motherfucker"
+   Block 15 (14): name="Block 15", lines=[47,48]
+     Content preview: "Presten atenciуn todos
+Toda la gente preste atenciуn, escъchenme ahora mismo"
+       Line 47: "Presten atenciуn todos"
+       Line 48: "Toda la gente preste atenciуn, escъchenme ahora mismo"
+ Rehearsal: Looking for block containing line 5
+   Checking block 0: lineIndices=[0,1,2,3,4,5,6,7]
+   ✓ Found! Block 0 contains line 5
+ Rehearsal: Found active block at index 0 with lines: Array(8)
+ Rehearsal: Active block 0: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 8, FontSize: 2.10rem, LineHeight: 2.72rem
+ Rehearsal: Activated line 5 in block with transition: none
+ Rehearsal: Next block preview for block 1: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 10: "use once you got a theory of how the thing works"
+ Rehearsal: Adding preview line 11: "Everybody wants the next thing to be just like the first"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 0 with next block preview
+ BlockLoopControl: Обновление для текущего блока
+ BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 8 to 11
+ BlockLoopControl: Found start marker for line 8: 74.75s
+ BlockLoopControl: Searching for end marker after line 11
+ BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+ BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Блок изменился, останавливаем зацикливание
+ BlockLoopControl: Текущий блок лупа: Block 2
+ BlockLoopControl: Новый активный блок: Block 1
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: Сохранены пользовательские границы: Object
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Активация для блока: Block 1
+ [DragBoundary] Применены переданные границы: Object
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Контроллер активирован
+ BlockLoopControl: Создана кнопка для блока: Block 1
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ Rehearsal: Auto-scrolling to active line in large block
+ 🚫 Блокирована очевидная гармоника: 429.0Hz (2.00x от 214.4Hz, ясность: 86.4%)
+ 🚫 Блокирована очевидная гармоника: 426.7Hz (1.99x от 214.4Hz, ясность: 84.9%)
+ 🚫 Блокирована очевидная гармоника: 479.8Hz (2.00x от 240.5Hz, ясность: 86.3%)
+ 🎯 Высокая ясность (96.5%) - принимаем возможную гармонику: 474.7Hz
+ 🚫 Октавный скачок заблокирован: 240.5Hz → 474.7Hz за 34мс (ratio: 1.97)
+ ✅ Октавный переход разрешен: 240.5Hz → 470.7Hz за 48мс (ratio: 1.96)
+ 🎯 Высокая ясность (90.7%) - принимаем возможную гармонику: 231.7Hz
+ 🚫 Октавный скачок заблокирован: 469.7Hz → 231.7Hz за 35мс (ratio: 0.49)
+ ✅ Октавный переход разрешен: 469.7Hz → 231.9Hz за 50мс (ratio: 0.49)
+ Key pressed: MetaLeft
+ Key pressed: Meta, key code: 91, waveform active: false
+ Key pressed: ShiftLeft
+ Key pressed: Shift, key code: 16, waveform active: false
+ LoopBlockManager: Shift key pressed, multiple selection mode active
+ 🚫 Блокирована очевидная гармоника: 236.5Hz (0.51x от 467.9Hz, ясность: 73.2%)
+ ✅ Октавный переход разрешен: 467.9Hz → 243.6Hz за 80мс (ratio: 0.52)
+ 🚫 Блокирована очевидная гармоника: 508.2Hz (2.00x от 253.7Hz, ясность: 84.6%)
+ Rehearsal: Line changing from 5 to 6
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 5 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 6 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 5 to 6
+ [SETACTIVE] Called with index 6. Current style: rehearsal
+ Rehearsal mode: Setting active line 6
+ Activating rehearsal line at index 6
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ LoopBlockManager: Shift key released, multiple selection mode deactivated
+ Rehearsal mode: Auto-returned to top after scroll
+ ✅ Октавный переход разрешен: 218.5Hz → 423.8Hz за 167мс (ratio: 1.94)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🎯 Высокая ясность (90.5%) - принимаем возможную гармонику: 120.9Hz
+ ✅ Октавный переход разрешен: 241.4Hz → 120.9Hz за 166мс (ratio: 0.50)
+ 🚫 Блокирована очевидная гармоника: 241.4Hz (2.00x от 120.9Hz, ясность: 81.9%)
+ 🚫 Блокирована очевидная гармоника: 240.0Hz (1.98x от 120.9Hz, ясность: 80.9%)
+ Rehearsal: Line changing from 6 to 7
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 6 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 7 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: Same block (block-1750956652235-0-gvnye9f93yv), updating active line from 6 to 7
+ [SETACTIVE] Called with index 7. Current style: rehearsal
+ Rehearsal mode: Setting active line 7
+ Activating rehearsal line at index 7
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    New active block: Block 1 (ID: block-1750956652235-0-gvnye9f93yv)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+    Current time range: 53.977s - 74.745s
+    New time range: 53.977s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ Rehearsal: Line changing from 7 to 8
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 7 belongs to block: block-1750956652235-0-gvnye9f93yv Array(8)
+ Rehearsal: New line 8 belongs to block: 1 Array(4)
+ Rehearsal: *** BLOCK CHANGED *** from block-1750956652235-0-gvnye9f93yv to 1
+ Rehearsal: Line changed from 7 to 8
+ Rehearsal: Current block lines: Array(8)
+ Rehearsal: New block lines: Array(4)
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line: 8, Total blocks: 16
+ Rehearsal: DETAILED Block structure:
+   Block 0 (block-1750956652235-0-gvnye9f93yv): name="Block 1", lines=[0,1,2,3,4,5,6,7]
+     Content preview: "I am not a pattern to be followed
+The pill that I'm on is a tough one to swallow
+I'm not a criminal,"
+       Line 0: "I am not a pattern to be followed"
+       Line 1: "The pill that I'm on is a tough one to swallow"
+       Line 2: "I'm not a criminal, not a role model"
+       Line 3: "Not a born leader I'm a tough act to follow"
+       Line 4: "I am not the fortune and the fame"
+       Line 5: "Nor the same person telling you to forfeit the game"
+       Line 6: "I came in the ring like a dog on a chain"
+       Line 7: "And I found out the underbelly's sicker than it seems"
+   Block 1 (1): name="Block 2", lines=[10,11,8,9]
+     Content preview: "use once you got a theory of how the thing works
+Everybody wants the next thing to be just like the "
+       Line 10: "use once you got a theory of how the thing works"
+       Line 11: "Everybody wants the next thing to be just like the first"
+       Line 8: "And it seems ugly, but it can get worse"
+       Line 9: "use even a blueprint is a gift and a curse"
+   Block 2 (2): name="Block 3", lines=[12,13,14,15,16]
+     Content preview: "And I'm not a robot
+I'm not a monkey
+I will not dance even if the beat's funky"
+       Line 12: "And I'm not a robot"
+       Line 13: "I'm not a monkey"
+       Line 14: "I will not dance even if the beat's funky"
+       Line 15: "Opposite of lazy, far from a punk"
+       Line 16: "Ya'll ought to stop talking start trying to catch up motherfucker"
+   Block 3 (3): name="Block 4", lines=[17]
+     Content preview: "And all the people say"
+       Line 17: "And all the people say"
+   Block 4 (4): name="Block 5", lines=[18]
+     Content preview: "Try to catch up motherfucker"
+       Line 18: "Try to catch up motherfucker"
+   Block 5 (5): name="Block 6", lines=[19,20,21,22,23,24,25,26]
+     Content preview: "Lauryn said, money change a situation
+Big said, it increase the complication
+Kane said, don't step, "
+       Line 19: "Lauryn said, money change a situation"
+       Line 20: "Big said, it increase the complication"
+       Line 21: "Kane said, don't step, I ain't the one"
+       Line 22: "Chuck said, that uzi weigh a motherfuckin' ton"
+       Line 23: "And I'm just a student of the game that they taught me"
+       Line 24: "Rockin' every stage in every place that it brought me"
+       Line 25: "I'm awfully underrated, but came here to correct it"
+       Line 26: "And so it ain't mistaken I'ma state it for the record"
+   Block 6 (6): name="Block 7", lines=[27,28,29,30,31]
+     Content preview: "I am the opposite of wack, opposite of weak
+Opposite of slack, synonym of heat
+Synonym of crack, clo"
+       Line 27: "I am the opposite of wack, opposite of weak"
+       Line 28: "Opposite of slack, synonym of heat"
+       Line 29: "Synonym of crack, closest to a peak"
+       Line 30: "Far from a punk"
+       Line 31: "Ya'll ought to stop talking, start trying to catch up motherfucker"
+   Block 7 (7): name="Block 8", lines=[32]
+     Content preview: "And all the people say"
+       Line 32: "And all the people say"
+   Block 8 (8): name="Block 9", lines=[33]
+     Content preview: "Try to catch up motherfucker"
+       Line 33: "Try to catch up motherfucker"
+   Block 9 (9-part-0): name="Block 10", lines=[34,35,36,37,38]
+     Content preview: "Oh, when they come for me
+Come for me
+I'll be gone"
+       Line 34: "Oh, when they come for me"
+       Line 35: "Come for me"
+       Line 36: "I'll be gone"
+       Line 37: "Oh, when they come for me"
+       Line 38: "Come for me"
+   Block 10 (9-part-1): name="Block 10 (продолжение 2)", lines=[39,40,41,42]
+     Content preview: "I'll be gone
+Oh, when they come for me
+Come for me"
+       Line 39: "I'll be gone"
+       Line 40: "Oh, when they come for me"
+       Line 41: "Come for me"
+       Line 42: "I'll be gone"
+   Block 11 (10): name="Block 11", lines=[43]
+     Content preview: "And all the people say"
+       Line 43: "And all the people say"
+   Block 12 (11): name="Block 12", lines=[44]
+     Content preview: "Try to catch up motherfucker"
+       Line 44: "Try to catch up motherfucker"
+   Block 13 (12): name="Block 13", lines=[45]
+     Content preview: "And all the people say"
+       Line 45: "And all the people say"
+   Block 14 (13): name="Block 14", lines=[46]
+     Content preview: "Try to catch up motherfucker"
+       Line 46: "Try to catch up motherfucker"
+   Block 15 (14): name="Block 15", lines=[47,48]
+     Content preview: "Presten atenciуn todos
+Toda la gente preste atenciуn, escъchenme ahora mismo"
+       Line 47: "Presten atenciуn todos"
+       Line 48: "Toda la gente preste atenciуn, escъchenme ahora mismo"
+ Rehearsal: Looking for block containing line 8
+   Checking block 0: lineIndices=[0,1,2,3,4,5,6,7]
+   ✗ Block 0 does NOT contain line 8
+   Checking block 1: lineIndices=[10,11,8,9]
+   ✓ Found! Block 1 contains line 8
+ Rehearsal: Found active block at index 1 with lines: Array(4)
+ Rehearsal: Active block 1: Object
+ >>> FONT_CALC_DEBUG >>> Lines: 4, FontSize: 2.66rem, LineHeight: 3.23rem
+ Rehearsal: Activated line 8 in block with transition: none
+ Rehearsal: Next block preview for block 2: Object
+ Rehearsal: Preview lines: Array(2)
+ Rehearsal: Adding preview line 12: "And I'm not a robot"
+ Rehearsal: Adding preview line 13: "I'm not a monkey"
+ Rehearsal: Preview container added with 2 lines
+ Rehearsal mode: Rendered active block 1 with next block preview
+ BlockLoopControl: Обновление для текущего блока
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.98s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.98s END=74.75s (duration: 20.77s)
+ BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 8 to 11
+ BlockLoopControl: Found start marker for line 8: 74.75s
+ BlockLoopControl: Searching for end marker after line 11
+ BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+ BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+ BlockLoopControl: Блок изменился, останавливаем зацикливание
+ BlockLoopControl: Текущий блок лупа: Block 1
+ BlockLoopControl: Новый активный блок: Block 2
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 2
+ BlockLoopControl: _createLoopButton called for block: Block 2
+ BlockLoopControl: Сохранены пользовательские границы: Object
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Активация для блока: Block 2
+ [DragBoundary] Применены переданные границы: Object
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Контроллер активирован
+ BlockLoopControl: Создана кнопка для блока: Block 2
+ BlockLoopControl: Кнопка создана для блока: Block 2
+ 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 ✅ AUTO RECOVERY: Loop health OK (check #560)
+rtf-parser.js:849    Loop active: false
+rtf-parser.js:849    Current time: 75.1s
+rtf-parser.js:849 🚫 Блокирована очевидная гармоника: 433.2Hz (1.99x от 217.8Hz, ясность: 88.9%)
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: ShiftLeft
+rtf-parser.js:849 Key pressed: Shift, key code: 16, waveform active: false
+rtf-parser.js:849 LoopBlockManager: Shift key pressed, multiple selection mode active
+rtf-parser.js:849 LoopBlockManager: Shift key released, multiple selection mode deactivated
+rtf-parser.js:849 🎯 Высокая ясность (98.6%) - принимаем возможную гармонику: 245.4Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 497.0Hz → 245.4Hz за 46мс (ratio: 0.49)
+rtf-parser.js:849 🎯 Высокая ясность (92.6%) - принимаем возможную гармонику: 507.8Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 254.5Hz → 507.8Hz за 51мс (ratio: 1.99)
+rtf-parser.js:849 🎯 Высокая ясность (98.4%) - принимаем возможную гармонику: 240.3Hz
+rtf-parser.js:849 ✅ Октавный переход разрешен: 484.9Hz → 240.3Hz за 64мс (ratio: 0.50)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 235.5Hz → 460.7Hz за 34мс (ratio: 1.96)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 448.8Hz → 216.8Hz за 19мс (ratio: 0.48)
+rtf-parser.js:849 🚫 Октавный скачок заблокирован: 448.8Hz → 211.5Hz за 32мс (ratio: 0.47)
+rtf-parser.js:849 ✅ Октавный переход разрешен: 448.8Hz → 209.4Hz за 50мс (ratio: 0.47)
+rtf-parser.js:849 Rehearsal: Line changing from 8 to 9
+rtf-parser.js:849 Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+rtf-parser.js:849   Part 1: lines 0-4 (5 lines)
+rtf-parser.js:849   Part 2: lines 5-8 (4 lines)
+rtf-parser.js:849 Rehearsal: Current line 8 belongs to block: 1 Array(4)
+rtf-parser.js:849 Rehearsal: New line 9 belongs to block: 1 Array(4)
+rtf-parser.js:849 Rehearsal: Same block (1), updating active line from 8 to 9
+rtf-parser.js:849 [SETACTIVE] Called with index 9. Current style: rehearsal
+rtf-parser.js:849 Rehearsal mode: Setting active line 9
+rtf-parser.js:849 Activating rehearsal line at index 9
+rtf-parser.js:849 📡 BLOCK CHANGE EVENT received
+rtf-parser.js:849    Current loop block: Block 2 (ID: 1)
+rtf-parser.js:849    New active block: Block 2 (ID: 1)
+rtf-parser.js:849    Loop is active: false
+rtf-parser.js:849    Seeking in progress: false
+rtf-parser.js:849    Same block ID: true
+rtf-parser.js:849    Same block name: true
+rtf-parser.js:849    Current block lines: [10,11,8,9]
+rtf-parser.js:849    New block lines: [10,11,8,9]
+rtf-parser.js:849    Same lines: true
+rtf-parser.js:849 BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+rtf-parser.js:849 BlockLoopControl: Available markers count: 49
+rtf-parser.js:849 BlockLoopControl: Block line range: 8 to 11
+rtf-parser.js:849 BlockLoopControl: Found start marker for line 8: 74.75s
+rtf-parser.js:849 BlockLoopControl: Searching for end marker after line 11
+rtf-parser.js:849 BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+rtf-parser.js:849 BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+rtf-parser.js:849 BlockLoopControl: Calculating time range for block "Block 2" with lines [10,11,8,9]
+rtf-parser.js:849 BlockLoopControl: Available markers count: 49
+rtf-parser.js:849 BlockLoopControl: Block line range: 8 to 11
+rtf-parser.js:849 BlockLoopControl: Found start marker for line 8: 74.75s
+rtf-parser.js:849 BlockLoopControl: Searching for end marker after line 11
+rtf-parser.js:849 BlockLoopControl: Found end marker (first of next block) for line 12: 85.25s
+rtf-parser.js:849 BlockLoopControl: Block "Block 2" LOOP BOUNDS: START=74.75s END=85.25s (duration: 10.51s)
+rtf-parser.js:849    Current time range: 74.745s - 85.253s
+rtf-parser.js:849    New time range: 74.745s - 85.253s
+rtf-parser.js:849    Time difference: 0.000s
+rtf-parser.js:849    Same time range: true
+rtf-parser.js:849 ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+rtf-parser.js:849 🔇 Глубокая тишина - очистка нот
+rtf-parser.js:849 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+rtf-parser.js:849 Key pressed: Space
+rtf-parser.js:849 Space bar pressed, toggling playback
+rtf-parser.js:849 ⏸️ ИНСТРУМЕНТАЛ: Пауза
+rtf-parser.js:849 ⏸️ ВОКАЛ: Пауза
+rtf-parser.js:849 isPlaying property set to: false
+rtf-parser.js:849 Key pressed:  , key code: 32, waveform active: false
+rtf-parser.js:849 ✅ Октавный переход разрешен: 166.2Hz → 79.9Hz за 52мс (ratio: 0.48)
+rtf-parser.js:849 🔍 Статический анализ: 78.1Hz (55.0%)
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: false
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: false
+waveform-editor.js:1458 WaveformEditor: Vocal audio data not available
+_drawWaveformData @ waveform-editor.js:1458
+rtf-parser.js:849 ✅ AUTO RECOVERY: Loop health OK (check #570)
+rtf-parser.js:849    Loop active: false
+rtf-parser.js:849    Current time: 78.2s

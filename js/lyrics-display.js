@@ -1095,12 +1095,17 @@ class LyricsDisplay {
         const lyricsContainer = this.lyricsContainer;
         if (!lyricsContainer) return;
 
+        // Очищаем контейнер
         lyricsContainer.innerHTML = '';
         
+        // ДОБАВЛЕНО: Применяем класс перехода к контейнеру репетиции
         if (this.currentTransition && this.currentTransition !== 'none') {
+            // Убираем существующие классы переходов
             const existingClasses = Array.from(lyricsContainer.classList)
                 .filter(c => c.startsWith('transition-'));
             existingClasses.forEach(c => lyricsContainer.classList.remove(c));
+            
+            // Добавляем новый класс перехода
             lyricsContainer.classList.add('transition-' + this.currentTransition);
         }
 
@@ -1109,17 +1114,39 @@ class LyricsDisplay {
             return;
         }
 
+        // ДОБАВЛЕНО: Разделяем большие блоки на части
         const processedBlocks = this._splitLargeBlocks(this.textBlocks);
 
+        console.log(`Rehearsal: Current line: ${this.currentLine}, Total blocks: ${processedBlocks.length}`);
+        console.log('Rehearsal: DETAILED Block structure:');
+        processedBlocks.forEach((block, index) => {
+            // ИСПРАВЛЕНО: Используем lineIndices вместо несуществующего block.lines
+            const previewLines = block.lineIndices.slice(0, 3).map(lineIndex => this.lyrics[lineIndex] || '').join('\n');
+            const preview = previewLines.substring(0, 100);
+            console.log(`  Block ${index} (${block.id}): name="${block.name}", lines=[${block.lineIndices.join(',')}]`);
+            console.log(`    Content preview: "${preview}"`);
+            block.lineIndices.forEach((lineIndex, i) => {
+                if (this.lyrics[lineIndex]) {
+                    console.log(`      Line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
+                }
+            });
+        });
+
+        // Найдем активный блок
         let activeBlockIndex = -1;
         let currentBlockId = null;
 
+        console.log(`Rehearsal: Looking for block containing line ${this.currentLine}`);
         for (let i = 0; i < processedBlocks.length; i++) {
             const block = processedBlocks[i];
+            console.log(`  Checking block ${i}: lineIndices=[${block.lineIndices.join(',')}]`);
             if (block.lineIndices.includes(this.currentLine)) {
                 activeBlockIndex = i;
                 currentBlockId = block.id;
+                console.log(`  ✓ Found! Block ${i} contains line ${this.currentLine}`);
                 break;
+            } else {
+                console.log(`  ✗ Block ${i} does NOT contain line ${this.currentLine}`);
             }
         }
 
@@ -1129,23 +1156,31 @@ class LyricsDisplay {
         }
 
         const activeBlock = processedBlocks[activeBlockIndex];
+        console.log(`Rehearsal: Found active block at index ${activeBlockIndex} with lines:`, activeBlock.lineIndices);
+        console.log(`Rehearsal: Active block ${activeBlockIndex}:`, activeBlock);
+        
+        // ДОБАВЛЕНО: Устанавливаем текущий активный блок для BlockLoopControl
         this.currentActiveBlock = activeBlock;
 
+        // Определяем размеры шрифта
         const fontInfo = this._calculateFontAndLineHeightForBlock(activeBlock.lineIndices.length);
         
-        // --- NEW: Create a wrapper for content ---
-        const wrapper = document.createElement('div');
-        wrapper.className = 'rehearsal-content-wrapper';
+        // Проверяем, является ли блок экстремально большим
+        const isExtremelyLarge = activeBlock.lineIndices.length >= 10;
+        const isVeryLarge = activeBlock.lineIndices.length >= 8;
 
+        // Создаем контейнер для активного блока
         const activeBlockContainer = document.createElement('div');
         activeBlockContainer.className = 'rehearsal-active-block';
         
-        if (activeBlock.lineIndices.length >= 10) {
+        // Добавляем специальные классы для больших блоков и продолжений
+        if (isExtremelyLarge) {
             activeBlockContainer.classList.add('extremely-large-block');
-        } else if (activeBlock.lineIndices.length >= 8) {
+        } else if (isVeryLarge) {
             activeBlockContainer.classList.add('very-large-block');
         }
         
+        // ДОБАВЛЕНО: Специальный класс для продолжений блоков
         if (activeBlock.isContinuation) {
             activeBlockContainer.classList.add('block-continuation');
         }
@@ -1153,60 +1188,160 @@ class LyricsDisplay {
         activeBlockContainer.style.fontSize = fontInfo.fontSize;
         activeBlockContainer.style.lineHeight = fontInfo.lineHeight;
 
-        activeBlock.lineIndices.forEach(lineIndex => {
-            if (this.lyrics[lineIndex] !== undefined) {
+        // Рендерим строки активного блока
+        activeBlock.lineIndices.forEach((lineIndex, idx) => {
+            if (this.lyrics[lineIndex]) {
                 const lineDiv = document.createElement('div');
                 lineDiv.className = 'rehearsal-active-line';
                 lineDiv.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
+                lineDiv.dataset.index = lineIndex; // ДОБАВЛЕНО: важно для идентификации строки
+                
+                // ДОБАВЛЕНО: Увеличиваем первую строку в продолжениях блоков
+                if (activeBlock.isContinuation && idx === 0) {
+                    lineDiv.classList.add('continuation-first-line');
+                }
+                
+                // ДОБАВЛЕНО: Применяем стили и классы переходов как в обычном режиме
+            if (this.currentStyle && this.currentStyle.css) {
+                    if (this.currentStyle.css.base) lineDiv.classList.add(this.currentStyle.css.base);
+                }
+                
+                // ДОБАВЛЕНО: Применяем текущий переход
+                if (this.currentTransition && this.currentTransition !== 'none') {
+                    lineDiv.classList.add('transition-' + this.currentTransition);
+                    
+                    // Специальная подготовка для Matrix эффекта
+                    if (this.currentTransition === 'matrix') {
+                        this._prepareMatrixEffectForLine(lineDiv);
+                    }
+                    // Подготовка для letter-by-letter эффектов
+                    else if (['letterByLetter', 'letterShine', 'cinemaLights'].includes(this.currentTransition)) {
+                        this._prepareLetterByLetterEffectForLine(lineDiv);
+                    }
+                    // Подготовка для word-by-word эффекта
+                    else if (this.currentTransition === 'wordByWord') {
+                        this._prepareWordByWordEffectForLine(lineDiv);
+                    }
+                    // Подготовка data-text атрибутов для псевдо-элементов
+                    else if (['echo', 'edgeGlow', 'pulseRim', 'fireEdge', 'neonOutline', 'starlight', 'laserScan'].includes(this.currentTransition)) {
+                        lineDiv.setAttribute('data-text', this.lyrics[lineIndex]);
+                    }
+                }
+                
+                if (lineIndex === this.currentLine) {
+                    lineDiv.classList.add('active');
+                    this.currentLyricElement = lineDiv; // ДОБАВЛЕНО: устанавливаем текущий элемент
+                    
+                    // ДОБАВЛЕНО: Применяем активные стили
+                    if (this.currentStyle && this.currentStyle.cssClass) {
+                        lineDiv.classList.add(this.currentStyle.cssClass + '-active');
+                    }
+                    
+                    // ОТКЛЮЧЕНО: В режиме репетиции переходы полностью блокированы
+                    // Анимации отключены для стабильности отображения блоков
+                    
+                    console.log(`Rehearsal: Activated line ${lineIndex} in block with transition: none`);
+                }
+                
                 activeBlockContainer.appendChild(lineDiv);
             }
         });
 
-        // --- NEW: Append active block to wrapper ---
-        wrapper.appendChild(activeBlockContainer);
+        lyricsContainer.appendChild(activeBlockContainer);
 
-        if (activeBlockIndex < processedBlocks.length - 1) {
-            const nextBlock = processedBlocks[activeBlockIndex + 1];
-            const previewContainer = document.createElement('div');
-            previewContainer.className = 'rehearsal-next-preview';
-            
-            if (nextBlock.isContinuation) {
-                previewContainer.classList.add('block-continuation-preview');
-            }
-
-            const previewLines = nextBlock.lineIndices.slice(0, 1);
-            previewLines.forEach(lineIndex => {
-                if (this.lyrics[lineIndex] !== undefined) {
-                    const lineDiv = document.createElement('div');
-                    lineDiv.className = 'rehearsal-preview-line';
-                    lineDiv.textContent = this.lyrics[lineIndex];
-                    previewContainer.appendChild(lineDiv);
+        // Автоматический скролл к активной строке в больших блоках
+        if (isExtremelyLarge || isVeryLarge) {
+            setTimeout(() => {
+                const activeLineElement = activeBlockContainer.querySelector('.rehearsal-active-line.active');
+                if (activeLineElement) {
+                    console.log('Rehearsal: Auto-scrolling to active line in large block');
+                    activeLineElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'nearest'
+                    });
                 }
-            });
-
-            // --- NEW: Append preview to wrapper ---
-            wrapper.appendChild(previewContainer);
+            }, 100); // Небольшая задержка для завершения рендеринга
         }
 
-        // --- NEW: Append wrapper to lyrics container ---
-        lyricsContainer.appendChild(wrapper);
+        // Добавляем превью следующего блока (если есть)
+        if (activeBlockIndex < processedBlocks.length - 1) {
+            const nextBlock = processedBlocks[activeBlockIndex + 1];
+            console.log(`Rehearsal: Next block preview for block ${activeBlockIndex + 1}:`, nextBlock);
+            
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'rehearsal-next-preview';
+            previewContainer.style.justifyContent = 'center';
+            
+            // ДОБАВЛЕНО: Специальная пометка для продолжений блоков
+            if (nextBlock.isContinuation) {
+                previewContainer.classList.add('preview-continuation');
+            }
+            
+            // Показываем только первые 2 строки следующего блока
+            const previewLines = nextBlock.lineIndices.slice(0, 2);
+            console.log(`Rehearsal: Preview lines:`, previewLines);
+            
+            previewLines.forEach((lineIndex, idx) => {
+                if (this.lyrics[lineIndex]) {
+                    const previewLine = document.createElement('div');
+                    previewLine.className = 'rehearsal-preview-line';
+                    previewLine.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
+                    
+                    // ДОБАВЛЕНО: Увеличиваем первую строку в превью продолжений
+                    if (nextBlock.isContinuation && idx === 0) {
+                        previewLine.classList.add('preview-continuation-first-line');
+                    }
+                    // ДОБАВЛЕНО: Выделяем оранжевым первую строку обычного следующего блока
+                    else if (!nextBlock.isContinuation && idx === 0) {
+                        previewLine.classList.add('next-block-first-line');
+                    }
+                    
+                    previewContainer.appendChild(previewLine);
+                    console.log(`Rehearsal: Adding preview line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
+                }
+            });
+            
+            lyricsContainer.appendChild(previewContainer);
+            console.log(`Rehearsal: Preview container added with ${previewLines.length} lines`);
+        }
 
         this.currentlyFocusedBlockId = currentBlockId;
+        console.log(`Rehearsal mode: Rendered active block ${activeBlockIndex} with next block preview`);
+        
+        // ДОБАВЛЕНО: Уведомляем BlockLoopControl о смене блока
+        if (window.app && window.app.blockLoopControl) {
+            window.app.blockLoopControl.updateForCurrentBlock();
+        }
     }
 
+    // ДОБАВЛЕНО: Метод для разделения больших блоков
     _splitLargeBlocks(blocks) {
         const MAX_LINES_PER_BLOCK = 8;
         const processedBlocks = [];
         
         blocks.forEach((originalBlock, blockIndex) => {
-            if (originalBlock.lineIndices.length <= MAX_LINES_PER_BLOCK) {
-                // Блок не нужно делить
-                processedBlocks.push({...originalBlock});
+            // ✅ КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Принудительная сортировка lineIndices
+            if (!originalBlock.lineIndices || !Array.isArray(originalBlock.lineIndices)) {
+                console.error(`Block ${blockIndex} has invalid lineIndices:`, originalBlock.lineIndices);
                 return;
             }
             
-            // Блок нужно разделить
-            const lineIndices = [...originalBlock.lineIndices];
+            // Сортируем массив индексов для обеспечения правильного порядка границ
+            const sortedLineIndices = [...originalBlock.lineIndices].sort((a, b) => a - b);
+            console.log(`🔧 Block "${originalBlock.name}": original=[${originalBlock.lineIndices.join(',')}], sorted=[${sortedLineIndices.join(',')}]`);
+            
+            if (sortedLineIndices.length <= MAX_LINES_PER_BLOCK) {
+                // Блок не нужно делить, но используем отсортированные индексы
+                processedBlocks.push({
+                    ...originalBlock,
+                    lineIndices: sortedLineIndices
+                });
+                return;
+            }
+            
+            // Блок нужно разделить - используем отсортированные индексы
+            const lineIndices = sortedLineIndices;
             const totalLines = lineIndices.length;
             
             // Вычисляем оптимальное количество частей для равномерного разделения
@@ -2092,12 +2227,21 @@ class LyricsDisplay {
 
         // REVISED: Concert Mode Teleprompter Logic - now independent and faster
         if (this.currentStyle && this.currentStyle.id === 'concert') {
-            element.scrollIntoView({
-                behavior: 'auto', // Changed to 'auto' for maximum speed
-                block: 'start',
-                inline: 'nearest'
-            });
-            return; // Exit after handling concert mode
+            const container = this.containerElement;
+            if (container && element) {
+                const offset = 30; // 30px отступ от верха, чтобы строка не прилипала к краю
+                
+                // Расчет целевой позиции скролла
+                // element.offsetTop - позиция строки относительно начала всего контента
+                // отнимаем отступ, чтобы строка была чуть ниже верха контейнера
+                const targetScrollTop = element.offsetTop - offset;
+
+                container.scrollTo({
+                    top: targetScrollTop,
+                    behavior: 'auto', // 'auto' для мгновенного скролла
+                });
+            }
+            return; // Выходим после обработки концертного режима
         }
         
         // Standard scrolling for other modes (respects autoScrollEnabled)

@@ -1,11 +1,41 @@
 /**
  * Main App for beLive application
  * Connects all components and handles main functionality
+ * 
+ * Required components:
+ * - DragBoundaryController (js/drag-boundary-controller.js)
+ * - BlockLoopControl (js/block-loop-control.js)
+ * - AudioEngine, LyricsDisplay, TrackCatalog, etc.
  */
 
 class App {
     constructor() {
         console.log('Initializing beLive App');
+        
+        // --- ЭТАП 1: ИНЪЕКЦИЯ ЗАВИСИМОСТЕЙ ---
+        // Инициализируем StateManager и ViewManager в правильном порядке
+        
+        if (window.StateManager) {
+            this.stateManager = new window.StateManager();
+            console.log('StateManager component ready');
+        } else {
+            console.error('FATAL: StateManager class not found');
+            return; // Прерываем выполнение, если критический компонент отсутствует
+        }
+
+        if (window.ViewManager) {
+            this.viewManager = new window.ViewManager();
+            this.viewManager.init(this.stateManager, this); // Инъекция зависимостей
+            console.log('ViewManager component ready');
+            
+            // Инициализируем обработчики событий для переключения экранов
+            this.viewManager.initEventHandlers();
+            console.log('🎯 ViewManager event handlers initialized');
+        } else {
+            console.error('FATAL: ViewManager class not found');
+            return; // Прерываем выполнение
+        }
+        // --- КОНЕЦ ЭТАПА 1 ---
         
         this.initComplete = false;
         this.lyricsEnabled = true;
@@ -14,10 +44,11 @@ class App {
         this.previousMode = null;
         
         // BPM контроль для режима репетиции
+        this.currentBPM = 100; // Добавляем инициализацию BPM
         this.bpmControl = {
             currentRate: 1.0, // 100% - оригинальная скорость
             minRate: 0.5,     // 50% - минимальная скорость
-            maxRate: 1.5,     // 150% - максимальная скорость
+            maxRate: 2.0,     // 200% - максимальная скорость
             step: 0.05        // 5% - шаг изменения
         };
         
@@ -155,28 +186,20 @@ class App {
 
         // Инициализация менеджера фона для караоке
         const karaokeImages = [
-            'Karaoke/istockphoto-1206780681-1024x1024.jpg',
+            'Karaoke/yichen-wang-aBeTfQ65ycQ-unsplash.jpg',
+            'Karaoke/boliviainteligente-NFY0BeronrE-unsplash.jpg',
+            'Karaoke/prince-abid-LeZItQhwFks-unsplash.jpg',
+            'Karaoke/bruno-cervera-Gi6-m_t_W-E-unsplash.jpg',
+            'Karaoke/kane-reinholdtsen-LETdkk7wHQk-unsplash.jpg',
             'Karaoke/pexels-amit-batra-3062797-4658541.jpg',
-            'Karaoke/pexels-capturexpression-26530062.jpg',
-            'Karaoke/pexels-katriengrevendonck-2101487.jpg',
             'Karaoke/pexels-clemlep-13659549.jpg',
-            'Karaoke/pexels-michiel-ton-2722948-4269570.jpg',
-            'Karaoke/pexels-pixabay-164879.jpg',
+            'Karaoke/pexels-capturexpression-26530062.jpg',
             'Karaoke/pexels-pixabay-164960.jpg',
-            'Karaoke/pexels-suvan-chowdhury-37305-144429.jpg'
+            'Karaoke/pexels-katriengrevendonck-2101487.jpg',
+            'Karaoke/pexels-suvan-chowdhury-37305-144429.jpg',
+            'Karaoke/pexels-pixabay-164879.jpg'
         ];
         this.karaokeBackgroundManager = new KaraokeBackgroundManager(karaokeImages);
-
-        // Инициализация переменных
-        this.currentScale = 100;
-        this.currentBPM = 100; // Добавляем инициализацию BPM
-        this.isPlaying = false;
-
-        this.audioEngine = new AudioEngine();
-        
-        // Инициализация AudioSettingsUI сразу после создания AudioEngine
-        this.audioSettingsUI = new AudioSettingsUI(this.audioEngine);
-        this.initAudioSettingsButton();
     }
     
     _initUI() {
@@ -210,11 +233,15 @@ class App {
         this.scaleUpBtn = document.getElementById('scale-up');
         this.scaleValueBtn = document.getElementById('scale-value'); // Renamed from scaleValue
         
-        // BPM controls (режим репетиции)
+        // BPM controls (режим репетиции) - ИСПРАВЛЕНО: bpm вместо bmp
         this.bpmDownBtn = document.getElementById('bpm-down');
         this.bpmUpBtn = document.getElementById('bpm-up');
         this.bpmValueBtn = document.getElementById('bpm-value');
         this.bpmControls = document.getElementById('bpm-controls');
+        
+        // Инициализация BPM системы
+        this.currentBPM = 100; // 100% - оригинальная скорость
+        this._updateBPMDisplay();
     }
     
     _setupEventListeners() {
@@ -296,25 +323,6 @@ class App {
             });
         }
         
-        // BPM controls listeners (только в режиме репетиции)
-        if (this.bpmDownBtn) {
-            this.bpmDownBtn.addEventListener('click', () => {
-                this._decreaseBPM();
-            });
-        }
-
-        if (this.bpmUpBtn) {
-            this.bpmUpBtn.addEventListener('click', () => {
-                this._increaseBPM();
-            });
-        }
-        
-        if (this.bpmValueBtn) {
-            this.bpmValueBtn.addEventListener('click', () => {
-                this._resetBPM();
-            });
-        }
-        
         // Global keyboard shortcuts
         document.addEventListener('keydown', this._handleKeyboardShortcut.bind(this));
         
@@ -333,6 +341,25 @@ class App {
         if (toggleBtn && transportControls) {
             toggleBtn.addEventListener('click', () => {
                 transportControls.classList.toggle('is-open');
+            });
+        }
+
+        // BPM controls listeners (только в режиме репетиции)
+        if (this.bpmDownBtn) {
+            this.bpmDownBtn.addEventListener('click', () => {
+                this._decreaseBPM();
+            });
+        }
+
+        if (this.bpmUpBtn) {
+            this.bpmUpBtn.addEventListener('click', () => {
+                this._increaseBPM();
+            });
+        }
+        
+        if (this.bpmValueBtn) {
+            this.bpmValueBtn.addEventListener('click', () => {
+                this._resetBPM();
             });
         }
     }
@@ -390,27 +417,10 @@ class App {
         this.progressBarContainer.addEventListener('mouseleave', () => {
             this.progressTooltip.style.opacity = '0';
         });
-        
-        // Слушаем изменения состояния лупа
-        document.addEventListener('loop-state-changed', () => {
-            this._updateProgressBarLoopState();
-        });
     }
     
     _handleProgressBarClick(e) {
         if (!this.audioEngine || !this.progressBarContainer) return;
-        
-        // Проверяем, активен ли луп в BlockLoopControl
-        if (this.blockLoopControl && this.blockLoopControl.isLooping) {
-            console.log('🚫 Перемещение по прогресс-бару заблокировано: активен луп блока');
-            return;
-        }
-        
-        // Проверяем, активен ли луп в LoopBlockManager
-        if (this.loopBlockManager && this.loopBlockManager.isLooping) {
-            console.log('🚫 Перемещение по прогресс-бару заблокировано: активен луп менеджера');
-            return;
-        }
         
         // Calculate click position as a percentage of the bar width
         const rect = this.progressBarContainer.getBoundingClientRect();
@@ -458,22 +468,6 @@ class App {
         
         // Update time display
         this.timeDisplay.textContent = `${this._formatTime(currentTime)} / ${this._formatTime(duration)}`;
-        
-        // Обновляем визуальное состояние прогресс-бара в зависимости от лупа
-        this._updateProgressBarLoopState();
-    }
-    
-    _updateProgressBarLoopState() {
-        if (!this.progressBarContainer) return;
-        
-        const isLoopActive = (this.blockLoopControl && this.blockLoopControl.isLooping) ||
-                           (this.loopBlockManager && this.loopBlockManager.isLooping);
-        
-        if (isLoopActive) {
-            this.progressBarContainer.classList.add('loop-blocked');
-        } else {
-            this.progressBarContainer.classList.remove('loop-blocked');
-        }
     }
     
     _formatTime(seconds) {
@@ -880,9 +874,15 @@ class App {
      */
     _activateConcertMode() {
         console.log('Activating concert mode');
+        
+        // Деактивируем Live режим если он активен
+        if (window.liveMode && window.liveMode.isActive) {
+            window.liveMode.deactivate();
+        }
+        
         this.karaokeBackgroundManager.stop();
         this.textStyleManager.setStyle('concert');
-        this._setLyricsContainerStyle(null);
+        this._setLyricsContainerStyle('style-concert');
         this.blockLoopControl.deactivate();
         this._hideLiveFeedConcept();
         
@@ -890,6 +890,10 @@ class App {
         if (this.bpmControls) {
             this.bpmControls.style.display = 'none';
         }
+        
+        // CSS классы для режимов
+        document.body.classList.add('mode-concert');
+        document.body.classList.remove('mode-rehearsal', 'mode-karaoke', 'mode-live');
     }
     
     /**
@@ -898,16 +902,26 @@ class App {
      */
     _activateKaraokeMode() {
         console.log('Activating karaoke mode');
-        this.karaokeBackgroundManager.start();
+        
+        // Деактивируем Live режим если он активен
+        if (window.liveMode && window.liveMode.isActive) {
+            window.liveMode.deactivate();
+        }
+        
         this.textStyleManager.setStyle('karaoke');
         this._setLyricsContainerStyle('style-karaoke');
         this.blockLoopControl.deactivate();
+        this.karaokeBackgroundManager.start();
         this._hideLiveFeedConcept();
         
         // Скрываем BPM контроли в режиме караоке
         if (this.bpmControls) {
             this.bpmControls.style.display = 'none';
         }
+        
+        // CSS классы для режимов
+        document.body.classList.add('mode-karaoke');
+        document.body.classList.remove('mode-concert', 'mode-rehearsal', 'mode-live');
     }
     
     /**
@@ -916,6 +930,12 @@ class App {
      */
     _activateRehearsalMode() {
         console.log('Activating rehearsal mode');
+        
+        // Деактивируем Live режим если он активен
+        if (window.liveMode && window.liveMode.isActive) {
+            window.liveMode.deactivate();
+        }
+        
         this.karaokeBackgroundManager.stop();
         this.textStyleManager.setStyle('rehearsal');
         this._setLyricsContainerStyle(null);
@@ -927,6 +947,10 @@ class App {
             this.bpmControls.style.display = 'flex';
         }
         this._updateBPMDisplay();
+        
+        // CSS классы для режимов
+        document.body.classList.add('mode-rehearsal');
+        document.body.classList.remove('mode-concert', 'mode-karaoke', 'mode-live');
     }
     
     /**
@@ -936,13 +960,40 @@ class App {
     _activateLiveMode() {
         console.log('Activating live mode');
         this.karaokeBackgroundManager.stop();
-        this._setLyricsContainerStyle(null);
-
-        if (window.liveMode) {
-                window.liveMode.activate();
-        } else {
-            console.warn('LiveMode instance not found');
+        this.textStyleManager.setStyle('live');
+        this._setLyricsContainerStyle('style-live');
+        this.blockLoopControl.deactivate();
+        this._hideLiveFeedConcept();
+        
+        // Скрываем BPM контроли в LIVE режиме
+        if (this.bpmControls) {
+            this.bpmControls.style.display = 'none';
         }
+        
+        // Инициализация LiveMode если доступен
+        if (typeof LiveMode !== 'undefined') {
+            this._initLiveMode();
+            // ВАЖНО: Активируем Live режим с камерой
+        if (window.liveMode) {
+                window.liveMode.activate()
+                    .then(activated => {
+                        if (activated) {
+                            console.log('Live режим успешно активирован с камерой');
+        } else {
+                            console.warn('Не удалось активировать Live режим');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка активации Live режима:', error);
+                    });
+            }
+        } else {
+            console.warn('LiveMode class not available');
+        }
+        
+        // CSS классы для режимов
+        document.body.classList.add('mode-live');
+        document.body.classList.remove('mode-concert', 'mode-karaoke', 'mode-rehearsal');
     }
     
     /**
@@ -1098,6 +1149,16 @@ class App {
      */
     _showLiveFeedConcept() {
         console.log('🚀 Показываю Живую Ленту');
+        
+        // Деактивируем Live режим если он активен
+        if (window.liveMode && window.liveMode.isActive) {
+            window.liveMode.deactivate();
+        }
+        
+        // Очищаем интерфейс репетиции при переходе на стартовую страницу
+        if (this.blockLoopControl) {
+            this.blockLoopControl.deactivate();
+        }
         
         const liveFeedConcept = document.getElementById('live-feed-concept');
         const body = document.body;
@@ -2228,33 +2289,57 @@ class App {
             this.bpmValueBtn.textContent = `${this.currentBPM}%`;
         }
     }
-
-    /**
-     * Инициализация кнопки настроек аудио
-     */
-    initAudioSettingsButton() {
-        console.log('🎛️ Инициализация кнопки настроек аудио...');
-        const audioSettingsBtn = document.getElementById('audio-settings-btn');
-        console.log('🎛️ Кнопка найдена:', !!audioSettingsBtn);
-        console.log('🎛️ AudioSettingsUI доступен:', !!this.audioSettingsUI);
-        
-        if (audioSettingsBtn && this.audioSettingsUI) {
-            audioSettingsBtn.addEventListener('click', () => {
-                console.log('🎛️ Клик по кнопке настроек аудио');
-                this.audioSettingsUI.toggle();
-            });
-            console.log('🎛️ Обработчик клика добавлен успешно');
-        } else {
-            console.error('🎛️ Ошибка инициализации:', {
-                button: !!audioSettingsBtn,
-                ui: !!this.audioSettingsUI
-            });
-        }
-    }
 }
 
 let initAttempts = 0;
 const MAX_INIT_ATTEMPTS = 50; // Максимум 5 секунд ожидания
+
+// === РАСШИРЕННАЯ ДИАГНОСТИКА КОМПОНЕНТОВ ===
+function diagnoseComponents() {
+    console.log('🔬 === ГЛУБОКАЯ ДИАГНОСТИКА КОМПОНЕНТОВ ===');
+    
+    const components = {
+        audioEngine: window.audioEngine,
+        lyricsDisplay: window.lyricsDisplay,
+        trackCatalog: window.trackCatalog,
+        StateManager: window.StateManager,
+        ViewManager: window.ViewManager
+    };
+    
+    for (const [name, component] of Object.entries(components)) {
+        console.log(`🔍 ${name}:`, {
+            exists: !!component,
+            type: typeof component,
+            constructor: component?.constructor?.name,
+            isClass: component?.prototype ? 'Да' : 'Нет',
+            properties: component ? Object.getOwnPropertyNames(component) : 'N/A',
+            // ДОБАВЛЯЕМ ТОЧНОЕ ЗНАЧЕНИЕ
+            exactValue: component,
+            // ПРОВЕРЯЕМ БУЛЕВО ЗНАЧЕНИЕ
+            booleanCheck: !component ? 'FALSY!' : 'TRUTHY'
+        });
+    }
+    
+    // ТОЧНАЯ ПРОВЕРКА УСЛОВИЯ ИЗ IF-STATEMENT
+    console.log('🎯 ТОЧНАЯ ПРОВЕРКА УСЛОВИЯ:');
+    console.log('!window.audioEngine:', !window.audioEngine);
+    console.log('!window.lyricsDisplay:', !window.lyricsDisplay);
+    console.log('!window.trackCatalog:', !window.trackCatalog);
+    console.log('!window.StateManager:', !window.StateManager);
+    console.log('!window.ViewManager:', !window.ViewManager);
+    
+    const condition = !window.audioEngine || !window.lyricsDisplay || !window.trackCatalog || !window.StateManager || !window.ViewManager;
+    console.log('🔥 РЕЗУЛЬТАТ ПОЛНОГО УСЛОВИЯ:', condition);
+    
+    // Дополнительная проверка глобального пространства имен
+    console.log('🌐 Глобальное пространство window содержит:');
+    const relevantKeys = Object.keys(window).filter(key => 
+        key.includes('Manager') || key.includes('Engine') || key.includes('Display') || key.includes('Catalog')
+    );
+    console.log('Релевантные ключи:', relevantKeys);
+    
+    console.log('🔬 === КОНЕЦ ДИАГНОСТИКИ ===');
+}
 
 function initializeApp() {
     initAttempts++;
@@ -2262,16 +2347,28 @@ function initializeApp() {
     if (initAttempts > MAX_INIT_ATTEMPTS) {
         console.error('Не удалось инициализировать приложение после', MAX_INIT_ATTEMPTS, 'попыток');
         console.error('Проверьте загрузку всех необходимых скриптов');
+        
+        // ДОБАВЛЯЕМ ФИНАЛЬНУЮ ДИАГНОСТИКУ ПЕРЕД СДАЧЕЙ
+        console.error('🚨 ФИНАЛЬНАЯ ДИАГНОСТИКА ПЕРЕД ЗАВЕРШЕНИЕМ:');
+        diagnoseComponents();
         return;
     }
     
     // Check if all required components are loaded
-    if (!window.audioEngine || !window.lyricsDisplay || !window.trackCatalog) {
+    // --- ИСПРАВЛЕНИЕ: Добавляем проверку критических компонентов ---
+    if (!window.audioEngine || !window.lyricsDisplay || !window.trackCatalog || !window.StateManager || !window.ViewManager) {
+        // ДОБАВЛЯЕМ ДИАГНОСТИКУ НА КАЖДОЙ ПОПЫТКЕ
+        if (initAttempts % 10 === 1) { // Каждые 10 попыток
+            diagnoseComponents();
+        }
+        
         console.warn('Components not ready yet, retrying in 100ms (attempt', initAttempts, '/', MAX_INIT_ATTEMPTS, ')');
         console.warn('Missing components:', {
             audioEngine: !!window.audioEngine,
             lyricsDisplay: !!window.lyricsDisplay, 
-            trackCatalog: !!window.trackCatalog
+            trackCatalog: !!window.trackCatalog,
+            StateManager: !!window.StateManager,
+            ViewManager: !!window.ViewManager
         });
         setTimeout(initializeApp, 100);
         return;

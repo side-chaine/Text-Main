@@ -1,0 +1,1226 @@
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: false
+    Seeking in progress: false
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.96s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.96s END=74.75s (duration: 20.79s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.96s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.96s END=74.75s (duration: 20.79s)
+    Current time range: 53.959s - 74.745s
+    New time range: 53.959s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🚫 Блокирована очевидная гармоника: 122.1Hz (0.49x от 250.6Hz, ясность: 83.0%)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ BlockLoopControl: Запуск зацикливания блока: Block 1
+ 🎯 USING USER BOUNDARIES: Lines 0-7 = 53.96s-74.75s
+ BlockLoopControl: Временные границы лупа: 53.96s - 74.75s
+ BlockLoopControl: Зацикливание установлено, воспроизведение продолжается без прерывания
+ BlockLoopControl: Добавлена оранжевая окантовка блока
+ BlockLoopControl: Зацикливание активно 53.958502s - 74.745106s (без прерывания воспроизведения)
+ 🎨 _hideColorDropdown вызван
+ 🔍 LOOP DIAGNOSTIC #10:
+      Current: 66.309s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948703.844s
+      Audio State: playing
+ ✅ LOOP SAFE: 8.4s until loop end
+ Rehearsal: Line changing from 4 to 5
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 4 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: New line 5 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: Same block (block-1750948696435-0-sukdymc09je), updating active line from 4 to 5
+ [SETACTIVE] Called with index 5. Current style: rehearsal
+ Rehearsal mode: Setting active line 5
+ Activating rehearsal line at index 5
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: true
+    Seeking in progress: false
+ 🎯 LOOP IS ACTIVE: Checking user boundaries
+    DragBoundaryController exists: true
+    DragBoundaryController is active: true
+    Has user defined boundaries: false
+ 🎯 USER BOUNDARY DETAILED CHECK:
+    Current line index: -1
+    Boundaries object: Object
+ 🎯 USER BOUNDARY CHECK:
+    Current line: -1
+    User boundaries: 0 - 7
+    Within boundaries: false
+ 🚨 LINE OUTSIDE USER BOUNDARIES: Line -1 is outside user range 0-7, checking other conditions
+    Same block ID: true
+    Same block name: true
+    Current block lines: [0,1,2,3,4,5,6,7]
+    New block lines: [0,1,2,3,4,5,6,7]
+    Same lines: true
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.96s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.96s END=74.75s (duration: 20.79s)
+ BlockLoopControl: Calculating time range for block "Block 1" with lines [0,1,2,3,4,5,6,7]
+ BlockLoopControl: Available markers count: 49
+ BlockLoopControl: Block line range: 0 to 7
+ BlockLoopControl: Found start marker for line 0: 53.96s
+ BlockLoopControl: Searching for end marker after line 7
+ BlockLoopControl: Found end marker (first of next block) for line 8: 74.75s
+ BlockLoopControl: Block "Block 1" LOOP BOUNDS: START=53.96s END=74.75s (duration: 20.79s)
+    Current time range: 53.959s - 74.745s
+    New time range: 53.959s - 74.745s
+    Time difference: 0.000s
+    Same time range: true
+ ✅ SAME BLOCK CONFIRMED: Not stopping loop - this is the same block
+ 🎯 Высокая ясность (90.6%) - принимаем возможную гармонику: 121.8Hz
+ ✅ Октавный переход разрешен: 241.4Hz → 121.8Hz за 215мс (ratio: 0.50)
+ 🚫 Блокирована очевидная гармоника: 242.9Hz (1.99x от 121.8Hz, ясность: 75.6%)
+ 🚫 Октавный скачок заблокирован: 121.8Hz → 238.0Hz за 34мс (ratio: 1.95)
+ 🔍 LOOP DIAGNOSTIC #20:
+      Current: 66.861s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948704.403s
+      Audio State: playing
+ ✅ LOOP SAFE: 7.9s until loop end
+ 🔍 LOOP DIAGNOSTIC #30:
+      Current: 67.395s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948704.929s
+      Audio State: playing
+ ✅ LOOP SAFE: 7.4s until loop end
+ 🔍 LOOP DIAGNOSTIC #40:
+      Current: 67.888s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948705.424s
+      Audio State: playing
+ ✅ LOOP SAFE: 6.9s until loop end
+ [DragBoundary] Начато перетаскивание end линии
+ [DragBoundary] Drag начат для end границы
+ 🔍 LOOP DIAGNOSTIC #50:
+      Current: 68.311s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948705.844s
+      Audio State: playing
+ ✅ LOOP SAFE: 6.4s until loop end
+ 🚫 Блокирована очевидная гармоника: 429.9Hz (2.01x от 213.8Hz, ясность: 89.5%)
+ [DragBoundary] Показан призрачный предпоказ для строки 7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ 🎯 Высокая ясность (96.2%) - принимаем возможную гармонику: 475.7Hz
+ ✅ Октавный переход разрешен: 240.3Hz → 475.7Hz за 41мс (ratio: 1.98)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ 🎯 Высокая ясность (91.0%) - принимаем возможную гармонику: 232.4Hz
+ 🚫 Октавный скачок заблокирован: 472.8Hz → 232.4Hz за 38мс (ratio: 0.49)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ ✅ Октавный переход разрешен: 472.8Hz → 232.7Hz за 54мс (ratio: 0.49)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Показан призрачный предпоказ для строки 6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ ✅ Октавный переход разрешен: 228.2Hz → 472.2Hz за 77мс (ratio: 2.07)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ 🔍 LOOP DIAGNOSTIC #60:
+      Current: 68.927s
+      Loop Range: 53.959s - 74.745s
+      End Threshold: 74.695s
+      Time Since Last Jump: 1750948706.465s
+      Audio State: playing
+ ✅ LOOP SAFE: 5.8s until loop end
+ 🚫 Блокирована очевидная гармоника: 237.1Hz (0.51x от 468.7Hz, ясность: 76.0%)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ 🚫 Блокирована очевидная гармоника: 231.1Hz (0.49x от 468.7Hz, ясность: 70.5%)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ ✅ Октавный переход разрешен: 468.7Hz → 243.4Hz за 77мс (ratio: 0.52)
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Окончание перетаскивания
+ [DragBoundary] Применение изменения: end -> 6
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Уведомляем BlockLoopControl об изменении границ
+ BlockLoopControl: Границы изменены через drag: Object
+ 🎯 USER BOUNDARIES SET: hasUserDefinedBoundaries = true
+ 🎯 LOOP BOUNDARIES UPDATED FROM LINES: Lines 0-6 = 53.96s - 72.08s
+ [DragBoundary] Новые границы: 0-6
+ [DragBoundary] Перетаскивание завершено
+ 🔍 LOOP DIAGNOSTIC #70:
+      Current: 69.461s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1750948706.995s
+      Audio State: playing
+ ✅ LOOP SAFE: 2.6s until loop end
+ Rehearsal: Line changing from 5 to 6
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 5 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: New line 6 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: Same block (block-1750948696435-0-sukdymc09je), updating active line from 5 to 6
+ [SETACTIVE] Called with index 6. Current style: rehearsal
+ Rehearsal mode: Setting active line 6
+ Activating rehearsal line at index 6
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: true
+    Seeking in progress: false
+ 🎯 LOOP IS ACTIVE: Checking user boundaries
+    DragBoundaryController exists: true
+    DragBoundaryController is active: true
+    Has user defined boundaries: true
+ ✅ USER BOUNDARIES ACTIVE: Preserving loop regardless of block change
+    User boundaries: Object
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными для пересоздания
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Деактивация
+ [DragBoundary] Деактивирован
+ [DragBoundary] Активация для блока "Block 1"
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Активирован с границами 0-7
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ ✅ AUTO RECOVERY: Loop health OK (check #80)
+    Loop active: true
+    Current time: 70.0s
+    Loop range: 54.0s - 72.1s
+ 🔍 LOOP DIAGNOSTIC #90:
+      Current: 70.408s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1750948707.944s
+      Audio State: playing
+ ✅ LOOP SAFE: 1.7s until loop end
+ 🔍 LOOP DIAGNOSTIC #100:
+      Current: 70.910s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1750948708.445s
+      Audio State: playing
+ ✅ LOOP SAFE: 1.2s until loop end
+ ✅ Октавный переход разрешен: 216.3Hz → 424.5Hz за 162мс (ratio: 1.96)
+ 🔍 LOOP DIAGNOSTIC #110:
+      Current: 71.410s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1750948708.943s
+      Audio State: playing
+ 🔍 LOOP DIAGNOSTIC #120:
+      Current: 71.934s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1750948709.478s
+      Audio State: playing
+ 🚫 Блокирована очевидная гармоника: 121.0Hz (0.50x от 241.1Hz, ясность: 89.7%)
+ 🚨 LOOP END REACHED at 72.062s (threshold: 72.026s)
+     Time since last jump: Infinitys
+     Jump allowed: true (min interval: 1.5s)
+     Currently seeking: false
+ 🎯 JUMP TARGET VALIDATION:
+     Target time: 53.959s
+     Target line: 0
+     Current block lines: [0,1,2,3,4,5,6,7]
+     Block contains target: true
+ 🔄 EXECUTING LOOP JUMP: 72.062s → 53.959s (target: 53.974s)
+ 🔒 SEEK STARTED: isSeekingInProgress = true
+    Executing setCurrentTime(53.974)
+    Time before seek: 72.062s
+ ⏰ СИНХРО: Позиция установлена 53.97с
+ Rehearsal: Line changing from 6 to 0
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 6 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: New line 0 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: Same block (block-1750948696435-0-sukdymc09je), updating active line from 6 to 0
+ [SETACTIVE] Called with index 0. Current style: rehearsal
+ Rehearsal mode: Setting active line 0
+ Activating rehearsal line at index 0
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: true
+    Seeking in progress: true
+ 🔒 IGNORING BLOCK CHANGE: Seek in progress, this is likely caused by the loop jump
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 48ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 139ms
+ 🚫 Блокирована очевидная гармоника: 209.5Hz (0.49x от 423.8Hz, ясность: 78.1%)
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 184ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 210ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 245ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 296ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 352ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 395ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 478ms
+ 🔒 LOOP CHECKS BLOCKED: Seek in progress for 510ms
+ ⚠️ SEEK TIMEOUT: Forcing isSeekingInProgress = false after 500ms
+(анонимная) @ block-loop-control.js:639
+ 🔍 LOOP DIAGNOSTIC #140:
+      Current: 54.785s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 0.87s
+      Audio State: playing
+ ✅ LOOP SAFE: 17.3s until loop end
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔍 LOOP DIAGNOSTIC #150:
+      Current: 55.303s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 1.388s
+      Audio State: playing
+ ✅ LOOP SAFE: 16.8s until loop end
+ ✅ AUTO RECOVERY: Loop health OK (check #160)
+    Loop active: true
+    Current time: 55.8s
+    Loop range: 54.0s - 72.1s
+ [DragBoundary] Начато перетаскивание end линии
+ [DragBoundary] Drag начат для end границы
+ [DragBoundary] Показан призрачный предпоказ для строки 7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Показан призрачный предпоказ для строки 6
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-6
+ [DragBoundary] Показан призрачный предпоказ для строки 5
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-5
+ [DragBoundary] Показан призрачный предпоказ для строки 4
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-4
+ [DragBoundary] Показан призрачный предпоказ для строки 2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ 🔍 LOOP DIAGNOSTIC #170:
+      Current: 56.412s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 2.497s
+      Audio State: playing
+ ✅ LOOP SAFE: 15.7s until loop end
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ 🚫 Октавный скачок заблокирован: 211.2Hz → 413.8Hz за 18мс (ratio: 1.96)
+ 🚫 Октавный скачок заблокирован: 211.2Hz → 406.4Hz за 33мс (ratio: 1.92)
+ Rehearsal: Line changing from 0 to 1
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 0 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: New line 1 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: Same block (block-1750948696435-0-sukdymc09je), updating active line from 0 to 1
+ [SETACTIVE] Called with index 1. Current style: rehearsal
+ Rehearsal mode: Setting active line 1
+ Activating rehearsal line at index 1
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: true
+    Seeking in progress: false
+ ✅ SEEK BUFFER EXPIRED: 2102ms since seek, processing block change
+ 🎯 LOOP IS ACTIVE: Checking user boundaries
+    DragBoundaryController exists: true
+    DragBoundaryController is active: true
+    Has user defined boundaries: true
+ ✅ USER BOUNDARIES ACTIVE: Preserving loop regardless of block change
+    User boundaries: Object
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными для пересоздания
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Деактивация
+ [DragBoundary] Деактивирован
+ [DragBoundary] Активация для блока "Block 1"
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Активирован с границами 0-7
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ 🎯 Высокая ясность (95.7%) - принимаем возможную гармонику: 191.5Hz
+ ✅ Октавный переход разрешен: 381.5Hz → 191.5Hz за 81мс (ratio: 0.50)
+ 🎯 Высокая ясность (92.7%) - принимаем возможную гармонику: 491.6Hz
+ ✅ Октавный переход разрешен: 246.5Hz → 491.6Hz за 75мс (ratio: 1.99)
+ 🎯 Высокая ясность (99.3%) - принимаем возможную гармонику: 245.4Hz
+ 🚫 Октавный скачок заблокирован: 493.9Hz → 245.4Hz за 29мс (ratio: 0.50)
+ ✅ Октавный переход разрешен: 493.9Hz → 245.3Hz за 41мс (ratio: 0.50)
+ 🔍 LOOP DIAGNOSTIC #180:
+      Current: 56.951s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 3.039s
+      Audio State: playing
+ ✅ LOOP SAFE: 15.1s until loop end
+ 🔍 LOOP DIAGNOSTIC #190:
+      Current: 57.451s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 3.537s
+      Audio State: playing
+ ✅ LOOP SAFE: 14.6s until loop end
+ 🔍 LOOP DIAGNOSTIC #200:
+      Current: 57.903s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 4.01s
+      Audio State: playing
+ ✅ LOOP SAFE: 14.2s until loop end
+ 🔍 LOOP DIAGNOSTIC #210:
+      Current: 58.420s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 4.505s
+      Audio State: playing
+ ✅ LOOP SAFE: 13.7s until loop end
+ [DragBoundary] Начато перетаскивание end линии
+ [DragBoundary] Drag начат для end границы
+ [DragBoundary] Показан призрачный предпоказ для строки 4
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-4
+ [DragBoundary] Показан призрачный предпоказ для строки 3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-3
+ [DragBoundary] Показан призрачный предпоказ для строки 2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-2
+ 🔍 LOOP DIAGNOSTIC #220:
+      Current: 59.005s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 5.09s
+      Audio State: playing
+ ✅ LOOP SAFE: 13.1s until loop end
+ Rehearsal: Line changing from 1 to 2
+ Splitting block "Block 10" (9 lines) into 2 parts with ~5 lines each
+   Part 1: lines 0-4 (5 lines)
+   Part 2: lines 5-8 (4 lines)
+ Rehearsal: Current line 1 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: New line 2 belongs to block: block-1750948696435-0-sukdymc09je Array(8)
+ Rehearsal: Same block (block-1750948696435-0-sukdymc09je), updating active line from 1 to 2
+ [SETACTIVE] Called with index 2. Current style: rehearsal
+ Rehearsal mode: Setting active line 2
+ Activating rehearsal line at index 2
+ 📡 BLOCK CHANGE EVENT received
+    Current loop block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    New active block: Block 1 (ID: block-1750948696435-0-sukdymc09je)
+    Loop is active: true
+    Seeking in progress: false
+ 🎯 LOOP IS ACTIVE: Checking user boundaries
+    DragBoundaryController exists: true
+    DragBoundaryController is active: true
+    Has user defined boundaries: true
+ ✅ USER BOUNDARIES ACTIVE: Preserving loop regardless of block change
+    User boundaries: Object
+ BlockLoopControl: _createLoopButtonForCurrentBlock called
+ BlockLoopControl: lyricsDisplay.currentActiveBlock: Object
+ BlockLoopControl: lyricsDisplay.textBlocks: Array(15)
+ BlockLoopControl: Создаем кнопку для активного блока репетиции: Block 1
+ BlockLoopControl: _createLoopButton called for block: Block 1
+ BlockLoopControl: Кнопка удалена, drag boundaries остаются активными для пересоздания
+ BlockLoopControl: blockElement found: true
+ [DragBoundary] Деактивация
+ [DragBoundary] Деактивирован
+ [DragBoundary] Активация для блока "Block 1"
+ [DragBoundary] Создание интерактивных линий границ
+ [DragBoundary] Создана стартовая линия для строки 0
+ [DragBoundary] Создана финишная линия для строки 7
+ [DragBoundary] Обновлены визуальные состояния. Диапазон: 0-7
+ [DragBoundary] Активирован с границами 0-7
+ BlockLoopControl: Кнопка создана для блока: Block 1
+ ✅ Октавный переход разрешен: 196.6Hz → 387.0Hz за 41мс (ratio: 1.97)
+ 🔇 Глубокая тишина - очистка нот
+ 🛑 Принудительная остановка всех нот (deep_silence), активных: 1
+ 🔍 LOOP DIAGNOSTIC #230:
+      Current: 59.505s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 5.589s
+      Audio State: playing
+ ✅ LOOP SAFE: 12.6s until loop end
+ 🔍 LOOP DIAGNOSTIC #240:
+      Current: 59.952s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 6.043s
+      Audio State: playing
+ ✅ LOOP SAFE: 12.1s until loop end
+ Key pressed: Space
+ Space bar pressed, toggling playback
+ ⏸️ ИНСТРУМЕНТАЛ: Пауза
+ ⏸️ ВОКАЛ: Пауза
+ isPlaying property set to: false
+ Key pressed:  , key code: 32, waveform active: false
+ 🔍 Статический анализ: 504.3Hz (69.8%)
+ ✅ Октавный переход разрешен: 251.8Hz → 504.3Hz за 247мс (ratio: 2.00)
+ 🔍 LOOP DIAGNOSTIC #250:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 6.614s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #260:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 7.256s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #270:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 7.888s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #280:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 8.388s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #290:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 8.888s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #300:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 9.389s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ ✅ AUTO RECOVERY: Loop health OK (check #310)
+    Loop active: true
+    Current time: 60.2s
+    Loop range: 54.0s - 72.1s
+ 🔍 LOOP DIAGNOSTIC #320:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 10.338s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #330:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 10.836s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #340:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 11.339s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #350:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 11.837s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #360:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 12.288s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #370:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 12.785s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #380:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 13.287s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #390:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 13.786s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #400:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 14.237s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #410:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 14.737s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #420:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 15.241s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #430:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 15.741s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #440:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 16.186s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #450:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 16.686s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #460:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 17.186s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #470:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 17.687s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #480:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 18.137s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #490:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 18.638s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #500:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 19.14s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #510:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 19.639s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #520:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 20.086s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #530:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 20.587s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #540:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 21.086s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #550:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 21.586s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #560:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 22.039s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #570:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 22.541s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #580:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 23.039s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #590:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 23.536s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #600:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 23.986s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #610:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 24.488s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #620:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 24.988s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #630:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 25.488s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #640:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 25.936s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #650:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 26.438s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #660:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 26.936s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #670:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 27.437s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #680:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 27.885s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #690:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 28.389s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #700:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 28.889s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #710:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 29.387s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ ✅ AUTO RECOVERY: Loop health OK (check #720)
+    Loop active: true
+    Current time: 60.2s
+    Loop range: 54.0s - 72.1s
+ 🔍 LOOP DIAGNOSTIC #730:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 30.338s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #740:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 30.837s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #750:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 31.338s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #760:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 31.837s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #770:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 32.29s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #780:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 32.788s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #790:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 33.288s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #800:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 33.788s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #810:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 34.239s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #820:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 34.736s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #830:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 35.236s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #840:
+      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 35.738s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #850:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 36.188s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #860:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 36.86s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #870:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 43.857s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #880:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 44.793s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 Key pressed: MetaLeft
+rtf-parser.js:849 Key pressed: Meta, key code: 91, waveform active: false
+rtf-parser.js:849 Key pressed: AltLeft
+rtf-parser.js:849 Key pressed: Alt, key code: 18, waveform active: false
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #890:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 45.345s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 Key pressed: KeyJ
+rtf-parser.js:849 Key pressed: j, key code: 74, waveform active: false
+rtf-parser.js:849 ✅ AUTO RECOVERY: Loop health OK (check #900)
+rtf-parser.js:849    Loop active: true
+rtf-parser.js:849    Current time: 60.2s
+rtf-parser.js:849    Loop range: 54.0s - 72.1s
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #910:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 46.392s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #920:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 47.091s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+waveform-editor.js:1458 WaveformEditor: Vocal audio data not available
+_drawWaveformData @ waveform-editor.js:1458
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #930:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 47.59s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #940:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 48.037s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #950:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 49.146s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #960:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 49.837s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #970:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 50.288s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #980:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 50.976s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #990:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 51.505s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+rtf-parser.js:849 🔍 LOOP DIAGNOSTIC #1000:
+rtf-parser.js:849      Current: 60.249s
+rtf-parser.js:849      Loop Range: 53.959s - 72.076s
+rtf-parser.js:849      End Threshold: 72.026s
+rtf-parser.js:849      Time Since Last Jump: 51.988s
+rtf-parser.js:849      Audio State: paused
+rtf-parser.js:849 ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1010:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 52.487s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1020:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 53.038s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1030:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 53.554s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1040:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 54.208s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1050:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 54.807s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1060:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 55.31s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1070:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 55.868s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1080:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 56.375s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1090:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 57.041s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1100:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 57.61s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1110:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 58.272s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1120:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 59.049s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1130:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 59.757s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1140:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 60.262s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1150:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 60.864s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1160:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 61.529s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1170:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 61.947s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1180:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 62.476s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1190:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 63.092s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1200:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 63.708s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1210:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 64.154s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1220:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 64.644s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1230:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 65.29s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1240:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 65.794s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1250:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 66.244s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end
+ 🔍 LOOP DIAGNOSTIC #1260:
+      Current: 60.249s
+      Loop Range: 53.959s - 72.076s
+      End Threshold: 72.026s
+      Time Since Last Jump: 66.747s
+      Audio State: paused
+ ✅ LOOP SAFE: 11.8s until loop end

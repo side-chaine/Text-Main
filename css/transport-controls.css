@@ -322,20 +322,6 @@
     opacity: 1; /* Show handle on hover */
 }
 
-/* Заблокированное состояние прогресс-бара при активном лупе */
-#progress-bar-container.loop-blocked {
-    cursor: not-allowed !important;
-    opacity: 0.6;
-}
-
-#progress-bar-container.loop-blocked:hover {
-    height: 10px !important; /* Не увеличиваем при наведении */
-}
-
-#progress-bar-container.loop-blocked #progress-bar::after {
-    opacity: 0 !important; /* Скрываем ручку */
-}
-
 /* --- Transformer Controls --- */
 #transport-controls {
     /* Fully transparent background */

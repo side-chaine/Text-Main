@@ -1,3 +1,10 @@
+/* CSS переменные для цветовых схем */
+:root {
+    --instrumental-color: #2196F3;
+    --vocals-color: #FFD700;
+    --master-gradient: linear-gradient(45deg, #2196F3, #FFD700);
+}
+
 /* Waveform Source Switcher */
 .waveform-source-group {
     display: flex;
@@ -7,99 +14,6 @@
     border-radius: 6px;
     padding: 2px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* === ГОРИЗОНТАЛЬНОЕ РАСПОЛОЖЕНИЕ ПАНЕЛИ === */
-.waveform-footer-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 15px;
-    background: rgba(0, 0, 0, 0.8);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    flex-wrap: nowrap;
-    overflow-x: auto;
-}
-
-/* === НОВЫЕ ГРУППЫ УПРАВЛЕНИЯ === */
-.waveform-control-group {
-    display: flex;
-    gap: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    padding: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    align-items: center;
-}
-
-/* BPM Display */
-.bpm-display {
-    min-width: 36px;
-    height: 28px;
-    padding: 4px 8px;
-    font-size: 11px;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.15);
-    color: #FFD700;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    user-select: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    outline: none;
-}
-
-.bpm-display:hover {
-    background: rgba(255, 215, 0, 0.2);
-    border-color: rgba(255, 215, 0, 0.5);
-    transform: translateY(-1px);
-}
-
-.bpm-display:focus {
-    background: rgba(255, 215, 0, 0.25);
-    border-color: #FFD700;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
-    user-select: text;
-    cursor: text;
-}
-
-/* Общие стили для кнопок управления */
-.waveform-btn.control-btn {
-    min-width: 28px;
-    height: 28px;
-    padding: 4px 6px;
-    font-size: 11px;
-    font-weight: 600;
-    border: none;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.waveform-btn.control-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.9);
-    transform: translateY(-1px);
-}
-
-.waveform-btn.control-btn.active {
-    background: #FF6B35;
-    color: white;
-    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3);
-}
-
-.waveform-btn.control-btn.active:hover {
-    background: #E55A2B;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 6px rgba(255, 107, 53, 0.4);
 }
 
 .waveform-source-group .source-btn {
@@ -161,13 +75,14 @@
 }
 
 .waveform-source-group .source-btn[data-source="master"].active {
-    background: #4CAF50;
+    background: linear-gradient(45deg, #2196F3 0%, #FFD700 100%);
     color: white;
     box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .waveform-source-group .source-btn[data-source="master"].active:hover {
-    background: #45a049;
+    background: linear-gradient(45deg, #1976D2 0%, #FFC107 100%);
     box-shadow: 0 3px 6px rgba(76, 175, 80, 0.4);
 }
 
@@ -220,4 +135,152 @@
     to {
         opacity: 0;
     }
+}
+
+/* Обновляем стили кнопок для использования переменных */
+.source-switcher button.active.vocals {
+    background: var(--vocals-color);
+    color: #000;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.source-switcher button.active.vocals:hover {
+    background: var(--vocals-color);
+    filter: brightness(0.9);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.source-switcher button.active.instrumental {
+    background: var(--instrumental-color);
+    color: white;
+    box-shadow: 0 2px 10px rgba(33, 150, 243, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.source-switcher button.active.instrumental:hover {
+    background: var(--instrumental-color);
+    filter: brightness(0.9);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+}
+
+.source-switcher button.active.master {
+    background: var(--master-gradient);
+    color: white;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.source-switcher button.active.master:hover {
+    background: var(--master-gradient);
+    filter: brightness(1.1);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Кнопка выбора цвета */
+.color-picker-button {
+    min-width: 32px;
+    height: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+}
+
+.color-picker-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.color-picker-button:active {
+    transform: translateY(0);
+}
+
+/* Выпадающее меню цветов */
+.color-dropdown {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    right: 0;
+    background: rgba(42, 42, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #666;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    min-width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.color-dropdown.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+    visibility: visible;
+}
+
+.color-scheme-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin: 4px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(51, 51, 51, 0.8);
+    border: 1px solid transparent;
+}
+
+.color-scheme-item:hover {
+    background: rgba(68, 68, 68, 0.9);
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.color-scheme-item.active {
+    background: rgba(85, 85, 85, 0.9);
+    border: 2px solid #888;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.color-preview {
+    width: 60px;
+    height: 30px;
+    border-radius: 6px;
+    margin-right: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.scheme-name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Анимация применения цвета */
+.color-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 } 

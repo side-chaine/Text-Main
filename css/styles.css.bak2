@@ -9463,8 +9463,29 @@ body .transition-inkBleed .lyric-line.becoming-active {
 
 /* Стили для кнопки BlockLoopControl в режиме репетиции */
 /* Стили для кнопки BlockLoopControl отключены - используются стили из loop-button-styles.css */
+.block-loop-btn:hover {
+    background-color: #f57c00;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
 
+.block-loop-btn.active {
+    background-color: #e74c3c;
+    color: white;
+    animation: pulse-button 1.5s infinite;
+}
 
+@keyframes pulse-button {
+    0% {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 3px 8px rgba(231, 76, 60, 0.6);
+    }
+    100% {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
 
 /* Стили для активного блока с зацикливанием в режиме репетиции */
 .rehearsal-active-block.loop-active {

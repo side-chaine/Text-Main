@@ -5,19 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beLive - Трансляции для музыкантов</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/loop-button-styles.css">
     <link rel="stylesheet" href="css/transport-controls.css">
     <link rel="stylesheet" href="css/karaoke-styles.css">
     <link rel="stylesheet" href="css/live-mode.css">
     <link rel="stylesheet" href="css/mode-buttons-override.css">
     <link rel="stylesheet" href="css/font-selector.css">
     <link rel="stylesheet" href="css/waveform-source-switcher.css">
-    <link rel="stylesheet" href="css/bpm-controls.css">
-    <link rel="stylesheet" href="css/rehearsal-mode.css">
-    <link rel="stylesheet" href="css/block-mode.css">
-    <link rel="stylesheet" href="css/karaoke-mode.css">
+    <link rel="stylesheet" href="css/avatar-page.css">
+    <link rel="stylesheet" href="css/home-button-enhanced.css">
+    <link rel="stylesheet" href="css/bmp-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Add JSZip library for backup system -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- MediaPipe Official CDN Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -39,13 +37,13 @@
     <link rel="stylesheet" href="css/rehearsal-styles.css">
     <link rel="stylesheet" href="css/concert-styles.css">
     <link rel="stylesheet" href="css/karaoke-styles.css">
-    <link rel="stylesheet" href="css/mobile-controls.css">
-    <link rel="stylesheet" href="css/audio-settings.css">
 
     <!-- Google Fonts for Font Selector -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;700&family=PT+Serif:wght@400;700&family=Oswald:wght@400;700&family=Lobster&family=Pacifico&family=Caveat&display=swap" rel="stylesheet">
+    <!-- Orbitron font for cockpit design -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
@@ -59,33 +57,30 @@
                 </button>
                 </div>
                 
-                <!-- BPM контроль для режима репетиции (перед режимами) -->
+                <!-- BPM контроль для режима репетиции (между логотипом и режимами) -->
                 <div class="bpm-controls" id="bpm-controls" style="display: none;">
-                    <button class="bpm-btn" id="bpm-down" title="Замедлить темп на 5%">−5</button>
-                    <button class="bpm-btn bpm-value-btn" id="bpm-value" title="Сбросить к оригинальному темпу">100%</button>
-                    <button class="bpm-btn" id="bpm-up" title="Ускорить темп на 5%">+5</button>
+                    <button class="bmp-btn" id="bpm-down" title="Замедлить темп на 5%">−5</button>
+                    <button class="bmp-btn bpm-value-btn" id="bpm-value" title="Сбросить к оригинальному темпу">100%</button>
+                    <button class="bmp-btn" id="bpm-up" title="Ускорить темп на 5%">+5</button>
                 </div>
-
+                
                 <!-- Группа 2: Центральные кнопки режимов (позиционируются абсолютно) -->
                 <div class="mode-buttons">
                     <button id="concert-mode" class="mode-button btn-concert" data-mode="concert">Концертный</button>
                     <button id="karaoke-mode" class="mode-button btn-karaoke" data-mode="karaoke">Караоке</button>
                     <button id="rehearsal-mode" class="mode-button btn-rehearsal" data-mode="rehearsal">Репетиция</button>
                     <button id="live-mode" class="mode-button btn-live" data-mode="live">LIVE</button>
-                    <button id="audio-settings-btn" class="mode-btn" title="Настройки аудио">
-                        <span class="icon">🎛️</span>
-                        <span class="label">Аудио</span>
-                    </button>
                 </div>
                 
                 <!-- Группа 3: Правые элементы (Каталог и Масштаб) -->
                 <div class="header-right-group">
-                    <div class="scale-controls">
+                <div class="scale-controls">
                         <button class="scale-btn" id="scale-down" title="Уменьшить шрифт">-</button>
                         <button class="scale-btn scale-value-btn" id="scale-value" title="Сбросить масштаб">100%</button>
                         <button class="scale-btn" id="scale-up" title="Увеличить шрифт">+</button>
                     </div>
                     <button id="catalog-btn" class="animated-gradient-btn">Catalog</button>
+                    <div class="user-avatar" id="avatar-btn" title="Avatar Studio">👤</div>
                 </div>
             </div>
         </header>
@@ -470,7 +465,290 @@
         <!-- Status Display for Live mode -->
         <div id="live-status-display" class="hidden"></div>
     </div>
-    
+
+    <!-- Avatar Studio Page Container -->
+    <div id="avatar-page-container" class="hidden">
+        <div class="cockpit-pro">
+            <!-- Унифицированная навигация как в основном приложении -->
+            <header class="cockpit-nav">
+                <!-- Группа 1: Логотип и левые элементы -->
+                <div class="header-left-group">
+                    <button class="home-btn" title="beLIVE Avatar Studio">
+                        <span class="home-logo">beLIVE</span>
+                    </button>
+                </div>
+                
+                <!-- Группа 2: Центральные кнопки режимов -->
+                <div class="mode-buttons">
+                    <button class="mode-button btn-concert" data-mode="concert">Концертный</button>
+                    <button class="mode-button btn-karaoke active" data-mode="karaoke">Караоке</button>
+                    <button class="mode-button btn-rehearsal" data-mode="rehearsal">Репетиция</button>
+                    <button class="mode-button btn-live" data-mode="live">LIVE</button>
+                </div>
+                
+                <!-- Группа 3: Правые элементы -->
+                <div class="header-right-group">
+                    <div class="scale-controls">
+                        <button class="scale-btn">-</button>
+                        <button class="scale-btn scale-value-btn">120%</button>
+                        <button class="scale-btn">+</button>
+                    </div>
+                    <button class="animated-gradient-btn">Catalog</button>
+                    <div class="progress-ring">
+                        <div class="daily-progress">
+                            <span class="progress-text">3/5</span>
+                            <span class="progress-label">цели</span>
+                        </div>
+                    </div>
+                    <div class="user-avatar active">👤</div>
+                </div>
+                
+                <!-- Кнопка возврата -->
+                <button id="back-to-live-feed" class="back-button">← Live Feed</button>
+            </header>
+
+            <!-- Карусель треков -->
+            <section class="track-carousel-container">
+                <div class="carousel-track-list">
+                    <!-- Первый набор треков -->
+                    <!-- Трек 1 -->
+                    <div class="carousel-track-item active" onclick="selectTrack(this)" data-track-id="1">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-1">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Sveta</a>
+                                <a href="#" class="singer">Mike</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Bohemian Rhapsody</h4>
+                    </div>
+                    <!-- Трек 2 -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="2">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-2"></div>
+                        <h4 class="track-item-title">Stairway to Heaven</h4>
+                    </div>
+                    <!-- Трек 3 -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="3">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-3">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Vasya</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Hallelujah</h4>
+                    </div>
+                    <!-- Трек 4 -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="4">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-4">
+                            <div class="live-singers">
+                                <a href="#" class="singer">John</a>
+                                <a href="#" class="singer">Lisa</a>
+                                <a href="#" class="singer">Max</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Smells Like Teen Spirit</h4>
+                    </div>
+                    <!-- Трек 5 -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="5">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-5"></div>
+                        <h4 class="track-item-title">Hotel California</h4>
+                    </div>
+                    <!-- Трек 6 -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="6">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-6">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Anna</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Yesterday</h4>
+                    </div>
+                    
+                    <!-- Дублированный набор треков для бесконечной прокрутки -->
+                    <!-- Трек 1 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="1">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-1">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Sveta</a>
+                                <a href="#" class="singer">Mike</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Bohemian Rhapsody</h4>
+                    </div>
+                    <!-- Трек 2 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="2">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-2"></div>
+                        <h4 class="track-item-title">Stairway to Heaven</h4>
+                    </div>
+                    <!-- Трек 3 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="3">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-3">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Vasya</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Hallelujah</h4>
+                    </div>
+                    <!-- Трек 4 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="4">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-4">
+                            <div class="live-singers">
+                                <a href="#" class="singer">John</a>
+                                <a href="#" class="singer">Lisa</a>
+                                <a href="#" class="singer">Max</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Smells Like Teen Spirit</h4>
+                    </div>
+                    <!-- Трек 5 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="5">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-5"></div>
+                        <h4 class="track-item-title">Hotel California</h4>
+                    </div>
+                    <!-- Трек 6 (дубль) -->
+                    <div class="carousel-track-item" onclick="selectTrack(this)" data-track-id="6">
+                        <div class="track-item-glow"></div>
+                        <div class="track-item-cover cover-6">
+                            <div class="live-singers">
+                                <a href="#" class="singer">Anna</a>
+                            </div>
+                        </div>
+                        <h4 class="track-item-title">Yesterday</h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Центральная рабочая область -->
+            <main class="cockpit-main-area">
+                <!-- Левая часть: Статистика пользователя по треку -->
+                <aside class="side-panel" id="user-track-stats">
+                    <div class="panel-content-wrapper" id="user-track-stats-content">
+                        <!-- Контент будет меняться через JS -->
+                    </div>
+                </aside>
+
+                <!-- Центральный Хаб -->
+                <div class="central-hub">
+                    <div class="energy-ring ring-1"></div>
+                    <div class="energy-ring ring-2"></div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Артист" class="hub-avatar">
+                </div>
+                
+                <!-- Правая часть: Список поющих сейчас -->
+                <aside class="side-panel" id="live-session-list">
+                    <div class="panel-content-wrapper" id="live-session-list-content">
+                        <!-- Контент будет меняться через JS -->
+                    </div>
+                </aside>
+            </main>
+        </div>
+
+        <!-- Скрытые данные для треков -->
+        <div id="track-data-1" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <div class="stats-item">
+                    <span class="stats-label">Лучшая точность</span>
+                    <span class="stats-value">92%</span>
+                </div>
+                <div class="accuracy-bar"><div class="accuracy-fill" style="width: 92%;"></div></div>
+                <div class="stats-item">
+                    <span class="stats-label">Исполнено раз</span>
+                    <span class="stats-value">15</span>
+                </div>
+                <div class="ai-suggestion">
+                    <div class="ai-header">💡 AI-Совет</div>
+                    <p class="ai-text">Отличный фальцет! Сделай переход к основной партии плавнее в такте 34.</p>
+                </div>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <ul class="live-list">
+                    <li><a href="#">Sveta <span class="session-type duo">Дуэт?</span></a></li>
+                    <li><a href="#">Mike <span class="session-type solo">Соло</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="track-data-2" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <div class="stats-item"><span class="stats-label">Лучшая точность</span><span class="stats-value">81%</span></div>
+                <div class="accuracy-bar"><div class="accuracy-fill" style="width: 81%;"></div></div>
+                <div class="stats-item"><span class="stats-label">Исполнено раз</span><span class="stats-value">7</span></div>
+                <div class="ai-suggestion"><div class="ai-header">💡 AI-Совет</div><p class="ai-text">Питч в крещендо почти идеален. Обрати внимание на "Соль" в бридже.</p></div>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <p class="no-one-singing">Никого нет в эфире. <br>Будь первым!</p>
+            </div>
+        </div>
+        <div id="track-data-3" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <div class="stats-item"><span class="stats-label">Лучшая точность</span><span class="stats-value">88%</span></div>
+                <div class="accuracy-bar"><div class="accuracy-fill" style="width: 88%;"></div></div>
+                <div class="stats-item"><span class="stats-label">Исполнено раз</span><span class="stats-value">21</span></div>
+                <div class="ai-suggestion"><div class="ai-header">💡 AI-Совет</div><p class="ai-text">Великолепная динамика. Используй схожую технику для "Yesterday".</p></div>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <ul class="live-list">
+                    <li><a href="#">Vasya <span class="session-type solo">Соло</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="track-data-4" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <div class="stats-item"><span class="stats-label">Лучшая точность</span><span class="stats-value">76%</span></div>
+                <div class="accuracy-bar"><div class="accuracy-fill" style="width: 76%;"></div></div>
+                <div class="stats-item"><span class="stats-label">Исполнено раз</span><span class="stats-value">11</span></div>
+                <div class="ai-suggestion"><div class="ai-header">💡 AI-Совет</div><p class="ai-text">Хороший драйв. Для аутентичности добавь больше "хрипотцы".</p></div>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <ul class="live-list">
+                    <li><a href="#">John <span class="session-type trio">Трио</span></a></li>
+                    <li><a href="#">Lisa <span class="session-type trio">Трио</span></a></li>
+                    <li><a href="#">Max <span class="session-type trio">Трио</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="track-data-5" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <p class="no-one-singing">Вы еще не пели эту песню.</p>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <p class="no-one-singing">Никого нет в эфире.</p>
+            </div>
+        </div>
+        <div id="track-data-6" style="display: none;">
+            <div class="left-panel-data">
+                <h3 class="panel-title">Ваша статистика</h3>
+                <div class="stats-item"><span class="stats-label">Лучшая точность</span><span class="stats-value">95%</span></div>
+                <div class="accuracy-bar"><div class="accuracy-fill" style="width: 95%;"></div></div>
+                <div class="stats-item"><span class="stats-label">Исполнено раз</span><span class="stats-value">34</span></div>
+                <div class="ai-suggestion"><div class="ai-header">💡 AI-Совет</div><p class="ai-text">Твое исполнение почти эталонное. Попробуй себя в режиме "Режиссер".</p></div>
+            </div>
+            <div class="right-panel-data">
+                <h3 class="panel-title">Сейчас поют</h3>
+                <ul class="live-list">
+                    <li><a href="#">Anna <span class="session-type duo">Дуэт?</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Transport Panel Toggle Button - MOVED -->
 
     <!-- Modal Block Editor Container (initially hidden) -->
@@ -526,18 +804,16 @@
     <script src="js/debug-config.js"></script>
 
     <!-- 🎵 CORE ENGINE & UTILITIES -->
+    <!-- КРИТИЧЕСКИ ВАЖНЫЙ ПОРЯДОК ЗАГРУЗКИ -->
+    <!-- StateManager и ViewManager должны быть загружены ДО app.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/rtf.js@0.4.0/dist/rtf.min.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/state-manager.js"></script>
-    
-    <!-- 🐙 КРАКЕН: AudioRouter для локального мониторинга -->
-    <script src="js/audio-router.js"></script>
-    
-    <!-- 🔍 КРАКЕН: Система диагностики -->
-    <script src="js/kraken-diagnostics.js"></script>
+    <script src="js/view-manager.js"></script> <!-- ДОБАВЛЕН ViewManager -->
     
     <!-- 🎵 COMPONENT SCRIPTS -->
+    <script src="js/color-service.js"></script>
     <script src="js/audio-engine.js"></script>
     <script src="js/enhanced-rtf-processor.js"></script>
     <script src="js/rtf-parser.js"></script>
@@ -548,6 +824,7 @@
     <script src="js/waveform-editor.js"></script>
     <script src="js/text-style-manager.js"></script>
     <script src="js/loopblock-manager.js"></script>
+    <script src="js/drag-boundary-controller.js"></script>
     <script src="js/block-loop-control.js"></script>
     <script src="js/background-effects-engine.js"></script>
     <script src="js/mask-system.js"></script>
@@ -560,7 +837,7 @@
     <script src="js/live-mode.js"></script>
     <script src="js/live-feed.js"></script>
 
-    <!-- 🚀 MAIN APPLICATION SCRIPT -->
+    <!-- 🚀 MAIN APPLICATION SCRIPT (MUST BE LAST) -->
     <script src="js/app.js"></script>
 
     <div id="block-editor-container" class="hidden"></div>
@@ -569,6 +846,5 @@
         <div class="loading-spinner"></div>
         <p>Загрузка трека...</p>
     </div>
-    <script src="js/audio-settings-ui.js"></script>
 </body>
 </html> 
