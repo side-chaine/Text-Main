@@ -1,0 +1,4 @@
+catalog-design-test.html:1 Access to script at 'file:///Users/evgenijmakrov/Text-Main/test/components/MyMusic.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated-app.
+MyMusic.js:1  Failed to load resource: net::ERR_FAILED
+catalog-design-test.html:1 Access to script at 'file:///Users/evgenijmakrov/Text-Main/test/components/Uploader.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated-app.
+Uploader.js:1  Failed to load resource: net::ERR_FAILED
