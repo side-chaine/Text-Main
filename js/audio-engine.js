@@ -708,9 +708,29 @@ class AudioEngine {
      * @returns {number} Current playback rate
      */
     getPlaybackRate() {
-        return this.instrumentalAudio ? this.instrumentalAudio.playbackRate : 1.0;
+        if (this.instrumentalAudio) {
+            return this.instrumentalAudio.playbackRate;
+        }
+        return 1.0;
     }
 
+    /**
+     * Захватывает аудиопоток из AudioContext.destination
+     * @returns {MediaStream} - Захваченный аудиопоток.
+     */
+    captureStream() {
+        if (!this.streamDestination) {
+            this.streamDestination = this.audioContext.createMediaStreamDestination();
+            
+            // Подключаем все нужные узлы к этому назначению
+            if (this.instrumentalGain) this.instrumentalGain.connect(this.streamDestination);
+            if (this.vocalsGain) this.vocalsGain.connect(this.streamDestination);
+            // Не подключаем микрофон, если не хотим его записывать
+            // if (this.microphoneGain) this.microphoneGain.connect(this.streamDestination);
+        }
+        return this.streamDestination.stream;
+    }
+    
     /**
      * Создает безопасный URL из исходного blob URL для WaveformEditor
      * @param {string} originalUrl - исходный URL (может быть blob:null)

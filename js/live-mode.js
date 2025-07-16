@@ -2858,10 +2858,13 @@ class LiveMode {
             // Метод 3: Через аудио позицию и маркеры
             if (window.audioEngine && window.app && window.app.markerManager) {
                 const currentTime = window.audioEngine.getCurrentTime();
-                const marker = window.app.markerManager.findNearestMarker(currentTime);
-                
-                if (marker && marker.text) {
-                    return marker.text.trim();
+                const activeLineIndex = window.app.markerManager.getActiveLineAtTime(currentTime);
+
+                if (activeLineIndex !== -1 && window.app && window.app.lyricsDisplay && typeof window.app.lyricsDisplay.getLineTextByIndex === 'function') {
+                    const lineText = window.app.lyricsDisplay.getLineTextByIndex(activeLineIndex);
+                    if (lineText) {
+                        return lineText.trim();
+                    }
                 }
             }
             
@@ -2885,228 +2888,229 @@ class LiveMode {
      * @private
      */
     _getMainNextLineText() {
-        try {
-            // Метод 1: Через DOM - следующий элемент после активного
-            const selectors = [
-                '#lyrics-display .lyric-line.active',
-                '.lyric-line.active',
-                '.active-line',
-                '.current-line',
-                '[data-active="true"]'
-            ];
-            
-            for (const selector of selectors) {
-                const activeElement = document.querySelector(selector);
-                if (activeElement && activeElement.nextElementSibling) {
-                    return activeElement.nextElementSibling.textContent.trim();
-                }
-            }
-            
-            // Метод 2: Через объект LyricsDisplay
-            if (window.app && window.app.lyricsDisplay) {
-                const lyricsDisplay = window.app.lyricsDisplay;
-                
-                // Через индекс и массив строк
-                if (typeof lyricsDisplay.currentActiveLine === 'number' && 
-                    Array.isArray(lyricsDisplay.lines) && 
-                    lyricsDisplay.lines.length > (lyricsDisplay.currentActiveLine + 1) &&
-                    lyricsDisplay.currentActiveLine >= 0) {
-                    return lyricsDisplay.lines[lyricsDisplay.currentActiveLine + 1].trim();
-                }
-                
-                // Через LyricsDisplay container
-                if (lyricsDisplay.container) {
-                    const activeEl = lyricsDisplay.container.querySelector('.lyric-line.active, .active');
-                    if (activeEl && activeEl.nextElementSibling) {
-                        return activeEl.nextElementSibling.textContent.trim();
-                    }
-                }
-                
-                // Через текущий набор строк на экране
-                const visibleLines = document.querySelectorAll('.lyric-line:not(.hidden)');
-                if (visibleLines && visibleLines.length > 1) {
-                    // Найдем текущую активную и возьмем следующую
-                    for (let i = 0; i < visibleLines.length - 1; i++) {
-                        if (visibleLines[i].classList.contains('active')) {
-                            return visibleLines[i+1].textContent.trim();
-                        }
-                    }
-                    // Если активную не нашли, берем вторую видимую
-                    return visibleLines[1].textContent.trim();
-                }
-            }
-            
-            // Метод 3: Через аудио позицию и маркеры
-            if (window.audioEngine && window.app && window.app.markerManager) {
-                const currentTime = window.audioEngine.getCurrentTime();
-                const markers = window.app.markerManager.getMarkers();
-                
-                if (Array.isArray(markers) && markers.length > 0) {
-                    // Найдем текущий маркер и возьмем следующий
-                    for (let i = 0; i < markers.length - 1; i++) {
-                        if (markers[i].time <= currentTime && markers[i+1].time > currentTime) {
-                            return markers[i+1].text || "";
-                        }
-                    }
-                }
-            }
-        } catch (error) {
-            console.error('LiveMode: Ошибка при получении следующей строки:', error);
+        if (this.mainLyricsDisplay && typeof this.mainLyricsDisplay.getNextLineText === 'function') {
+            return this.mainLyricsDisplay.getNextLineText();
         }
-        
-        return null;
+        return '';
     }
 
     /**
      * Переключение записи видео
      */
     async toggleRecording() {
-        // Найдем оба индикатора REC - и в верхнем левом углу, и кнопку
-        const recordingIndicator = document.getElementById('recording-indicator');
-        const recButton = document.getElementById('live-rec-button');
-        const oldRecIndicator = document.querySelector('.rec-indicator, #rec-indicator'); // Поиск старого индикатора
-        
-        if (!recButton) {
-            console.error('LiveMode: Кнопка REC не найдена');
+        if (this.isRecording) {
+            await this.stopRecording();
+        } else {
+            await this.startRecording();
+        }
+    }
+
+    /**
+     * Начинает запись видео.
+     */
+    async startRecording() {
+        if (this.isRecording) {
+            console.warn("LiveMode: Запись уже идет.");
+            return;
+        }
+
+        console.log("LiveMode: Запуск записи мастер-трека...");
+        this._showSpinner(true);
+
+        try {
+            // 1. Захват видеопотока с экрана (БЕЗ АУДИО)
+            const displayStream = await navigator.mediaDevices.getDisplayMedia({
+                video: { frameRate: 25, width: 1920, height: 1080 },
+                audio: false 
+            });
+
+            // 2. Захват аудиопотока из AudioEngine
+            if (!window.audioEngine || typeof window.audioEngine.captureStream !== 'function') {
+                throw new Error('AudioEngine не найден или не поддерживает captureStream.');
+            }
+            
+            const masterAudioStream = window.audioEngine.captureStream();
+            if (masterAudioStream.getAudioTracks().length === 0) {
+                 console.warn("LiveMode: Аудиопоток из AudioEngine не содержит аудиодорожек. Запись будет без звука.");
+                 // Можно добавить дорожку с тишиной для совместимости, как раньше
+            } else {
+                console.log("LiveMode: Аудиопоток мастер-трека успешно захвачен.");
+            }
+
+            // 3. Объединение видео и аудиопотока мастер-трека
+            const videoTracks = displayStream.getVideoTracks();
+            const audioTracks = masterAudioStream.getAudioTracks();
+            
+            const combinedStream = new MediaStream([
+                ...videoTracks,
+                ...audioTracks
+            ]);
+            
+            this.recordedStream = combinedStream;
+            this.originalDisplayStream = displayStream; // Сохраняем для остановки
+
+            // 4. Настройка MediaRecorder
+            const options = {
+                mimeType: 'video/webm;codecs=vp8,opus',
+                videoBitsPerSecond: 3500000, 
+                audioBitsPerSecond: 256000  // Увеличим битрейт для качества музыки
+            };
+
+            this.mediaRecorder = new MediaRecorder(this.recordedStream, options);
+            this.recordedChunks = [];
+
+            // 5. Сбор данных
+            this.mediaRecorder.ondataavailable = e => {
+                if (e.data.size > 0) {
+                    this.recordedChunks.push(e.data);
+                }
+            };
+            
+            this.mediaRecorder.onstop = () => {
+                console.log("LiveMode: Запись остановлена, обработка данных.");
+                const blob = new Blob(this.recordedChunks, { type: options.mimeType });
+                const url = URL.createObjectURL(blob);
+                this._saveRecording(url);
+                this.recordedChunks = [];
+                 // Остановка видеопотока с экрана
+                if (this.originalDisplayStream) {
+                    this.originalDisplayStream.getTracks().forEach(track => track.stop());
+                    this.originalDisplayStream = null;
+                }
+                if (this.recordedStream) {
+                    this.recordedStream.getTracks().forEach(track => track.stop());
+                    this.recordedStream = null;
+                }
+            };
+            
+            this.mediaRecorder.onerror = (event) => {
+                console.error(`LiveMode: Ошибка MediaRecorder: ${event.error.name}`, event.error);
+                this._showErrorMessage(`Ошибка записи: ${event.error.name}`);
+                this.stopRecording(); 
+            };
+
+            this.mediaRecorder.start();
+            this.isRecording = true;
+            this.statusDisplay.textContent = 'REC';
+            this.statusDisplay.style.color = 'red';
+            console.log("LiveMode: Запись мастер-трека началась.");
+
+        } catch (error) {
+            console.error('LiveMode: Ошибка при запуске записи:', error);
+            this._showErrorMessage(`Не удалось начать запись: ${error.message}`);
+            this.isRecording = false;
+        } finally {
+            this._showSpinner(false);
+        }
+    }
+    
+    /**
+     * Останавливает запись видео.
+     */
+    async stopRecording() {
+        if (!this.isRecording || !this.mediaRecorder) {
+            console.warn("LiveMode: Запись не активна.");
             return;
         }
         
-        if (!this.isRecording) {
-            try {
-                console.log('LiveMode: Начало записи видео');
+        console.log("LiveMode: Остановка записи...");
+        this._showSpinner(true);
+        
+        return new Promise(resolve => {
+            this.mediaRecorder.onstop = () => {
+                const blob = new Blob(this.recordedChunks, { type: this.mediaRecorder.mimeType });
+                const url = URL.createObjectURL(blob);
+                this._saveRecording(url);
                 
-                // Подготавливаем запись всего экрана
-                let captureStream;
-                
-                try {
-                    // Пытаемся захватить весь экран (если браузер поддерживает)
-                    const displaySurface = document.getElementById('live-video-container');
-                    
-                    if (displaySurface && 'captureStream' in displaySurface) {
-                        // Используем API для захвата потока с DOM-элемента (работает в Chrome)
-                        captureStream = displaySurface.captureStream();
-                        console.log('LiveMode: Успешно захвачен поток с DOM элемента');
-                    } else if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-                        // Если не поддерживается captureStream, пробуем getDisplayMedia
-                        captureStream = await navigator.mediaDevices.getDisplayMedia({
-                            video: {
-                                cursor: "always",
-                                displaySurface: "browser"
-                            },
-                            audio: true
-                        });
-                        console.log('LiveMode: Успешно захвачен поток с экрана через getDisplayMedia');
-                    } else {
-                        // Если нет поддержки захвата экрана, используем существующий видеопоток
-                        captureStream = this.videoStream;
-                        console.log('LiveMode: Используем обычный видеопоток (без захвата экрана)');
-                    }
-                } catch (e) {
-                    console.error('LiveMode: Ошибка при попытке захвата экрана:', e);
-                    // Используем обычный видеопоток как запасной вариант
-                    captureStream = this.videoStream;
-                    console.log('LiveMode: Используем обычный видеопоток после ошибки захвата экрана');
+                // Остановка видеопотока с экрана
+                if (this.originalDisplayStream) {
+                    this.originalDisplayStream.getTracks().forEach(track => track.stop());
                 }
                 
-                // Устанавливаем опции для записи
-                const options = { mimeType: 'video/webm;codecs=vp9,opus' };
-                
-                // Создаем MediaRecorder с выбранным потоком
-                this.mediaRecorder = new MediaRecorder(captureStream, options);
-                
-                // Очищаем предыдущие чанки данных
+                this.isRecording = false;
+                this.statusDisplay.textContent = '';
                 this.recordedChunks = [];
+                this.mediaRecorder = null;
+                this.recordedStream = null;
+                this.originalDisplayStream = null;
                 
-                // Обработчик данных
-                this.mediaRecorder.ondataavailable = (event) => {
-                    if (event.data.size > 0) {
-                        this.recordedChunks.push(event.data);
-                    }
-                };
-                
-                // Обработчик завершения записи
-                this.mediaRecorder.onstop = () => {
-                    // Создаем Blob из записанных данных
-                    const blob = new Blob(this.recordedChunks, { type: 'video/webm' });
-                    
-                    // Создаем ссылку для скачивания
-                    const url = URL.createObjectURL(blob);
+                this._showSpinner(false);
+                console.log("LiveMode: Запись мастер-трека успешно остановлена и сохранена.");
+                resolve();
+            };
+            
+            this.mediaRecorder.stop();
+        });
+    }
+    
+    /**
+     * Сохраняет записанное видео.
+     * @param {string} url - URL записанного Blob.
+     * @private
+     */
+    _saveRecording(url) {
                     const a = document.createElement('a');
                     a.style.display = 'none';
                     a.href = url;
-                    a.download = `text-live-${new Date().toISOString()}.webm`;
-                    
-                    // Добавляем ссылку в DOM и эмулируем клик
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
+        a.download = `beLive-recording-${formattedDate}.webm`;
                     document.body.appendChild(a);
                     a.click();
-                    
-                    // Очищаем ресурсы
                     setTimeout(() => {
                         document.body.removeChild(a);
                         URL.revokeObjectURL(url);
+            console.log("LiveMode: Запись сохранена, ресурсы очищены.");
                     }, 100);
-                    
-                    console.log('LiveMode: Запись сохранена');
-                };
-                
-                // Начинаем запись
-                this.mediaRecorder.start();
-                
-                // Обновляем UI
-                this.isRecording = true;
-                
-                // Показываем индикатор в верхнем левом углу
-                if (recordingIndicator) {
-                    recordingIndicator.classList.remove('hidden');
+    }
+    
+    /**
+     * Показывает или скрывает спиннер загрузки.
+     * @param {boolean} show - Показать или скрыть.
+     * @private
+     */
+    _showSpinner(show) {
+        let spinner = document.getElementById('live-mode-spinner');
+        if (!spinner) {
+            spinner = document.createElement('div');
+            spinner.id = 'live-mode-spinner';
+            spinner.innerHTML = '<div></div><div></div><div></div>'; // Простая анимация спиннера
+            const style = document.createElement('style');
+            style.textContent = `
+                #live-mode-spinner {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 10001;
+                    display: none; /* Скрыт по умолчанию */
                 }
-                
-                // Показываем старый индикатор записи, если он существует
-                if (oldRecIndicator) {
-                    oldRecIndicator.style.display = 'block';
-                    oldRecIndicator.classList.remove('hidden');
+                #live-mode-spinner.show {
+                    display: inline-block;
                 }
-                
-                // Обновляем стиль кнопки REC
-                recButton.innerHTML = '<i class="fas fa-square"></i> STOP';
-                recButton.style.backgroundColor = 'rgba(220, 53, 69, 0.9)';
-                recButton.classList.add('recording'); // Добавляем класс для мигания
-                
-                // Показываем уведомление
-                this._showErrorMessage('Запись начата', 'info');
-                
-            } catch (error) {
-                console.error('LiveMode: Ошибка при начале записи:', error);
-                this._showErrorMessage('Не удалось начать запись видео', 'error');
-            }
+                #live-mode-spinner div {
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    background: #fff;
+                    border-radius: 50%;
+                    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+                }
+                #live-mode-spinner div:nth-child(1) { animation-delay: -0.32s; }
+                #live-mode-spinner div:nth-child(2) { animation-delay: -0.16s; }
+                @keyframes sk-bouncedelay {
+                    0%, 80%, 100% { transform: scale(0); }
+                    40% { transform: scale(1.0); }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(spinner);
+        }
+
+        if (show) {
+            spinner.classList.add('show');
         } else {
-            // Останавливаем запись
-            if (this.mediaRecorder) {
-                this.mediaRecorder.stop();
-            }
-            
-            // Обновляем UI
-            this.isRecording = false;
-            
-            // Скрываем индикатор в верхнем левом углу
-            if (recordingIndicator) {
-                recordingIndicator.classList.add('hidden');
-            }
-            
-            // Скрываем старый индикатор записи, если он существует
-            if (oldRecIndicator) {
-                oldRecIndicator.style.display = 'none';
-                oldRecIndicator.classList.add('hidden');
-            }
-            
-            // Возвращаем кнопке REC прежний вид
-            recButton.innerHTML = '<i class="fas fa-circle"></i> REC';
-            recButton.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
-            recButton.classList.remove('recording'); // Удаляем класс мигания
-            
-            // Показываем уведомление
-            this._showErrorMessage('Запись завершена', 'success');
-            
-            console.log('LiveMode: Запись остановлена');
+            spinner.classList.remove('show');
         }
     }
 
@@ -3190,6 +3194,26 @@ class LiveMode {
             console.log(`LiveMode: Сменился режим на ${e.detail.mode}`);
             if (e.detail.mode === 'live' && !this.isActive) {
                 this.activate();
+            }
+        }
+    }
+
+    /**
+     * Переключение стриминга (заглушка)
+     */
+    toggleStreaming() {
+        console.log('LiveMode: Функция стриминга еще не реализована.');
+        this._showErrorMessage('Стриминг пока не доступен', 'info');
+        // В будущем здесь будет логика запуска/остановки стрима
+        this.isStreaming = !this.isStreaming;
+        const streamButton = document.getElementById('live-stream-button');
+        if (streamButton) {
+            if (this.isStreaming) {
+                streamButton.innerHTML = '<i class="fas fa-stop-circle"></i> STOP';
+                streamButton.style.backgroundColor = 'rgba(255, 100, 0, 0.8)';
+            } else {
+                streamButton.innerHTML = '<i class="fas fa-broadcast-tower"></i> LIVE';
+                streamButton.style.backgroundColor = 'rgba(0, 123, 255, 0.8)';
             }
         }
     }

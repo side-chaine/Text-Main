@@ -1420,59 +1420,31 @@ class WaveformEditor {
      * @private
      */
     _drawWaveformData(ctx) {
+        const width = this.canvas.width;
         const middle = this.canvas.height / 2;
+        const dpr = window.devicePixelRatio || 1;
+        
+        ctx.clearRect(0, 0, width, this.canvas.height);
 
-        if (this.currentWaveformSource === 'master') {
-            // Мастер-вид: Сначала рисуем инструментал, затем "вырезаем" место и рисуем вокал.
-            if (this.instrumentalAudioData && this.vocalAudioData) {
-                if (window.colorService && window.colorService.getCurrentScheme) {
-                    console.log(`🎨 Master view: Drawing instrumental, then punching out and drawing vocals.`);
+        // 1. Отрисовка инструментальной дорожки (если есть)
+        if (this.instrumentalAudioData) {
+            this._drawSingleWaveform(ctx, middle, this.instrumentalAudioData, '#4497ff', 0.8);
+        }
 
-                    // 1. Рисуем инструментал с полной непрозрачностью
-                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.instrumentalAudioData, window.colorService.getColor('instrumental'), 1.0, false);
+        // 2. Отрисовка вокальной дорожки поверх (если есть)
+        if (this.vocalAudioData) {
+            // Если нет инструментала, рисуем вокал по центру. 
+            // Если есть, рисуем его как мастер-трек (например, немного сместив или другим стилем)
+            const isMasterVocal = !!this.instrumentalAudioData;
+            this._drawSingleWaveform(ctx, middle, this.vocalAudioData, '#FFD700', 1.0, isMasterVocal);
+        }
 
-                    // 2. Рисуем вокал с полной непрозрачностью, но с предварительной "вырезкой" фона.
-                    // Это гарантирует, что цвет вокала будет одинаковым везде.
-                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.vocalAudioData, window.colorService.getColor('vocals'), 1.0, true);
-                } else {
-                    // Fallback
-                    console.warn('WaveformEditor: ColorService недоступен, используем fallback цвета');
-                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.instrumentalAudioData, '#2196F3', 1.0, false);
-                    this._drawSingleWaveform(ctx, this.canvas.height / 2, this.vocalAudioData, '#FFD700', 1.0, true);
-                }
-            } else {
-                console.warn('WaveformEditor: Нет аудио данных для мастер-вида');
-                // Рисуем любые доступные данные как fallback
-                const fallbackData = this.instrumentalAudioData || this.vocalAudioData || this.audioData;
-                if (fallbackData) {
-                    const fallbackColor = window.colorService ? window.colorService.getColor('instrumental') : '#2196F3';
-                    this._drawSingleWaveform(ctx, this.canvas.height / 2, fallbackData, fallbackColor, 1.0, false);
-                }
-            }
-        } else if (this.currentWaveformSource === 'vocals') {
-            // Отображаем только вокал
-            if (this.vocalAudioData) {
-                const vocalsColor = window.colorService ? window.colorService.getVocalsColor() : '#FFD700';
-                this._drawSingleWaveform(ctx, middle, this.vocalAudioData, vocalsColor, 1.0, false);
-            } else {
-                console.warn('WaveformEditor: Vocal audio data not available');
-            }
-        } else if (this.currentWaveformSource === 'instrumental') {
-            // Отображаем только инструментал  
-            if (this.instrumentalAudioData) {
-                const instrumentalColor = window.colorService ? window.colorService.getInstrumentalColor() : '#2196F3';
-                this._drawSingleWaveform(ctx, middle, this.instrumentalAudioData, instrumentalColor, 1.0, false);
-        } else {
-                console.warn('WaveformEditor: Instrumental audio data not available');
-            }
-        } else {
-            // Fallback: используем любые доступные данные
-            const fallbackData = this.vocalAudioData || this.instrumentalAudioData || this.masterAudioData || this.audioData;
-            if (fallbackData) {
-                this._drawSingleWaveform(ctx, middle, fallbackData, '#666666', 1.0, false);
-            } else {
-                console.warn('WaveformEditor: No audio data available for waveform display');
-            }
+        if (!this.instrumentalAudioData && !this.vocalAudioData) {
+            console.log("WaveformEditor: Vocal audio data not available");
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = `${14 * dpr}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText('Аудиоданные недоступны', width / 2, middle);
         }
     }
     
@@ -1486,6 +1458,10 @@ class WaveformEditor {
      * @private
      */
     _drawSingleWaveform(ctx, middle, audioData, color, alpha, isMasterVocal = false) {
+        const width = this.canvas.width;
+        const dpr = window.devicePixelRatio || 1;
+        const totalPixels = width * dpr;
+        
         if (!audioData) return;
 
         // Извлекаем RGB компоненты из hex цвета
@@ -3239,6 +3215,53 @@ class WaveformEditor {
             window.colorService.addListener((scheme) => {
                 this._updateColorDropdown();
             });
+        }
+    }
+
+    /**
+     * Загружает данные для обеих волновых форм (инструментальной и вокальной).
+     * @param {string} instrumentalUrl URL для инструментальной дорожки.
+     * @param {string} vocalsUrl URL для вокальной дорожки.
+     * @returns {Promise<void>}
+     */
+    async loadDualWaveforms(instrumentalUrl, vocalsUrl) {
+        console.log(`WaveformEditor: Загрузка двойных волновых форм. Инструментал: ${instrumentalUrl}, Вокал: ${vocalsUrl}`);
+        
+        // Сбрасываем предыдущие данные
+        this.instrumentalAudioData = null;
+        this.vocalAudioData = null;
+        this.rawInstrumentalData = null;
+        this.rawVocalData = null;
+        
+        const loadPromises = [];
+
+        if (instrumentalUrl) {
+            loadPromises.push(this._loadBufferFromUrl(instrumentalUrl).then(buffer => {
+                console.log('Инструментальная дорожка загружена.');
+                this.rawInstrumentalData = buffer.getChannelData(0);
+                this.instrumentalAudioData = this._generatePeaks(this.rawInstrumentalData);
+                if (!this.audioDuration) this.audioDuration = buffer.duration;
+            }));
+        }
+
+        if (vocalsUrl) {
+            loadPromises.push(this._loadBufferFromUrl(vocalsUrl).then(buffer => {
+                console.log('Вокальная дорожка загружена.');
+                this.rawVocalData = buffer.getChannelData(0);
+                this.vocalAudioData = this._generatePeaks(this.rawVocalData);
+                if (!this.audioDuration) this.audioDuration = buffer.duration;
+            }));
+        }
+
+        try {
+            await Promise.all(loadPromises);
+            console.log('Все волновые формы успешно загружены и обработаны.');
+            this._drawWaveform();
+        } catch (error) {
+            console.error('Ошибка при загрузке одной из волновых форм:', error);
+            this._showNotification('Не удалось загрузить аудио для редактора.', 'error');
+            // Даже если есть ошибка, пытаемся отрисовать то, что загрузилось
+            this._drawWaveform();
         }
     }
 }

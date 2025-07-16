@@ -1356,6 +1356,25 @@ class TrackCatalog {
             // Update track list
             this._renderTrackList();
 
+            // Отображаем WaveformEditor и загружаем аудио для синхронизации
+            if (window.waveformEditor) {
+                window.waveformEditor.show();
+                // Нам нужен URL для загрузки в waveform-редактор
+                const instrumentalUrl = track.instrumentalUrl || track.audioUrl;
+                const vocalsUrl = track.vocalsUrl;
+
+                // Используем новый метод для загрузки обеих дорожек
+                if (instrumentalUrl || vocalsUrl) {
+                     window.waveformEditor.loadDualWaveforms(instrumentalUrl, vocalsUrl)
+                        .then(() => {
+                            console.log('WaveformEditor: Обе дорожки успешно загружены.');
+                        })
+                        .catch(error => {
+                            console.error('TrackCatalog: Ошибка при загрузке двойных волновых форм:', error);
+                        });
+                }
+            }
+
             console.log(`✅ Track "${track.title}" loaded successfully`);
             
         } catch (error) {

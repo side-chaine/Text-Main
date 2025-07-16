@@ -58,7 +58,7 @@
             gap: 20px;
             padding: 20px;
             box-sizing: border-box;
-            /* overflow: hidden; */ /* This was hiding the uploader and the scrollbar */
+            overflow: hidden;
         }
 
         .catalog-column {
@@ -67,8 +67,8 @@
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-            /* display: flex; */ /* This was the problem, it prevented natural block flow and overflow */
-            /* flex-direction: column; */ /* This was the problem */
+            display: flex;
+            flex-direction: column;
             overflow-y: auto;
             max-height: 100%;
             position: relative;
@@ -210,11 +210,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em; /* Make icon bigger */
-            color: #888;
+            font-size: 0.7em;
+            color: #ccc;
             flex-shrink: 0;
             border: 1px solid #666;
-            /* Removed problematic background-image from external service */
+            background-image: url('https://via.placeholder.com/60'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+            text-indent: -9999px; /* Hide text, show background image */
         }
         .trends-suggestions-column .track-details {
             flex-grow: 1;
@@ -296,135 +299,6 @@
             color: #bbb;
             flex-shrink: 0;
         }
-
-        /* --- Uploader Styles --- */
-        .upload-section {
-            background-color: #3a3a3a;
-            border-radius: 8px;
-            margin-top: 20px;
-            padding: 15px;
-        }
-        .upload-section h3 {
-            font-size: 1.2em;
-            color: #00e676;
-            margin-top: 0;
-            text-align: center;
-        }
-        .drop-zones-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        .drop-zone {
-            flex: 1;
-            border: 2px dashed #555;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            color: #888;
-            cursor: pointer;
-            transition: border-color 0.3s, background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100px; /* Fixed height */
-        }
-        .drop-zone:hover, .drop-zone.drag-over {
-            border-color: #00e676;
-            background-color: rgba(0, 230, 118, 0.1);
-        }
-        .drop-zone.has-file {
-            border-color: #00e676;
-            border-style: solid;
-        }
-        .drop-zone-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .drop-zone-message {
-            font-size: 0.9em;
-        }
-        .file-name {
-            color: #00e676;
-            font-weight: bold;
-        }
-        .upload-buttons-container {
-            display: flex;
-            gap: 15px;
-        }
-        .upload-buttons-container .btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.2s;
-        }
-        .upload-buttons-container .json-btn {
-            background-color: #555;
-            color: #eee;
-        }
-        .upload-buttons-container .json-btn:hover {
-            background-color: #666;
-        }
-        .upload-buttons-container .json-btn.has-file {
-            background-color: #00e676;
-            color: #1a1a1a;
-        }
-        .upload-buttons-container .upload-btn {
-            background-color: #00e676;
-            color: #1a1a1a;
-            font-weight: bold;
-        }
-        .upload-buttons-container .upload-btn:hover {
-            background-color: #00ff8c;
-        }
-        #json-file-input {
-            display: none;
-        }
-
-        /* --- Modal Styles --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none; /* Hidden by default */
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .modal-overlay.visible {
-            display: flex;
-        }
-        .modal-content {
-            background-color: #2a2a2a;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            width: 600px;
-            max-width: 90%;
-            position: relative;
-        }
-        .modal-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .modal-close-btn:hover {
-            color: #fff;
-        }
-
     </style>
 </head>
 <body>
@@ -434,38 +308,7 @@
         <button class="mode-btn active">РЕПЕТИЦИЯ</button>
         <button class="mode-btn">LIVE</button>
         <button class="mode-btn">КАТАЛОГ</button>
-        <button class="mode-btn" id="show-upload-modal-btn">Загрузить трек</button>
     </div>
-
-    <!-- Modal for Uploader -->
-    <div id="uploader-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="modal-close-btn" class="modal-close-btn">&times;</button>
-            <div class="upload-section">
-                <h3>Загрузить новый трек</h3>
-                <div class="drop-zones-container">
-                    <div id="instrumental-drop-zone" class="drop-zone" title="Инструментал">
-                        <div class="drop-zone-icon">🎹</div>
-                        <div class="drop-zone-message"></div>
-                    </div>
-                    <div id="vocals-drop-zone" class="drop-zone" title="Вокал">
-                        <div class="drop-zone-icon">🎤</div>
-                        <div class="drop-zone-message"></div>
-                    </div>
-                    <div id="lyrics-drop-zone" class="drop-zone" title="Текст">
-                        <div class="drop-zone-icon">✍️</div>
-                        <div class="drop-zone-message"></div>
-                    </div>
-                </div>
-                <div class="upload-buttons-container">
-                    <input type="file" id="json-file-input" accept=".json">
-                    <button id="json-upload-button" class="btn json-btn">Прикрепить JSON с маркерами</button>
-                    <button id="upload-track-button" class="btn upload-btn">Загрузить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="catalog-main-content">
         <!-- Первая колонка: My Music / My Box -->
@@ -481,14 +324,84 @@
             <h2 class="column-header">Тренды и Предложения</h2>
             
             <div class="section-title">📈 Тренды</div>
-            <div id="trends-grid" class="trends-grid">
-                <!-- Динамически загружаемый контент будет здесь -->
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Bohemian Rhapsody</div>
+                    <div class="artist">Queen</div>
+                </div>
+                <div class="trend-indicator"></div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Stairway to Heaven</div>
+                    <div class="artist">Led Zeppelin</div>
+                </div>
+                <div class="trend-indicator"></div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Shape of You</div>
+                    <div class="artist">Ed Sheeran</div>
+                </div>
+                <div class="trend-indicator"></div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Blinding Lights</div>
+                    <div class="artist">The Weeknd</div>
+                </div>
+                <div class="trend-indicator"></div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Bad Guy</div>
+                    <div class="artist">Billie Eilish</div>
+                </div>
+                <div class="trend-indicator"></div>
             </div>
 
             <div class="section-title">💡 Предложения для тебя</div>
-            <div id="suggestions-grid" class="trends-grid">
-                <!-- Динамически загружаемый контент будет здесь -->
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Yesterday</div>
+                    <div class="artist">The Beatles</div>
+                </div>
             </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Hallelujah</div>
+                    <div class="artist">Leonard Cohen</div>
+                </div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Smells Like Teen Spirit</div>
+                    <div class="artist">Nirvana</div>
+                </div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Hotel California</div>
+                    <div class="artist">Eagles</div>
+                </div>
+            </div>
+            <div class="track-card">
+                <div class="album-art-placeholder"></div>
+                <div class="track-details">
+                    <div class="title">Imagine</div>
+                    <div class="artist">John Lennon</div>
+                </div>
+            </div>
+            <!-- More trending/suggested tracks for scrolling -->
         </div>
 
         <!-- Третья колонка: Умный Поиск -->
@@ -543,121 +456,227 @@
         </div>
     </div>
 
-    <script type="module">
-        import { renderMyMusic } from './components/MyMusic.js';
-        import { initializeUploader } from './components/Uploader.js';
+    <script>
+        const myMusicData = [
+            {
+                artist: "Linkin Park",
+                tracks: [
+                    { title: "New Divide", played: 12, favorite: true },
+                    { title: "When They Come For Me", played: 8, favorite: false },
+                ]
+            },
+            {
+                artist: "Eminem",
+                tracks: [
+                    { title: "Love The Way You Lie", played: 25, favorite: true },
+                ]
+            },
+            {
+                artist: "Aerosmith",
+                tracks: [
+                    { title: "Dream On", played: 5, favorite: false },
+                ]
+            },
+            {
+                artist: "Queen",
+                tracks: [
+                    { title: "Bohemian Rhapsody", played: 30, favorite: true },
+                    { title: "Don't Stop Me Now", played: 20, favorite: false },
+                    { title: "We Will Rock You", played: 15, favorite: false },
+                ]
+            },
+            {
+                artist: "Led Zeppelin",
+                tracks: [
+                    { title: "Stairway to Heaven", played: 40, favorite: true },
+                    { title: "Whole Lotta Love", played: 22, favorite: false },
+                ]
+            },
+            {
+                artist: "The Beatles",
+                tracks: [
+                    { title: "Yesterday", played: 18, favorite: false },
+                    { title: "Hey Jude", played: 28, favorite: true },
+                ]
+            },
+            {
+                artist: "Michael Jackson",
+                tracks: [
+                    { title: "Billie Jean", played: 35, favorite: true },
+                ]
+            },
+            {
+                artist: "Madonna",
+                tracks: [
+                    { title: "Like a Prayer", played: 10, favorite: false },
+                ]
+            },
+            {
+                artist: "Adele",
+                tracks: [
+                    { title: "Rolling in the Deep", played: 23, favorite: true },
+                ]
+            }
+        ];
 
-        // --- ДАННЫЕ И РЕНДЕРИНГ ДЛЯ ТРЕНДОВ И ПРЕДЛОЖЕНИЙ ---
+        const myMusicList = document.getElementById('my-music-list');
+
+        function renderMyMusic() {
+            myMusicList.innerHTML = ''; // Очистить текущий список
+
+            myMusicData.forEach(artistData => {
+                const artistGroup = document.createElement('div');
+                artistGroup.className = 'artist-group';
+
+                const artistHeader = document.createElement('div');
+                artistHeader.className = 'artist-header';
+                artistHeader.innerHTML = `<span>${artistData.artist}</span><span>${artistData.tracks.length} трека <span class="toggle-icon">+</span></span>`;
+                artistGroup.appendChild(artistHeader);
+
+                const trackList = document.createElement('ul');
+                trackList.className = 'track-list';
+                trackList.style.display = 'none'; // Скрыто по умолчанию
+
+                artistData.tracks.forEach(track => {
+                    const trackItem = document.createElement('li');
+                    trackItem.className = 'track-item';
+                    const favoriteClass = track.favorite ? 'active' : '';
+                    trackItem.innerHTML = `
+                        <span>${track.title} <span class="track-meta-info">(Исполнено ${track.played} раз)${track.played > 20 ? ' 🔥' : ''}</span></span>
+                        <span class="track-item-controls">
+                            <button class="play-button" data-track-title="${track.title}">▶</button>
+                            <button class="favorite-button ${favoriteClass}" data-track-title="${track.title}">⭐</button>
+                        </span>
+                    `;
+                    trackList.appendChild(trackItem);
+                });
+                artistGroup.appendChild(trackList);
+                myMusicList.appendChild(artistGroup);
+            });
+
+            addEventListeners();
+        }
+
+        function addEventListeners() {
+            document.querySelectorAll('.artist-group').forEach(group => {
+                group.querySelector('.artist-header').addEventListener('click', () => {
+                    const trackList = group.querySelector('.track-list');
+                    const toggleIcon = group.querySelector('.toggle-icon');
+                    if (trackList) {
+                        trackList.style.display = trackList.style.display === 'none' ? 'block' : 'none';
+                        toggleIcon.textContent = trackList.style.display === 'none' ? '+' : '-';
+                        group.classList.toggle('expanded', trackList.style.display === 'block');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.play-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const trackTitle = event.target.dataset.trackTitle;
+                    alert(`Воспроизведение: ${trackTitle}`);
+                    // Здесь будет логика воспроизведения трека
+                });
+            });
+
+            document.querySelectorAll('.favorite-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const trackTitle = event.target.dataset.trackTitle;
+                    event.target.classList.toggle('active');
+                    const isFavorite = event.target.classList.contains('active');
+                    alert(`${trackTitle} ${isFavorite ? 'добавлен в' : 'удален из'} избранного`);
+                    // Здесь будет логика добавления/удаления из избранного
+                });
+            });
+
+            // Mock search functionality for demonstration
+            const searchInput = document.querySelector('.smart-search-column input[type="text"]');
+            const searchResultsContainer = document.querySelector('.smart-search-column .search-results');
+            const mockResults = [
+                { title: "New Divide", artist: "Linkin Park", lyrics: "I remember new divide in my mind", type: "🎵" },
+                { title: "When They Come For Me", artist: "Linkin Park", lyrics: "When they come for me I'll be gone", type: "🎤" },
+                { title: "Love The Way You Lie", artist: "Eminem", lyrics: "Just gonna stand there and watch me burn", type: "✍️" },
+                { title: "Dream On", artist: "Aerosmith", lyrics: "Every time that I look in the mirror", type: "🎵" },
+                { title: "Bohemian Rhapsody", artist: "Queen", lyrics: "Is this the real life? Is this just fantasy?", type: "🎤" },
+                { title: "Stairway to Heaven", artist: "Led Zeppelin", lyrics: "And she's buying a stairway to heaven", type: "✍️" },
+                { title: "Yesterday", artist: "The Beatles", lyrics: "Yesterday, all my troubles seemed so far away", type: "🎵" },
+                { title: "Imagine", artist: "John Lennon", lyrics: "Imagine there's no heaven", type: "🎤" },
+                { title: "Smells Like Teen Spirit", artist: "Nirvana", lyrics: "Load up on guns, bring your friends", type: "✍️" },
+                { title: "Billie Jean", artist: "Michael Jackson", lyrics: "Billie Jean is not my lover", type: "🎵" },
+                { title: "Rolling in the Deep", artist: "Adele", lyrics: "We could have had it all", type: "🎤" },
+            ];
+
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                searchResultsContainer.innerHTML = '';
+
+                if (query.length < 2) return;
+
+                const filteredResults = mockResults.filter(track => {
+                    return track.title.toLowerCase().includes(query) ||
+                           track.artist.toLowerCase().includes(query) ||
+                           (track.lyrics && track.lyrics.toLowerCase().includes(query));
+                });
+
+                filteredResults.forEach(track => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    
+                    let displayedText = `${track.title} - ${track.artist}`;
+                    let matchTypeIcon = track.type; 
+                    
+                    displayedText = displayedText.replace(new RegExp(query, 'gi'), (match) => {
+                        const isExactWord = new RegExp(`\\b${query}\\b`, 'gi').test(match);
+                        return `<span class="highlight-${isExactWord ? 'exact' : 'partial'}">${match}</span>`;
+                    });
+
+                    item.innerHTML = `<span class="search-icon">${matchTypeIcon}</span>${displayedText}`;
+                    searchResultsContainer.appendChild(item);
+                });
+            });
+        }
+
+        // Инициализация рендеринга при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMyMusic();
+            renderTrendsAndSuggestions();
+        });
 
         const trendsData = [
-            { title: "Bohemian Rhapsody", artist: "Queen", isTrending: true },
-            { title: "Stairway to Heaven", artist: "Led Zeppelin", isTrending: true },
-            { title: "Shape of You", artist: "Ed Sheeran", isTrending: true },
-            { title: "Blinding Lights", artist: "The Weeknd", isTrending: true },
-            { title: "Bad Guy", artist: "Billie Eilish", isTrending: true },
-        ];
-        
-        const suggestionsData = [
-            { title: "Yesterday", artist: "The Beatles", isTrending: false },
-            { title: "Hallelujah", artist: "Leonard Cohen", isTrending: false },
-            { title: "Smells Like Teen Spirit", artist: "Nirvana", isTrending: false },
-            { title: "Hotel California", artist: "Eagles", isTrending: false },
-            { title: "Imagine", artist: "John Lennon", isTrending: false },
+            { cover: "https://via.placeholder.com/150/FF5733/FFFFFF?text=Trend+1", title: "Summer Vibes", artist: "DJ Chill", trendScore: 95 },
+            { cover: "https://via.placeholder.com/150/33FF57/FFFFFF?text=Trend+2", title: "City Lights", artist: "Urban Beats", trendScore: 88 },
+            { cover: "https://via.placeholder.com/150/3357FF/FFFFFF?text=Trend+3", title: "Forest Echo", artist: "Nature Sounds", trendScore: 72 },
+            { cover: "https://via.placeholder.com/150/F0FF33/FFFFFF?text=Trend+4", title: "Deep House Mix", artist: "Groove Master", trendScore: 91 },
+            { cover: "https://via.placeholder.com/150/FF33F0/FFFFFF?text=Trend+5", title: "Acoustic Dreams", artist: "Melody Maker", trendScore: 80 },
+            { cover: "https://via.placeholder.com/150/33FFF0/FFFFFF?text=Trend+6", title: "Cyberpunk Anthem", artist: "Synthwave", trendScore: 98 },
+            { cover: "https://via.placeholder.com/150/5733FF/FFFFFF?text=Trend+7", title: "Jazz Fusion", artist: "Smooth Jams", trendScore: 65 },
+            { cover: "https://via.placeholder.com/150/FF8833/FFFFFF?text=Trend+8", title: "Rock Ballad", artist: "Power Chords", trendScore: 78 },
+            { cover: "https://via.placeholder.com/150/88FF33/FFFFFF?text=Trend+9", title: "Lo-Fi Study", artist: "Brain Relax", trendScore: 85 },
+            { cover: "https://via.placeholder.com/150/3388FF/FFFFFF?text=Trend+10", title: "Epic Soundtrack", artist: "Cinematic Orchestra", trendScore: 93 }
         ];
 
-        function renderTrackCards(container, data) {
-            if (!container) return; // Защита от ошибок, если элемент не найден
-            container.innerHTML = '';
+        const trendsGrid = document.getElementById('trends-grid');
 
-            data.forEach(track => {
+        function renderTrendsAndSuggestions() {
+            trendsGrid.innerHTML = ''; // Очистить текущий список
+
+            trendsData.forEach(track => {
                 const trackCard = document.createElement('div');
                 trackCard.className = 'track-card';
                 trackCard.innerHTML = `
-                    <div class="album-art-placeholder">${track.isTrending ? '📈' : '💡'}</div>
-                    <div class="track-details">
-                        <div class="title">${track.title}</div>
-                        <div class="artist">${track.artist}</div>
+                    <img src="${track.cover}" alt="${track.title} Cover" class="track-cover">
+                    <div class="track-info">
+                        <span class="track-title">${track.title}</span>
+                        <span class="track-artist">${track.artist}</span>
                     </div>
-                    ${track.isTrending ? '<div class="trend-indicator"></div>' : ''}
+                    <div class="trend-indicator" style="--trend-score: ${track.trendScore}%;"></div>
                 `;
                 trackCard.addEventListener('click', () => {
-                    alert(`Выбран трек: ${track.title} - ${track.artist}`);
+                    alert(`Выбран трек из трендов: ${track.title} - ${track.artist}`);
+                    // Здесь будет логика для обработки выбора трека из трендов
                 });
-                container.appendChild(trackCard);
+                trendsGrid.appendChild(trackCard);
             });
         }
-
-        function renderTrendsAndSuggestions() {
-            const trendsGrid = document.getElementById('trends-grid');
-            const suggestionsGrid = document.getElementById('suggestions-grid');
-            renderTrackCards(trendsGrid, trendsData);
-            renderTrackCards(suggestionsGrid, suggestionsData);
-        }
-
-        // --- Улучшенный Mock search functionality ---
-        const searchInput = document.querySelector('.smart-search-column input[type="text"]');
-        const searchResultsContainer = document.querySelector('.smart-search-column .search-results');
-        const mockResults = [
-            { title: "New Divide", artist: "Linkin Park", lyrics: "I remember new divide in my mind", type: "🎵" },
-            { title: "When They Come For Me", artist: "Linkin Park", lyrics: "When they come for me I'll be gone", type: "🎤" },
-            { title: "Love The Way You Lie", artist: "Eminem", lyrics: "Just gonna stand there and watch me burn", type: "✍️" },
-            { title: "Dream On", artist: "Aerosmith", lyrics: "Every time that I look in the mirror", type: "🎵" },
-            { title: "Bohemian Rhapsody", artist: "Queen", lyrics: "Is this the real life? Is this just fantasy?", type: "🎤" },
-            { title: "Stairway to Heaven", artist: "Led Zeppelin", lyrics: "And she's buying a stairway to heaven", type: "✍️" },
-            { title: "Yesterday", artist: "The Beatles", lyrics: "Yesterday, all my troubles seemed so far away", type: "🎵" },
-            { title: "Imagine", artist: "John Lennon", lyrics: "Imagine there's no heaven", type: "🎤" },
-            { title: "Smells Like Teen Spirit", artist: "Nirvana", lyrics: "Load up on guns, bring your friends", type: "✍️" },
-            { title: "Billie Jean", artist: "Michael Jackson", lyrics: "Billie Jean is not my lover", type: "🎵" },
-            { title: "Rolling in the Deep", artist: "Adele", lyrics: "We could have had it all", type: "🎤" },
-        ];
-
-        function renderSearchResults(results) {
-            searchResultsContainer.innerHTML = '';
-            results.forEach(track => {
-                const item = document.createElement('div');
-                item.className = 'search-result-item';
-                
-                let displayedText = `${track.title} - ${track.artist}`;
-                if (track.highlighted) {
-                    displayedText = track.highlighted;
-                }
-
-                item.innerHTML = `<span class="search-icon">${track.type}</span>${displayedText}`;
-                searchResultsContainer.appendChild(item);
-            });
-        }
-        
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value.toLowerCase().trim();
-
-            if (!query) {
-                renderSearchResults(mockResults); // Восстанавливаем список по умолчанию
-                return;
-            }
-
-            const filteredResults = mockResults.filter(track => {
-                return track.title.toLowerCase().includes(query) ||
-                        (track.artist && track.artist.toLowerCase().includes(query)) ||
-                        (track.lyrics && track.lyrics.toLowerCase().includes(query));
-            }).map(track => {
-                const highlighted = `${track.title} - ${track.artist}`.replace(new RegExp(query, 'gi'), (match) => {
-                    const isExactWord = new RegExp(`\\b${query}\\b`, 'gi').test(match);
-                    return `<span class="highlight-${isExactWord ? 'exact' : 'partial'}">${match}</span>`;
-                });
-                return {...track, highlighted };
-            });
-            
-            renderSearchResults(filteredResults);
-        });
-        
-        // Инициализация рендеринга при загрузке страницы
-        document.addEventListener('DOMContentLoaded', () => {
-            const myMusicList = document.getElementById('my-music-list');
-            renderMyMusic(myMusicList);
-            initializeUploader();
-            renderTrendsAndSuggestions();
-            renderSearchResults(mockResults); // Первоначальный рендеринг полного списка для поиска
-        });
     </script>
 </body>
 </html> 
