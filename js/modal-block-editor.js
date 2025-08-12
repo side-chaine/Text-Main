@@ -679,6 +679,11 @@ class ModalBlockEditor {
                                             normInstr = await window.AudioSourceAdapter.normalize(instrumentalBlob);
                                         }
                                         const instrumentalDataUrl = normInstr?.safeUrl || await new Promise((resolve, reject) => {
+                                            // compat: avoid optional chaining for older engines
+                                            const _maybeSafe = (normInstr && normInstr.safeUrl);
+                                            if (_maybeSafe) { resolve(_maybeSafe); return; }
+                                            // fallback to FileReader
+                                            
                                             const reader = new FileReader();
                                             reader.onload = () => resolve(reader.result);
                                             reader.onerror = () => reject(new Error('Failed to create data URL for instrumental'));
@@ -692,12 +697,16 @@ class ModalBlockEditor {
                                             if (window.AudioSourceAdapter) {
                                                 normVoc = await window.AudioSourceAdapter.normalize(vocalsBlobForEngine);
                                             }
-                                            vocalsDataUrl = normVoc?.safeUrl || await new Promise((resolve, reject) => {
+                                            if (normVoc && normVoc.safeUrl) {
+                                                vocalsDataUrl = normVoc.safeUrl;
+                                            } else {
+                                                vocalsDataUrl = await new Promise((resolve, reject) => {
                                                 const reader = new FileReader();
                                                 reader.onload = () => resolve(reader.result);
                                                 reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
                                                 reader.readAsDataURL(vocalsBlobForEngine);
                                             });
+                                            }
                                         }
                                         
                                         await window.audioEngine.loadTrack(instrumentalDataUrl, vocalsDataUrl);
@@ -715,7 +724,7 @@ class ModalBlockEditor {
                                     try {
                                         if (window.AudioSourceAdapter) {
                                             const norm = await window.AudioSourceAdapter.normalize(vocalsBlob);
-                                            vocalsDataUrl = norm.safeUrl;
+                                            vocalsDataUrl = norm && norm.safeUrl ? norm.safeUrl : null;
                                         }
                                         if (!vocalsDataUrl) {
                                             vocalsDataUrl = await new Promise((resolve, reject) => {
@@ -1086,6 +1095,9 @@ class ModalBlockEditor {
         return false;
     }
 }
+
+// Экспорт в глобальную область видимости для использования в WaveformEditor
+window.ModalBlockEditor = ModalBlockEditor;
 
 // Глобальный экземпляр для доступа из других модулей
 // window.modalBlockEditor = new ModalBlockEditor(); 
