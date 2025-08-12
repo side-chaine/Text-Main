@@ -35,6 +35,24 @@ class CatalogV2 {
     initDatabase() {
         // Подключаемся к уже существующей базе данных
         const request = indexedDB.open('TextAppDB', 5);
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            try {
+                if (!db.objectStoreNames.contains('tracks')) {
+                    const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                    trackStore.createIndex('title', 'title', { unique: false });
+                }
+                if (!db.objectStoreNames.contains('app_state')) {
+                    db.createObjectStore('app_state', { keyPath: 'key' });
+                }
+                if (!db.objectStoreNames.contains('temp_audio_files')) {
+                    db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                }
+                console.log('🎵 CatalogV2: Stores ensured in onupgradeneeded');
+            } catch (e) {
+                console.warn('CatalogV2: onupgradeneeded issue:', e);
+            }
+        };
         
         request.onsuccess = (event) => {
             this.db = event.target.result;
@@ -54,6 +72,31 @@ class CatalogV2 {
         }
         
         try {
+            // Проверяем наличие store перед транзакцией
+            if (!this.db.objectStoreNames.contains('tracks')) {
+                console.warn('CatalogV2: store "tracks" отсутствует. Переоткрываю БД с onupgradeneeded...');
+                await new Promise((resolve, reject) => {
+                    const reopen = indexedDB.open('TextAppDB', 5);
+                    reopen.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains('tracks')) {
+                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                            trackStore.createIndex('title', 'title', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('app_state')) {
+                            db.createObjectStore('app_state', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('temp_audio_files')) {
+                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        }
+                    };
+                    reopen.onsuccess = (e) => {
+                        this.db = e.target.result;
+                        resolve();
+                    };
+                    reopen.onerror = (e) => reject(e);
+                });
+            }
             const transaction = this.db.transaction(['tracks'], 'readonly');
             const store = transaction.objectStore('tracks');
             const request = store.getAll();
