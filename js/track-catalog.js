@@ -62,18 +62,17 @@ class TrackCatalog {
         
         console.log('✅ TrackCatalog: IndexedDB доступен, открываем базу данных...');
         
-        // 🎯 ЭКСТРЕННЫЙ РЕЖИМ: Пытаемся создать новую базу с другим именем
-        const dbName = 'TextAppDB_Recovery_' + Date.now();
-        console.log('🔄 TrackCatalog: Используем экстренное имя базы:', dbName);
-        
-        const request = indexedDB.open(dbName, 1); // Версия 1 для новой базы
+        // ✅ Используем стабильную базу приложения
+        const dbName = 'TextAppDB';
+        const dbVersion = 5;
+        console.log('🔄 TrackCatalog: Используем стабильную базу:', dbName, 'v' + dbVersion);
+        const request = indexedDB.open(dbName, dbVersion);
         
         request.onerror = (event) => {
             console.error('❌ TrackCatalog: Database error:', event.target.error);
             console.error('❌ TrackCatalog: Error details:', event);
             
-            // 🎯 ПОСЛЕДНЯЯ ПОПЫТКА: Удаляем и пересоздаем базу
-            this.forceRecreateDatabase();
+            // Не пересоздаём агрессивно базу по умолчанию, чтобы не терять данные
         };
         
         request.onblocked = (event) => {
@@ -2249,8 +2248,19 @@ class TrackCatalog {
                         if (this.lyricsDisplay.currentStyle && this.lyricsDisplay.currentStyle.id === 'rehearsal') {
                            this.lyricsDisplay.activateRehearsalDisplay();
                         }
-                    }
-                }
+                        // 🔔 Сообщаем всем слушателям (WaveformEditor/MarkerManager), что блоки применены
+                        try {
+                            const evt = new CustomEvent('blocks-applied', { detail: { trackId, blocksCount: track.blocksData.length } });
+                            document.dispatchEvent(evt);
+                        } catch (e) {
+                            console.warn('TrackCatalog: Failed to dispatch blocks-applied event', e);
+                        }
+                        // Принудительно обновляем цвета маркеров
+                        if (window.markerManager && typeof window.markerManager.updateMarkerColors === 'function') {
+                            window.markerManager.updateMarkerColors();
+                        }
+                     }
+                 }
             }).catch(err => {
                 // 🎯 ИСПРАВЛЕННОЕ уведомление об ошибке
                 if (window.app && typeof window.app.showNotification === 'function') {

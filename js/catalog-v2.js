@@ -121,6 +121,7 @@ class CatalogV2 {
                                 <div class="track-actions">
                                     <button class="track-action-btn play-btn" title="Играть">▶</button>
                                     <button class="track-action-btn add-btn" title="Добавить в плейлист">➕</button>
+                                    <button class="track-action-btn json-btn" title="Добавить JSON">🧩</button>
                                 </div>
                             </div>
                         `).join('')}
@@ -178,26 +179,45 @@ class CatalogV2 {
                     const rect = container.getBoundingClientRect();
                     const clickX = e.clientX;
                     const clickY = e.clientY;
-                    
-                    // Область крестика (top: 15px, right: 20px, размер: 35px)
-                    const closeAreaLeft = rect.right - 20 - 35;
-                    const closeAreaTop = rect.top + 15;
-                    const closeAreaRight = rect.right - 20;
-                    const closeAreaBottom = rect.top + 15 + 35;
-                    
-                    if (clickX >= closeAreaLeft && clickX <= closeAreaRight &&
-                        clickY >= closeAreaTop && clickY <= closeAreaBottom) {
+                    const inRightTopCorner = clickX > rect.right - 40 && clickY < rect.top + 40;
+                    if (inRightTopCorner) {
                         this.close();
-                        return;
                     }
-                }
-                
-                // Закрытие по клику на фон
-                if (e.target === this.overlay) {
-                    this.close();
                 }
             });
         }
+ 
+        // Делегирование кликов по трекам (play/plus/json)
+        this.overlay.addEventListener('click', (e) => {
+            const playBtn = e.target.closest('.play-btn');
+            const addBtn = e.target.closest('.add-btn');
+            const jsonBtn = e.target.closest('.json-btn');
+            const trackItem = e.target.closest('.track-item');
+            
+            if (playBtn) {
+                this.playTrack(playBtn);
+                return;
+            }
+            if (addBtn) {
+                this.addToPlaylist(addBtn);
+                return;
+            }
+            if (jsonBtn && trackItem) {
+                const trackId = parseInt(trackItem.dataset.trackId);
+                if (window.trackCatalog && typeof window.trackCatalog._importMarkersForSpecificTrack === 'function') {
+                    window.trackCatalog._importMarkersForSpecificTrack(trackId);
+                } else {
+                    console.warn('CatalogV2: trackCatalog._importMarkersForSpecificTrack недоступен');
+                }
+                return;
+            }
+        });
+
+        // Переключатели вкладок
+        const tabs = this.overlay.querySelectorAll('.catalog-v2-tabs .tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => this.switchTab(tab));
+        });
         
         // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
@@ -685,6 +705,7 @@ class CatalogV2 {
             <div class="track-actions">
                 <button class="track-action-btn play-btn" data-track-id="${track.id}">▶</button>
                 <button class="track-action-btn add-btn" data-track-id="${track.id}">➕</button>
+                <button class="track-action-btn json-btn" data-track-id="${track.id}">🧩</button>
             </div>
         `;
         
@@ -747,16 +768,25 @@ class CatalogV2 {
             await this.loadTrackIntoApp(track);
             
             // Небольшая задержка для завершения загрузки
-            setTimeout(() => {
-                // Открываем редактор блоков через WaveformEditor
-                if (window.waveformEditor && typeof window.waveformEditor._openNewBlockEditor === 'function') {
-                    console.log('🎯 CatalogV2: Открываем NEW Block Editor');
+            const startTs = performance.now();
+            const maxWaitMs = 5000;
+            const waitReady = async () => {
+                const ready = window.waveformEditor
+                    && typeof window.waveformEditor._openNewBlockEditor === 'function'
+                    && window.waveformEditor.currentTrackId === track.id;
+                if (ready) {
+                    console.log('🎯 CatalogV2: WaveformEditor готов. Открываем Block Editor');
                     window.waveformEditor._openNewBlockEditor();
-                } else {
-                    console.warn('❌ CatalogV2: WaveformEditor или метод _openNewBlockEditor недоступен');
-                    this.showNotification('⚠️ Редактор блоков недоступен');
+                    return;
                 }
-            }, 1000);
+                if (performance.now() - startTs > maxWaitMs) {
+                    console.warn('⚠️ CatalogV2: Не удалось дождаться готовности WaveformEditor для Block Editor');
+                    this.showNotification('⚠️ Редактор блоков недоступен: таймаут ожидания');
+                    return;
+                }
+                setTimeout(waitReady, 150);
+            };
+            waitReady();
             
         } catch (error) {
             console.error('❌ CatalogV2: Ошибка при открытии редактора блоков:', error);
@@ -832,17 +862,15 @@ class CatalogV2 {
     
     open() {
         if (!this.overlay) return;
-        
-        this.overlay.classList.remove('hidden');
         this.isOpen = true;
-        
-        console.log('📁 CatalogV2: Overlay открыт');
+        this.overlay.style.display = 'block';
+        document.body.classList.add('catalog-open');
+        // При каждом открытии подтягиваем актуальные треки из БД
+        this.loadTracksFromDB();
     }
     
     close() {
         if (!this.overlay) return;
-        
-        this.overlay.classList.add('hidden');
         this.isOpen = false;
         
         console.log('🔄 CatalogV2: Overlay закрыт');

@@ -950,6 +950,12 @@ class App {
         this.textStyleManager.setStyle('rehearsal');
         this._setLyricsContainerStyle(null);
         this.blockLoopControl.activate();
+        // Обеспечить появление кнопки Loop сразу после первого рендера блока
+        setTimeout(() => {
+            if (this.blockLoopControl && typeof this.blockLoopControl.updateForCurrentBlock === 'function') {
+                this.blockLoopControl.updateForCurrentBlock();
+            }
+        }, 150);
         this._hideLiveFeedConcept();
         
         // Показываем BPM контроли в режиме репетиции
