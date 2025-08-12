@@ -68,6 +68,11 @@ class CatalogV2 {
     async loadTracksFromDB() {
         if (!this.db) {
             console.error('❌ CatalogV2: База данных не инициализирована');
+            // Попробуем инициализировать и повторить
+            this.initDatabase();
+            setTimeout(() => {
+                if (this.db) this.loadTracksFromDB();
+            }, 200);
             return;
         }
         
@@ -705,7 +710,7 @@ class CatalogV2 {
             
             // Показываем уведомление
             this.showNotification(`✅ Трек "${trackTitle}" успешно сохранен!`);
-            console.log('🔔 CatalogV2: ✅ Трек "' + trackTitle + '" успешно сохранен!');
+            console.log('🔔 CatalogV2: ✅ Трек ' + trackTitle + ' успешно сохранен!');
             
             // Очищаем форму
             this.cancelUpload();
