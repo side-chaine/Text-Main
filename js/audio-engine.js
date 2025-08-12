@@ -231,13 +231,33 @@ class AudioEngine {
             if (vocalsUrl.startsWith('blob:')) this.activeBlobUrls.push(vocalsUrl);
 
             vocalsReadyPromise = new Promise((resolve, reject) => {
+                this.vocalsAudio.addEventListener('error', (e) => {
+                    console.error("❌ Ошибка загрузки вокала:", e);
+                    console.warn("🎯 Переходим в instrumental-only режим");
+                    
+                    // Очищаем неработающий вокальный элемент
+                    this.vocalsAudio = null;
+                    this.vocalsSourceNode = null;
+                    
+                    // Уведомляем систему о fallback режиме ТОЛЬКО при ошибке
+                    if (window.app && window.app.showVocalError) {
+                        window.app.showVocalError("Вокальная дорожка недоступна. Режим: только инструментал.");
+                    }
+                    
+                    // Resolve для продолжения работы в instrumental-only
+                    resolve({ mode: 'instrumental-only', hasVocals: false });
+                });
+                
+                // 🔧 НОВОЕ: Обработчик успешной загрузки вокала
                 this.vocalsAudio.addEventListener('loadedmetadata', () => {
                     console.log(`✅ ВОКАЛ ГОТОВ! Длительность: ${this.vocalsAudio.duration.toFixed(2)}с`);
-                    resolve();
-                });
-                this.vocalsAudio.addEventListener('error', (e) => {
-                    console.warn("⚠️ Ошибка загрузки вокала:", e);
-                    resolve(); // Continue without vocals
+                    
+                    // Активируем вокальный слайдер при успешной загрузке
+                    if (window.app && window.app.enableVocalControls) {
+                        window.app.enableVocalControls();
+                    }
+                    
+                    resolve({ mode: 'dual-track', hasVocals: true });
                 });
             });
 
@@ -255,12 +275,25 @@ class AudioEngine {
 
         // Connect vocals when ready (non-blocking)
         if (vocalsUrl && this.vocalsAudio) {
-            vocalsReadyPromise.then(() => {
-                if (!this.vocalsSourceNode && this.vocalsAudio) {
-                    this.vocalsSourceNode = this.audioContext.createMediaElementSource(this.vocalsAudio);
-                    this.vocalsSourceNode.connect(this.vocalsGain);
-                    console.log('🎤 ВОКАЛ ПОДКЛЮЧЕН к аудио-контексту');
+            vocalsReadyPromise.then((result) => {
+                // 🔧 ИСПРАВЛЕНО: Проверяем что вокал реально загрузился
+                if (!this.vocalsSourceNode && this.vocalsAudio && this.vocalsAudio.src) {
+                    try {
+                        this.vocalsSourceNode = this.audioContext.createMediaElementSource(this.vocalsAudio);
+                        this.vocalsSourceNode.connect(this.vocalsGain);
+                        console.log('🎤 ВОКАЛ ПОДКЛЮЧЕН к аудио-контексту');
+                    } catch (error) {
+                        console.error('❌ Ошибка подключения вокала к Web Audio:', error);
+                        this.vocalsAudio = null;
+                        this.vocalsSourceNode = null;
+                    }
+                } else if (result && result.mode === 'instrumental-only') {
+                    console.log('🎯 Режим instrumental-only активирован');
                 }
+            }).catch((error) => {
+                console.error('❌ Критическая ошибка загрузки вокала:', error);
+                this.vocalsAudio = null;
+                this.vocalsSourceNode = null;
             });
         }
 
@@ -456,8 +489,8 @@ class AudioEngine {
             await this.instrumentalAudio.play();
             console.log('▶️ ИНСТРУМЕНТАЛ: Воспроизведение начато');
 
-            // Play vocals in sync if available
-            if (this.vocalsAudio && this.vocalsAudio.readyState >= 3) {
+            // Play vocals in sync if available AND connected to Web Audio
+            if (this.vocalsAudio && this.vocalsAudio.readyState >= 3 && this.vocalsSourceNode) {
                 try {
                     // Sync vocals to instrumental timing
                     this.vocalsAudio.currentTime = this.instrumentalAudio.currentTime;
@@ -466,6 +499,25 @@ class AudioEngine {
                 } catch (vocalsError) {
                     console.warn('⚠️ Вокал не может быть воспроизведен:', vocalsError);
                 }
+            } else if (this.vocalsAudio && !this.vocalsSourceNode) {
+                console.log('🔄 ВОКАЛ: Ожидаем подключения к Web Audio API...');
+                // Попытаемся переподключить через короткую задержку
+                setTimeout(() => {
+                    if (this.vocalsAudio && this.vocalsAudio.readyState >= 3 && !this.vocalsSourceNode) {
+                        try {
+                            this.vocalsSourceNode = this.audioContext.createMediaElementSource(this.vocalsAudio);
+                            this.vocalsSourceNode.connect(this.vocalsGain);
+                            console.log('🎤 ВОКАЛ: Экстренное подключение к Web Audio выполнено');
+                            
+                            // Активируем вокальные контролы
+                            if (window.app && window.app.enableVocalControls) {
+                                window.app.enableVocalControls();
+                            }
+                        } catch (error) {
+                            console.error('❌ Экстренное подключение вокала не удалось:', error);
+                        }
+                    }
+                }, 100);
             }
 
             this.isPlaying = true;

@@ -1,5 +1,0 @@
-/Users/evgenijmakrov/Text-Main/css/track-catalog.css:1  Failed to load resource: net::ERR_FILE_NOT_FOUND
-catalog-design-test.html:660 Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
-    at renderTrendsAndSuggestions (catalog-design-test.html:660:34)
-    at HTMLDocument.<anonymous> (catalog-design-test.html:641:13)
-60:1  Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED

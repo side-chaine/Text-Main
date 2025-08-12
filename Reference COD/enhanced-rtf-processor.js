@@ -308,6 +308,7 @@ class EnhancedRtfProcessor {
         // Нормализация пробелов и переносов строк
         processedText = processedText.replace(/[ \t]+/g, ' ');
         processedText = processedText.replace(/\n{3,}/g, '\n\n');
+        processedText = processedText.replace(/^\s*\n/gm, ''); // Пустые строки, которые могли остаться после очистки
         
         // Удаление строк, содержащих только непечатные символы или остатки тегов
         const lines = processedText.split('\n');

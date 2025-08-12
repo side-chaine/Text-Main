@@ -200,6 +200,16 @@ class App {
             'Karaoke/pexels-pixabay-164879.jpg'
         ];
         this.karaokeBackgroundManager = new KaraokeBackgroundManager(karaokeImages);
+
+        // this.initCatalogV2(); // УБРАНО: инициализация теперь в index.html
+    }
+    
+    initCatalogV2() {
+        if (window.CatalogV2) {
+            window.catalogV2 = new CatalogV2();
+        } else {
+            console.error("CatalogV2 class not found. Make sure catalog-v2.js is loaded before app.js");
+        }
     }
     
     _initUI() {
@@ -329,20 +339,20 @@ class App {
         // Add listener for when a track is fully loaded
         document.addEventListener('track-loaded', this._handleTrackLoaded.bind(this));
         
-        // Word alignment button (Proof of Concept)
-        const alignBtn = document.getElementById('align-words-btn');
+        // Word Alignment Button  
+        const alignBtn = document.getElementById('word-align-btn');
         if (alignBtn) {
             alignBtn.addEventListener('click', () => this._handleWordAlignment());
         }
 
-        // Transport Toggle Logic
-        const toggleBtn = document.getElementById('transport-toggle');
-        const transportControls = document.getElementById('transport-controls');
-        if (toggleBtn && transportControls) {
-            toggleBtn.addEventListener('click', () => {
-                transportControls.classList.toggle('is-open');
-            });
-        }
+        // 🔧 ИСПРАВЛЕНО: Убрал дублированный код, используем централизованный метод
+        this._initTransportToggle();
+
+        // 🔧 НОВЫЙ: Реинициализация transport controls после каждой загрузки трека
+        document.addEventListener('track-loaded', () => {
+            console.log('🔄 Track loaded, reinitializing transport controls');
+            this._initTransportToggle();
+        });
 
         // BPM controls listeners (только в режиме репетиции)
         if (this.bpmDownBtn) {
@@ -1097,12 +1107,60 @@ class App {
         
         document.body.appendChild(notificationDiv);
         
-        // Автоматически скрываем уведомление через 5 секунд
+        // Удаляем уведомление через 5 секунд
         setTimeout(() => {
-            if (document.body.contains(notificationDiv)) {
-                document.body.removeChild(notificationDiv);
+            if (notificationDiv.parentNode) {
+                notificationDiv.parentNode.removeChild(notificationDiv);
             }
         }, 5000);
+    }
+    
+    /**
+     * 🔧 НОВЫЙ: Показывает ошибку загрузки вокальной дорожки
+     * @param {string} message - Сообщение об ошибке
+     */
+    showVocalError(message) {
+        console.warn('🎤 Vocal Error:', message);
+        this._showNotification(message, 'error');
+        
+        // Обновляем UI индикатор вокала (если есть)
+        const vocalIndicator = document.querySelector('.vocal-indicator');
+        if (vocalIndicator) {
+            vocalIndicator.classList.add('vocal-unavailable');
+            vocalIndicator.title = 'Вокальная дорожка недоступна';
+        }
+        
+        // Деактивируем вокальный слайдер
+        if (this.vocalsVolumeSlider) {
+            this.vocalsVolumeSlider.disabled = true;
+            this.vocalsVolumeSlider.style.opacity = '0.5';
+            this.vocalsVolumeSlider.title = 'Вокальная дорожка недоступна';
+        }
+    }
+    
+    /**
+     * 🔧 НОВЫЙ: Активирует вокальные контролы при успешной загрузке вокала
+     */
+    enableVocalControls() {
+        console.log('🎤 Activating vocal controls');
+        
+        // Активируем вокальный слайдер
+        if (this.vocalsVolumeSlider) {
+            this.vocalsVolumeSlider.disabled = false;
+            this.vocalsVolumeSlider.style.opacity = '1';
+            this.vocalsVolumeSlider.title = 'Громкость вокальной дорожки';
+        }
+        
+        // Обновляем UI индикатор вокала (если есть)
+        const vocalIndicator = document.querySelector('.vocal-indicator');
+        if (vocalIndicator) {
+            vocalIndicator.classList.remove('vocal-unavailable');
+            vocalIndicator.classList.add('vocal-available');
+            vocalIndicator.title = 'Вокальная дорожка активна';
+        }
+        
+        // Показываем успешное уведомление
+        this._showNotification('Вокальная дорожка загружена успешно', 'success');
     }
 
     /**
@@ -2218,16 +2276,42 @@ class App {
         }
     }
 
+    /**
+     * 🔧 ИСПРАВЛЕНО: Централизованная инициализация transport toggle с защитой от дублирования
+     */
     _initTransportToggle() {
         const toggleBtn = document.getElementById('transport-toggle');
         const transportControls = document.getElementById('transport-controls');
 
-        if (toggleBtn && transportControls) {
-            toggleBtn.addEventListener('click', () => {
-                transportControls.classList.toggle('is-open');
-            });
-        } else {
+        if (!toggleBtn || !transportControls) {
             console.error('Transport toggle button or controls panel not found.');
+            return;
+        }
+
+        // 🔧 ЗАЩИТА: Удаляем существующие обработчики перед добавлением новых
+        if (this._transportToggleHandler) {
+            toggleBtn.removeEventListener('click', this._transportToggleHandler);
+        }
+
+        // Создаем новый обработчик и сохраняем ссылку для cleanup
+        this._transportToggleHandler = () => {
+            transportControls.classList.toggle('is-open');
+            console.log(`🎛️ Transport controls: ${transportControls.classList.contains('is-open') ? 'открыты' : 'закрыты'}`);
+        };
+
+        toggleBtn.addEventListener('click', this._transportToggleHandler);
+        console.log('🎛️ Transport toggle инициализирован');
+    }
+
+    /**
+     * 🔧 НОВЫЙ: Cleanup метод для transport controls
+     */
+    _cleanupTransportToggle() {
+        const toggleBtn = document.getElementById('transport-toggle');
+        if (toggleBtn && this._transportToggleHandler) {
+            toggleBtn.removeEventListener('click', this._transportToggleHandler);
+            this._transportToggleHandler = null;
+            console.log('🧹 Transport toggle очищен');
         }
     }
 

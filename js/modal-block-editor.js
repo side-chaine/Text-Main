@@ -276,57 +276,85 @@ class ModalBlockEditor {
     _splitTextIntoBlocks(text) {
         if (!text || text.trim() === '') return [];
         
+        console.log('🔍 ModalBlockEditor: _splitTextIntoBlocks получил текст длиной:', text.length);
+        
         // Нормализуем переносы строк
         const normalizedText = text.replace(/\r\n|\r/g, '\n');
+        
+        // 🔍 ДЕТАЛЬНАЯ ОТЛАДКА: анализируем структуру текста
+        const lines = normalizedText.split('\n');
+        const emptyLines = lines.filter(line => line.trim() === '').length;
+        console.log(`🔍 ModalBlockEditor: всего строк=${lines.length}, пустых строк=${emptyLines}`);
+        console.log('🔍 ModalBlockEditor: Первые 10 строк:', lines.slice(0, 10));
         
         // Попробуем несколько стратегий разделения
         let blocks = [];
         
         // Стратегия 1: Разделение по двойным переносам строк (стандартная)
         let potentialBlocks = normalizedText.split(/\n\s*\n/);
+        console.log(`🔍 ModalBlockEditor: Стратегия 1 (двойные переносы) дала ${potentialBlocks.length} блоков`);
         
         // Если получилось мало блоков, пробуем другие стратегии
         if (potentialBlocks.length <= 2) {
-            // Стратегия 2: Разделение по строкам, содержащим только символы или пустым строкам
+            console.log('🔍 ModalBlockEditor: Мало блоков от стратегии 1, пробуем стратегию 2 (пустые строки)');
+            
+            // 🎯 УЛУЧШЕННАЯ Стратегия 2: Разделение по ОДИНАРНЫМ пустым строкам
             const lines = normalizedText.split('\n');
             let currentBlock = [];
+            blocks = [];
             
             for (let i = 0; i < lines.length; i++) {
-                const line = lines[i].trim();
+                const line = lines[i];
+                const trimmedLine = line.trim();
                 
-                // Если строка пустая или содержит только символы/числа - это разделитель
-                if (line === '' || /^[\s\-_=*#\d\[\]()]+$/.test(line)) {
+                // Если строка пустая - это разделитель блоков
+                if (trimmedLine === '') {
                     if (currentBlock.length > 0) {
-                        blocks.push(currentBlock.join('\n').trim());
+                        const blockContent = currentBlock.join('\n').trim();
+                        if (blockContent) { // Только если блок не пустой
+                            blocks.push(blockContent);
+                        }
                         currentBlock = [];
                     }
                 } else {
-                    currentBlock.push(lines[i]);
+                    currentBlock.push(line);
                 }
             }
             
             // Добавляем последний блок
             if (currentBlock.length > 0) {
-                blocks.push(currentBlock.join('\n').trim());
+                const blockContent = currentBlock.join('\n').trim();
+                if (blockContent) {
+                    blocks.push(blockContent);
+                }
             }
+            
+            console.log(`🔍 ModalBlockEditor: Стратегия 2 (пустые строки) дала ${blocks.length} блоков`);
         } else {
             // Используем стандартное разделение
             blocks = potentialBlocks.map(block => block.trim()).filter(block => block !== '');
         }
         
+        console.log(`🔍 ModalBlockEditor: После стратегий 1-2 получено ${blocks.length} блоков`);
+        
         // Если все еще мало блоков, разделяем по количеству строк
         if (blocks.length <= 2) {
-            const lines = normalizedText.split('\n').filter(line => line.trim() !== '');
-            const linesPerBlock = Math.max(4, Math.ceil(lines.length / 8)); // Примерно 8 блоков
+            console.log('🔍 ModalBlockEditor: Применяем стратегию 3 - разделение по количеству строк');
+            // 🎯 ИСПРАВЛЕНИЕ: НЕ удаляем пустые строки, используем их для разделения
+            const allLines = normalizedText.split('\n');
+            const nonEmptyLines = allLines.filter(line => line.trim() !== '');
+            const linesPerBlock = Math.max(4, Math.ceil(nonEmptyLines.length / 8)); // Примерно 8 блоков
             
             blocks = [];
-            for (let i = 0; i < lines.length; i += linesPerBlock) {
-                const blockLines = lines.slice(i, i + linesPerBlock);
+            for (let i = 0; i < nonEmptyLines.length; i += linesPerBlock) {
+                const blockLines = nonEmptyLines.slice(i, i + linesPerBlock);
                 if (blockLines.length > 0) {
                     blocks.push(blockLines.join('\n'));
                 }
             }
         }
+        
+        console.log(`🔍 ModalBlockEditor: Финальное количество блоков: ${blocks.length}`);
         
         // Определяем типы блоков на основе содержимого
         return blocks.map((content, index) => {
@@ -646,22 +674,26 @@ class ModalBlockEditor {
                                     console.log('ModalBlockEditor: Loading track audio into audioEngine...');
                                     try {
                                         const instrumentalBlob = new Blob([currentTrack.instrumentalData], { type: currentTrack.instrumentalType || 'audio/wav' });
-                                        const instrumentalUrl = URL.createObjectURL(instrumentalBlob);
+                                        const instrumentalDataUrl = await new Promise((resolve, reject) => {
+                                            const reader = new FileReader();
+                                            reader.onload = () => resolve(reader.result);
+                                            reader.onerror = () => reject(new Error('Failed to create data URL for instrumental'));
+                                            reader.readAsDataURL(instrumentalBlob);
+                                        });
                                         
-                                        let vocalsUrl = null;
+                                        let vocalsDataUrl = null;
                                         if (currentTrack.vocalsData) {
-                                            const vocalsBlob = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                            vocalsUrl = URL.createObjectURL(vocalsBlob);
+                                            const vocalsBlobForEngine = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
+                                            vocalsDataUrl = await new Promise((resolve, reject) => {
+                                                const reader = new FileReader();
+                                                reader.onload = () => resolve(reader.result);
+                                                reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
+                                                reader.readAsDataURL(vocalsBlobForEngine);
+                                            });
                                         }
                                         
-                                        await window.audioEngine.loadTrack(instrumentalUrl, vocalsUrl);
+                                        await window.audioEngine.loadTrack(instrumentalDataUrl, vocalsDataUrl);
                                         console.log('ModalBlockEditor: Track loaded into audioEngine successfully');
-                                        
-                                        // Очищаем временные URLs
-                                        setTimeout(() => {
-                                            URL.revokeObjectURL(instrumentalUrl);
-                                            if (vocalsUrl) URL.revokeObjectURL(vocalsUrl);
-                                        }, 2000);
                                         
                                     } catch (error) {
                                         console.error('ModalBlockEditor: Error loading track into audioEngine:', error);
@@ -671,26 +703,19 @@ class ModalBlockEditor {
                                 if (currentTrack && currentTrack.vocalsData) {
                                     console.log('ModalBlockEditor: Creating vocals URL for sync...');
                                     
-                                    // Создаем blob URL для вокальных данных
+                                    // Создаем data URL из Blob, чтобы избежать blob:null на file://
                                     const vocalsBlob = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                    const vocalsUrl = URL.createObjectURL(vocalsBlob);
+                                    const vocalsDataUrl = await new Promise((resolve, reject) => {
+                                        const reader = new FileReader();
+                                        reader.onload = () => resolve(reader.result);
+                                        reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
+                                        reader.readAsDataURL(vocalsBlob);
+                                    });
                                     
-                                    // Загружаем аудио для синхронизации
-                                    await window.waveformEditor.loadAudioForSync(vocalsUrl);
+                                    // Загружаем аудио для синхронизации из data URL
+                                    await window.waveformEditor.loadAudioForSync(vocalsDataUrl);
                                     console.log('ModalBlockEditor: Audio loaded for sync, opening editor...');
-                                    
-                                    // Очищаем временный URL
-                                    setTimeout(() => URL.revokeObjectURL(vocalsUrl), 1000);
-                                    
-                                    window.waveformEditor.show();
-                                    
-                                    // 🎯 АВТОМАТИЧЕСКИ АКТИВИРУЕМ РЕЖИМ МАРКЕРОВ
-                                    setTimeout(() => {
-                                        if (window.waveformEditor && !window.waveformEditor.showMarkers) {
-                                            console.log('ModalBlockEditor: Auto-activating markers mode (no vocals)...');
-                                            window.waveformEditor._toggleMarkers();
-                                        }
-                                    }, 500);
+                                }
                             } else {
                                     console.warn('ModalBlockEditor: No vocals data found, opening editor with mock data');
                                     window.waveformEditor.show();

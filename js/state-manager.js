@@ -56,6 +56,18 @@ class StateManager {
                 throw e;
             }
             
+            // 🔧 НОВЫЙ: Transport Controls cleanup
+            try {
+                console.log('4. Cleaning up Transport Controls...');
+                if (window.app && typeof window.app._cleanupTransportToggle === 'function') {
+                    window.app._cleanupTransportToggle();
+                    console.log('✅ Transport Controls cleanup complete');
+                }
+            } catch (e) {
+                console.error('Warning: Transport Controls cleanup failed:', e);
+                // Не останавливаем процесс - это не критичная ошибка
+            }
+            
             // Добавьте сюда другие компоненты для сброса по аналогии
 
             console.log('🎉 StateManager: HARD RESET completed successfully');

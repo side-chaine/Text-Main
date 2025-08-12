@@ -1251,17 +1251,23 @@ class LyricsDisplay {
 
         // Автоматический скролл к активной строке в больших блоках
         if (isExtremelyLarge || isVeryLarge) {
-            setTimeout(() => {
-                const activeLineElement = activeBlockContainer.querySelector('.rehearsal-active-line.active');
-                if (activeLineElement) {
-                    console.log('Rehearsal: Auto-scrolling to active line in large block');
-                    activeLineElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center',
-                        inline: 'nearest'
-                    });
-                }
-            }, 100); // Небольшая задержка для завершения рендеринга
+            // Подавляем автоскролл в режиме репетиции
+            const isRehearsal = this.currentStyle && this.currentStyle.id === 'rehearsal';
+            if (!isRehearsal) {
+                setTimeout(() => {
+                    const activeLineElement = activeBlockContainer.querySelector('.rehearsal-active-line.active');
+                    if (activeLineElement) {
+                        console.log('Rehearsal: Auto-scrolling to active line in large block');
+                        activeLineElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                            inline: 'nearest'
+                        });
+                    }
+                }, 50);
+            } else {
+                console.log('Rehearsal: Auto-scroll suppressed for large block');
+            }
         }
 
         // Добавляем превью следующего блока (если есть)
@@ -1638,15 +1644,19 @@ class LyricsDisplay {
                 clearTimeout(this._rehearsalScrollTimeout);
             }
             
-            this._rehearsalScrollTimeout = setTimeout(() => {
-                if (this.containerElement && this.containerElement.scrollTop > 10) {
-                    console.log('Rehearsal: Auto-returning to top after scroll');
-                    this.containerElement.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 2000);
+            // Подавляем авто-возврат в режиме репетиции (без автоскролла вообще)
+            const isRehearsal = this.currentStyle && this.currentStyle.id === 'rehearsal';
+            if (!isRehearsal) {
+                this._rehearsalScrollTimeout = setTimeout(() => {
+                    if (this.containerElement && this.containerElement.scrollTop > 10) {
+                        console.log('Rehearsal: Auto-returning to top after scroll');
+                        this.containerElement.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 2000);
+            }
             
                 return;
             }

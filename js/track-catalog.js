@@ -52,32 +52,60 @@ class TrackCatalog {
     }
     
     _initDatabase() {
-        const request = indexedDB.open('TextAppDB', 5); // Увеличил версию для обновления схемы
+        console.log('🔄 TrackCatalog: Начинаем инициализацию базы данных...');
+        
+        // 🎯 ДИАГНОСТИКА: Проверяем доступность IndexedDB
+        if (!window.indexedDB) {
+            console.error('❌ TrackCatalog: IndexedDB не поддерживается браузером');
+            return;
+        }
+        
+        console.log('✅ TrackCatalog: IndexedDB доступен, открываем базу данных...');
+        
+        // 🎯 ЭКСТРЕННЫЙ РЕЖИМ: Пытаемся создать новую базу с другим именем
+        const dbName = 'TextAppDB_Recovery_' + Date.now();
+        console.log('🔄 TrackCatalog: Используем экстренное имя базы:', dbName);
+        
+        const request = indexedDB.open(dbName, 1); // Версия 1 для новой базы
         
         request.onerror = (event) => {
-            console.error('Database error:', event.target.error);
+            console.error('❌ TrackCatalog: Database error:', event.target.error);
+            console.error('❌ TrackCatalog: Error details:', event);
+            
+            // 🎯 ПОСЛЕДНЯЯ ПОПЫТКА: Удаляем и пересоздаем базу
+            this.forceRecreateDatabase();
+        };
+        
+        request.onblocked = (event) => {
+            console.warn('⚠️ TrackCatalog: Database blocked:', event);
+            console.warn('⚠️ TrackCatalog: Trying to force close other connections...');
         };
         
         request.onupgradeneeded = (event) => {
+            console.log('🔄 TrackCatalog: onupgradeneeded triggered');
             this.db = event.target.result;
+            
+            // Создаем все необходимые stores
             if (!this.db.objectStoreNames.contains('tracks')) {
                 const trackStore = this.db.createObjectStore('tracks', { keyPath: 'id' });
                 trackStore.createIndex('title', 'title', { unique: false });
-                console.log('Object store "tracks" created.');
+                console.log('✅ TrackCatalog: Object store "tracks" created.');
             }
             if (!this.db.objectStoreNames.contains('app_state')) {
                 this.db.createObjectStore('app_state', { keyPath: 'key' });
-                console.log('Object store "app_state" created.');
+                console.log('✅ TrackCatalog: Object store "app_state" created.');
             }
-            // Новое хранилище для временных аудиофайлов
             if (!this.db.objectStoreNames.contains('temp_audio_files')) {
                 this.db.createObjectStore('temp_audio_files', { keyPath: 'id' });
-                console.log('Object store "temp_audio_files" created.');
+                console.log('✅ TrackCatalog: Object store "temp_audio_files" created.');
             }
         };
         
         request.onsuccess = (event) => {
             this.db = event.target.result;
+            console.log('✅ TrackCatalog: База данных успешно инициализирована');
+            console.log('✅ TrackCatalog: Database name:', this.db.name);
+            console.log('✅ TrackCatalog: Database version:', this.db.version);
             
             // Load tracks from database
             this._loadTracksFromDB();
@@ -94,7 +122,13 @@ class TrackCatalog {
         const clearBtn = document.getElementById('clear-catalog');
         
         catalogBtn.addEventListener('click', () => {
-            this.openCatalog();
+            if (window.catalogV2) {
+                window.catalogV2.open();
+            } else {
+                console.error('CatalogV2 is not initialized');
+                // Fallback to old catalog if new one is not available
+                this.openCatalog();
+            }
         });
         
         closeBtn.addEventListener('click', () => {
@@ -1342,6 +1376,8 @@ class TrackCatalog {
             }, 100); // Небольшая задержка для завершения всех операций
             
             // 🚀 АВТОПЛЕЙ: Запускаем воспроизведение сразу после загрузки
+            // 🎯 ОТКЛЮЧЕНО: Трек НЕ должен запускаться автоматически при работе с блоками
+            /*
             console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
             setTimeout(async () => {
                 try {
@@ -1352,6 +1388,7 @@ class TrackCatalog {
                     console.log('💡 Пользователь может запустить воспроизведение вручную через пробел или кнопку Play');
                 }
             }, 200); // Небольшая задержка для стабилизации
+            */
             
             // Update track list
             this._renderTrackList();
@@ -2199,7 +2236,12 @@ class TrackCatalog {
             track.blocksData = blocksData;
             track.lastModified = new Date();
             this._saveTrackToDB(track).then(() => {
-                showNotification(`Lyric blocks for "${track.title}" saved.`, 'success');
+                // 🎯 ИСПРАВЛЕННОЕ уведомление
+                if (window.app && typeof window.app.showNotification === 'function') {
+                    window.app.showNotification(`Lyric blocks for "${track.title}" saved.`, 'success');
+                } else {
+                    console.log(`✅ Lyric blocks for "${track.title}" saved.`);
+                }
                 // If it's the current track and rehearsal mode is active, we might want to refresh its display
                 if (this.tracks[this.currentTrackIndex] && this.tracks[this.currentTrackIndex].id === trackId) {
                     if (this.lyricsDisplay) {
@@ -2210,10 +2252,20 @@ class TrackCatalog {
                     }
                 }
             }).catch(err => {
-                showNotification(`Error saving lyric blocks: ${err.message}`, 'error');
+                // 🎯 ИСПРАВЛЕННОЕ уведомление об ошибке
+                if (window.app && typeof window.app.showNotification === 'function') {
+                    window.app.showNotification(`Error saving lyric blocks: ${err.message}`, 'error');
+                } else {
+                    console.error(`❌ Error saving lyric blocks: ${err.message}`);
+                }
             });
         } else {
-            showNotification('Track not found for saving blocks.', 'error');
+            // 🎯 ИСПРАВЛЕННОЕ уведомление об ошибке
+            if (window.app && typeof window.app.showNotification === 'function') {
+                window.app.showNotification('Track not found for saving blocks.', 'error');
+            } else {
+                console.error('❌ Track not found for saving blocks.');
+            }
         }
     }
 
@@ -2495,6 +2547,55 @@ class TrackCatalog {
                 resolve(this.db);
             };
         });
+    }
+
+    // 🎯 ЭКСТРЕННЫЙ МЕТОД: Принудительное пересоздание базы данных
+    async forceRecreateDatabase() {
+        console.log('🚨 TrackCatalog: ЭКСТРЕННОЕ пересоздание базы данных...');
+        
+        try {
+            // Удаляем старую базу
+            const deleteRequest = indexedDB.deleteDatabase('TextAppDB');
+            
+            deleteRequest.onsuccess = () => {
+                console.log('✅ TrackCatalog: Старая база удалена, создаем новую...');
+                
+                // Пытаемся создать новую базу с простым именем
+                const newRequest = indexedDB.open('TextAppDB_New', 1);
+                
+                newRequest.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    
+                    // Создаем stores
+                    const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                    trackStore.createIndex('title', 'title', { unique: false });
+                    db.createObjectStore('app_state', { keyPath: 'key' });
+                    db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                    
+                    console.log('✅ TrackCatalog: Новая база создана с stores');
+                };
+                
+                newRequest.onsuccess = (event) => {
+                    this.db = event.target.result;
+                    console.log('🎉 TrackCatalog: ЭКСТРЕННАЯ база данных готова!');
+                    
+                    // Вызываем загрузку треков
+                    this._loadTracksFromDB();
+                    this._finalizeUploadFromBlockEditor();
+                };
+                
+                newRequest.onerror = (event) => {
+                    console.error('💥 TrackCatalog: КРИТИЧЕСКАЯ ОШИБКА создания новой базы:', event);
+                };
+            };
+            
+            deleteRequest.onerror = (event) => {
+                console.error('❌ TrackCatalog: Ошибка удаления старой базы:', event);
+            };
+            
+        } catch (error) {
+            console.error('💥 TrackCatalog: КРИТИЧЕСКАЯ ОШИБКА пересоздания:', error);
+        }
     }
 }
 

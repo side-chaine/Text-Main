@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/avatar-page.css">
     <link rel="stylesheet" href="css/home-button-enhanced.css">
     <link rel="stylesheet" href="css/bmp-styles.css">
+    <link rel="stylesheet" href="css/catalog-v2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- MediaPipe Official CDN Libraries -->
@@ -837,14 +838,134 @@
     <script src="js/live-mode.js"></script>
     <script src="js/live-feed.js"></script>
 
+    <!-- 🎵 CATALOG V2 SCRIPT (MUST BE BEFORE APP.JS) -->
+    <script src="js/catalog-v2.js?v=2.0"></script>
+
     <!-- 🚀 MAIN APPLICATION SCRIPT (MUST BE LAST) -->
     <script src="js/app.js"></script>
+    
+    <!-- Инициализация приложения -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Принудительная инициализация CatalogV2 после готовности DOM
+            try {
+                if (window.CatalogV2) {
+                    window.catalogV2 = new CatalogV2();
+                    console.log('✅ CatalogV2 успешно инициализирован в DOMContentLoaded');
+                } else {
+                    console.error('❌ CatalogV2 class не найден после загрузки скрипта');
+                }
+            } catch (error) {
+                console.error('❌ Ошибка при инициализации CatalogV2:', error);
+            }
+        });
+    </script>
 
     <div id="block-editor-container" class="hidden"></div>
     <div id="font-selector-modal" class="hidden"></div>
     <div id="loading-overlay" class="hidden">
         <div class="loading-spinner"></div>
         <p>Загрузка трека...</p>
+    </div>
+
+    <!-- 🎵 CATALOG V2 OVERLAY -->
+    <div id="catalog-v2-overlay" class="catalog-v2-overlay hidden">
+        <div class="catalog-v2-container">
+            <div class="catalog-v2-header">
+                <h2>🎵 Каталог треков</h2>
+                <button id="catalog-v2-close" class="catalog-v2-close-btn">✕ Закрыть</button>
+            </div>
+            <div class="catalog-v2-content">
+                <!-- 3-КОЛОНОЧНАЯ СТРУКТУРА -->
+                <div class="catalog-v2-grid">
+                    <!-- КОЛОНКА 1: МОЯ МУЗЫКА -->
+                    <div class="catalog-column my-music-column">
+                        <h3>🎵 Моя музыка</h3>
+                        <div class="my-music-content">
+                            <p class="empty-state">Загрузите треки через "Upload Track" →</p>
+                        </div>
+                    </div>
+                    
+                    <!-- КОЛОНКА 2: ПЛЕЙЛИСТЫ/ИСТОРИЯ/ТРЕНДЫ -->
+                    <div class="catalog-column center-dynamic-column">
+                        <div class="tab-navigation">
+                            <button class="tab-btn active" data-tab="playlists">Плейлисты</button>
+                            <button class="tab-btn" data-tab="history">История</button>
+                            <button class="tab-btn" data-tab="trends">Тренды</button>
+                        </div>
+                        <div class="tab-panels">
+                            <div class="tab-panel active" id="playlists-panel">
+                                <p class="empty-state">Создайте свой первый плейлист</p>
+                            </div>
+                            <div class="tab-panel" id="history-panel">
+                                <p class="empty-state">История воспроизведения пуста</p>
+                                <div style="margin-top: 20px; text-align: center;">
+                                    <button id="clear-indexeddb-btn" class="track-action-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f); color: white; padding: 10px 20px; font-size: 0.9em;">
+                                        🗑️ Очистить базу данных
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tab-panel" id="trends-panel">
+                                <p class="empty-state">Загружаются тренды...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- КОЛОНКА 3: ПОИСК/ЗАГРУЗКА -->
+                    <div class="catalog-column smart-search-column">
+                        <h3>🔍 Smart Search / Upload</h3>
+                        <div class="search-upload-toggle">
+                            <button class="toggle-btn active" data-mode="search">Поиск</button>
+                            <button class="toggle-btn" data-mode="upload">Upload Track</button>
+                        </div>
+                        <div class="search-mode-content active">
+                            <input type="text" class="search-input" placeholder="Поиск треков...">
+                            <div class="search-results">
+                                <p class="empty-state">Введите запрос для поиска</p>
+                            </div>
+                        </div>
+                        <div class="upload-mode-content">
+                            <div class="upload-mode-container">
+                                <div class="upload-header">
+                                    <h4>📁 Загрузка нового трека</h4>
+                                </div>
+                                
+                                <div class="upload-grid">
+                                    <!-- INSTRUMENTAL CELL -->
+                                    <div class="upload-cell" data-type="instrumental">
+                                        <div class="upload-icon">🎵</div>
+                                        <div class="drop-text">Перетащите файл или нажмите для выбора</div>
+                                        <input type="file" id="instrumental-input" class="file-input" accept="audio/*">
+                                        <label for="instrumental-input" class="file-label">Instrumental Track</label>
+                                    </div>
+                                    
+                                    <!-- VOCAL CELL -->
+                                    <div class="upload-cell" data-type="vocal">
+                                        <div class="upload-icon">🎤</div>
+                                        <div class="drop-text">Перетащите файл или нажмите для выбора</div>
+                                        <input type="file" id="vocal-input" class="file-input" accept="audio/*">
+                                        <label for="vocal-input" class="file-label">Vocals Track (optional)</label>
+                                    </div>
+                                    
+                                    <!-- LYRICS CELL -->
+                                    <div class="upload-cell" data-type="lyrics">
+                                        <div class="upload-icon">📝</div>
+                                        <div class="drop-text">Перетащите .txt или .rtf файл</div>
+                                        <input type="file" id="lyrics-input" class="file-input" accept=".txt,.rtf">
+                                        <label for="lyrics-input" class="file-label">Lyrics</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="upload-controls">
+                                    <button id="upload-cancel" class="upload-btn cancel-btn">❌ Отмена</button>
+                                    <button id="upload-save" class="upload-btn save-btn" disabled>💾 Сохранить трек</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html> 

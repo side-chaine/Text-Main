@@ -1855,7 +1855,12 @@ class WaveformEditor {
             
             // Добавляем слушатель для центровки при каждом изменении активной строки
             this._syncEditorCenteringHandler = () => {
-                this._centerActiveLineInSyncEditor();
+                // Не центрировать в режиме репетиции
+                const isRehearsal = (document.body && document.body.classList.contains('mode-rehearsal')) ||
+                                    (window.textStyleManager && window.textStyleManager.currentStyleId === 'rehearsal');
+                if (!isRehearsal) {
+                    this._centerActiveLineInSyncEditor();
+                }
             };
             document.addEventListener('active-line-changed', this._syncEditorCenteringHandler);
             
@@ -1912,7 +1917,13 @@ class WaveformEditor {
                         
                         // ПРИНУДИТЕЛЬНОЕ центрирование активной строчки в Sync Editor
                         setTimeout(() => {
-                            this._centerActiveLineInSyncEditor();
+                            const isRehearsal = (document.body && document.body.classList.contains('mode-rehearsal')) ||
+                                                (window.textStyleManager && window.textStyleManager.currentStyleId === 'rehearsal');
+                            if (!isRehearsal) {
+                                this._centerActiveLineInSyncEditor();
+                            } else {
+                                console.log('Sync Editor: Initial centering suppressed in rehearsal mode');
+                            }
                         }, 150); // Увеличил задержку для стабильности
                     }
                 }
@@ -1943,6 +1954,13 @@ class WaveformEditor {
      * @private
      */
     _centerActiveLineInSyncEditor() {
+        // Подавляем центровку в режиме репетиции
+        const isRehearsal = (document.body && document.body.classList.contains('mode-rehearsal')) ||
+                            (window.textStyleManager && window.textStyleManager.currentStyleId === 'rehearsal');
+        if (isRehearsal) {
+            console.log('Sync Editor: Centering suppressed in rehearsal mode');
+            return;
+        }
         const currentLyricsDisplay = window.lyricsDisplay;
         if (currentLyricsDisplay && currentLyricsDisplay.currentLyricElement) {
             // SYNC EDITOR TELEPROMPTER MODE - активная строка прикреплена к верху как в концертном режиме
@@ -2826,7 +2844,7 @@ class WaveformEditor {
      * Open text editor for lyrics
      * @private
      */
-    _openNewBlockEditor() {
+    async _openNewBlockEditor() {
         console.log('WaveformEditor: Opening NEW block editor for track:', this.currentTrackId);
         
         // Проверяем наличие трека
@@ -2852,10 +2870,36 @@ class WaveformEditor {
         // Получаем ОРИГИНАЛЬНЫЙ текст с сохранением форматирования
         let currentLyrics = '';
         
-        // Приоритет: оригинальный контент трека -> обработанный текст -> текст из lyricsDisplay
+        // 🎯 ИСПРАВЛЕНО: Для RTF файлов сначала парсим, потом передаем в редактор
         if (track.lyricsOriginalContent) {
-            currentLyrics = track.lyricsOriginalContent;
-            console.log('Using ORIGINAL lyrics from track.lyricsOriginalContent. Length:', currentLyrics.length);
+            console.log('Using ORIGINAL lyrics from track.lyricsOriginalContent. Length:', track.lyricsOriginalContent.length);
+            
+            // Проверяем если это RTF - парсим его
+            if (track.lyricsOriginalContent.trim().startsWith('{\\rtf')) {
+                console.log('WaveformEditor: Парсим RTF перед передачей в редактор блоков');
+                try {
+                    // Используем RTF парсер для получения чистого текста
+                    if (window.trackCatalog && window.trackCatalog.rtfAdapter) {
+                        currentLyrics = await window.trackCatalog.rtfAdapter.parse(track.lyricsOriginalContent);
+                        console.log('WaveformEditor: RTF успешно обработан, длина:', currentLyrics.length);
+                        
+                        // 🔍 ДЕТАЛЬНАЯ ОТЛАДКА: проверяем пустые строки после парсинга
+                        const lines = currentLyrics.split('\n');
+                        const emptyLines = lines.filter(line => line.trim() === '').length;
+                        console.log(`🔍 WaveformEditor: После RTF парсинга: всего строк=${lines.length}, пустых строк=${emptyLines}`);
+                        console.log('🔍 WaveformEditor: Первые 10 строк после парсинга:', lines.slice(0, 10));
+                    } else {
+                        // Fallback к базовой очистке RTF
+                        currentLyrics = this._basicRtfCleanup(track.lyricsOriginalContent);
+                        console.log('WaveformEditor: Использована базовая очистка RTF');
+                    }
+                } catch (error) {
+                    console.error('WaveformEditor: Ошибка парсинга RTF:', error);
+                    currentLyrics = track.lyricsOriginalContent;
+                }
+            } else {
+                currentLyrics = track.lyricsOriginalContent;
+            }
         } else if (track.lyrics) {
             currentLyrics = track.lyrics;
             console.log('Using track.lyrics. Length:', currentLyrics.length);
@@ -2873,18 +2917,42 @@ class WaveformEditor {
         this.modalBlockEditor.init(
             currentLyrics,
             track,
-            // Callback для сохранения
-            (updatedLyrics, blocksData) => {
-                console.log('Block editor save callback triggered');
+            // 🎯 ИСПРАВЛЕННЫЙ Callback для сохранения (новый формат)
+            async (editedBlocks, savedTrackInfo) => {
+                console.log('WaveformEditor: Block editor save callback triggered');
+                console.log('WaveformEditor: Edited blocks:', editedBlocks);
+                console.log('WaveformEditor: Track info:', savedTrackInfo);
+                
                 if (window.trackCatalog && this.currentTrackId) {
-                    // Сохраняем как оригинальный текст, так и блоки
-                    window.trackCatalog.updateTrackLyrics(this.currentTrackId, updatedLyrics, blocksData);
-                    this._showNotification('Текст и блоки сохранены успешно!', 'success');
+                    try {
+                        // 🎯 СОХРАНЯЕМ БЛОКИ ЧЕРЕЗ ПРАВИЛЬНЫЙ МЕТОД
+                        console.log('WaveformEditor: Сохраняем блоки через saveLyricsBlocks...');
+                        window.trackCatalog.saveLyricsBlocks(this.currentTrackId, editedBlocks);
+                        
+                        // 🎯 ОБНОВЛЯЕМ ТЕКСТ ЧЕРЕЗ updateTrackLyrics
+                        const updatedLyrics = window.trackCatalog._convertBlocksToPlainText(editedBlocks);
+                        console.log('WaveformEditor: Обновляем текст трека...');
+                        window.trackCatalog.updateTrackLyrics(this.currentTrackId, updatedLyrics);
+                        
+                        this._showNotification('Текст и блоки сохранены успешно!', 'success');
+                        
+                        // 🎯 ВОЗВРАЩАЕМ РЕЗУЛЬТАТ ДЛЯ АВТООТКРЫТИЯ SYNC EDITOR
+                        return { trackId: this.currentTrackId, success: true };
+                        
+                    } catch (error) {
+                        console.error('WaveformEditor: Ошибка при сохранении блоков:', error);
+                        this._showNotification('Ошибка при сохранении блоков!', 'error');
+                        return { trackId: this.currentTrackId, success: false, error };
+                    }
+                } else {
+                    console.warn('WaveformEditor: TrackCatalog или currentTrackId недоступны');
+                    this._showNotification('Ошибка: нет доступа к каталогу треков', 'error');
+                    return { success: false, error: 'TrackCatalog unavailable' };
                 }
             },
             // Callback для отмены
             () => {
-                console.log('Block editor cancelled');
+                console.log('WaveformEditor: Block editor cancelled');
             }
         );
         
@@ -3262,6 +3330,43 @@ class WaveformEditor {
             this._showNotification('Не удалось загрузить аудио для редактора.', 'error');
             // Даже если есть ошибка, пытаемся отрисовать то, что загрузилось
             this._drawWaveform();
+        }
+    }
+    
+    /**
+     * Базовая очистка RTF кода (fallback)
+     * @param {string} rtfText - RTF текст
+     * @returns {string} - Очищенный текст
+     * @private
+     */
+    _basicRtfCleanup(rtfText) {
+        if (!rtfText) return '';
+        
+        try {
+            let cleanText = rtfText;
+            
+            // Удаляем RTF заголовки и метаданные
+            cleanText = cleanText.replace(/^{\\rtf1[^{}]*/, '');
+            cleanText = cleanText.replace(/\{\\colortbl[^{}]*\}/g, '');
+            cleanText = cleanText.replace(/\{\\fonttbl[^{}]*\}/g, '');
+            cleanText = cleanText.replace(/\{\\stylesheet[^{}]*\}/g, '');
+            
+            // Заменяем команды переносов
+            cleanText = cleanText.replace(/\\par\s?/g, '\n');
+            cleanText = cleanText.replace(/\\line\s?/g, '\n');
+            
+            // Удаляем RTF команды
+            cleanText = cleanText.replace(/\\[a-z]+\d*\s?/g, '');
+            cleanText = cleanText.replace(/[{}]/g, '');
+            
+            // Очищаем множественные переносы
+            cleanText = cleanText.replace(/\n{3,}/g, '\n\n');
+            cleanText = cleanText.trim();
+            
+            return cleanText;
+        } catch (error) {
+            console.error('WaveformEditor: Ошибка базовой очистки RTF:', error);
+            return rtfText;
         }
     }
 }
