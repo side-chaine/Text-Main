@@ -1319,6 +1319,14 @@ class LyricsDisplay {
         if (window.app && window.app.blockLoopControl) {
             window.app.blockLoopControl.updateForCurrentBlock();
         }
+
+        // 🔔 Сообщаем системе, что рендер завершен (для ранних хуков UI)
+        try {
+            const evt = new CustomEvent('lyrics-rendered', { detail: { mode: 'rehearsal', blockId: activeBlock.id } });
+            document.dispatchEvent(evt);
+        } catch (e) {
+            console.warn('LyricsDisplay: Не удалось отправить событие lyrics-rendered', e);
+        }
     }
 
     // ДОБАВЛЕНО: Метод для разделения больших блоков
@@ -2702,6 +2710,14 @@ class LyricsDisplay {
             
             if (shouldRender) {
             this._renderLyrics(); // This will render based on the new this.lyrics
+            // 🎯 Обеспечиваем появление Loop-кнопки сразу после первичного рендера в режиме репетиции
+            try {
+                if (window.app && window.app.blockLoopControl && typeof window.app.blockLoopControl._createLoopButtonForCurrentBlock === 'function') {
+                    window.app.blockLoopControl._createLoopButtonForCurrentBlock();
+                }
+            } catch (e) {
+                console.warn('LyricsDisplay: Не удалось создать Loop-кнопку после рендера:', e);
+            }
             } else {
                 console.log('LyricsDisplay: Skipping render as requested by shouldRender=false');
             }

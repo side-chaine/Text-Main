@@ -62,17 +62,20 @@ class TrackCatalog {
         
         console.log('✅ TrackCatalog: IndexedDB доступен, открываем базу данных...');
         
-        // ✅ Используем стабильную базу приложения
+        // 🎯 СТАБИЛЬНАЯ БАЗА: используем постоянное имя и актуальную версию
         const dbName = 'TextAppDB';
-        const dbVersion = 5;
-        console.log('🔄 TrackCatalog: Используем стабильную базу:', dbName, 'v' + dbVersion);
-        const request = indexedDB.open(dbName, dbVersion);
+        this.dbName = dbName;
+        const DB_VERSION = 5;
+        console.log('🔄 TrackCatalog: Открываем стабильную базу:', dbName, 'v' + DB_VERSION);
+        
+        const request = indexedDB.open(dbName, DB_VERSION);
         
         request.onerror = (event) => {
             console.error('❌ TrackCatalog: Database error:', event.target.error);
             console.error('❌ TrackCatalog: Error details:', event);
             
-            // Не пересоздаём агрессивно базу по умолчанию, чтобы не терять данные
+            // 🎯 МЯГКО: без удаления базы, просто лог
+            console.warn('TrackCatalog: Ошибка открытия стабильной базы. Проверьте доступ к IndexedDB.');
         };
         
         request.onblocked = (event) => {
@@ -84,7 +87,7 @@ class TrackCatalog {
             console.log('🔄 TrackCatalog: onupgradeneeded triggered');
             this.db = event.target.result;
             
-            // Создаем все необходимые stores
+            // Создаем/мигрируем stores
             if (!this.db.objectStoreNames.contains('tracks')) {
                 const trackStore = this.db.createObjectStore('tracks', { keyPath: 'id' });
                 trackStore.createIndex('title', 'title', { unique: false });
@@ -106,53 +109,11 @@ class TrackCatalog {
             console.log('✅ TrackCatalog: Database name:', this.db.name);
             console.log('✅ TrackCatalog: Database version:', this.db.version);
             
-            // ✅ ГАРАНТИЯ НАЛИЧИЯ STORES: если отсутствуют — поднимаем версию и создаем
-            const ensureStoresAndProceed = () => {
-                this._loadTracksFromDB();
-                this._finalizeUploadFromBlockEditor();
-            };
-            
-            try {
-                const hasTracks = this.db.objectStoreNames.contains('tracks');
-                const hasAppState = this.db.objectStoreNames.contains('app_state');
-                const hasTemp = this.db.objectStoreNames.contains('temp_audio_files');
-
-                if (!hasTracks || !hasAppState || !hasTemp) {
-                    console.warn('⚠️ TrackCatalog: Обнаружены отсутствующие stores. Выполняю upgrade...');
-                    const nextVersion = (this.db.version || 5) + 1;
-                    this.db.close();
-                    const upgradeReq = indexedDB.open('TextAppDB', nextVersion);
-                    upgradeReq.onupgradeneeded = (e) => {
-                        const db = e.target.result;
-                        if (!db.objectStoreNames.contains('tracks')) {
-                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
-                            trackStore.createIndex('title', 'title', { unique: false });
-                        }
-                        if (!db.objectStoreNames.contains('app_state')) {
-                            db.createObjectStore('app_state', { keyPath: 'key' });
-                        }
-                        if (!db.objectStoreNames.contains('temp_audio_files')) {
-                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
-                        }
-                    };
-                    upgradeReq.onsuccess = (e2) => {
-                        this.db = e2.target.result;
-                        console.log('✅ TrackCatalog: Stores созданы, версия повышена до', this.db.version);
-                        ensureStoresAndProceed();
-                    };
-                    upgradeReq.onerror = (e2) => {
-                        console.error('❌ TrackCatalog: Ошибка upgrade для создания stores:', e2);
-                        ensureStoresAndProceed();
-                    };
-                    return;
-                }
-            } catch (e) {
-                console.warn('TrackCatalog: Ошибка проверки stores, продолжаю с загрузкой:', e);
-            }
-            
             // Load tracks from database
             this._loadTracksFromDB();
-            this._finalizeUploadFromBlockEditor();
+
+            // Теперь вызываем финализацию здесь, когда this.db точно инициализирована
+            this._finalizeUploadFromBlockEditor(); 
         };
     }
     
@@ -1278,6 +1239,7 @@ class TrackCatalog {
                 <div class="track-info">
                     <span>${track.vocalsData ? 'Track + Vocals' : 'Track Only'}</span>
                     <span>${track.lyrics ? 'Has Lyrics' : 'No Lyrics'}</span>
+                    <button class="import-track-markers" data-id="${track.id}" title="Добавить JSON маркеров">+ JSON</button>
                     <button class="delete-track" data-id="${track.id}">Delete</button>
                 </div>
             `;
@@ -1306,6 +1268,16 @@ class TrackCatalog {
                 if (confirm('Are you sure you want to delete this track?')) {
                     this.deleteTrack(trackId);
                 }
+            });
+        });
+
+        // Add event listeners for per-track JSON import
+        const importButtons = this.catalogElement.querySelectorAll('.import-track-markers');
+        importButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const trackId = parseInt(button.dataset.id);
+                this._importMarkersForSpecificTrack(trackId);
             });
         });
     }

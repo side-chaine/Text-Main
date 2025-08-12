@@ -117,6 +117,20 @@ class BlockLoopControl {
         
         // Слушаем изменения активного блока
         document.addEventListener('active-line-changed', this.handleBlockChange);
+
+        // Ранний хук после рендера текста (если событие используется в системе)
+        try {
+            document.addEventListener('lyrics-rendered', () => {
+                if (!this.isActive) return;
+                try {
+                    this._createLoopButtonForCurrentBlock();
+                } catch (e) {
+                    console.warn('BlockLoopControl: Не удалось создать Loop-кнопку по событию lyrics-rendered', e);
+                }
+            });
+        } catch (e) {
+            // безопасно игнорируем, если события нет в системе
+        }
     }
     
     /**
