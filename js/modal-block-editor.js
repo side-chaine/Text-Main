@@ -674,7 +674,11 @@ class ModalBlockEditor {
                                     console.log('ModalBlockEditor: Loading track audio into audioEngine...');
                                     try {
                                         const instrumentalBlob = new Blob([currentTrack.instrumentalData], { type: currentTrack.instrumentalType || 'audio/wav' });
-                                        const instrumentalDataUrl = await new Promise((resolve, reject) => {
+                                        let normInstr = null;
+                                        if (window.AudioSourceAdapter) {
+                                            normInstr = await window.AudioSourceAdapter.normalize(instrumentalBlob);
+                                        }
+                                        const instrumentalDataUrl = normInstr?.safeUrl || await new Promise((resolve, reject) => {
                                             const reader = new FileReader();
                                             reader.onload = () => resolve(reader.result);
                                             reader.onerror = () => reject(new Error('Failed to create data URL for instrumental'));
@@ -684,7 +688,11 @@ class ModalBlockEditor {
                                         let vocalsDataUrl = null;
                                         if (currentTrack.vocalsData) {
                                             const vocalsBlobForEngine = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                            vocalsDataUrl = await new Promise((resolve, reject) => {
+                                            let normVoc = null;
+                                            if (window.AudioSourceAdapter) {
+                                                normVoc = await window.AudioSourceAdapter.normalize(vocalsBlobForEngine);
+                                            }
+                                            vocalsDataUrl = normVoc?.safeUrl || await new Promise((resolve, reject) => {
                                                 const reader = new FileReader();
                                                 reader.onload = () => resolve(reader.result);
                                                 reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
@@ -702,17 +710,31 @@ class ModalBlockEditor {
                                 
                                 if (currentTrack && currentTrack.vocalsData) {
                                     console.log('ModalBlockEditor: Creating vocals URL for sync...');
-                                    
-                                    // Создаем data URL из Blob, чтобы избежать blob:null на file://
                                     const vocalsBlob = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                    const vocalsDataUrl = await new Promise((resolve, reject) => {
-                                        const reader = new FileReader();
-                                        reader.onload = () => resolve(reader.result);
-                                        reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
-                                        reader.readAsDataURL(vocalsBlob);
-                                    });
+                                    let vocalsDataUrl = null;
+                                    try {
+                                        if (window.AudioSourceAdapter) {
+                                            const norm = await window.AudioSourceAdapter.normalize(vocalsBlob);
+                                            vocalsDataUrl = norm.safeUrl;
+                                        }
+                                        if (!vocalsDataUrl) {
+                                            vocalsDataUrl = await new Promise((resolve, reject) => {
+                                                const reader = new FileReader();
+                                                reader.onload = () => resolve(reader.result);
+                                                reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
+                                                reader.readAsDataURL(vocalsBlob);
+                                            });
+                                        }
+                                    } catch (e) {
+                                        console.warn('ModalBlockEditor: Adapter failed, fallback to FileReader', e);
+                                        vocalsDataUrl = await new Promise((resolve, reject) => {
+                                            const reader = new FileReader();
+                                            reader.onload = () => resolve(reader.result);
+                                            reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
+                                            reader.readAsDataURL(vocalsBlob);
+                                        });
+                                    }
                                     
-                                    // Загружаем аудио для синхронизации из data URL
                                     await window.waveformEditor.loadAudioForSync(vocalsDataUrl);
                                     console.log('ModalBlockEditor: Audio loaded for sync, opening editor...');
                                 }
