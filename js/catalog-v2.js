@@ -96,6 +96,11 @@ class CatalogV2 {
                     };
                     reopen.onerror = (e) => reject(e);
                 });
+                // Повторная проверка после переоткрытия
+                if (!this.db.objectStoreNames.contains('tracks')) {
+                    console.error('❌ CatalogV2: После переоткрытия store "tracks" всё ещё отсутствует');
+                    return;
+                }
             }
             const transaction = this.db.transaction(['tracks'], 'readonly');
             const store = transaction.objectStore('tracks');

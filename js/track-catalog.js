@@ -106,11 +106,53 @@ class TrackCatalog {
             console.log('✅ TrackCatalog: Database name:', this.db.name);
             console.log('✅ TrackCatalog: Database version:', this.db.version);
             
+            // ✅ ГАРАНТИЯ НАЛИЧИЯ STORES: если отсутствуют — поднимаем версию и создаем
+            const ensureStoresAndProceed = () => {
+                this._loadTracksFromDB();
+                this._finalizeUploadFromBlockEditor();
+            };
+            
+            try {
+                const hasTracks = this.db.objectStoreNames.contains('tracks');
+                const hasAppState = this.db.objectStoreNames.contains('app_state');
+                const hasTemp = this.db.objectStoreNames.contains('temp_audio_files');
+
+                if (!hasTracks || !hasAppState || !hasTemp) {
+                    console.warn('⚠️ TrackCatalog: Обнаружены отсутствующие stores. Выполняю upgrade...');
+                    const nextVersion = (this.db.version || 5) + 1;
+                    this.db.close();
+                    const upgradeReq = indexedDB.open('TextAppDB', nextVersion);
+                    upgradeReq.onupgradeneeded = (e) => {
+                        const db = e.target.result;
+                        if (!db.objectStoreNames.contains('tracks')) {
+                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                            trackStore.createIndex('title', 'title', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('app_state')) {
+                            db.createObjectStore('app_state', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('temp_audio_files')) {
+                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        }
+                    };
+                    upgradeReq.onsuccess = (e2) => {
+                        this.db = e2.target.result;
+                        console.log('✅ TrackCatalog: Stores созданы, версия повышена до', this.db.version);
+                        ensureStoresAndProceed();
+                    };
+                    upgradeReq.onerror = (e2) => {
+                        console.error('❌ TrackCatalog: Ошибка upgrade для создания stores:', e2);
+                        ensureStoresAndProceed();
+                    };
+                    return;
+                }
+            } catch (e) {
+                console.warn('TrackCatalog: Ошибка проверки stores, продолжаю с загрузкой:', e);
+            }
+            
             // Load tracks from database
             this._loadTracksFromDB();
-
-            // Теперь вызываем финализацию здесь, когда this.db точно инициализирована
-            this._finalizeUploadFromBlockEditor(); 
+            this._finalizeUploadFromBlockEditor();
         };
     }
     
