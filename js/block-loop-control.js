@@ -17,11 +17,18 @@ class BlockLoopControl {
         this.loopEndTime = null;   // null вместо 0 - чтобы отличать неустановленное значение
         this.lastJumpTime = 0;      // Защита от частых прыжков
         this.diagnosticCounter = 0;  // Счетчик для логирования
-        
-        // 🎯 НОВЫЙ ФЛАГ: Отслеживание пользовательских границ
-        this.hasUserDefinedBoundaries = false;
-        this.userBoundaries = null; // Сохраняем пользовательские границы
-        
+ 
+         // 🎯 НОВЫЙ ФЛАГ: Отслеживание пользовательских границ
+         this.hasUserDefinedBoundaries = false;
+         this.userBoundaries = null; // Сохраняем пользовательские границы
+ 
+         // 🎯 MULTI-LOOP (MVP: +1 блок)
+         this.isMultiLoopEnabled = false;   // общий флаг
+         this.linkedBlock = null;           // следующий блок
+         this.combinedStartTime = null;     // итоговое начало (из первого блока)
+         this.combinedEndTime = null;       // итоговый конец (из второго блока)
+         this.plusButton = null;            // UI плюсик под Stop
+
         // Состояние перемотки для предотвращения race condition
         this.isSeekingInProgress = false;
         this.seekStartTime = null;
@@ -254,19 +261,8 @@ class BlockLoopControl {
         // Создаем кнопку
         this.loopButton = document.createElement('button');
         this.loopButton.className = 'block-loop-btn';
-        this.loopButton.innerHTML = 'Loop'; // Текстовая иконка вместо эмодзи
+        this.loopButton.innerHTML = this.isLooping ? 'Stop' : 'Loop';
         this.loopButton.title = `Зациклить блок "${block.name}"`;
-        
-        // Плюсик (для добавления следующего блока)
-        this.loopPlusBtn = document.createElement('span');
-        this.loopPlusBtn.className = 'block-loop-plus hidden';
-        this.loopPlusBtn.textContent = '+';
-        this.loopPlusBtn.title = 'Добавить следующий блок в луп';
-        this.loopPlusBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this._handlePlusClick();
-        });
-        this.loopButton.appendChild(this.loopPlusBtn);
         
         // Обработчик клика
         this.loopButton.addEventListener('click', () => {
@@ -278,8 +274,6 @@ class BlockLoopControl {
         
         this.currentBlockElement = blockElement;
         this.currentLoopBlock = block;
-        // При создании кнопки сбрасываем последовательность
-        this.sequenceBlocks = [];
         
         // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
         // Каждый новый блок получает границы по умолчанию (весь блок)
@@ -287,7 +281,12 @@ class BlockLoopControl {
             this.dragBoundaryController.activate(block, blockElement, null);
             console.log('BlockLoopControl: Создана кнопка для блока:', block.name);
         }
-        
+
+        // Если луп активен — показываем плюсик для расширения на следующий блок
+        if (this.isLooping) {
+            this._ensurePlusButton(blockElement, block);
+        }
+
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
     }
     
@@ -343,6 +342,7 @@ class BlockLoopControl {
             this.loopButton.remove();
             this.loopButton = null;
         }
+        if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; }
         
         // НЕ деактивируем drag boundaries при удалении кнопки
         // Границы должны деактивироваться только при полном отключении контроллера
@@ -433,6 +433,16 @@ class BlockLoopControl {
             console.log('BlockLoopControl: Добавлена оранжевая окантовка блока');
         }
 
+        // Инициализация комбинированных границ (пока только один блок)
+        this.combinedStartTime = this.loopStartTime;
+        this.combinedEndTime = this.loopEndTime;
+        this.isMultiLoopEnabled = false;
+        this.linkedBlock = null;
+        // Плюсик под кнопкой
+        if (this.currentBlockElement) {
+            this._ensurePlusButton(this.currentBlockElement, block);
+        }
+
         console.log(`BlockLoopControl: Зацикливание активно ${this.loopStartTime}s - ${this.loopEndTime}s (без прерывания воспроизведения)`);
     }
     
@@ -450,10 +460,16 @@ class BlockLoopControl {
         this.loopStartTime = null;
         this.loopEndTime = null;
         this.lastJumpTime = 0; // Сбрасываем защиту от прыжков
-        
+
         // 🔧 ИСПРАВЛЕНИЕ: Сбрасываем пользовательские границы при остановке лупа
         this.hasUserDefinedBoundaries = false;
         this.userBoundaries = null;
+
+        // Сбрасываем multi-loop
+        this.isMultiLoopEnabled = false;
+        this.linkedBlock = null;
+        this.combinedStartTime = null;
+        this.combinedEndTime = null;
         
         // Обновляем вид кнопки
         this._updateButtonState(false);
@@ -462,6 +478,9 @@ class BlockLoopControl {
         if (this.currentBlockElement) {
             this.currentBlockElement.classList.remove('loop-active');
         }
+        // Убираем подсветку с подключенного блока
+        const linkedEl = document.querySelector('.rehearsal-active-block.loop-linked');
+        if (linkedEl) linkedEl.classList.remove('loop-linked');
         
         // НЕ деактивируем drag boundaries при остановке лупа
         // Границы должны оставаться активными для возможности перетаскивания
@@ -576,50 +595,11 @@ class BlockLoopControl {
             this.loopButton.classList.add('active');
             this.loopButton.innerHTML = 'Stop'; // Активная иконка
             this.loopButton.title = 'Остановить зацикливание';
-            // Показать плюсик
-            if (this.loopPlusBtn) this.loopButton.appendChild(this.loopPlusBtn);
-            if (this.loopPlusBtn) this.loopPlusBtn.classList.remove('hidden');
         } else {
             this.loopButton.classList.remove('active');
             this.loopButton.innerHTML = 'Loop'; // Неактивная иконка
             this.loopButton.title = `Зациклить блок "${this.currentLoopBlock?.name || ''}"`;
-            // Спрятать плюсик
-            if (this.loopPlusBtn) this.loopPlusBtn.classList.add('hidden');
         }
-    }
-
-    /**
-     * Клик по плюсику — добавляет следующий блок к текущему лупу
-     * и расширяет конечную границу лупа до конца последнего блока
-     */
-    _handlePlusClick() {
-        try {
-            if (!this.isLooping || !this.lyricsDisplay || !Array.isArray(this.lyricsDisplay.textBlocks)) return;
-            const blocks = this.lyricsDisplay.textBlocks;
-            // Если последовательность ещё не создана — стартуем с текущего
-            if (!Array.isArray(this.sequenceBlocks) || this.sequenceBlocks.length === 0) {
-                this.sequenceBlocks = [this.currentLoopBlock];
-            }
-            const last = this.sequenceBlocks[this.sequenceBlocks.length - 1];
-            // Находим следующий блок по индексу первой строки
-            const lastMaxLine = Math.max(...last.lineIndices);
-            const next = blocks.find(b => Math.min(...b.lineIndices) > lastMaxLine);
-            if (!next) {
-                console.warn('BlockLoopControl: Нет следующего блока для добавления в луп');
-                return;
-            }
-            this.sequenceBlocks.push(next);
-            console.log(`BlockLoopControl: Добавлен следующий блок в луп: ${next.name}`);
-            // Подсветка (если DOM есть)
-            const nextEl = this._findBlockDOMElement(next);
-            if (nextEl) nextEl.classList.add('loop-active');
-            // Пересчёт конечной метки — по последнему блоку
-            const rangeLast = this._getBlockTimeRange(next);
-            if (rangeLast && rangeLast.endTime != null) {
-                this.loopEndTime = rangeLast.endTime;
-                console.log(`BlockLoopControl: Расширён луп до конца блока "${next.name}" → ${this.loopEndTime.toFixed(2)}s`);
-            }
-        } catch (e) { console.warn('BlockLoopControl: _handlePlusClick error', e); }
     }
     
     /**
@@ -649,17 +629,21 @@ class BlockLoopControl {
         if (this.diagnosticCounter % 30 === 0) {
             const audioState = this.audioEngine.isPlaying ? 'playing' : 'paused';
             console.debug(`🔍 LOOP DIAGNOSTIC #${this.diagnosticCounter}:`);
+            const s = this.isMultiLoopEnabled ? this.combinedStartTime : this.loopStartTime;
+            const e = this.isMultiLoopEnabled ? this.combinedEndTime : this.loopEndTime;
             console.debug(`     Current: ${currentTime.toFixed(3)}s`);
-            console.debug(`     Loop Range: ${this.loopStartTime?.toFixed(3)}s - ${this.loopEndTime?.toFixed(3)}s`);
-            console.debug(`     End Threshold: ${(this.loopEndTime - 0.05).toFixed(3)}s`);
+            console.debug(`     Loop Range: ${s?.toFixed(3)}s - ${e?.toFixed(3)}s`);
+            console.debug(`     End Threshold: ${(e - 0.05).toFixed(3)}s`);
             console.debug(`     Time Since Last Jump: ${(Date.now() - this.lastJumpTime) / 1000}s`);
             console.debug(`     Audio State: ${audioState}`);
         }
         
         // ⚡ КРИТИЧЕСКОЕ УСИЛЕНИЕ: Расширенные "ворота" для надежного срабатывания
         // Увеличиваем буфер до 150мс и добавляем упреждающий прыжок
-        const preJumpThreshold = this.loopEndTime - 0.15; // Упреждающий порог 150мс
-        const criticalThreshold = this.loopEndTime - 0.05; // Критический порог 50мс
+        const loopEnd = this.isMultiLoopEnabled ? this.combinedEndTime : this.loopEndTime;
+        const loopStart = this.isMultiLoopEnabled ? this.combinedStartTime : this.loopStartTime;
+        const preJumpThreshold = loopEnd - 0.15;
+        const criticalThreshold = loopEnd - 0.05;
         
         // 🎯 УПРЕЖДАЮЩИЙ ПРЫЖОК: Готовимся к прыжку заранее
         if (currentTime >= preJumpThreshold && currentTime < criticalThreshold) {
@@ -693,11 +677,11 @@ class BlockLoopControl {
                 const currentBlock = this.currentLoopBlock;
                 if (currentBlock && currentBlock.lineIndices) {
                     // Находим строку, соответствующую loopStartTime
-                    const targetLine = this._findLineByTime(this.loopStartTime);
+                    const targetLine = this._findLineByTime(loopStart);
                     const blockContainsTarget = currentBlock.lineIndices.includes(targetLine);
                     
                     console.log(`🎯 JUMP TARGET VALIDATION:`);
-                    console.log(`    Target time: ${this.loopStartTime.toFixed(3)}s`);
+                    console.log(`    Target time: ${loopStart.toFixed(3)}s`);
                     console.log(`    Target line: ${targetLine}`);
                     console.log(`    Current block lines: [${currentBlock.lineIndices.join(',')}]`);
                     console.log(`    Block contains target: ${blockContainsTarget}`);
@@ -709,14 +693,14 @@ class BlockLoopControl {
                         const adjustedStartTime = this._findTimeByLine(blockStartLine);
                         if (adjustedStartTime !== null) {
                             console.log(`🔧 ADJUSTED TARGET: ${adjustedStartTime.toFixed(3)}s (line ${blockStartLine})`);
-                            this.loopStartTime = adjustedStartTime;
+                            this.loopStartTime = adjustedStartTime; this.combinedStartTime = adjustedStartTime;
                         }
                     }
                 }
                 
                 // ⚡ ДВОЙНОЕ ПОДТВЕРЖДЕНИЕ: Усиленный механизм seek с подтверждением
-                const seekTarget = this.loopStartTime + 0.01; // Минимальное смещение для точности
-                console.log(`🔄 EXECUTING ${triggerType} LOOP JUMP: ${currentTime.toFixed(3)}s → ${this.loopStartTime.toFixed(3)}s (target: ${seekTarget.toFixed(3)}s)`);
+                const seekTarget = loopStart + 0.01;
+                console.log(`🔄 EXECUTING ${triggerType} LOOP JUMP: ${currentTime.toFixed(3)}s → ${loopStart.toFixed(3)}s (target: ${seekTarget.toFixed(3)}s)`);
                 console.log(`🔒 SEEK STARTED: isSeekingInProgress = true`);
                 
                 // Устанавливаем флаги
@@ -773,7 +757,7 @@ class BlockLoopControl {
             }
         } else {
             // Логируем когда мы в "безопасной зоне"
-            const timeUntilEnd = this.loopEndTime - currentTime;
+            const timeUntilEnd = loopEnd - currentTime;
             if (this.diagnosticCounter % 10 === 0 && timeUntilEnd > 1.0) {
                 console.log(`✅ LOOP SAFE: ${timeUntilEnd.toFixed(1)}s until loop end`);
             }
@@ -1235,17 +1219,16 @@ class BlockLoopControl {
         if (currentTime === undefined || !currentBlock) return;
         
         // Проверяем: должен ли быть активен луп, но он неактивен?
-        const shouldBeLooping = this.currentLoopBlock && 
-                               currentBlock.id === this.currentLoopBlock.id &&
-                               currentTime >= this.loopStartTime &&
-                               currentTime <= this.loopEndTime;
+        const s = this.isMultiLoopEnabled ? this.combinedStartTime : this.loopStartTime;
+        const e = this.isMultiLoopEnabled ? this.combinedEndTime : this.loopEndTime;
+        const shouldBeLooping = this.currentLoopBlock && currentTime >= s && currentTime <= e;
         
         if (shouldBeLooping && !this.isLooping) {
             console.log(`🚨 AUTO RECOVERY: Loop should be active but isn't!`);
             console.log(`   Current block: ${currentBlock.name} (ID: ${currentBlock.id})`);
             console.log(`   Loop block: ${this.currentLoopBlock.name} (ID: ${this.currentLoopBlock.id})`);
             console.log(`   Current time: ${currentTime.toFixed(3)}s`);
-            console.log(`   Loop range: ${this.loopStartTime?.toFixed(3)}s - ${this.loopEndTime?.toFixed(3)}s`);
+            console.log(`   Loop range: ${s?.toFixed(3)}s - ${e?.toFixed(3)}s`);
             
             // Попытка автоматического восстановления
             console.log(`🔧 AUTO RECOVERY: Attempting to restore loop`);
@@ -1277,7 +1260,7 @@ class BlockLoopControl {
             console.debug(`   Loop active: ${this.isLooping}`);
             console.debug(`   Current time: ${currentTime.toFixed(1)}s`);
             if (this.isLooping) {
-                console.debug(`   Loop range: ${this.loopStartTime?.toFixed(1)}s - ${this.loopEndTime?.toFixed(1)}s`);
+                console.debug(`   Loop range: ${s?.toFixed(1)}s - ${e?.toFixed(1)}s`);
             }
         }
     }
@@ -1329,6 +1312,76 @@ class BlockLoopControl {
             
             console.log(`🔓 CORRECTION FLAG CLEARED: System ready for normal operation`);
         }
+    }
+
+    // Создаёт/обновляет плюсик под кнопкой Stop
+    _ensurePlusButton(blockElement, block) {
+        if (!blockElement) return;
+        if (!this.loopButton) return;
+        const hasNext = this._hasNextBlock(block);
+        if (!hasNext) { if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; } return; }
+        if (!this.plusButton) {
+            const btn = document.createElement('button');
+            btn.className = 'block-loop-plus-btn';
+            btn.textContent = '+';
+            btn.title = 'Добавить следующий блок в луп';
+            btn.onclick = () => this._attachNextBlock(block);
+            this.plusButton = btn;
+            // позиционируем по центру под основной кнопкой
+            btn.style.position = 'absolute';
+            btn.style.top = '46px';
+            btn.style.right = '10px';
+            btn.style.transform = 'translateY(4px)';
+            btn.style.opacity = '0.0';
+            btn.style.transition = 'opacity 150ms ease, transform 150ms ease';
+            blockElement.appendChild(btn);
+            // плавное появление
+            requestAnimationFrame(() => { btn.style.opacity = '1'; btn.style.transform = 'translateY(0)'; });
+        }
+    }
+
+    _hasNextBlock(block) {
+        const blocks = this.lyricsDisplay?.textBlocks || [];
+        const idx = blocks.findIndex(b => b.id === block.id);
+        return idx !== -1 && idx < blocks.length - 1;
+    }
+
+    _attachNextBlock(block) {
+        if (!this._hasNextBlock(block)) return;
+        const blocks = this.lyricsDisplay.textBlocks;
+        const idx = blocks.findIndex(b => b.id === block.id);
+        const nextBlock = blocks[idx + 1];
+        this.linkedBlock = nextBlock;
+        this.isMultiLoopEnabled = true;
+        // Подсветка второго блока
+        const nextEl = this._findBlockDOMElement(nextBlock) || document.querySelector('.rehearsal-preview-block');
+        if (nextEl) nextEl.classList.add('loop-linked');
+        // Пересчёт комбинированных границ
+        this._recalculateCombinedRange();
+        // Разрешаем управление только концом во втором блоке
+        if (this.dragBoundaryController && nextEl) {
+            this.dragBoundaryController.activate(nextBlock, nextEl, null, { mode: 'end-only' });
+        }
+    }
+
+    _recalculateCombinedRange() {
+        // старт всегда из первого блока/границ
+        this.combinedStartTime = (this.loopStartTime ?? this._getBlockTimeRange(this.currentLoopBlock)?.startTime) || 0;
+        // конец — от пользовательских границ второго блока, если заданы, иначе конец второго блока
+        let end = null;
+        if (this.linkedBlock && this.dragBoundaryController) {
+            const b = this.dragBoundaryController.getBoundaries();
+            if (b && typeof b.endBoundary === 'number') {
+                const t = this._findTimeByLine(b.endBoundary + 1);
+                if (t !== null) end = t;
+            }
+        }
+        if (end === null && this.linkedBlock) {
+            const tr = this._getBlockTimeRange(this.linkedBlock);
+            end = tr?.endTime ?? this.loopEndTime;
+        }
+        this.combinedEndTime = end ?? this.loopEndTime;
+        console.log(`🔗 Combined loop: ${this.combinedStartTime.toFixed(2)}s - ${this.combinedEndTime.toFixed(2)}s`);
     }
 }
 
