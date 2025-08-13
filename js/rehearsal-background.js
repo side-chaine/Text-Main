@@ -10,6 +10,7 @@ class RehearsalBackgroundManager {
 		this._boundHandler = null;
 		this._currentBlockId = null;
 		this._cache = new Map(); // src -> HTMLImageElement (preloaded)
+		this._decoded = new Map(); // src -> boolean
 	}
 
 	_preloadAll() {
@@ -21,6 +22,10 @@ class RehearsalBackgroundManager {
 			img.loading = 'eager';
 			img.src = src;
 			this._cache.set(src, img);
+			// Принудительно декодируем
+			if (typeof img.decode === 'function') {
+				img.decode().then(() => { this._decoded.set(src, true); }).catch(() => {});
+			}
 		});
 	}
 
@@ -69,8 +74,16 @@ class RehearsalBackgroundManager {
 		if (img.complete && img.naturalWidth > 0) {
 			apply();
 		} else {
-			img.onload = apply;
+			let applied = false;
+			const tryApply = () => { if (!applied) { applied = true; apply(); } };
+			// Декодирование для ускорения первого кадра
+			if (typeof img.decode === 'function') {
+				img.decode().then(tryApply).catch(() => {});
+			}
+			img.onload = tryApply;
 			img.onerror = () => console.error(`❌ Rehearsal Background: failed to load ${imagePath}`);
+			// Fallback, если onload/ decode не пришли (например, из cache без событий)
+			setTimeout(tryApply, 300);
 		}
 	}
 
