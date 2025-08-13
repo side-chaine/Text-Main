@@ -2958,6 +2958,31 @@ class WaveformEditor {
             this.modalBlockEditor = new ModalBlockEditor();
         }
         
+        // Fallback: если в currentLyrics нет пустых строк как разделителей — пробуем собрать блоки из уже загруженных строк LyricsDisplay
+        try {
+            const hasDoubleNewlines = /\n\s*\n/.test(currentLyrics || '');
+            if (!hasDoubleNewlines && window.lyricsDisplay && Array.isArray(window.lyricsDisplay.lyrics) && window.lyricsDisplay.lyrics.length > 0) {
+                const lines = window.lyricsDisplay.lyrics.map(l => String(l || '').trim()).filter(Boolean);
+                const blocks = [];
+                const boundary = /(\[?\s*(припев|проигрыш)\s*\]?)/i;
+                let acc = [];
+                for (const line of lines) {
+                    if (boundary.test(line)) {
+                        if (acc.length) { blocks.push(acc.join('\n')); acc = []; }
+                        blocks.push(line);
+                        continue;
+                    }
+                    acc.push(line);
+                    if (acc.length >= 2) { blocks.push(acc.join('\n')); acc = []; }
+                }
+                if (acc.length) blocks.push(acc.join('\n'));
+                if (blocks.length > 0) {
+                    currentLyrics = blocks.join('\n\n');
+                    console.log('WaveformEditor: Applied LyricsDisplay fallback, blocks:', blocks.length);
+                }
+            }
+        } catch (e) { console.warn('WaveformEditor: LyricsDisplay fallback failed', e); }
+        
         // Инициализируем редактор с оригинальным текстом
         this.modalBlockEditor.init(
             currentLyrics,
