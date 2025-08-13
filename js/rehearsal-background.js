@@ -27,12 +27,15 @@ class RehearsalBackgroundManager {
 		// Не очищаем backgroundImage здесь, так как режимы сами управляют сбросом
 	}
 
-	_setBackground() {
+	_setBackground(forcedIndex = null) {
 		if (!this.isActive || !this.body.classList.contains('mode-rehearsal')) return;
-		let nextIndex;
-		do {
-			nextIndex = Math.floor(Math.random() * this.imagePaths.length);
-		} while (this.imagePaths.length > 1 && nextIndex === this.lastImageIndex);
+		let nextIndex = forcedIndex;
+		if (typeof nextIndex !== 'number' || nextIndex < 0) {
+			// случайный только если не передан индекс
+			do {
+				nextIndex = Math.floor(Math.random() * this.imagePaths.length);
+			} while (this.imagePaths.length > 1 && nextIndex === this.lastImageIndex);
+		}
 		this.lastImageIndex = nextIndex;
 		const imagePath = this.imagePaths[nextIndex];
 		const img = new Image();
@@ -68,11 +71,21 @@ class RehearsalBackgroundManager {
 				}
 				if (newBlockIndex !== this._currentBlockIndex) {
 					this._currentBlockIndex = newBlockIndex;
-					this._setBackground();
+					// Дет. выбор картинки: индекс блока по модулю количества картинок
+					const imgIndex = newBlockIndex % this.imagePaths.length;
+					this._setBackground(imgIndex);
 				}
 			} catch(_) {}
 		};
 		document.addEventListener('active-line-changed', this._boundHandler);
+
+		// Инициализируем текущий блок на момент привязки
+		try {
+			if (lyricsDisplay && Array.isArray(lyricsDisplay.textBlocks) && lyricsDisplay.textBlocks.length > 0) {
+				const currentLine = typeof lyricsDisplay.currentLine === 'number' ? lyricsDisplay.currentLine : 0;
+				this._currentBlockIndex = this._getBlockIndexByLine(lyricsDisplay.textBlocks, currentLine);
+			}
+		} catch(_) {}
 	}
 
 	_getBlockIndexByLine(textBlocks, lineIndex) {
