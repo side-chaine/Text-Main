@@ -828,6 +828,16 @@ class BlockLoopControl {
                     console.log(`   Boundaries in current block: ${boundariesInCurrentBlock}`);
                     
                     if (!boundariesInCurrentBlock) {
+                        // В режиме multi-loop допускаем границы второго блока
+                        if (this.isMultiLoopEnabled && this.linkedBlock) {
+                            const linkedLines = this.linkedBlock.lineIndices || [];
+                            const inLinked = linkedLines.includes(startBoundary) && linkedLines.includes(endBoundary);
+                            if (inLinked) {
+                                console.log('✅ MULTI-LOOP BOUNDARIES: Boundaries belong to linked block, keeping loop');
+                                this._createLoopButtonForCurrentBlock();
+                                return;
+                            }
+                        }
                         console.log(`🚨 INVALID BOUNDARIES: User boundaries don't belong to current block, stopping loop`);
                         // Сбрасываем пользовательские границы
                         this.hasUserDefinedBoundaries = false;
@@ -1353,15 +1363,22 @@ class BlockLoopControl {
         const nextBlock = blocks[idx + 1];
         this.linkedBlock = nextBlock;
         this.isMultiLoopEnabled = true;
-        // Подсветка второго блока
+        // Подсветка второго блока (если есть отдельный элемент)
         const nextEl = this._findBlockDOMElement(nextBlock) || document.querySelector('.rehearsal-preview-block');
         if (nextEl) nextEl.classList.add('loop-linked');
-        // Пересчёт комбинированных границ
-        this._recalculateCombinedRange();
-        // Разрешаем управление только концом во втором блоке
-        if (this.dragBoundaryController && nextEl) {
-            this.dragBoundaryController.activate(nextBlock, nextEl, null, { mode: 'end-only' });
+        // Визуальный фидбэк для плюсика
+        if (this.plusButton) this.plusButton.classList.add('active');
+        // Мгновенно расширяем временной диапазон до конца следующего блока
+        const tr = this._getBlockTimeRange(nextBlock);
+        if (tr && tr.endTime != null) {
+            this.combinedStartTime = this.loopStartTime ?? this._getBlockTimeRange(block)?.startTime ?? 0;
+            this.combinedEndTime = tr.endTime;
+            console.log(`🔗 Combined loop set: ${this.combinedStartTime.toFixed(2)}s - ${this.combinedEndTime.toFixed(2)}s`);
+        } else {
+            this._recalculateCombinedRange();
         }
+        // ВАЖНО: НЕ переактивируем DragBoundary на втором блоке, оставляем линии на первом
+        // Возможность тянуть конец во втором блоке добавим на следующем этапе, когда будет DOM всех строк
     }
 
     _recalculateCombinedRange() {
