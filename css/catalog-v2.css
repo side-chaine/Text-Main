@@ -908,3 +908,18 @@
 .upload-cell .upload-icon { font-size: 18px; margin-bottom: 4px; }
 .upload-controls { padding: 6px 0; }
 .upload-btn { padding: 6px 10px; font-size: 0.85em; } 
+
+/* Super-compact fix: жесткая высота ячеек и скрытие лишнего в состоянии file-selected */
+.upload-mode-container { padding: 10px; }
+.search-upload-toggle { margin-bottom: 8px; }
+.search-input { margin-bottom: 10px; padding: 8px 10px; font-size: 12px; }
+.upload-grid.compact { gap: 5px; }
+.upload-grid.compact .upload-cell { height: 76px; min-height: 76px; padding: 5px; overflow: hidden; }
+.upload-grid.compact .file-label, .upload-grid.compact .drop-text { font-size: 0.68em; }
+.upload-cell .upload-icon { font-size: 16px; margin-bottom: 3px; }
+.upload-controls { padding: 4px 0; }
+.upload-btn { padding: 5px 9px; font-size: 0.8em; }
+/* При выбранном файле – не растягиваем ячейку за счёт контента */
+.upload-cell.file-selected .upload-icon, 
+.upload-cell.file-selected .drop-text { display: none; }
+.upload-cell .file-name { font-size: 0.7em; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } 
