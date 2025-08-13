@@ -28,9 +28,9 @@ class BlockLoopControl {
          this.combinedStartTime = null;     // итоговое начало (из первого блока)
          this.combinedEndTime = null;       // итоговый конец (из второго блока)
          this.plusButton = null;            // UI плюсик под Stop
-         // Чипы управления multi-loop
-         this.firstChip = null;   // для отключения первого блока
-         this.linkedChip = null;  // для отключения подключенного блока
+         // Многоблочный паровозик
+         this.selectedBlocks = [];          // массив blockId в порядке воспроизведения
+         this.loopChipsContainer = null;    // контейнер чипов под Stop
 
         // Состояние перемотки для предотвращения race condition
         this.isSeekingInProgress = false;
@@ -281,13 +281,31 @@ class BlockLoopControl {
         this.loopButton.innerHTML = this.isLooping ? 'Stop' : 'Loop';
         this.loopButton.title = `Зациклить блок "${block.name}"`;
         
-        // Обработчик клика
+        // Обработчик клика (Stop должен полностью сбрасывать систему)
         this.loopButton.addEventListener('click', () => {
             this.toggleLooping(block);
+            if (!this.isLooping) {
+                // Если произошла остановка — очистить паровозик и UI
+                this._clearTrain();
+            }
         });
         
         // Добавляем кнопку рядом с блоком
         this._positionLoopButton(blockElement);
+        
+        // Создаём контейнер для чипов (вертикальный стек под Stop)
+        if (!this.loopChipsContainer) {
+            const chips = document.createElement('div');
+            chips.className = 'loop-chips-stack';
+            chips.style.position = 'absolute';
+            chips.style.top = '46px';
+            chips.style.right = '12px';
+            chips.style.display = 'flex';
+            chips.style.flexDirection = 'column';
+            chips.style.gap = '6px';
+            blockElement.appendChild(chips);
+            this.loopChipsContainer = chips;
+        }
         
         this.currentBlockElement = blockElement;
         this.lastRenderedBlockId = block.id;
@@ -316,16 +334,14 @@ class BlockLoopControl {
             if (this.isMultiLoopEnabled && this.plusButton) {
                 this.plusButton.classList.add('active');
             }
-            // Показ чипов только в режиме multi-loop
-            if (this.isMultiLoopEnabled) {
-                this._ensureChips(blockElement);
-            }
             // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
             this._updateButtonState(true);
             // Подсветка активного блока всегда при включенном лупе
             if (blockElement) {
                 blockElement.classList.add('loop-active');
             }
+            // Ререндерим чипы, если уже есть паровозик
+            this._renderLoopChips();
         }
         
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
@@ -384,8 +400,6 @@ class BlockLoopControl {
             this.loopButton = null;
         }
         if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; }
-        if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
-        if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
         
         // НЕ деактивируем drag boundaries при удалении кнопки
         // Границы должны деактивироваться только при полном отключении контроллера
@@ -1173,7 +1187,7 @@ class BlockLoopControl {
                 if (endTime !== null) this.loopEndTime = endTime;
             }
 
-            console.log(`🎯 LOOP BOUNDARIES UPDATED FROM LINES: start=${this.loopStartTime?.toFixed(2)}s end=${this.loopEndTime?.toFixed(2)}s | combined=${(this.combinedStartTime??this.loopStartTime).toFixed(2)}s-${(this.combinedEndTime??this.loopEndTime).toFixed(2)}s`);
+            console.log(`�� LOOP BOUNDARIES UPDATED FROM LINES: start=${this.loopStartTime?.toFixed(2)}s end=${this.loopEndTime?.toFixed(2)}s | combined=${(this.combinedStartTime??this.loopStartTime).toFixed(2)}s-${(this.combinedEndTime??this.loopEndTime).toFixed(2)}s`);
             return;
         }
     }
@@ -1472,7 +1486,13 @@ class BlockLoopControl {
         const nextEl = this._findBlockDOMElement(nextBlock) || document.querySelector('.rehearsal-preview-block');
         if (nextEl) { nextEl.classList.add('loop-linked'); nextEl.classList.add('loop-active'); }
         // Визуальный фидбэк для плюсика
-        if (this.plusButton) this.plusButton.classList.add('active');
+        if (this.plusButton) {
+            this.plusButton.classList.add('active');
+            setTimeout(() => this.plusButton && this.plusButton.classList.remove('active'), 180);
+        }
+        // Поддержка массива выбранных блоков (паровозик)
+        if (this.selectedBlocks.length === 0) this.selectedBlocks.push(block.id);
+        if (!this.selectedBlocks.includes(nextBlock.id)) this.selectedBlocks.push(nextBlock.id);
         // Если луп ещё не запущен — запускаем от первого блока
         if (!this.isLooping) {
             this.startLooping(block);
@@ -1486,9 +1506,11 @@ class BlockLoopControl {
         } else {
             this._recalculateCombinedRange();
         }
-        // Чипы управления
-        this._ensureChips(this.currentBlockElement || document.querySelector('.rehearsal-active-block'));
+        // Обновляем drag-режимы по краям паровозика и чипы
+        this._syncTrainEdges();
+        this._renderLoopChips();
         // ВАЖНО: НЕ переактивируем DragBoundary на втором блоке, оставляем линии на первом
+        // Возможность тянуть конец во втором блоке добавим на следующем этапе, когда будет DOM всех строк
     }
 
     _recalculateCombinedRange() {
@@ -1550,80 +1572,83 @@ class BlockLoopControl {
         return null;
     }
 
-    // Создает/обновляет чипы закрытия блоков (☒)
-    _ensureChips(blockElement) {
-        if (!blockElement) return;
-        // Первый чип (отключить первый блок)
-        if (!this.firstChip) {
+    // Полная очистка паровозика/визуала
+    _clearTrain() {
+        this.selectedBlocks = [];
+        if (this.loopChipsContainer) { this.loopChipsContainer.innerHTML = ''; }
+        const linkedEl = document.querySelector('.rehearsal-active-block.loop-linked, .rehearsal-preview-block.loop-linked');
+        if (linkedEl) linkedEl.classList.remove('loop-linked');
+        this.isMultiLoopEnabled = false;
+        this.linkedBlock = null;
+        this.combinedStartTime = null;
+        this.combinedEndTime = null;
+        // Плюсик снова отображается как у одиночного режима (решит _ensurePlusButton при необходимости)
+    }
+
+    // Рендер вертикального стека чипов по selectedBlocks
+    _renderLoopChips() {
+        if (!this.loopChipsContainer) return;
+        this.loopChipsContainer.innerHTML = '';
+        if (!this.isLooping || this.selectedBlocks.length < 2) return; // показываем только при паровозике
+        const blocks = this._getProcessedBlocks();
+        const allowRemove = (id) => {
+            // V1: разрешаем удалять только крайние, центральные заблокированы
+            const first = this.selectedBlocks[0];
+            const last = this.selectedBlocks[this.selectedBlocks.length - 1];
+            return id === first || id === last;
+        };
+        for (const id of this.selectedBlocks) {
             const chip = document.createElement('button');
-            chip.className = 'block-loop-chip';
-            chip.textContent = '☒';
-            chip.title = 'Исключить первый блок из лупа';
-            chip.style.position = 'absolute';
-            chip.style.top = '46px';
-            chip.style.right = '46px';
-            chip.onclick = () => this._detachBlock('first');
-            blockElement.appendChild(chip);
-            this.firstChip = chip;
-        }
-        // Второй чип (отключить подключенный блок)
-        if (!this.linkedChip) {
-            const chip = document.createElement('button');
-            chip.className = 'block-loop-chip';
-            chip.textContent = '☒';
-            chip.title = 'Исключить подключенный блок из лупа';
-            chip.style.position = 'absolute';
-            chip.style.top = '46px';
-            chip.style.right = '76px';
-            chip.onclick = () => this._detachBlock('linked');
-            blockElement.appendChild(chip);
-            this.linkedChip = chip;
+            chip.className = 'loop-chip';
+            chip.innerText = '☒';
+            chip.title = 'Исключить блок из лупа';
+            chip.style.opacity = allowRemove(id) ? '1' : '0.55';
+            chip.disabled = !allowRemove(id);
+            chip.onclick = () => this._removeFromTrain(id);
+            this.loopChipsContainer.appendChild(chip);
         }
     }
 
-    // Открепляет один из блоков из мультилупа, оставляя одиночный луп
-    _detachBlock(which) {
-        if (!this.isLooping) return;
-        if (!this.isMultiLoopEnabled) return;
-        if (which === 'linked') {
-            // Остаемся на первом блоке
-            this.isMultiLoopEnabled = false;
+    _removeFromTrain(blockId) {
+        if (!this.isLooping || this.selectedBlocks.length < 2) return;
+        const first = this.selectedBlocks[0];
+        const last = this.selectedBlocks[this.selectedBlocks.length - 1];
+        // V1: удалять можно только края
+        if (blockId !== first && blockId !== last) return;
+        this.selectedBlocks = this.selectedBlocks.filter(id => id !== blockId);
+        if (this.selectedBlocks.length === 1) {
+            // Возврат к одиночному режиму
             this.linkedBlock = null;
-            // Комбинированные границы больше не используются
-            this.combinedStartTime = this.loopStartTime;
-            this.combinedEndTime = this.loopEndTime;
-            // Перерисуем UI
-            if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
-            if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
-            this._createLoopButtonForCurrentBlock();
-            return;
-        }
-        if (which === 'first' && this.linkedBlock) {
-            // Переключаем якорь на подключенный блок
-            const keep = this.linkedBlock;
-            this.currentLoopBlock = keep;
             this.isMultiLoopEnabled = false;
-            this.linkedBlock = null;
-            // Рассчитываем границы по памяти или по блоку
-            let startTime = null, endTime = null;
-            const remembered = this._getRememberedBoundaries(keep.id);
-            if (remembered) {
-                startTime = this._findTimeByLine(remembered.start);
-                endTime = this._findTimeByLine(remembered.end + 1);
+            const anchorId = this.selectedBlocks[0];
+            const blocks = this._getProcessedBlocks();
+            const anchor = blocks.find(b => b.id === anchorId) || this.currentLoopBlock;
+            if (anchor) {
+                const r = this._getBlockTimeRange(anchor);
+                if (r) { this.loopStartTime = r.startTime; this.loopEndTime = r.endTime; }
             }
-            if (startTime == null || endTime == null) {
-                const tr = this._getBlockTimeRange(keep);
-                startTime = tr.startTime; endTime = tr.endTime;
-            }
-            if (startTime != null && endTime != null) {
-                this.loopStartTime = startTime; this.loopEndTime = endTime;
-                this.combinedStartTime = startTime; this.combinedEndTime = endTime;
-            }
-            // Удаляем чипы и пересоздаем UI под одиночный луп
-            if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
-            if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
-            this._createLoopButtonForCurrentBlock();
+        } else {
+            // Паровозик остаётся — пересчитать края и комбинированные времена
+            this._syncTrainEdges();
         }
+        this._renderLoopChips();
+    }
+
+    _syncTrainEdges() {
+        if (this.selectedBlocks.length < 2) return;
+        const blocks = this._getProcessedBlocks();
+        const first = blocks.find(b => b.id === this.selectedBlocks[0]);
+        const last = blocks.find(b => b.id === this.selectedBlocks[this.selectedBlocks.length - 1]);
+        if (first) this.currentLoopBlock = first;
+        if (last) this.linkedBlock = last;
+        // Пересчёт комбинированного диапазона
+        const firstRange = first ? this._getBlockTimeRange(first) : null;
+        const lastRange = last ? this._getBlockTimeRange(last) : null;
+        if (firstRange) this.combinedStartTime = this.loopStartTime ?? firstRange.startTime;
+        if (lastRange) this.combinedEndTime = lastRange.endTime;
+        // Выставляем режимы линий: начало у первого, конец у последнего
+        this._syncDragModeForBlock(first);
+        this._syncDragModeForBlock(last);
     }
 }
 

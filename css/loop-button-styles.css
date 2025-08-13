@@ -238,3 +238,26 @@
 	border-color: transparent !important;
 	background-color: transparent !important;
 } 
+
+/* Стек чипов под Stop */
+.loop-chips-stack { }
+
+/* Чип блока (квадратик с крестиком) */
+.loop-chip {
+	background: rgba(255,255,255,0.08);
+	border: 1px solid rgba(255,255,255,0.35);
+	color: rgba(255,165,0,0.95);
+	width: 22px;
+	height: 22px;
+	border-radius: 6px;
+	font-weight: 800;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: 0 0 10px rgba(0,0,0,0.25) inset;
+}
+.loop-chip:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.55); }
+.loop-chip:disabled { cursor: default; filter: saturate(0.4); } 
