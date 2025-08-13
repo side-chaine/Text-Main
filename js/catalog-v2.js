@@ -739,6 +739,22 @@ class CatalogV2 {
             const hasJsonMarkers = Array.isArray(savedTrack?.syncMarkers) && savedTrack.syncMarkers.length > 0;
             if (hasJsonMarkers) {
                 console.log('✅ CatalogV2: JSON маркеры присутствуют, пропускаем редактор блоков. Трек доступен в поиске и "Моей музыке" (если добавите).');
+                try {
+                    // Маркеры уже в savedTrack.syncMarkers — применим цвета от блоков (если они будут)
+                    if (window.markerManager) {
+                        window.markerManager.setMarkers(savedTrack.syncMarkers);
+                        window.markerManager.updateMarkerColors();
+                    }
+                    // Если LyricsDisplay уже содержит textBlocks (синтезированные из маркеров), включим репетиционный UI
+                    if (window.lyricsDisplay && Array.isArray(window.lyricsDisplay.textBlocks) && window.lyricsDisplay.textBlocks.length > 0) {
+                        if (typeof window.lyricsDisplay.activateRehearsalDisplay === 'function') {
+                            window.lyricsDisplay.activateRehearsalDisplay();
+                        }
+                    }
+                } catch (e) { console.warn('CatalogV2: post-save JSON handling failed', e); }
+                this.switchToSearch();
+                this.addTrackToSearchResults(savedTrack);
+                return; // Не открываем редакторы
             } else {
                 // Иначе — старое поведение: открыть редактор блоков
                 console.log('🎯 CatalogV2: Открываем редактор блоков для обработки трека');

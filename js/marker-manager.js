@@ -364,9 +364,14 @@ class MarkerManager {
                     
                     // Обновляем цвет и тип блока для загружаемого маркера
                     const updatedMarker = { ...marker };
-                    if (!updatedMarker.blockType || !updatedMarker.color) {
+                    if (!updatedMarker.blockType) {
                         updatedMarker.blockType = this._getBlockTypeForLine(marker.lineIndex);
-                        updatedMarker.color = this._getColorForBlockType(updatedMarker.blockType);
+                    }
+                    if (!updatedMarker.color) {
+                        const typeForColor = updatedMarker.blockType && updatedMarker.blockType !== 'unknown'
+                            ? updatedMarker.blockType
+                            : this._getBlockTypeForLine(marker.lineIndex);
+                        updatedMarker.color = this._getColorForBlockType(typeForColor);
                     }
                     
                     validMarkers.push(updatedMarker);
@@ -385,6 +390,22 @@ class MarkerManager {
         // Ensure markers are sorted by time
         this.markers.sort((a, b) => a.time - b.time);
         
+        // Если блоки ещё не загружены, но в маркерах есть типы — синтезируем textBlocks из маркеров
+        try {
+            const hasBlocks = !!(this.lyricsDisplay && Array.isArray(this.lyricsDisplay.textBlocks) && this.lyricsDisplay.textBlocks.length > 0);
+            const hasTypedMarkers = this.markers.some(m => m.blockType && m.blockType !== 'unknown');
+            if (!hasBlocks && this.lyricsDisplay && hasTypedMarkers) {
+                const synthesized = this._buildBlocksFromMarkers(this.markers);
+                if (synthesized.length > 0) {
+                    this.lyricsDisplay.textBlocks = synthesized;
+                    if (typeof this.lyricsDisplay.updateDefinedBlocksDisplay === 'function') {
+                        this.lyricsDisplay.updateDefinedBlocksDisplay(synthesized);
+                    }
+                    console.log(`MarkerManager: Synthesized ${synthesized.length} textBlocks from JSON markers.`);
+                }
+            }
+        } catch (e) { console.warn('MarkerManager: Failed to synthesize blocks from markers', e); }
+
         this._notifySubscribers('markersReset', this.markers);
         
         // Update UI to highlight lines with markers
@@ -399,8 +420,13 @@ class MarkerManager {
         if (!this.markers || this.markers.length === 0) return;
         
         let updated = false;
+        const hasBlocks = !!(this.lyricsDisplay && Array.isArray(this.lyricsDisplay.textBlocks) && this.lyricsDisplay.textBlocks.length > 0);
         this.markers.forEach(marker => {
             const newBlockType = this._getBlockTypeForLine(marker.lineIndex);
+            // Если блоки не загружены или тип неизвестен — не перезаписываем переданные из JSON тип/цвет
+            if (!hasBlocks || newBlockType === 'unknown') {
+                return;
+            }
             const newColor = this._getColorForBlockType(newBlockType);
             
             if (marker.blockType !== newBlockType || marker.color !== newColor) {
@@ -763,6 +789,41 @@ class MarkerManager {
             clearInterval(this.updateInterval);
             this.updateInterval = null;
         }
+    }
+
+    /**
+     * Строит textBlocks из последовательности маркеров с типами.
+     * Группируем по непрерывным отрезкам одинакового blockType.
+     */
+    _buildBlocksFromMarkers(markers) {
+        if (!Array.isArray(markers) || markers.length === 0) return [];
+        const sorted = [...markers].sort((a,b)=>a.lineIndex-b.lineIndex);
+        const blocks = [];
+        let current = null;
+        const counters = { verse:0, chorus:0, bridge:0 };
+        for (const m of sorted) {
+            const t = (m.blockType && m.blockType !== 'unknown') ? m.blockType : 'verse';
+            if (!current || current.type !== t || m.lineIndex !== current._lastLineIndex + 1) {
+                // Закрываем предыдущий
+                if (current) {
+                    delete current._lastLineIndex;
+                    blocks.push(current);
+                }
+                counters[t] = (counters[t]||0) + 1;
+                current = {
+                    id: `blk-${t}-${counters[t]}`,
+                    name: `${t.charAt(0).toUpperCase()+t.slice(1)} ${counters[t]}`,
+                    type: t,
+                    lineIndices: [m.lineIndex],
+                    _lastLineIndex: m.lineIndex
+                };
+            } else {
+                current.lineIndices.push(m.lineIndex);
+                current._lastLineIndex = m.lineIndex;
+            }
+        }
+        if (current) { delete current._lastLineIndex; blocks.push(current); }
+        return blocks;
     }
 }
 
