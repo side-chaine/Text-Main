@@ -896,3 +896,15 @@
 }
 .upload-cell .upload-icon { font-size: 20px; margin-bottom: 6px; }
 .upload-cell .file-name { font-size: 0.75em; } 
+
+/* Ultra-compact tweaks for upload column to avoid vertical scroll */
+.smart-search-column { padding: 12px; }
+.search-upload-toggle { margin-bottom: 12px; padding: 4px; }
+.toggle-btn { padding: 8px 10px; font-size: 0.9em; }
+.search-input { margin-bottom: 12px; padding: 10px 12px; font-size: 13px; }
+.upload-grid.compact .upload-cell { min-height: 84px; padding: 6px; }
+.upload-grid.compact { gap: 6px; }
+.upload-grid.compact .file-label, .upload-grid.compact .drop-text { font-size: 0.7em; }
+.upload-cell .upload-icon { font-size: 18px; margin-bottom: 4px; }
+.upload-controls { padding: 6px 0; }
+.upload-btn { padding: 6px 10px; font-size: 0.85em; } 
