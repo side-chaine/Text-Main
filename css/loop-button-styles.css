@@ -227,4 +227,14 @@
 /* Подсветка подключенного блока */
 .rehearsal-active-block.loop-active { box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.9) inset; }
 .rehearsal-active-block.loop-linked,
-.rehearsal-preview-block.loop-linked { box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.7) inset; } 
+.rehearsal-preview-block.loop-linked { box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.7) inset; }
+
+/* === Unified highlight for active and linked blocks (same intensity) === */
+.rehearsal-active-block.loop-active,
+.rehearsal-active-block.loop-linked,
+.rehearsal-preview-block.loop-linked,
+.rehearsal-preview-block.loop-active {
+	box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.95) inset, 0 0 18px rgba(255, 165, 0, 0.35) !important;
+	border-color: transparent !important;
+	background-color: transparent !important;
+} 
