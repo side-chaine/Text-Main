@@ -273,7 +273,10 @@ class BlockLoopControl {
         this._positionLoopButton(blockElement);
         
         this.currentBlockElement = blockElement;
-        this.currentLoopBlock = block;
+        // Не трогаем якорный блок лупа в режиме multi-loop при переходе на связанный блок
+        if (!this.isLooping || !this.isMultiLoopEnabled || (this.currentLoopBlock && this.currentLoopBlock.id === block.id)) {
+            this.currentLoopBlock = block;
+        }
         
         // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
         // Каждый новый блок получает границы по умолчанию (весь блок)
@@ -297,6 +300,8 @@ class BlockLoopControl {
             if (this.isMultiLoopEnabled && this.plusButton) {
                 this.plusButton.classList.add('active');
             }
+            // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
+            this._updateButtonState(true);
         }
 
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
@@ -907,6 +912,12 @@ class BlockLoopControl {
 
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
+            // Ранний guard: при активном multi-loop держим луп при переходах first↔linked
+            if (this.isLooping && this.isMultiLoopEnabled && (newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+                console.log('✅ MULTI-LOOP CONTINUE (early guard): keep looping across linked blocks');
+                this._createLoopButtonForCurrentBlock();
+                return;
+            }
             // ✅ MULTI-LOOP: если перешли на связанный блок, продолжаем без остановки
             if (this.isLooping && this.isMultiLoopEnabled && (newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
                 console.log('✅ MULTI-LOOP CONTINUE: staying in combined loop across blocks');
