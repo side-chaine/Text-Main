@@ -326,7 +326,7 @@ class ModalBlockEditor {
                 const blockContent = currentBlock.join('\n').trim();
                 if (blockContent) {
                     blocks.push(blockContent);
-                }
+            }
             }
             
             console.log(`🔍 ModalBlockEditor: Стратегия 2 (пустые строки) дала ${blocks.length} блоков`);
@@ -337,6 +337,43 @@ class ModalBlockEditor {
         
         console.log(`🔍 ModalBlockEditor: После стратегий 1-2 получено ${blocks.length} блоков`);
         
+        // Дополнительный этап: если внутри длинного блока встречаются повторяющиеся строки
+        // (часто это начало припева), делим такой блок на две части в точке первого повтора
+        try {
+            const allLinesForCounts = normalizedText
+                .split('\n')
+                .map(l => l.trim().toLowerCase())
+                .filter(l => l.length > 0);
+            const lineCounts = allLinesForCounts.reduce((acc, l) => {
+                acc[l] = (acc[l] || 0) + 1; return acc;
+            }, {});
+            const refined = [];
+            for (const b of blocks) {
+                const bLines = b.split('\n');
+                let splitIdx = -1;
+                for (let i = 0; i < bLines.length; i++) {
+                    const key = bLines[i].trim().toLowerCase();
+                    if (key && lineCounts[key] > 1) { // признак повторяющейся строки (потенциальный припев)
+                        // избегаем слишком раннего срабатывания — хотя бы 2 строки пролога
+                        if (i >= 2) { splitIdx = i; }
+                        break;
+                    }
+                }
+                if (splitIdx > 0) {
+                    const pre = bLines.slice(0, splitIdx).join('\n').trim();
+                    const rep = bLines.slice(splitIdx).join('\n').trim();
+                    if (pre) refined.push(pre);
+                    if (rep) refined.push(rep);
+                } else {
+                    refined.push(b);
+                }
+            }
+            if (refined.length > blocks.length) {
+                blocks = refined;
+                console.log(`🔍 ModalBlockEditor: refine-проход добавил разбиение, теперь блоков=${blocks.length}`);
+            }
+        } catch (e) { console.warn('ModalBlockEditor: refine split failed', e); }
+
         // Если все еще мало блоков, разделяем по количеству строк
         if (blocks.length <= 2) {
             console.log('🔍 ModalBlockEditor: Применяем стратегию 3 - разделение по количеству строк');
@@ -383,7 +420,7 @@ class ModalBlockEditor {
             if (block === content) continue;
             const blockWords = block.toLowerCase().split(/\s+/).filter(w => w.length > 3);
             const commonWords = words.filter(word => blockWords.includes(word));
-            if (commonWords.length > words.length * 0.6) {
+            if (commonWords.length > words.length * 0.45) {
                 matchCount++;
             }
         }
@@ -617,172 +654,15 @@ class ModalBlockEditor {
                 this.hide();
 
                 // 🎯 АВТОМАТИЧЕСКИ ОТКРЫВАЕМ SYNC EDITOR ПОСЛЕ СОХРАНЕНИЯ
-                if (window.waveformEditor && window.trackCatalog) {
-                    try {
-                        // Получаем trackId из результата сохранения
-                        const savedTrackId = result.trackId;
-                        console.log('ModalBlockEditor: Using saved trackId for sync editor:', savedTrackId);
-                        
-                        if (savedTrackId) {
-                            // 🔄 ПРИНУДИТЕЛЬНО ОБНОВЛЯЕМ СПИСОК ТРЕКОВ В КАТАЛОГЕ
-                            await window.trackCatalog._loadTracksFromDB();
-                            
-                            // Ищем трек с несколькими попытками
-                            let trackIndex = -1;
-                            let attempts = 0;
-                            const maxAttempts = 3;
-                            
-                            while (trackIndex === -1 && attempts < maxAttempts) {
-                                attempts++;
-                                console.log(`ModalBlockEditor: Attempt ${attempts} to find track with ID:`, savedTrackId);
-                                
-                                trackIndex = window.trackCatalog.tracks.findIndex(track => track.id === savedTrackId);
-                                
-                                if (trackIndex === -1 && attempts < maxAttempts) {
-                                    console.log('ModalBlockEditor: Track not found, waiting and reloading...');
-                                    await new Promise(resolve => setTimeout(resolve, 200));
-                                    await window.trackCatalog._loadTracksFromDB();
-                                }
-                            }
-                            
-                            console.log('ModalBlockEditor: Found track index:', trackIndex);
-                            
-                            if (trackIndex >= 0) {
-                                const currentTrack = window.trackCatalog.tracks[trackIndex];
-                                console.log('ModalBlockEditor: Current track for sync:', currentTrack.title);
-                                
-                                // Устанавливаем currentTrackIndex в каталоге
-                                window.trackCatalog.currentTrackIndex = trackIndex;
-                                
-                                // 🎯 ЗАГРУЖАЕМ ТЕКСТ ТРЕКА В LYRICS DISPLAY
-                                if (window.lyricsDisplay && currentTrack.blocksData && currentTrack.blocksData.length > 0) {
-                                    console.log('ModalBlockEditor: Loading structured blocks into display...');
-                                    await window.lyricsDisplay.loadImportedBlocks(currentTrack.blocksData);
-                                    
-                                    // 🎨 ПРИНУДИТЕЛЬНО ОБНОВЛЯЕМ ЦВЕТА МАРКЕРОВ
-                                    if (window.markerManager) {
-                                        console.log('ModalBlockEditor: Updating marker colors after loading blocks...');
-                                        window.markerManager.updateMarkerColors();
-                                    }
-                                } else if (window.lyricsDisplay && currentTrack.lyrics) {
-                                    console.log('ModalBlockEditor: Loading track lyrics into display...');
-                                    window.lyricsDisplay.loadLyrics(currentTrack.lyrics);
-                                }
-                                
-                                // 🎯 ЗАГРУЖАЕМ АУДИО В ОСНОВНОЙ ДВИЖОК ДЛЯ ВОСПРОИЗВЕДЕНИЯ
-                                if (window.audioEngine && currentTrack.instrumentalData) {
-                                    console.log('ModalBlockEditor: Loading track audio into audioEngine...');
-                                    try {
-                                        const instrumentalBlob = new Blob([currentTrack.instrumentalData], { type: currentTrack.instrumentalType || 'audio/wav' });
-                                        let normInstr = null;
-                                        if (window.AudioSourceAdapter) {
-                                            normInstr = await window.AudioSourceAdapter.normalize(instrumentalBlob);
-                                        }
-                                        const instrumentalDataUrl = normInstr?.safeUrl || await new Promise((resolve, reject) => {
-                                            // compat: avoid optional chaining for older engines
-                                            const _maybeSafe = (normInstr && normInstr.safeUrl);
-                                            if (_maybeSafe) { resolve(_maybeSafe); return; }
-                                            // fallback to FileReader
-                                            
-                                            const reader = new FileReader();
-                                            reader.onload = () => resolve(reader.result);
-                                            reader.onerror = () => reject(new Error('Failed to create data URL for instrumental'));
-                                            reader.readAsDataURL(instrumentalBlob);
-                                        });
-                                        
-                                        let vocalsDataUrl = null;
-                                        if (currentTrack.vocalsData) {
-                                            const vocalsBlobForEngine = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                            let normVoc = null;
-                                            if (window.AudioSourceAdapter) {
-                                                normVoc = await window.AudioSourceAdapter.normalize(vocalsBlobForEngine);
-                                            }
-                                            if (normVoc && normVoc.safeUrl) {
-                                                vocalsDataUrl = normVoc.safeUrl;
-                                            } else {
-                                                vocalsDataUrl = await new Promise((resolve, reject) => {
-                                                const reader = new FileReader();
-                                                reader.onload = () => resolve(reader.result);
-                                                reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
-                                                reader.readAsDataURL(vocalsBlobForEngine);
-                                            });
-                                            }
-                                        }
-                                        
-                                        await window.audioEngine.loadTrack(instrumentalDataUrl, vocalsDataUrl);
-                                        console.log('ModalBlockEditor: Track loaded into audioEngine successfully');
-                                        
-                                    } catch (error) {
-                                        console.error('ModalBlockEditor: Error loading track into audioEngine:', error);
-                                    }
-                                }
-                                
-                                if (currentTrack && currentTrack.vocalsData) {
-                                    console.log('ModalBlockEditor: Creating vocals URL for sync...');
-                                    const vocalsBlob = new Blob([currentTrack.vocalsData], { type: currentTrack.vocalsType || 'audio/wav' });
-                                    let vocalsDataUrl = null;
-                                    try {
-                                        if (window.AudioSourceAdapter) {
-                                            const norm = await window.AudioSourceAdapter.normalize(vocalsBlob);
-                                            vocalsDataUrl = norm && norm.safeUrl ? norm.safeUrl : null;
-                                        }
-                                        if (!vocalsDataUrl) {
-                                            vocalsDataUrl = await new Promise((resolve, reject) => {
-                                                const reader = new FileReader();
-                                                reader.onload = () => resolve(reader.result);
-                                                reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
-                                                reader.readAsDataURL(vocalsBlob);
-                                            });
-                                        }
-                                    } catch (e) {
-                                        console.warn('ModalBlockEditor: Adapter failed, fallback to FileReader', e);
-                                        vocalsDataUrl = await new Promise((resolve, reject) => {
-                                            const reader = new FileReader();
-                                            reader.onload = () => resolve(reader.result);
-                                            reader.onerror = () => reject(new Error('Failed to create data URL for vocals'));
-                                            reader.readAsDataURL(vocalsBlob);
-                                        });
-                                    }
-                                    
-                                    await window.waveformEditor.loadAudioForSync(vocalsDataUrl);
-                                    console.log('ModalBlockEditor: Audio loaded for sync, opening editor...');
-                                }
-                            } else {
-                                    console.warn('ModalBlockEditor: No vocals data found, opening editor with mock data');
+                try {
+                    if (window.waveformEditor && typeof window.waveformEditor.show === 'function') {
                                     window.waveformEditor.show();
-                                    
-                                    // 🎯 АВТОМАТИЧЕСКИ АКТИВИРУЕМ РЕЖИМ МАРКЕРОВ
-                                    setTimeout(() => {
-                                        if (window.waveformEditor && !window.waveformEditor.showMarkers) {
-                                            console.log('ModalBlockEditor: Auto-activating markers mode (no vocals)...');
-                                            window.waveformEditor._toggleMarkers();
-                                        }
-                                    }, 500);
-                            }
-                        } else {
-                                console.error('ModalBlockEditor: Track not found by ID after', maxAttempts, 'attempts:', savedTrackId);
-                                // Все равно пытаемся открыть редактор
-                                window.waveformEditor.show();
-                        }
-                } else {
-                            console.warn('ModalBlockEditor: No trackId in save result');
-                            window.waveformEditor.show();
+                        console.log('ModalBlockEditor: Fallback open of Sync Editor via show()');
+                            } else {
+                        console.warn('ModalBlockEditor: WaveformEditor not available to show editor');
                         }
                     } catch (error) {
-                        console.error('ModalBlockEditor: Error opening Sync Editor:', error);
-                        // Показываем уведомление об ошибке
-                        if (window.showNotification) {
-                            window.showNotification('Ошибка при открытии Sync Editor: ' + error.message, 'error');
-                        }
-                        // Все равно пытаемся открыть редактор
-                        try {
-                            window.waveformEditor.show();
-                        } catch (fallbackError) {
-                            console.error('ModalBlockEditor: Fallback show() also failed:', fallbackError);
-                        }
-                    }
-                } else {
-                    console.warn('ModalBlockEditor: WaveformEditor or TrackCatalog not available');
+                    console.error('ModalBlockEditor: Error opening Sync Editor (fallback):', error);
                 }
                 
             } catch (error) {
