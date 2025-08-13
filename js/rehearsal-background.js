@@ -6,6 +6,8 @@ class RehearsalBackgroundManager {
 		this.body = document.body;
 		this.lastImageIndex = -1;
 		this.isActive = false;
+		this._currentBlockIndex = null;
+		this._boundHandler = null;
 	}
 
 	start() {
@@ -41,5 +43,46 @@ class RehearsalBackgroundManager {
 		};
 		img.onerror = () => console.error(`❌ Rehearsal Background: failed to load ${imagePath}`);
 		img.src = imagePath;
+	}
+
+	/**
+	 * Привязка к смене блоков: меняем фон только при естественном проигрывании и смене блока.
+	 */
+	bindToBlockChanges(lyricsDisplay, blockLoopControl, audioEngine) {
+		if (this._boundHandler) return; // уже привязано
+		this._boundHandler = (e) => {
+			try {
+				if (!this.isActive || !this.body.classList.contains('mode-rehearsal')) return;
+				if (!lyricsDisplay || !Array.isArray(lyricsDisplay.textBlocks) || lyricsDisplay.textBlocks.length === 0) return;
+				// Не менять при лупе или seek
+				if (blockLoopControl && (blockLoopControl.isLooping || blockLoopControl.isSeekingInProgress)) return;
+				// Только во время воспроизведения
+				if (!audioEngine || audioEngine.isPlaying !== true) return;
+				const lineIndex = e.detail?.lineIndex;
+				if (typeof lineIndex !== 'number') return;
+				const newBlockIndex = this._getBlockIndexByLine(lyricsDisplay.textBlocks, lineIndex);
+				if (newBlockIndex === null) return;
+				if (this._currentBlockIndex === null) {
+					this._currentBlockIndex = newBlockIndex;
+					return;
+				}
+				if (newBlockIndex !== this._currentBlockIndex) {
+					this._currentBlockIndex = newBlockIndex;
+					this._setBackground();
+				}
+			} catch(_) {}
+		};
+		document.addEventListener('active-line-changed', this._boundHandler);
+	}
+
+	_getBlockIndexByLine(textBlocks, lineIndex) {
+		for (let i = 0; i < textBlocks.length; i++) {
+			const blk = textBlocks[i];
+			if (!blk || !Array.isArray(blk.lineIndices)) continue;
+			const min = Math.min(...blk.lineIndices);
+			const max = Math.max(...blk.lineIndices);
+			if (lineIndex >= min && lineIndex <= max) return i;
+		}
+		return null;
 	}
 } 

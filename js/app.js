@@ -973,7 +973,11 @@ class App {
         // Сначала классы режима, потом запуск фона
         document.body.classList.add('mode-rehearsal');
         document.body.classList.remove('mode-concert', 'mode-karaoke', 'mode-live');
-        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.start();
+        if (this.rehearsalBackgroundManager) {
+            this.rehearsalBackgroundManager.start();
+            // Привяжем смену фона к смене блоков (только если не луп и не seek)
+            this.rehearsalBackgroundManager.bindToBlockChanges(this.lyricsDisplay, this.blockLoopControl, this.audioEngine);
+        }
     }
     
     /**
