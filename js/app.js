@@ -135,15 +135,7 @@ class App {
         // Initialize microphone controls
         this._initMicrophoneControls();
 
-        // Check if LoopBlockManager class is available
-        if (window.LoopBlockManager) {
-            // Initialize LoopBlockManager
-            this.loopBlockManager = new LoopBlockManager(this.audioEngine, this.lyricsDisplay, this.progressBarContainer);
-            console.log('LoopBlockManager component ready');
-        } else {
-            console.warn('LoopBlockManager class not found, LoopBlockManager not initialized. Make sure js/loopblock-manager.js is loaded before app.js or LoopBlockManager is globally available.');
-        }
-        
+        // LoopBlockManager (legacy) отключен. Кнопка Loop используется для новой логики (позже).
         // Initialize BlockLoopControl
         if (window.BlockLoopControl && window.markerManager) {
             this.blockLoopControl = new BlockLoopControl(this.audioEngine, this.lyricsDisplay, window.markerManager);
@@ -730,51 +722,11 @@ class App {
             return;
         }
         
-        this.loopBlockActive = false;
-        
-        // Проверяем доступность аудио движка
-        if (this.audioEngine && this.audioEngine.duration > 0) {
-            console.log('Audio already loaded, initializing LoopBlockManager immediately');
-            this._initializeLoopBlockManager();
-        } else {
-            // Аудио еще не загружено или не готово
-            console.log('Audio not fully loaded yet, setting up delayed initialization');
-            
-            // Подписываемся на событие загрузки трека
-            const initOnTrackLoaded = (detail) => {
-                console.log('Track loaded event detected, initializing LoopBlockManager', detail);
-                this._initializeLoopBlockManager();
-            };
-            
-            // Добавляем обработчик на событие track-loaded
-            document.addEventListener('track-loaded', initOnTrackLoaded);
-            
-            // Также добавим таймер для периодической проверки
-            this.loopBlockInitTimer = setInterval(() => {
-                if (this.audioEngine && this.audioEngine.duration > 0) {
-                    console.log('Audio ready detected via timer, initializing LoopBlockManager');
-                    clearInterval(this.loopBlockInitTimer);
-                    document.removeEventListener('track-loaded', initOnTrackLoaded);
-                    this._initializeLoopBlockManager();
-                }
-            }, 1000);
-        }
-        
-        // Настраиваем обработчик нажатия на кнопку независимо от инициализации менеджера
+        // Наследие отключено. Временно просто транслируем событие для новой логики.
         this.loopBlockBtn.addEventListener('click', () => {
-            this.loopBlockActive = !this.loopBlockActive;
-            this.loopBlockBtn.classList.toggle('active', this.loopBlockActive);
-            
-            // Переключаем режим LoopBlock если менеджер доступен
-            if (this.loopBlockManager) {
-                console.log('LoopBlock Mode:', this.loopBlockActive ? 'ON' : 'OFF');
-                this.loopBlockManager.toggleMode(this.loopBlockActive);
-            } else {
-                console.log('LoopBlock Mode toggled but manager not ready yet');
-                
-                // Если менеджер еще не готов, попробуем инициализировать его сейчас
-                this._initializeLoopBlockManager();
-            }
+            try {
+                document.dispatchEvent(new CustomEvent('bottom-loop-click'));
+            } catch (_) {}
         });
     }
     
@@ -782,44 +734,7 @@ class App {
      * Инициализирует LoopBlockManager с текущими компонентами
      * @private
      */
-    _initializeLoopBlockManager() {
-        // Проверяем, существует ли уже менеджер
-        if (this.loopBlockManager) {
-            console.log('LoopBlockManager already initialized');
-            return;
-        }
-        
-        // Проверяем наличие всех необходимых компонентов
-        const progressBarContainer = document.getElementById('progress-bar-container');
-        
-        if (!this.audioEngine || !progressBarContainer || !this.lyricsDisplay) {
-            console.warn('Cannot initialize LoopBlockManager: Missing dependencies');
-            return;
-        }
-        
-        try {
-            // Создаем экземпляр LoopBlockManager
-            this.loopBlockManager = new LoopBlockManager(
-                this.audioEngine,
-                this.lyricsDisplay,
-                progressBarContainer
-            );
-            
-            console.log('LoopBlockManager successfully initialized');
-            
-            // Если была нажата кнопка до инициализации, активируем режим
-            if (this.loopBlockActive && this.loopBlockManager) {
-                console.log('Activating LoopBlock mode that was toggled earlier');
-                this.loopBlockManager.toggleMode(true);
-            }
-            
-            // Initialize mask controls
-            this._initMaskControls();
-            
-        } catch (error) {
-            console.error('Error initializing LoopBlockManager:', error);
-        }
-    }
+    _initializeLoopBlockManager() { /* legacy disabled */ }
 
     /**
      * Initialize mask controls
