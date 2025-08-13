@@ -8,6 +8,7 @@ class RehearsalBackgroundManager {
 		this.isActive = false;
 		this._currentBlockIndex = null;
 		this._boundHandler = null;
+		this._currentBlockId = null;
 	}
 
 	start() {
@@ -63,14 +64,21 @@ class RehearsalBackgroundManager {
 				if (!audioEngine || audioEngine.isPlaying !== true) return;
 				const lineIndex = e.detail?.lineIndex;
 				if (typeof lineIndex !== 'number') return;
-				const newBlockIndex = this._getBlockIndexByLine(lyricsDisplay.textBlocks, lineIndex);
+				// Работаем по разделённым блокам (учитываем разбиение >8 строк)
+				const processedBlocks = (typeof lyricsDisplay._splitLargeBlocks === 'function')
+					? lyricsDisplay._splitLargeBlocks(lyricsDisplay.textBlocks || [])
+					: (lyricsDisplay.textBlocks || []);
+				const newBlockIndex = this._getBlockIndexByLine(processedBlocks, lineIndex);
 				if (newBlockIndex === null) return;
+				const newBlockId = processedBlocks[newBlockIndex]?.id || `idx-${newBlockIndex}`;
 				if (this._currentBlockIndex === null) {
 					this._currentBlockIndex = newBlockIndex;
+					this._currentBlockId = newBlockId;
 					return;
 				}
-				if (newBlockIndex !== this._currentBlockIndex) {
+				if (newBlockIndex !== this._currentBlockIndex || newBlockId !== this._currentBlockId) {
 					this._currentBlockIndex = newBlockIndex;
+					this._currentBlockId = newBlockId;
 					// Дет. выбор картинки: индекс блока по модулю количества картинок
 					const imgIndex = newBlockIndex % this.imagePaths.length;
 					this._setBackground(imgIndex);
@@ -83,14 +91,18 @@ class RehearsalBackgroundManager {
 		try {
 			if (lyricsDisplay && Array.isArray(lyricsDisplay.textBlocks) && lyricsDisplay.textBlocks.length > 0) {
 				const currentLine = typeof lyricsDisplay.currentLine === 'number' ? lyricsDisplay.currentLine : 0;
-				this._currentBlockIndex = this._getBlockIndexByLine(lyricsDisplay.textBlocks, currentLine);
+				const processedBlocks = (typeof lyricsDisplay._splitLargeBlocks === 'function')
+					? lyricsDisplay._splitLargeBlocks(lyricsDisplay.textBlocks || [])
+					: (lyricsDisplay.textBlocks || []);
+				this._currentBlockIndex = this._getBlockIndexByLine(processedBlocks, currentLine);
+				this._currentBlockId = processedBlocks?.[this._currentBlockIndex]?.id || null;
 			}
 		} catch(_) {}
 	}
 
-	_getBlockIndexByLine(textBlocks, lineIndex) {
-		for (let i = 0; i < textBlocks.length; i++) {
-			const blk = textBlocks[i];
+	_getBlockIndexByLine(blocks, lineIndex) {
+		for (let i = 0; i < blocks.length; i++) {
+			const blk = blocks[i];
 			if (!blk || !Array.isArray(blk.lineIndices)) continue;
 			const min = Math.min(...blk.lineIndices);
 			const max = Math.max(...blk.lineIndices);
