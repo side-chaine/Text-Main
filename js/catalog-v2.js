@@ -30,6 +30,7 @@ class CatalogV2 {
         
         this.setupEventListeners();
         this.initDatabase();
+        this.attachSearchHandlers();
     }
     
     initDatabase() {
@@ -106,6 +107,9 @@ class CatalogV2 {
                         }
                     });
                 }
+
+                // 🎯 Всегда рендерим правую колонку поиска всеми треками
+                this.renderSearchAllTracks();
             };
             
             request.onerror = () => {
@@ -151,7 +155,7 @@ class CatalogV2 {
                                 <div class="track-actions">
                                     <button class="track-action-btn play-btn" title="Играть">▶</button>
                                     <button class="track-action-btn add-btn" title="Добавить в плейлист">➕</button>
-                                    <button class="track-action-btn delete-btn" title="Удалить из каталога">✕</button>
+                                    ${window.__ADMIN__ ? '<button class="track-action-btn delete-btn" title="Удалить из каталога">✕</button>' : ''}
                                 </div>
                             </div>
                         `).join('')}
@@ -163,29 +167,69 @@ class CatalogV2 {
         myMusicContent.innerHTML = html;
         console.log(`🎵 CatalogV2: "Моя музыка" обновлена, отображено ${allTracks.length} треков`);
 
-        // Обработчик удаления
-        myMusicContent.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const item = e.currentTarget.closest('.track-item');
-                const id = parseInt(item?.dataset?.trackId);
-                if (!id || !this.db) return;
-                if (!confirm('Удалить трек из каталога? Данные будут удалены из базы.')) return;
-                const tx = this.db.transaction(['tracks'], 'readwrite');
-                const store = tx.objectStore('tracks');
-                const req = store.delete(id);
-                req.onsuccess = () => {
-                    // Удаляем из памяти основного каталога
-                    if (window.trackCatalog && window.trackCatalog.tracks) {
-                        window.trackCatalog.tracks = window.trackCatalog.tracks.filter(t => t.id !== id);
-                    }
-                    // Удаляем из локального списка CatalogV2
-                    this.tracks = this.tracks.filter(t => t.id !== id);
-                    item.remove();
-                    console.log('CatalogV2: Трек удалён:', id);
-                };
-                req.onerror = (ev) => console.error('CatalogV2: Ошибка удаления трека:', ev.target?.error);
+        // Обработчик удаления (только для админов)
+        if (window.__ADMIN__) {
+            myMusicContent.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const item = e.currentTarget.closest('.track-item');
+                    const id = parseInt(item?.dataset?.trackId);
+                    if (!id || !this.db) return;
+                    if (!confirm('Удалить трек из общей базы? Данные будут удалены из IndexedDB.')) return;
+                    const tx = this.db.transaction(['tracks'], 'readwrite');
+                    const store = tx.objectStore('tracks');
+                    const req = store.delete(id);
+                    req.onsuccess = () => {
+                        if (window.trackCatalog && window.trackCatalog.tracks) {
+                            window.trackCatalog.tracks = window.trackCatalog.tracks.filter(t => t.id !== id);
+                        }
+                        this.tracks = this.tracks.filter(t => t.id !== id);
+                        this.renderMyMusic();
+                        this.renderSearchAllTracks();
+                    };
+                });
             });
+        }
+    }
+
+    // Рендер всего каталога (панель Поиск) всеми треками
+    renderSearchAllTracks() {
+        const searchResults = document.querySelector('.search-results');
+        if (!searchResults) return;
+        const source = (window.trackCatalog && window.trackCatalog.tracks) ? window.trackCatalog.tracks : this.tracks;
+        searchResults.innerHTML = '';
+        if (!source || source.length === 0) {
+            searchResults.innerHTML = '<p class="empty-state">Введите запрос для поиска</p>';
+            return;
+        }
+        source.forEach(track => {
+            const el = document.createElement('div');
+            el.className = 'search-result-item track-item';
+            el.setAttribute('data-track-id', track.id);
+            el.innerHTML = `
+                <div class="track-title">${track.title}</div>
+                <div class="track-actions">
+                    <button class="track-action-btn play-btn" data-track-id="${track.id}">▶</button>
+                    <button class="track-action-btn add-btn" data-track-id="${track.id}">➕</button>
+                </div>
+            `;
+            searchResults.appendChild(el);
+        });
+        console.log(`🎵 CatalogV2: Поиск/каталог обновлён, элементов: ${source.length}`);
+    }
+
+    // Подключение поля поиска для фильтрации
+    attachSearchHandlers() {
+        const input = document.querySelector('.search-mode-content input[type="text"], .search-input');
+        if (!input) return;
+        input.addEventListener('input', () => {
+            const q = (input.value || '').toLowerCase();
+            const searchResults = document.querySelector('.search-results');
+            if (!searchResults) return;
+            const source = (window.trackCatalog && window.trackCatalog.tracks) ? window.trackCatalog.tracks : this.tracks;
+            const filtered = !q ? source : source.filter(t => (t.title || '').toLowerCase().includes(q));
+            searchResults.innerHTML = '';
+            filtered.forEach(track => this.addTrackToSearchResults(track));
         });
     }
     
