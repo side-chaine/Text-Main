@@ -10,6 +10,7 @@ class CatalogV2 {
         this.isOpen = false;
         this.tracks = [];
         this.db = null;
+        this.myMusicIds = new Set();
         this.uploadSession = {
             instrumental: null,
             vocal: null,
@@ -35,7 +36,7 @@ class CatalogV2 {
     
     initDatabase() {
         const DB_NAME = (window.__DB_NAME || 'TextAppDB');
-        const DB_VERSION = 5;
+        const DB_VERSION = 6;
         const openMain = () => indexedDB.open(DB_NAME, DB_VERSION);
         const openRecovery = (name) => indexedDB.open(name, 1);
 
@@ -48,11 +49,13 @@ class CatalogV2 {
             }
             if (!db.objectStoreNames.contains('app_state')) db.createObjectStore('app_state', { keyPath: 'key' });
             if (!db.objectStoreNames.contains('temp_audio_files')) db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+            if (!db.objectStoreNames.contains('my_music')) db.createObjectStore('my_music', { keyPath: 'trackId' });
         };
         request.onsuccess = (event) => {
             this.db = event.target.result;
             console.log('🎵 CatalogV2: База данных подключена');
             this.loadTracksFromDB();
+            this.loadMyMusicFromDB();
         };
         request.onerror = () => {
             console.warn('❌ CatalogV2: Ошибка подключения. Пробуем пересоздать базу...');
@@ -70,6 +73,7 @@ class CatalogV2 {
                         s.createIndex('title', 'title', { unique: false });
                         db.createObjectStore('app_state', { keyPath: 'key' });
                         db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        db.createObjectStore('my_music', { keyPath: 'trackId' });
                     };
                     rec.onsuccess = (e3) => { this.db = e3.target.result; this.loadTracksFromDB(); };
                     rec.onerror = (e3) => console.error('💥 CatalogV2: Recovery DB open failed:', e3);
@@ -124,20 +128,17 @@ class CatalogV2 {
         const myMusicContent = this.overlay.querySelector('.my-music-content');
         if (!myMusicContent) return;
         
-        // 🎯 ИСПОЛЬЗУЕМ треки из основного каталога (window.trackCatalog.tracks)
-        let allTracks = [];
+        // 🎯 Берём только треки, добавленные пользователем в "Мою музыку"
+        const allTracks = (window.trackCatalog && window.trackCatalog.tracks) ? window.trackCatalog.tracks : this.tracks;
+        const myTracks = allTracks.filter(t => this.myMusicIds.has(t.id));
         
-        if (window.trackCatalog && window.trackCatalog.tracks) {
-            allTracks = window.trackCatalog.tracks;
-        }
-        
-        if (allTracks.length === 0) {
+        if (myTracks.length === 0) {
             myMusicContent.innerHTML = '<p class="empty-state">Загрузите треки через "Upload Track" →</p>';
             return;
         }
         
         // Группируем треки по исполнителям/альбомам
-        const groupedTracks = this.groupTracksByArtist(allTracks);
+        const groupedTracks = this.groupTracksByArtist(myTracks);
         
         let html = '';
         for (const [artist, tracks] of Object.entries(groupedTracks)) {
@@ -155,7 +156,7 @@ class CatalogV2 {
                                 <div class="track-actions">
                                     <button class="track-action-btn play-btn" title="Играть">▶</button>
                                     <button class="track-action-btn add-btn" title="Добавить в плейлист">➕</button>
-                                    ${window.__ADMIN__ ? '<button class="track-action-btn delete-btn" title="Удалить из каталога">✕</button>' : ''}
+                                    <button class="track-action-btn delete-btn" title="Удалить из "Моей музыки"">✕</button>
                                 </div>
                             </div>
                         `).join('')}
@@ -165,31 +166,19 @@ class CatalogV2 {
         }
         
         myMusicContent.innerHTML = html;
-        console.log(`🎵 CatalogV2: "Моя музыка" обновлена, отображено ${allTracks.length} треков`);
+        console.log(`🎵 CatalogV2: "Моя музыка" обновлена, отображено ${myTracks.length} треков`);
 
-        // Обработчик удаления (только для админов)
-        if (window.__ADMIN__) {
-            myMusicContent.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const item = e.currentTarget.closest('.track-item');
-                    const id = parseInt(item?.dataset?.trackId);
-                    if (!id || !this.db) return;
-                    if (!confirm('Удалить трек из общей базы? Данные будут удалены из IndexedDB.')) return;
-                    const tx = this.db.transaction(['tracks'], 'readwrite');
-                    const store = tx.objectStore('tracks');
-                    const req = store.delete(id);
-                    req.onsuccess = () => {
-                        if (window.trackCatalog && window.trackCatalog.tracks) {
-                            window.trackCatalog.tracks = window.trackCatalog.tracks.filter(t => t.id !== id);
-                        }
-                        this.tracks = this.tracks.filter(t => t.id !== id);
-                        this.renderMyMusic();
-                        this.renderSearchAllTracks();
-                    };
-                });
+        // Обработчик удаления из "Моей музыки" (для всех пользователей)
+        myMusicContent.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const item = e.currentTarget.closest('.track-item');
+                const id = parseInt(item?.dataset?.trackId);
+                if (!id || !this.db) return;
+                await this.removeFromMyMusic(id);
+                this.renderMyMusic();
             });
-        }
+        });
     }
 
     // Рендер всего каталога (панель Поиск) всеми треками
@@ -541,10 +530,10 @@ class CatalogV2 {
         }
         
         console.log(`➕ CatalogV2: Добавление трека "${track.title}" в "Мою музыку"`);
-        
-        // 🎯 ДОБАВЛЯЕМ трек в "Мою музыку" (renderMyMusic обновится)
-        this.renderMyMusic();
-        this.showNotification(`✅ Трек "${track.title}" добавлен в "Мою музыку"`);
+        this.addToMyMusic(trackId).then(() => {
+            this.renderMyMusic();
+            this.showNotification(`✅ Трек "${track.title}" добавлен в "Мою музыку"`);
+        });
         
         // Визуальная обратная связь
         button.textContent = '✅';
@@ -1020,6 +1009,40 @@ class CatalogV2 {
         this.isOpen = false;
         
         console.log('🔄 CatalogV2: Overlay закрыт');
+    }
+
+    async loadMyMusicFromDB() {
+        if (!this.db) return;
+        try {
+            const tx = this.db.transaction(['my_music'], 'readonly');
+            const store = tx.objectStore('my_music');
+            const req = store.getAll();
+            req.onsuccess = () => {
+                const rows = req.result || [];
+                this.myMusicIds = new Set(rows.map(r => r.trackId));
+                this.renderMyMusic();
+            };
+        } catch(_) {}
+    }
+
+    async addToMyMusic(trackId) {
+        if (!this.db || !trackId) return;
+        try {
+            const tx = this.db.transaction(['my_music'], 'readwrite');
+            const store = tx.objectStore('my_music');
+            store.put({ trackId, addedAt: new Date().toISOString() });
+            this.myMusicIds.add(trackId);
+        } catch(_) {}
+    }
+
+    async removeFromMyMusic(trackId) {
+        if (!this.db || !trackId) return;
+        try {
+            const tx = this.db.transaction(['my_music'], 'readwrite');
+            const store = tx.objectStore('my_music');
+            store.delete(trackId);
+            this.myMusicIds.delete(trackId);
+        } catch(_) {}
     }
 }
 

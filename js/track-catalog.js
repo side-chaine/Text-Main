@@ -65,7 +65,7 @@ class TrackCatalog {
         // 🎯 СТАБИЛЬНАЯ БАЗА: используем постоянное имя и актуальную версию
         const dbName = (window.__DB_NAME || 'TextAppDB');
         this.dbName = dbName;
-        const DB_VERSION = 5;
+        const DB_VERSION = 6;
         console.log('🔄 TrackCatalog: Открываем стабильную базу:', dbName, 'v' + DB_VERSION);
         
         const request = indexedDB.open(dbName, DB_VERSION);
@@ -93,6 +93,9 @@ class TrackCatalog {
                         if (!db.objectStoreNames.contains('temp_audio_files')) {
                             db.createObjectStore('temp_audio_files', { keyPath: 'id' });
                         }
+                        if (!db.objectStoreNames.contains('my_music')) {
+                            db.createObjectStore('my_music', { keyPath: 'trackId' });
+                        }
                     };
                     retry.onsuccess = (ev2) => {
                         this.db = ev2.target.result;
@@ -112,6 +115,7 @@ class TrackCatalog {
                             trackStore.createIndex('title', 'title', { unique: false });
                             db.createObjectStore('app_state', { keyPath: 'key' });
                             db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                            db.createObjectStore('my_music', { keyPath: 'trackId' });
                         };
                         rec.onsuccess = (ev3) => {
                             this.db = ev3.target.result;
@@ -135,6 +139,7 @@ class TrackCatalog {
                         trackStore.createIndex('title', 'title', { unique: false });
                         db.createObjectStore('app_state', { keyPath: 'key' });
                         db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        db.createObjectStore('my_music', { keyPath: 'trackId' });
                     };
                     rec.onsuccess = (ev3) => {
                         this.db = ev3.target.result;
@@ -171,6 +176,10 @@ class TrackCatalog {
             if (!this.db.objectStoreNames.contains('temp_audio_files')) {
                 this.db.createObjectStore('temp_audio_files', { keyPath: 'id' });
                 console.log('✅ TrackCatalog: Object store "temp_audio_files" created.');
+            }
+            if (!this.db.objectStoreNames.contains('my_music')) {
+                this.db.createObjectStore('my_music', { keyPath: 'trackId' });
+                console.log('✅ TrackCatalog: Object store "my_music" created.');
             }
         };
         
@@ -1305,13 +1314,14 @@ class TrackCatalog {
                 trackElement.classList.add('current-track');
             }
             
+            const deleteBtnHtml = (window.__ADMIN__ ? `<button class="delete-track" data-id="${track.id}">Delete</button>` : '');
             trackElement.innerHTML = `
                 <div class="track-title">${track.title}</div>
                 <div class="track-info">
                     <span>${track.vocalsData ? 'Track + Vocals' : 'Track Only'}</span>
                     <span>${track.lyrics ? 'Has Lyrics' : 'No Lyrics'}</span>
                     <button class="import-track-markers" data-id="${track.id}" title="Добавить JSON маркеров">+ JSON</button>
-                    <button class="delete-track" data-id="${track.id}">Delete</button>
+                    ${deleteBtnHtml}
                 </div>
             `;
             
