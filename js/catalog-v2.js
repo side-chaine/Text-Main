@@ -151,6 +151,7 @@ class CatalogV2 {
                                 <div class="track-actions">
                                     <button class="track-action-btn play-btn" title="Играть">▶</button>
                                     <button class="track-action-btn add-btn" title="Добавить в плейлист">➕</button>
+                                    <button class="track-action-btn delete-btn" title="Удалить из каталога">✕</button>
                                 </div>
                             </div>
                         `).join('')}
@@ -161,6 +162,31 @@ class CatalogV2 {
         
         myMusicContent.innerHTML = html;
         console.log(`🎵 CatalogV2: "Моя музыка" обновлена, отображено ${allTracks.length} треков`);
+
+        // Обработчик удаления
+        myMusicContent.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const item = e.currentTarget.closest('.track-item');
+                const id = parseInt(item?.dataset?.trackId);
+                if (!id || !this.db) return;
+                if (!confirm('Удалить трек из каталога? Данные будут удалены из базы.')) return;
+                const tx = this.db.transaction(['tracks'], 'readwrite');
+                const store = tx.objectStore('tracks');
+                const req = store.delete(id);
+                req.onsuccess = () => {
+                    // Удаляем из памяти основного каталога
+                    if (window.trackCatalog && window.trackCatalog.tracks) {
+                        window.trackCatalog.tracks = window.trackCatalog.tracks.filter(t => t.id !== id);
+                    }
+                    // Удаляем из локального списка CatalogV2
+                    this.tracks = this.tracks.filter(t => t.id !== id);
+                    item.remove();
+                    console.log('CatalogV2: Трек удалён:', id);
+                };
+                req.onerror = (ev) => console.error('CatalogV2: Ошибка удаления трека:', ev.target?.error);
+            });
+        });
     }
     
     groupTracksByArtist(tracksArray = null) {
@@ -709,22 +735,10 @@ class CatalogV2 {
             // Очищаем форму
             this.cancelUpload();
             
-            // 🎯 ЛОГИКА: если есть JSON маркеры — редактор блоков не открываем
+            // 🎯 ЛОГИКА: если есть JSON маркеры — редактор блоков НЕ открываем и трек не автозапускаем
             const hasJsonMarkers = Array.isArray(savedTrack?.syncMarkers) && savedTrack.syncMarkers.length > 0;
             if (hasJsonMarkers) {
-                console.log('✅ CatalogV2: JSON маркеры присутствуют, пропускаем редактор блоков и запускаем трек');
-                try {
-                    // Закрываем каталог и запускаем трек
-                    this.close();
-                    if (window.trackCatalog && typeof window.trackCatalog.loadTrack === 'function') {
-                        const originalTrackIndex = window.trackCatalog.tracks.findIndex(t => t.id === savedTrack.id);
-                        if (originalTrackIndex !== -1) {
-                            window.trackCatalog.loadTrack(originalTrackIndex);
-                        }
-                    }
-                } catch (e) {
-                    console.warn('CatalogV2: Не удалось автозапустить трек с JSON маркерами:', e);
-                }
+                console.log('✅ CatalogV2: JSON маркеры присутствуют, пропускаем редактор блоков. Трек доступен в поиске и "Моей музыке" (если добавите).');
             } else {
                 // Иначе — старое поведение: открыть редактор блоков
                 console.log('🎯 CatalogV2: Открываем редактор блоков для обработки трека');
