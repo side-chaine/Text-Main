@@ -91,10 +91,19 @@ class DragBoundaryController {
         this.blockElement = blockElement;
         this.isActive = true;
         
-        // Устанавливаем начальные границы
-        this.startBoundary = this.currentBoundaries.start;
-        this.endBoundary = this.currentBoundaries.end;
-        console.log('[DragBoundary] ✅ Применены переданные границы:', this.currentBoundaries);
+        // Восстанавливаем сохранённые границы, если переданы. Дефолты ставим только при их отсутствии
+        const sorted = [...block.lineIndices].sort((a,b)=>a-b);
+        const defaultStart = sorted[0];
+        const defaultEnd = sorted[sorted.length - 1];
+        const hasInitial = initialBoundaries && typeof initialBoundaries.startBoundary === 'number' && typeof initialBoundaries.endBoundary === 'number';
+        console.log(`🎯 Initial boundaries received: ${hasInitial ? 'Object' : 'null'}`);
+        if (hasInitial) {
+            this.boundaries = { startBoundary: initialBoundaries.startBoundary, endBoundary: initialBoundaries.endBoundary };
+            console.log('[DragBoundary] ✅ Применены сохранённые границы:', this.boundaries);
+        } else if (!this.boundaries) {
+            console.log(`✅ Set default boundaries from sorted indices: start=${defaultStart}, end=${defaultEnd}`);
+            this.boundaries = { startBoundary: defaultStart, endBoundary: defaultEnd };
+        }
         
         // Проверяем корректность границ
         if (!block.lineIndices.includes(this.startBoundary)) {
@@ -115,7 +124,13 @@ class DragBoundaryController {
         this._activeBlockElement = blockElement;
         this._activeBlockId = this.currentBlockId;
 
+        // Создаем линии границ на основе актуальных this.boundaries (включая восстановленные)
         this._createBoundaryLines();
+        // Проставляем текущие индексы согласно this.boundaries
+        if (this.boundaries) {
+            this.startBoundary = this.boundaries.startBoundary;
+            this.endBoundary = this.boundaries.endBoundary;
+        }
         this._setDisabledByMode();
         
         // Обновляем визуальные состояния
