@@ -1094,26 +1094,55 @@ class BlockLoopControl {
         this.userBoundaries = { ...boundaries };
         console.log('🎯 USER BOUNDARIES SET: hasUserDefinedBoundaries = true');
         
-        // 🎯 КРИТИЧЕСКОЕ УЛУЧШЕНИЕ: Правильно обрабатываем изменение границ
+        // 🎯 КРИТИКАЛЬНО: В multi-loop корректируем ТОЛЬКО нужную сторону и синхронизируем combined*
+        const activeBlock = this.lyricsDisplay?.currentActiveBlock;
+        const isMulti = this.isMultiLoopEnabled && this.linkedBlock;
+        const mode = this.dragBoundaryController?.mode || 'both';
+
         if (boundaries.startTime !== undefined && boundaries.endTime !== undefined) {
-            // Обновляем временные границы напрямую
-            this.loopStartTime = boundaries.startTime;
-            this.loopEndTime = boundaries.endTime;
-            
-            console.log(`🎯 LOOP BOUNDARIES UPDATED: ${this.loopStartTime.toFixed(2)}s - ${this.loopEndTime.toFixed(2)}s`);
-        } else if (boundaries.startBoundary !== undefined && boundaries.endBoundary !== undefined) {
-            // Конвертируем индексы строк во временные метки
-            const startTime = this._findTimeByLine(boundaries.startBoundary);
-            const endTime = this._findTimeByLine(boundaries.endBoundary + 1); // следующая строка для конца
-            
-            if (startTime !== null && endTime !== null) {
-                this.loopStartTime = startTime;
-                this.loopEndTime = endTime;
-                
-                console.log(`🎯 LOOP BOUNDARIES UPDATED FROM LINES: Lines ${boundaries.startBoundary}-${boundaries.endBoundary} = ${this.loopStartTime.toFixed(2)}s - ${this.loopEndTime.toFixed(2)}s`);
+            // Редкий случай передачи времён напрямую — распределяем по режиму
+            if (isMulti && activeBlock) {
+                if (activeBlock.id === this.currentLoopBlock?.id && (mode === 'start-only' || mode === 'both')) {
+                    this.loopStartTime = boundaries.startTime;
+                    this.combinedStartTime = this.loopStartTime;
+                }
+                if (activeBlock.id === this.linkedBlock?.id && (mode === 'end-only' || mode === 'both')) {
+                    this.loopEndTime = boundaries.endTime;
+                    this.combinedEndTime = this.loopEndTime;
+                }
             } else {
-                console.warn('🎯 BOUNDARY UPDATE FAILED: Could not convert line indices to time');
+                this.loopStartTime = boundaries.startTime;
+                this.loopEndTime = boundaries.endTime;
             }
+            console.log(`🎯 LOOP BOUNDARIES UPDATED: ${this.loopStartTime?.toFixed(2)}s - ${this.loopEndTime?.toFixed(2)}s | combined=${(this.combinedStartTime??this.loopStartTime).toFixed(2)}s-${(this.combinedEndTime??this.loopEndTime).toFixed(2)}s`);
+            return;
+        }
+
+        if (boundaries.startBoundary !== undefined && boundaries.endBoundary !== undefined) {
+            // Индексы строк → времена
+            const startTime = this._findTimeByLine(boundaries.startBoundary);
+            const endTime = this._findTimeByLine(boundaries.endBoundary + 1);
+
+            if (isMulti && activeBlock) {
+                if (activeBlock.id === this.currentLoopBlock?.id && (mode === 'start-only' || mode === 'both')) {
+                    if (startTime !== null) {
+                        this.loopStartTime = startTime;
+                        this.combinedStartTime = this.loopStartTime;
+                    }
+                }
+                if (activeBlock.id === this.linkedBlock?.id && (mode === 'end-only' || mode === 'both')) {
+                    if (endTime !== null) {
+                        this.loopEndTime = endTime;
+                        this.combinedEndTime = this.loopEndTime;
+                    }
+                }
+            } else {
+                if (startTime !== null) this.loopStartTime = startTime;
+                if (endTime !== null) this.loopEndTime = endTime;
+            }
+
+            console.log(`🎯 LOOP BOUNDARIES UPDATED FROM LINES: start=${this.loopStartTime?.toFixed(2)}s end=${this.loopEndTime?.toFixed(2)}s | combined=${(this.combinedStartTime??this.loopStartTime).toFixed(2)}s-${(this.combinedEndTime??this.loopEndTime).toFixed(2)}s`);
+            return;
         }
     }
     
