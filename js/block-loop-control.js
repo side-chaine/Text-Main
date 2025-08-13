@@ -285,6 +285,9 @@ class BlockLoopControl {
         // Если луп активен — показываем плюсик для расширения на следующий блок
         if (this.isLooping) {
             this._ensurePlusButton(blockElement, block);
+            if (this.isMultiLoopEnabled && this.plusButton) {
+                this.plusButton.classList.add('active');
+            }
         }
 
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
@@ -1260,13 +1263,14 @@ class BlockLoopControl {
         }
         
         // Проверяем: активен луп, но мы далеко за его пределами?
-        if (this.isLooping && this.loopEndTime && 
-            currentTime > this.loopEndTime + 2.0) { // Если ушли на 2+ секунды за границу
+        const loopEndForHealth = this.isMultiLoopEnabled ? this.combinedEndTime : this.loopEndTime;
+        if (this.isLooping && loopEndForHealth && 
+            currentTime > loopEndForHealth + 2.0) { // Если ушли на 2+ секунды за границу
             
             console.log(`🚨 AUTO RECOVERY: Loop is active but we're far beyond its boundaries!`);
             console.log(`   Current time: ${currentTime.toFixed(3)}s`);
-            console.log(`   Loop end: ${this.loopEndTime.toFixed(3)}s`);
-            console.log(`   Distance beyond: ${(currentTime - this.loopEndTime).toFixed(1)}s`);
+            console.log(`   Loop end: ${loopEndForHealth.toFixed(3)}s`);
+            console.log(`   Distance beyond: ${(currentTime - loopEndForHealth).toFixed(1)}s`);
             
             // Это признак cascade failure - останавливаем сломанный луп
             console.log(`🛑 AUTO RECOVERY: Stopping broken loop`);
@@ -1360,6 +1364,9 @@ class BlockLoopControl {
             blockElement.appendChild(btn);
             // плавное появление
             requestAnimationFrame(() => { btn.style.opacity = '1'; btn.style.transform = 'translateY(0)'; });
+            if (this.isMultiLoopEnabled) {
+                btn.classList.add('active');
+            }
         }
     }
 
