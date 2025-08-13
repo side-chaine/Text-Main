@@ -1394,9 +1394,13 @@ class BlockLoopControl {
         this.isMultiLoopEnabled = true;
         // Подсветка второго блока (если есть отдельный элемент)
         const nextEl = this._findBlockDOMElement(nextBlock) || document.querySelector('.rehearsal-preview-block');
-        if (nextEl) nextEl.classList.add('loop-linked');
+        if (nextEl) { nextEl.classList.add('loop-linked'); nextEl.classList.add('loop-active'); }
         // Визуальный фидбэк для плюсика
         if (this.plusButton) this.plusButton.classList.add('active');
+        // Если луп ещё не запущен — запускаем от первого блока
+        if (!this.isLooping) {
+            this.startLooping(block);
+        }
         // Мгновенно расширяем временной диапазон до конца следующего блока
         const tr = this._getBlockTimeRange(nextBlock);
         if (tr && tr.endTime != null) {
