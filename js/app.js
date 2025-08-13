@@ -947,15 +947,11 @@ class App {
         }
         
         this.karaokeBackgroundManager.stop();
+        // Защита от артефактов фона после караоке
+        try { document.body.classList.remove('karaoke-active'); document.body.style.backgroundImage = ''; } catch(_) {}
         this.textStyleManager.setStyle('rehearsal');
         this._setLyricsContainerStyle(null);
         this.blockLoopControl.activate();
-        // Обеспечить появление кнопки Loop сразу после первого рендера блока
-        setTimeout(() => {
-            if (this.blockLoopControl && typeof this.blockLoopControl.updateForCurrentBlock === 'function') {
-                this.blockLoopControl.updateForCurrentBlock();
-            }
-        }, 150);
         this._hideLiveFeedConcept();
         
         // Показываем BPM контроли в режиме репетиции

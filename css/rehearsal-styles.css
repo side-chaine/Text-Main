@@ -4,4 +4,13 @@
     font-family: 'Courier New', Courier, monospace;
     background-color: rgba(20, 20, 30, 0.8);
     color: #E0E0E0;
+}
+
+/* Режим репетиции — гарантированный фон и сброс картинок караоке */
+body.mode-rehearsal {
+	background-image: none !important;
+	background-color: #0f0f15 !important;
+	background-attachment: scroll !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
 } 
