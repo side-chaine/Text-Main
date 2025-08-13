@@ -74,8 +74,79 @@ class TrackCatalog {
             console.error('❌ TrackCatalog: Database error:', event.target.error);
             console.error('❌ TrackCatalog: Error details:', event);
             
-            // 🎯 МЯГКО: без удаления базы, просто лог
-            console.warn('TrackCatalog: Ошибка открытия стабильной базы. Проверьте доступ к IndexedDB.');
+            // 🎯 Fallback 1: Пытаемся удалить проблемную базу и создать заново
+            try {
+                console.warn('TrackCatalog: Пробуем пересоздать стабильную базу...');
+                const del = indexedDB.deleteDatabase('TextAppDB');
+                del.onsuccess = () => {
+                    console.log('TrackCatalog: Стабильная база удалена, создаем заново...');
+                    const retry = indexedDB.open('TextAppDB', DB_VERSION);
+                    retry.onupgradeneeded = (ev) => {
+                        const db = ev.target.result;
+                        if (!db.objectStoreNames.contains('tracks')) {
+                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                            trackStore.createIndex('title', 'title', { unique: false });
+                        }
+                        if (!db.objectStoreNames.contains('app_state')) {
+                            db.createObjectStore('app_state', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('temp_audio_files')) {
+                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        }
+                    };
+                    retry.onsuccess = (ev2) => {
+                        this.db = ev2.target.result;
+                        this.dbName = 'TextAppDB';
+                        console.log('✅ TrackCatalog: Стабильная база пересоздана');
+                        this._loadTracksFromDB();
+                        this._finalizeUploadFromBlockEditor();
+                    };
+                    retry.onerror = () => {
+                        // 🎯 Fallback 2: Открываем Recovery базу
+                        const recoveryName = 'TextAppDB_Recovery_' + Date.now();
+                        console.warn('TrackCatalog: Переходим на Recovery базу:', recoveryName);
+                        const rec = indexedDB.open(recoveryName, 1);
+                        rec.onupgradeneeded = (ev3) => {
+                            const db = ev3.target.result;
+                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                            trackStore.createIndex('title', 'title', { unique: false });
+                            db.createObjectStore('app_state', { keyPath: 'key' });
+                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                        };
+                        rec.onsuccess = (ev3) => {
+                            this.db = ev3.target.result;
+                            this.dbName = recoveryName;
+                            console.log('✅ TrackCatalog: Recovery база готова');
+                            this._loadTracksFromDB();
+                            this._finalizeUploadFromBlockEditor();
+                        };
+                        rec.onerror = (e3) => {
+                            console.error('💥 TrackCatalog: Не удалось открыть Recovery базу:', e3);
+                        };
+                    };
+                };
+                del.onerror = () => {
+                    console.warn('TrackCatalog: Не удалось удалить стабильную базу. Переходим к Recovery.');
+                    const recoveryName = 'TextAppDB_Recovery_' + Date.now();
+                    const rec = indexedDB.open(recoveryName, 1);
+                    rec.onupgradeneeded = (ev3) => {
+                        const db = ev3.target.result;
+                        const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
+                        trackStore.createIndex('title', 'title', { unique: false });
+                        db.createObjectStore('app_state', { keyPath: 'key' });
+                        db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                    };
+                    rec.onsuccess = (ev3) => {
+                        this.db = ev3.target.result;
+                        this.dbName = recoveryName;
+                        console.log('✅ TrackCatalog: Recovery база готова');
+                        this._loadTracksFromDB();
+                        this._finalizeUploadFromBlockEditor();
+                    };
+                };
+            } catch (e) {
+                console.error('TrackCatalog: Fallback init exception:', e);
+            }
         };
         
         request.onblocked = (event) => {
@@ -129,7 +200,7 @@ class TrackCatalog {
             } else {
                 console.error('CatalogV2 is not initialized');
                 // Fallback to old catalog if new one is not available
-                this.openCatalog();
+            this.openCatalog();
             }
         });
         
@@ -1282,7 +1353,7 @@ class TrackCatalog {
         });
     }
     
-    async loadTrack(index) {
+    async loadTrack(index, options = {}) {
         if (index < 0 || index >= this.tracks.length) return;
         
         const track = this.tracks[index];
@@ -1388,40 +1459,34 @@ class TrackCatalog {
                 console.timeEnd('⏱️ TOTAL_TRACK_LOAD_TIME'); // Общее время загрузки
             }, 100); // Небольшая задержка для завершения всех операций
             
-            // 🚀 АВТОПЛЕЙ: Запускаем воспроизведение сразу после загрузки
-            // 🎯 ОТКЛЮЧЕНО: Трек НЕ должен запускаться автоматически при работе с блоками
-            /*
-            console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
-            setTimeout(async () => {
-                try {
-                    await audioEngine.play();
-                    console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
-                } catch (playError) {
-                    console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
-                    console.log('💡 Пользователь может запустить воспроизведение вручную через пробел или кнопку Play');
-                }
-            }, 200); // Небольшая задержка для стабилизации
-            */
+            // 🚀 АВТОПЛЕЙ: по опции
+            if (options && options.autoplay) {
+                console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
+                setTimeout(async () => {
+                    try {
+                        await audioEngine.play();
+                        console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
+                    } catch (playError) {
+                        console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
+                    }
+                }, 200);
+            }
             
             // Update track list
             this._renderTrackList();
 
-            // Отображаем WaveformEditor и загружаем аудио для синхронизации
-            if (window.waveformEditor) {
+            // Отображаем WaveformEditor только если НЕ запрещено опциями
+            const shouldOpenSync = !(options && options.openSyncEditor === false);
+            if (shouldOpenSync && window.waveformEditor) {
                 window.waveformEditor.show();
                 // Нам нужен URL для загрузки в waveform-редактор
                 const instrumentalUrl = track.instrumentalUrl || track.audioUrl;
                 const vocalsUrl = track.vocalsUrl;
 
-                // Используем новый метод для загрузки обеих дорожек
                 if (instrumentalUrl || vocalsUrl) {
-                     window.waveformEditor.loadDualWaveforms(instrumentalUrl, vocalsUrl)
-                        .then(() => {
-                            console.log('WaveformEditor: Обе дорожки успешно загружены.');
-                        })
-                        .catch(error => {
-                            console.error('TrackCatalog: Ошибка при загрузке двойных волновых форм:', error);
-                        });
+                    window.waveformEditor.loadDualWaveforms(instrumentalUrl, vocalsUrl)
+                        .then(() => console.log('WaveformEditor: Обе дорожки успешно загружены.'))
+                        .catch(error => console.error('TrackCatalog: Ошибка при загрузке двойных волновых форм:', error));
                 }
             }
 
@@ -2273,8 +2338,8 @@ class TrackCatalog {
                         if (window.markerManager && typeof window.markerManager.updateMarkerColors === 'function') {
                             window.markerManager.updateMarkerColors();
                         }
-                     }
-                 }
+                    }
+                }
             }).catch(err => {
                 // 🎯 ИСПРАВЛЕННОЕ уведомление об ошибке
                 if (window.app && typeof window.app.showNotification === 'function') {

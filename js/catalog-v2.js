@@ -453,7 +453,14 @@ class CatalogV2 {
             const originalTrackIndex = window.trackCatalog.tracks.findIndex(t => t.id === trackId);
             if (originalTrackIndex !== -1) {
                 console.log(`🎵 CatalogV2: Найден индекс ${originalTrackIndex} в оригинальном каталоге`);
-                window.trackCatalog.loadTrack(originalTrackIndex);
+                // Устанавливаем предпочтительный режим — Караоке
+                try {
+                    if (window.app && typeof window.app._activateKaraokeMode === 'function') {
+                        window.app._activateKaraokeMode();
+                    }
+                } catch (_) {}
+                // Загружаем без открытия Sync Editor и с автоплеем
+                window.trackCatalog.loadTrack(originalTrackIndex, { openSyncEditor: false, autoplay: true });
             } else {
                 console.error('❌ CatalogV2: Трек не найден в оригинальном каталоге');
                 this.showNotification('❌ Трек не синхронизирован с основным каталогом');
