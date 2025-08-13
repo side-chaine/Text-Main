@@ -262,15 +262,7 @@ class CatalogV2 {
             }
         });
         
-        // Кнопка очистки IndexedDB
-        const clearDbBtn = document.getElementById('clear-indexeddb-btn');
-        if (clearDbBtn) {
-            clearDbBtn.addEventListener('click', () => {
-                if (confirm('⚠️ ВНИМАНИЕ! Это удалит ВСЕ сохраненные треки и данные.\n\nПродолжить очистку базы данных?')) {
-                    this.clearIndexedDB();
-                }
-            });
-        }
+        // Кнопка очистки IndexedDB — скрыта для пользователей; оставлена функция clearIndexedDB для админов
         
         // НОВЫЙ ФУНКЦИОНАЛ: Табы и переключатели
         this.setupTabsAndToggles();
@@ -424,6 +416,13 @@ class CatalogV2 {
         
         const trackId = parseInt(trackItem.dataset.trackId);
         
+        // Всегда стартуем воспроизведение в режиме Караоке
+        try {
+            if (window.app && typeof window.app._activateKaraokeMode === 'function') {
+                window.app._activateKaraokeMode();
+            }
+        } catch (_) {}
+
         // 🎯 ИЩЕМ трек в ОБЪЕДИНЕННОМ массиве (основной каталог + новые треки CatalogV2)
         let track = null;
         
