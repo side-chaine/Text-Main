@@ -48,6 +48,7 @@ class BlockLoopControl {
         // UI элементы
         this.loopButton = null;
         this.currentBlockElement = null;
+        this.lastRenderedBlockId = null;
         
         // Инициализируем DragBoundaryController
         this.dragBoundaryController = new DragBoundaryController(this, this.lyricsDisplay);
@@ -180,6 +181,12 @@ class BlockLoopControl {
         // В режиме репетиции получаем активный блок напрямую
         if (this.lyricsDisplay.currentActiveBlock) {
             const currentBlock = this.lyricsDisplay.currentActiveBlock;
+            if (this.lastRenderedBlockId === currentBlock.id && this.loopButton) {
+                // Обновим только режим линий/визуал если надо
+                this._syncDragModeForBlock(currentBlock);
+                this._updateButtonState(this.isLooping);
+                return;
+            }
             console.log('BlockLoopControl: Создаем кнопку для активного блока репетиции:', currentBlock.name);
             this._createLoopButton(currentBlock);
             return;
@@ -273,10 +280,7 @@ class BlockLoopControl {
         this._positionLoopButton(blockElement);
         
         this.currentBlockElement = blockElement;
-        // Не трогаем якорный блок лупа в режиме multi-loop при переходе на связанный блок
-        if (!this.isLooping || !this.isMultiLoopEnabled || (this.currentLoopBlock && this.currentLoopBlock.id === block.id)) {
-            this.currentLoopBlock = block;
-        }
+        this.lastRenderedBlockId = block.id;
         
         // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
         // Каждый новый блок получает границы по умолчанию (весь блок)
@@ -1454,6 +1458,21 @@ class BlockLoopControl {
             }
         } catch (_) {}
         return this.lyricsDisplay?.textBlocks || [];
+    }
+
+    _syncDragModeForBlock(block) {
+        if (!this.dragBoundaryController || !this.dragBoundaryController.isActive) return;
+        let mode = 'both';
+        if (this.isLooping && this.isMultiLoopEnabled) {
+            if (this.linkedBlock && block.id === this.linkedBlock.id) {
+                mode = 'end-only';
+            } else if (this.currentLoopBlock && block.id === this.currentLoopBlock.id) {
+                mode = 'start-only';
+            }
+        }
+        if (typeof this.dragBoundaryController.setMode === 'function') {
+            this.dragBoundaryController.setMode(mode);
+        }
     }
 }
 

@@ -41,6 +41,7 @@ class DragBoundaryController {
      */
     activate(block, blockElement, initialBoundaries, options = {}) {
         this.mode = options.mode || 'both';
+        this.currentBlockId = block?.id || null;
         console.log(`✅ DragBoundaryController activated for block: ${block.name}`);
         console.log(`📊 Block line indices: [${block.lineIndices.join(',')}]`);
         console.log(`🎯 Initial boundaries received:`, initialBoundaries);
@@ -104,15 +105,18 @@ class DragBoundaryController {
             console.error(`[DragBoundary] ❌ ОШИБКА: endBoundary ${this.endBoundary} не найден в блоке ${block.lineIndices}`);
         }
         
-        // Создаем линии границ
+        // Если уже активны линии для этого же блока и DOM, не пересоздаём — обновим режим и выходим
+        if (this.isActive && this._activeBlockElement === blockElement && this._activeBlockId === this.currentBlockId) {
+            this._setDisabledByMode();
+            console.log('[DragBoundary] 🔁 Reusing existing lines for same block, only mode updated');
+            return;
+        }
+
+        this._activeBlockElement = blockElement;
+        this._activeBlockId = this.currentBlockId;
+
         this._createBoundaryLines();
-        // Блокируем лишнюю линию в режиме start-only/end-only
-        if (this.mode === 'start-only' && this.endLine) {
-            this.endLine.classList.add('disabled');
-        }
-        if (this.mode === 'end-only' && this.startLine) {
-            this.startLine.classList.add('disabled');
-        }
+        this._setDisabledByMode();
         
         // Обновляем визуальные состояния
         this._updateVisualStates();
@@ -241,7 +245,8 @@ class DragBoundaryController {
      * Обработчик начала перетаскивания линии
      */
     _onLineMouseDown(e, boundaryType) {
-        // Игнорируем запрещенные линии
+        if (!this.isActive) return;
+        // Игнор кликов по заблокированной линии
         if (this.mode === 'start-only' && boundaryType === 'end') return;
         if (this.mode === 'end-only' && boundaryType === 'start') return;
         e.preventDefault();
@@ -530,5 +535,21 @@ class DragBoundaryController {
         }
         this.ghostLine = null;
         this.dragState.currentPreviewLine = null;
+    }
+
+    setMode(mode) {
+        this.mode = mode || 'both';
+        this._setDisabledByMode();
+    }
+
+    _setDisabledByMode() {
+        if (!this.startLine || !this.endLine) return;
+        this.startLine.classList.remove('disabled');
+        this.endLine.classList.remove('disabled');
+        if (this.mode === 'start-only') {
+            this.endLine.classList.add('disabled');
+        } else if (this.mode === 'end-only') {
+            this.startLine.classList.add('disabled');
+        }
     }
 } 
