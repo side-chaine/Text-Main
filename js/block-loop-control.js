@@ -1341,14 +1341,14 @@ class BlockLoopControl {
     }
 
     _hasNextBlock(block) {
-        const blocks = this.lyricsDisplay?.textBlocks || [];
+        const blocks = this._getProcessedBlocks();
         const idx = blocks.findIndex(b => b.id === block.id);
         return idx !== -1 && idx < blocks.length - 1;
     }
 
     _attachNextBlock(block) {
         if (!this._hasNextBlock(block)) return;
-        const blocks = this.lyricsDisplay.textBlocks;
+        const blocks = this._getProcessedBlocks();
         const idx = blocks.findIndex(b => b.id === block.id);
         const nextBlock = blocks[idx + 1];
         this.linkedBlock = nextBlock;
@@ -1382,6 +1382,17 @@ class BlockLoopControl {
         }
         this.combinedEndTime = end ?? this.loopEndTime;
         console.log(`🔗 Combined loop: ${this.combinedStartTime.toFixed(2)}s - ${this.combinedEndTime.toFixed(2)}s`);
+    }
+
+    _getProcessedBlocks() {
+        try {
+            if (this.lyricsDisplay && typeof this.lyricsDisplay._splitLargeBlocks === 'function') {
+                const src = this.lyricsDisplay.textBlocks || [];
+                const processed = this.lyricsDisplay._splitLargeBlocks(src) || [];
+                return Array.isArray(processed) ? processed : src;
+            }
+        } catch (_) {}
+        return this.lyricsDisplay?.textBlocks || [];
     }
 }
 
