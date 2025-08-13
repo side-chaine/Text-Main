@@ -188,6 +188,10 @@ class BlockLoopControl {
                 // Обновим только режим линий/визуал если надо
                 this._syncDragModeForBlock(currentBlock);
                 this._updateButtonState(this.isLooping);
+                // Удерживаем оранжевую рамку при активном лупе
+                if (this.isLooping && this.currentBlockElement) {
+                    this.currentBlockElement.classList.add('loop-active');
+                }
                 return;
             }
             console.log('BlockLoopControl: Создаем кнопку для активного блока репетиции:', currentBlock.name);
@@ -311,6 +315,10 @@ class BlockLoopControl {
             }
             // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
             this._updateButtonState(true);
+            // Подсветка активного блока всегда при включенном лупе
+            if (blockElement) {
+                blockElement.classList.add('loop-active');
+            }
         }
         
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
