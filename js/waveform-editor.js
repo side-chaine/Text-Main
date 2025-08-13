@@ -2899,6 +2899,23 @@ class WaveformEditor {
                             .replace(/\\line\b\s*\\line\b/g, '\n\n');
                         // Затем одиночные \par/\line в одиночные переносы
                         txt = txt.replace(/\\par\b/g, '\n').replace(/\\line\b/g, '\n');
+                        // Декодируем Unicode-последовательности \uXXXX (RTF), включая отрицательные
+                        txt = txt.replace(/\\u(-?\d+)\s?/g, (m, numStr) => {
+                            let code = parseInt(numStr, 10);
+                            if (code < 0) code = 65536 + code; // корректировка отрицательных
+                            try { return String.fromCharCode(code); } catch (_) { return ''; }
+                        });
+                        // Декодируем CP1251 байты в \'HH через TextDecoder (fallback: fromCharCode)
+                        txt = txt.replace(/\\'([0-9a-fA-F]{2})/g, (m, hex) => {
+                            try {
+                                if (typeof TextDecoder !== 'undefined') {
+                                    const dec = new TextDecoder('windows-1251');
+                                    const u8 = new Uint8Array([parseInt(hex, 16)]);
+                                    return dec.decode(u8);
+                                }
+                            } catch (_) { /* ignore */ }
+                            return String.fromCharCode(parseInt(hex, 16));
+                        });
                         // Удаляем управляющие последовательности, не затрагивая переводы строк
                         txt = txt
                             .replace(/\{\\[^}]*\}/g, '')
