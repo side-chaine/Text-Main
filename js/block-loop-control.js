@@ -256,17 +256,29 @@ class BlockLoopControl {
         this.loopButton.className = 'block-loop-btn';
         this.loopButton.innerHTML = 'Loop'; // Текстовая иконка вместо эмодзи
         this.loopButton.title = `Зациклить блок "${block.name}"`;
-        
-        // Обработчик клика
-        this.loopButton.addEventListener('click', () => {
-            this.toggleLooping(block);
+ 
+         // Обработчик клика
+         this.loopButton.addEventListener('click', () => {
+             this.toggleLooping(block);
+         });
+ 
+        // Кнопка «плюс» для добавления следующего блока в луп (создаём скрытой)
+        this.plusButton = document.createElement('button');
+        this.plusButton.className = 'block-loop-plus-btn hidden';
+        this.plusButton.innerHTML = '+';
+        this.plusButton.title = 'Добавить следующий блок в луп';
+        this.plusButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this._tryAttachNextBlockToLoop();
         });
-        
+
         // Добавляем кнопку рядом с блоком
         this._positionLoopButton(blockElement);
-        
-        this.currentBlockElement = blockElement;
-        this.currentLoopBlock = block;
+        // Позиционируем плюс по центру под Loop и прячем до активации лупа
+        this._positionPlusButton(blockElement);
+ 
+         this.currentBlockElement = blockElement;
+         this.currentLoopBlock = block;
         
         // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
         // Каждый новый блок получает границы по умолчанию (весь блок)
@@ -320,6 +332,17 @@ class BlockLoopControl {
         
         blockElement.appendChild(this.loopButton);
     }
+
+    _positionPlusButton(blockElement) {
+        blockElement.style.position = 'relative';
+        this.plusButton.style.position = 'absolute';
+        this.plusButton.style.top = '52px';
+        this.plusButton.style.right = '18px';
+        this.plusButton.style.zIndex = '1000';
+        this.plusButton.style.opacity = '0';
+        this.plusButton.style.transition = 'opacity 160ms ease, transform 160ms ease';
+        blockElement.appendChild(this.plusButton);
+    }
     
     /**
      * Убирает кнопку Loop
@@ -329,6 +352,10 @@ class BlockLoopControl {
         if (this.loopButton) {
             this.loopButton.remove();
             this.loopButton = null;
+        }
+        if (this.plusButton) {
+            this.plusButton.remove();
+            this.plusButton = null;
         }
         
         // НЕ деактивируем drag boundaries при удалении кнопки
@@ -563,10 +590,22 @@ class BlockLoopControl {
             this.loopButton.classList.add('active');
             this.loopButton.innerHTML = 'Stop'; // Активная иконка
             this.loopButton.title = 'Остановить зацикливание';
+            if (this.plusButton) {
+                this.plusButton.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    this.plusButton.style.opacity = '1';
+                    this.plusButton.style.transform = 'translateY(0)';
+                });
+            }
         } else {
             this.loopButton.classList.remove('active');
             this.loopButton.innerHTML = 'Loop'; // Неактивная иконка
             this.loopButton.title = `Зациклить блок "${this.currentLoopBlock?.name || ''}"`;
+            if (this.plusButton) {
+                this.plusButton.style.opacity = '0';
+                this.plusButton.style.transform = 'translateY(-6px)';
+                this.plusButton.classList.add('hidden');
+            }
         }
     }
     
@@ -839,6 +878,14 @@ class BlockLoopControl {
             return;
         }
         
+        // ТРИГГЕР СМЕНЫ ФОНА ДЛЯ РЕПЕТИЦИИ (без лупа и без перемотки)
+        try {
+            const isRehearsal = document.body.classList.contains('mode-rehearsal');
+            if (isRehearsal && !this.isLooping && !this.isSeekingInProgress && window.app?.rehearsalBackgroundManager) {
+                window.app.rehearsalBackgroundManager.setRandomBackgroundSmooth();
+            }
+        } catch(_) {}
+
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
             // Сравниваем по ID блока И по имени блока для большей точности
@@ -1269,6 +1316,30 @@ class BlockLoopControl {
             
             console.log(`🔓 CORRECTION FLAG CLEARED: System ready for normal operation`);
         }
+    }
+
+    _tryAttachNextBlockToLoop() {
+        try {
+            if (!this.isLooping || !this.currentLoopBlock) return;
+            const blocks = this.lyricsDisplay?.textBlocks;
+            if (!Array.isArray(blocks) || blocks.length === 0) return;
+            // Найти индекс текущего блока в processed списке (учитываем split)
+            const processed = this.lyricsDisplay._splitLargeBlocks(blocks);
+            const curIdx = processed.findIndex(b => b.id === this.currentLoopBlock.id);
+            if (curIdx === -1 || curIdx >= processed.length - 1) return;
+            const nextBlock = processed[curIdx + 1];
+
+            // Подсветка второго блока
+            const nextEl = this._findBlockDOMElement(nextBlock) || document.querySelector('.rehearsal-next-preview')?.parentElement;
+            if (nextEl) nextEl.classList.add('loop-active');
+
+            // Вычислить объединённые границы времени: start = текущее start, end = граница next блока (или пользовательская)
+            const nextRange = this._getBlockTimeRange(nextBlock);
+            if (nextRange && nextRange.endTime) {
+                this.loopEndTime = nextRange.endTime;
+                console.log(`BlockLoopControl: Расширен луп до следующего блока. Новый конец: ${this.loopEndTime.toFixed(2)}s`);
+            }
+        } catch (e) { console.warn('BlockLoopControl: attach next block failed', e); }
     }
 }
 

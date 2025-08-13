@@ -1289,23 +1289,21 @@ class LyricsDisplay {
             console.log(`Rehearsal: Preview lines:`, previewLines);
             
             previewLines.forEach((lineIndex, idx) => {
-                if (this.lyrics[lineIndex]) {
-                    const previewLine = document.createElement('div');
-                    previewLine.className = 'rehearsal-preview-line';
-                    previewLine.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
-                    
-                    // ДОБАВЛЕНО: Увеличиваем первую строку в превью продолжений
-                    if (nextBlock.isContinuation && idx === 0) {
-                        previewLine.classList.add('preview-continuation-first-line');
-                    }
-                    // ДОБАВЛЕНО: Выделяем оранжевым первую строку обычного следующего блока
-                    else if (!nextBlock.isContinuation && idx === 0) {
-                        previewLine.classList.add('next-block-first-line');
-                    }
-                    
-                    previewContainer.appendChild(previewLine);
-                    console.log(`Rehearsal: Adding preview line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
+                const previewLine = document.createElement('div');
+                previewLine.className = 'rehearsal-preview-line';
+                previewLine.dataset.index = lineIndex; // чтобы DragBoundary мог адресоваться к строке превью
+                previewLine.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
+                
+                if (idx === 0) {
+                    // Особый стиль для первой строки превью (делаем полужирным и увеличиваем размер)
+                    previewLine.classList.add('preview-continuation-first-line');
                 }
+                
+                // Добавляем специальный класс для следующего блока
+                previewLine.classList.add('next-block-first-line');
+                
+                previewContainer.appendChild(previewLine);
+                console.log(`Rehearsal: Adding preview line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
             });
             
             lyricsContainer.appendChild(previewContainer);
