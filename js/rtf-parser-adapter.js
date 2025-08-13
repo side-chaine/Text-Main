@@ -59,14 +59,7 @@ class RtfParserAdapter {
             // Используем улучшенный процессор, если он доступен
             if (this.isEnhancedProcessorAvailable) {
                 console.log('RtfParserAdapter: Используем EnhancedRtfProcessor');
-                const parsed = await EnhancedRtfProcessor.parse(rtfContent);
-                try {
-                    if (window.EnhancedTextProcessor && typeof window.EnhancedTextProcessor.processPlainText === 'function') {
-                        const lines = window.EnhancedTextProcessor.processPlainText(parsed);
-                        return Array.isArray(lines) ? lines.join('\n') : parsed;
-                    }
-                } catch (_) {}
-                return parsed;
+                return await EnhancedRtfProcessor.parse(rtfContent);
             }
             
             // Используем стандартный парсер, если он доступен
