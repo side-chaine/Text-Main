@@ -895,6 +895,13 @@ class BlockLoopControl {
 
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
+            // ✅ MULTI-LOOP: если перешли на связанный блок, продолжаем без остановки
+            if (this.isLooping && this.isMultiLoopEnabled && (newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+                console.log('✅ MULTI-LOOP CONTINUE: staying in combined loop across blocks');
+                // Переставляем кнопку на новый активный блок, чтобы она всегда была рядом
+                this._createLoopButtonForCurrentBlock();
+                return;
+            }
             // Сравниваем по ID блока И по имени блока для большей точности
             const sameBlockId = newActiveBlock.id === this.currentLoopBlock.id;
             const sameBlockName = newActiveBlock.name === this.currentLoopBlock.name;
@@ -993,6 +1000,12 @@ class BlockLoopControl {
         
         // Проверяем, изменился ли блок на самом деле
         const newActiveBlock = this.lyricsDisplay?.currentActiveBlock;
+        // ✅ MULTI-LOOP: если активен связанный блок, не трогаем луп
+        if (this.isLooping && this.isMultiLoopEnabled && newActiveBlock && (newActiveBlock.id === this.currentLoopBlock?.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+            console.log('✅ MULTI-LOOP CONTINUE (update): staying in combined loop across blocks');
+            this._createLoopButtonForCurrentBlock();
+            return;
+        }
         
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
