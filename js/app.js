@@ -203,9 +203,17 @@ class App {
 
         // Инициализация менеджера фона для репетиции (статичный фон, без слайдшоу)
         const rehearsalImages = [
-            'Rehearsal/rehearsal-bg-1.jpg',
-            'Rehearsal/rehearsal-bg-2.jpg',
-            'Rehearsal/rehearsal-bg-3.jpg'
+            'Rehearsal/dj_naushniki_ustanovka_122020_2560x1440.jpg',
+            'Rehearsal/didzhej_muzyka_diskoteka_160929_2560x1440.jpg',
+            'Rehearsal/gitara_bas_gitara_struny_106722_2560x1440.jpg',
+            'Rehearsal/muzykalnyj_instrument_muzyka_udarnye_106370_2560x1440.jpg',
+            'Rehearsal/noty_griaznyj_bumaga_124163_2560x1440.jpg',
+            'Rehearsal/krolik_naushniki_muzyka_130283_2560x1440.jpg',
+            'Rehearsal/soty_obem_zheleznyj_167098_2560x1440.jpg',
+            'Rehearsal/dvoichnyj_kod_kod_tsifry_147523_2560x1440.jpg',
+            'Rehearsal/fotoapparat_obektiv_remeshok_145518_1600x900.jpg',
+            'Rehearsal/naushniki_knigi_obrazovanie_121501_2560x1600.jpg',
+            'Rehearsal/naushniki_ustanovka_muzyka_104587_1280x1024.jpg'
         ];
         this.rehearsalBackgroundManager = new RehearsalBackgroundManager(rehearsalImages, 0);
     }
