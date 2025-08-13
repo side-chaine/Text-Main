@@ -39,7 +39,8 @@ class DragBoundaryController {
      * @param {Element} blockElement - DOM элемент блока
      * @param {Object} initialBoundaries - начальные границы (опционально)
      */
-    activate(block, blockElement, initialBoundaries) {
+    activate(block, blockElement, initialBoundaries, options = {}) {
+        this.mode = options.mode || 'both';
         console.log(`✅ DragBoundaryController activated for block: ${block.name}`);
         console.log(`📊 Block line indices: [${block.lineIndices.join(',')}]`);
         console.log(`🎯 Initial boundaries received:`, initialBoundaries);
@@ -105,6 +106,13 @@ class DragBoundaryController {
         
         // Создаем линии границ
         this._createBoundaryLines();
+        // Блокируем лишнюю линию в режиме start-only/end-only
+        if (this.mode === 'start-only' && this.endLine) {
+            this.endLine.classList.add('disabled');
+        }
+        if (this.mode === 'end-only' && this.startLine) {
+            this.startLine.classList.add('disabled');
+        }
         
         // Обновляем визуальные состояния
         this._updateVisualStates();
@@ -233,6 +241,9 @@ class DragBoundaryController {
      * Обработчик начала перетаскивания линии
      */
     _onLineMouseDown(e, boundaryType) {
+        // Игнорируем запрещенные линии
+        if (this.mode === 'start-only' && boundaryType === 'end') return;
+        if (this.mode === 'end-only' && boundaryType === 'start') return;
         e.preventDefault();
         e.stopPropagation();
         

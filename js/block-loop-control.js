@@ -278,7 +278,16 @@ class BlockLoopControl {
         // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
         // Каждый новый блок получает границы по умолчанию (весь блок)
         if (this.dragBoundaryController && this.isActive) {
-            this.dragBoundaryController.activate(block, blockElement, null);
+            // Выбираем режим линий в зависимости от multi-loop и того, какой это блок
+            let mode = 'both';
+            if (this.isLooping && this.isMultiLoopEnabled) {
+                if (this.linkedBlock && block.id === this.linkedBlock.id) {
+                    mode = 'end-only';
+                } else if (this.currentLoopBlock && block.id === this.currentLoopBlock.id) {
+                    mode = 'start-only';
+                }
+            }
+            this.dragBoundaryController.activate(block, blockElement, null, { mode });
             console.log('BlockLoopControl: Создана кнопка для блока:', block.name);
         }
 

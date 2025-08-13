@@ -99,6 +99,8 @@
     border-color: rgba(231, 76, 60, 0.5);
 }
 
+.loop-boundary-line.disabled { pointer-events: none; opacity: 0.35; }
+
 .loop-start-line {
     top: -3px;
 }
@@ -223,7 +225,6 @@
  .block-loop-plus-btn.active { background: rgba(255, 165, 0, 0.35) !important; border-color: rgba(255,165,0,0.9) !important; color: #ffd9a6; opacity: 1; text-shadow: none; }
 
 /* Подсветка подключенного блока */
+.rehearsal-active-block.loop-active { box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.9) inset; }
 .rehearsal-active-block.loop-linked,
-.rehearsal-preview-block.loop-linked {
-	box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.7) inset;
-} 
+.rehearsal-preview-block.loop-linked { box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.7) inset; } 
