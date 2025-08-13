@@ -63,7 +63,7 @@ class TrackCatalog {
         console.log('✅ TrackCatalog: IndexedDB доступен, открываем базу данных...');
         
         // 🎯 СТАБИЛЬНАЯ БАЗА: используем постоянное имя и актуальную версию
-        const dbName = 'TextAppDB';
+        const dbName = (window.__DB_NAME || 'TextAppDB');
         this.dbName = dbName;
         const DB_VERSION = 5;
         console.log('🔄 TrackCatalog: Открываем стабильную базу:', dbName, 'v' + DB_VERSION);
@@ -77,10 +77,10 @@ class TrackCatalog {
             // 🎯 Fallback 1: Пытаемся удалить проблемную базу и создать заново
             try {
                 console.warn('TrackCatalog: Пробуем пересоздать стабильную базу...');
-                const del = indexedDB.deleteDatabase('TextAppDB');
+                const del = indexedDB.deleteDatabase(dbName);
                 del.onsuccess = () => {
                     console.log('TrackCatalog: Стабильная база удалена, создаем заново...');
-                    const retry = indexedDB.open('TextAppDB', DB_VERSION);
+                    const retry = indexedDB.open(dbName, DB_VERSION);
                     retry.onupgradeneeded = (ev) => {
                         const db = ev.target.result;
                         if (!db.objectStoreNames.contains('tracks')) {
@@ -96,14 +96,14 @@ class TrackCatalog {
                     };
                     retry.onsuccess = (ev2) => {
                         this.db = ev2.target.result;
-                        this.dbName = 'TextAppDB';
+                        this.dbName = dbName;
                         console.log('✅ TrackCatalog: Стабильная база пересоздана');
                         this._loadTracksFromDB();
                         this._finalizeUploadFromBlockEditor();
                     };
                     retry.onerror = () => {
                         // 🎯 Fallback 2: Открываем Recovery базу
-                        const recoveryName = 'TextAppDB_Recovery_' + Date.now();
+                        const recoveryName = (dbName + '_Recovery_' + Date.now());
                         console.warn('TrackCatalog: Переходим на Recovery базу:', recoveryName);
                         const rec = indexedDB.open(recoveryName, 1);
                         rec.onupgradeneeded = (ev3) => {
@@ -127,7 +127,7 @@ class TrackCatalog {
                 };
                 del.onerror = () => {
                     console.warn('TrackCatalog: Не удалось удалить стабильную базу. Переходим к Recovery.');
-                    const recoveryName = 'TextAppDB_Recovery_' + Date.now();
+                    const recoveryName = (dbName + '_Recovery_' + Date.now());
                     const rec = indexedDB.open(recoveryName, 1);
                     rec.onupgradeneeded = (ev3) => {
                         const db = ev3.target.result;
@@ -2644,7 +2644,7 @@ class TrackCatalog {
         
         try {
             // Удаляем старую базу
-            const deleteRequest = indexedDB.deleteDatabase('TextAppDB');
+            const deleteRequest = indexedDB.deleteDatabase(dbName);
             
             deleteRequest.onsuccess = () => {
                 console.log('✅ TrackCatalog: Старая база удалена, создаем новую...');

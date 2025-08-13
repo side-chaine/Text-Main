@@ -34,7 +34,7 @@ class CatalogV2 {
     }
     
     initDatabase() {
-        const DB_NAME = 'TextAppDB';
+        const DB_NAME = (window.__DB_NAME || 'TextAppDB');
         const DB_VERSION = 5;
         const openMain = () => indexedDB.open(DB_NAME, DB_VERSION);
         const openRecovery = (name) => indexedDB.open(name, 1);
@@ -62,7 +62,7 @@ class CatalogV2 {
                 retry.onupgradeneeded = request.onupgradeneeded;
                 retry.onsuccess = (ev2) => { this.db = ev2.target.result; this.loadTracksFromDB(); };
                 retry.onerror = () => {
-                    const recovery = 'TextAppDB_Recovery_' + Date.now();
+                    const recovery = (DB_NAME + '_Recovery_' + Date.now());
                     const rec = openRecovery(recovery);
                     rec.onupgradeneeded = (e3) => {
                         const db = e3.target.result;
