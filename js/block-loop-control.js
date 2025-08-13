@@ -31,6 +31,8 @@ class BlockLoopControl {
          // Многоблочный паровозик
          this.selectedBlocks = [];          // массив blockId в порядке воспроизведения
          this.loopChipsContainer = null;    // контейнер чипов под Stop
+         // Поезд вагончиков (V2 UI)
+         this.loopTrainContainer = null;
 
         // Состояние перемотки для предотвращения race condition
         this.isSeekingInProgress = false;
@@ -293,55 +295,17 @@ class BlockLoopControl {
         // Добавляем кнопку рядом с блоком
         this._positionLoopButton(blockElement);
         
-        // Создаём контейнер для чипов (вертикальный стек под Stop)
-        if (!this.loopChipsContainer) {
-            const chips = document.createElement('div');
-            chips.className = 'loop-chips-stack';
-            chips.style.position = 'absolute';
-            chips.style.top = '46px';
-            chips.style.right = '12px';
-            chips.style.display = 'flex';
-            chips.style.flexDirection = 'column';
-            chips.style.gap = '6px';
-            blockElement.appendChild(chips);
-            this.loopChipsContainer = chips;
-        }
+        // Отрисовка поезда вагончиков (всегда в репетиции)
+        this._renderLoopTrain();
         
-        this.currentBlockElement = blockElement;
-        this.lastRenderedBlockId = block.id;
-        
-        // 🔧 ИСПРАВЛЕНИЕ: Активируем drag boundaries БЕЗ сохраненных границ
-        // Каждый новый блок получает границы по умолчанию (весь блок)
-        if (this.dragBoundaryController && this.isActive) {
-            // Выбираем режим линий в зависимости от multi-loop и того, какой это блок
-            let mode = 'both';
-            if (this.isLooping && this.isMultiLoopEnabled) {
-                if (this.linkedBlock && block.id === this.linkedBlock.id) {
-                    mode = 'end-only';
-                } else if (this.currentLoopBlock && block.id === this.currentLoopBlock.id) {
-                    mode = 'start-only';
-                }
-            }
-            // Восстанавливаем сохранённые границы для блока (если есть)
-            const remembered = this._getRememberedBoundaries(block.id);
-            this.dragBoundaryController.activate(block, blockElement, remembered || null, { mode });
-            console.log('BlockLoopControl: Создана кнопка для блока:', block.name);
-        }
-
-        // Если луп активен — показываем плюсик для расширения на следующий блок
+        // Если луп активен — синхронизируем состоян ие Stop и подсветку
         if (this.isLooping) {
-            this._ensurePlusButton(blockElement, block);
-            if (this.isMultiLoopEnabled && this.plusButton) {
-                this.plusButton.classList.add('active');
-            }
             // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
             this._updateButtonState(true);
             // Подсветка активного блока всегда при включенном лупе
             if (blockElement) {
                 blockElement.classList.add('loop-active');
             }
-            // Ререндерим чипы, если уже есть паровозик
-            this._renderLoopChips();
         }
         
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
@@ -1649,6 +1613,65 @@ class BlockLoopControl {
         // Выставляем режимы линий: начало у первого, конец у последнего
         this._syncDragModeForBlock(first);
         this._syncDragModeForBlock(last);
+    }
+
+    // ====== V2: Поезд вагончиков ======
+    _renderLoopTrain() {
+        const blockElement = this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
+        if (!blockElement) return;
+        const blocks = this._getProcessedBlocks();
+        if (!blocks || blocks.length === 0) return;
+
+        if (!this.loopTrainContainer) {
+            const container = document.createElement('div');
+            container.className = 'loop-train';
+            container.style.position = 'absolute';
+            container.style.top = '-28px';
+            container.style.left = '8px';
+            container.style.right = '8px';
+            container.style.display = 'flex';
+            container.style.gap = '6px';
+            container.style.alignItems = 'center';
+            container.style.justifyContent = 'flex-start';
+            container.style.pointerEvents = 'auto';
+            blockElement.appendChild(container);
+            this.loopTrainContainer = container;
+        } else {
+            this.loopTrainContainer.innerHTML = '';
+        }
+
+        for (let i = 0; i < blocks.length; i += 1) {
+            const wagon = document.createElement('button');
+            wagon.className = 'loop-wagon';
+            wagon.dataset.index = String(i);
+            wagon.textContent = String(i + 1);
+            wagon.title = blocks[i].name || `Block ${i + 1}`;
+            // Пока без логики диапазона — просто навигация по клику (минимум)
+            wagon.onclick = () => {
+                const target = blocks[i];
+                const tr = this._getBlockTimeRange(target);
+                if (tr && typeof tr.startTime === 'number') {
+                    try { this.audioEngine.setCurrentTime(tr.startTime); } catch (e) {}
+                }
+            };
+            this.loopTrainContainer.appendChild(wagon);
+        }
+
+        this._updateTrainPlayingHighlight();
+    }
+
+    _updateTrainPlayingHighlight() {
+        if (!this.loopTrainContainer) return;
+        const blocks = this._getProcessedBlocks();
+        if (!blocks || blocks.length === 0) return;
+        const current = this.lyricsDisplay?.currentActiveBlock;
+        if (!current) return;
+        const idx = blocks.findIndex(b => b.id === current.id);
+        const wagons = this.loopTrainContainer.querySelectorAll('.loop-wagon');
+        wagons.forEach(w => w.classList.remove('playing'));
+        if (idx >= 0 && idx < wagons.length) {
+            wagons[idx].classList.add('playing');
+        }
     }
 }
 

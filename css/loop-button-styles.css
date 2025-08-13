@@ -261,3 +261,24 @@
 }
 .loop-chip:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.55); }
 .loop-chip:disabled { cursor: default; filter: saturate(0.4); } 
+
+/* ====== Поезд вагончиков (V2) ====== */
+.loop-train { }
+.loop-wagon {
+	background: rgba(255,255,255,0.08);
+	border: 1px solid rgba(255,255,255,0.3);
+	color: rgba(255,255,255,0.95);
+	min-width: 28px;
+	height: 22px;
+	border-radius: 10px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	box-shadow: 0 0 10px rgba(0,0,0,0.25) inset;
+}
+.loop-wagon:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.55); }
+.loop-wagon.playing { border-color: rgba(100,200,255,0.9); box-shadow: 0 0 0 2px rgba(100,200,255,0.35); } 
