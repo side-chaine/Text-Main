@@ -71,8 +71,13 @@ const rtfParserIntegration = {
                     const processedText = await this._parseRtfWithAdapter(text);
                     if (processedText && processedText.length > 0) {
                         console.log(`RTF Integration: Успешно обработан RTF, длина: ${processedText.length}`);
-                        // Устанавливаем обработанный текст
-                        this.fullText = processedText;
+                        // Доп. нормализация через EnhancedTextProcessor
+                        if (window.EnhancedTextProcessor && typeof window.EnhancedTextProcessor.processPlainText === 'function') {
+                            const lines = window.EnhancedTextProcessor.processPlainText(processedText);
+                            this.fullText = Array.isArray(lines) ? lines.join('\n') : processedText;
+                        } else {
+                            this.fullText = processedText;
+                        }
                     } else {
                         console.warn('RTF Integration: Адаптер вернул пустой результат, используем оригинальный метод');
                         // Если адаптер не справился, используем оригинальный обработчик

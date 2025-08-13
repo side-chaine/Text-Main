@@ -59,27 +59,14 @@ class RtfParserAdapter {
             // Используем улучшенный процессор, если он доступен
             if (this.isEnhancedProcessorAvailable) {
                 console.log('RtfParserAdapter: Используем EnhancedRtfProcessor');
-                const enhancedText = await EnhancedRtfProcessor.parse(rtfContent);
-                
-                // 🔍 Проверяем наличие пустых строк/двойных переносов после парсинга
-                const hasDoubleNewlines = /\n\s*\n/.test(enhancedText);
-                const lines = enhancedText.split('\n');
-                const emptyLines = lines.filter(line => line.trim() === '').length;
-                console.log(`RtfParserAdapter: Enhanced result lines=${lines.length}, empty=${emptyLines}, hasDoubleNL=${hasDoubleNewlines}`);
-                
-                // Если пустых строк нет и в исходнике не было \par/\line → пробуем Legacy
-                if ((!hasDoubleNewlines && emptyLines === 0) || (!fileStructureInfo.hasParTags && !fileStructureInfo.hasLineTags)) {
-                    if (this.isLegacyProcessorAvailable) {
-                        console.log('RtfParserAdapter: Fallback → Legacy RtfParser (нет явных абзацев после Enhanced)');
-                        const legacyText = RtfParser.parse(rtfContent);
-                        const legacyLines = legacyText.split('\n');
-                        const legacyEmpty = legacyLines.filter(l => l.trim() === '').length;
-                        console.log(`RtfParserAdapter: Legacy result lines=${legacyLines.length}, empty=${legacyEmpty}`);
-                        return legacyText;
+                const parsed = await EnhancedRtfProcessor.parse(rtfContent);
+                try {
+                    if (window.EnhancedTextProcessor && typeof window.EnhancedTextProcessor.processPlainText === 'function') {
+                        const lines = window.EnhancedTextProcessor.processPlainText(parsed);
+                        return Array.isArray(lines) ? lines.join('\n') : parsed;
                     }
-                }
-                
-                return enhancedText;
+                } catch (_) {}
+                return parsed;
             }
             
             // Используем стандартный парсер, если он доступен

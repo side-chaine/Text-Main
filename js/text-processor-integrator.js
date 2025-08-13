@@ -60,7 +60,7 @@
                 try {
                     const rtfSignatures = ['\\rtf', '{\\rtf', '\\par', '\\pard', '\\f0', '\\ansicpg', '\\cocoartf'];
                     const isRtf = typeof text === 'string' && rtfSignatures.some(signature => text.includes(signature));
-                    const isLrc = typeof text === 'string' && text.includes('[') && text.includes(']') && /^\\[\\d+:\\d+/i.test(text);
+                    const isLrc = typeof text === 'string' && text.includes('[') && text.includes(']') && /^\[\d+:\d+/i.test(text);
                     
                     let processedText = '';
                     let lines = [];
