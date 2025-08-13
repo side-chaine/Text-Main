@@ -28,6 +28,9 @@ class BlockLoopControl {
          this.combinedStartTime = null;     // итоговое начало (из первого блока)
          this.combinedEndTime = null;       // итоговый конец (из второго блока)
          this.plusButton = null;            // UI плюсик под Stop
+         // Чипы управления multi-loop
+         this.firstChip = null;   // для отключения первого блока
+         this.linkedChip = null;  // для отключения подключенного блока
 
         // Состояние перемотки для предотвращения race condition
         this.isSeekingInProgress = false;
@@ -313,6 +316,10 @@ class BlockLoopControl {
             if (this.isMultiLoopEnabled && this.plusButton) {
                 this.plusButton.classList.add('active');
             }
+            // Показ чипов только в режиме multi-loop
+            if (this.isMultiLoopEnabled) {
+                this._ensureChips(blockElement);
+            }
             // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
             this._updateButtonState(true);
             // Подсветка активного блока всегда при включенном лупе
@@ -377,6 +384,8 @@ class BlockLoopControl {
             this.loopButton = null;
         }
         if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; }
+        if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
+        if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
         
         // НЕ деактивируем drag boundaries при удалении кнопки
         // Границы должны деактивироваться только при полном отключении контроллера
@@ -1477,8 +1486,9 @@ class BlockLoopControl {
         } else {
             this._recalculateCombinedRange();
         }
+        // Чипы управления
+        this._ensureChips(this.currentBlockElement || document.querySelector('.rehearsal-active-block'));
         // ВАЖНО: НЕ переактивируем DragBoundary на втором блоке, оставляем линии на первом
-        // Возможность тянуть конец во втором блоке добавим на следующем этапе, когда будет DOM всех строк
     }
 
     _recalculateCombinedRange() {
@@ -1538,6 +1548,82 @@ class BlockLoopControl {
         const end = typeof b.end === 'number' ? b.end : b.endBoundary;
         if (typeof start === 'number' && typeof end === 'number') return { start, end };
         return null;
+    }
+
+    // Создает/обновляет чипы закрытия блоков (☒)
+    _ensureChips(blockElement) {
+        if (!blockElement) return;
+        // Первый чип (отключить первый блок)
+        if (!this.firstChip) {
+            const chip = document.createElement('button');
+            chip.className = 'block-loop-chip';
+            chip.textContent = '☒';
+            chip.title = 'Исключить первый блок из лупа';
+            chip.style.position = 'absolute';
+            chip.style.top = '46px';
+            chip.style.right = '46px';
+            chip.onclick = () => this._detachBlock('first');
+            blockElement.appendChild(chip);
+            this.firstChip = chip;
+        }
+        // Второй чип (отключить подключенный блок)
+        if (!this.linkedChip) {
+            const chip = document.createElement('button');
+            chip.className = 'block-loop-chip';
+            chip.textContent = '☒';
+            chip.title = 'Исключить подключенный блок из лупа';
+            chip.style.position = 'absolute';
+            chip.style.top = '46px';
+            chip.style.right = '76px';
+            chip.onclick = () => this._detachBlock('linked');
+            blockElement.appendChild(chip);
+            this.linkedChip = chip;
+        }
+    }
+
+    // Открепляет один из блоков из мультилупа, оставляя одиночный луп
+    _detachBlock(which) {
+        if (!this.isLooping) return;
+        if (!this.isMultiLoopEnabled) return;
+        if (which === 'linked') {
+            // Остаемся на первом блоке
+            this.isMultiLoopEnabled = false;
+            this.linkedBlock = null;
+            // Комбинированные границы больше не используются
+            this.combinedStartTime = this.loopStartTime;
+            this.combinedEndTime = this.loopEndTime;
+            // Перерисуем UI
+            if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
+            if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
+            this._createLoopButtonForCurrentBlock();
+            return;
+        }
+        if (which === 'first' && this.linkedBlock) {
+            // Переключаем якорь на подключенный блок
+            const keep = this.linkedBlock;
+            this.currentLoopBlock = keep;
+            this.isMultiLoopEnabled = false;
+            this.linkedBlock = null;
+            // Рассчитываем границы по памяти или по блоку
+            let startTime = null, endTime = null;
+            const remembered = this._getRememberedBoundaries(keep.id);
+            if (remembered) {
+                startTime = this._findTimeByLine(remembered.start);
+                endTime = this._findTimeByLine(remembered.end + 1);
+            }
+            if (startTime == null || endTime == null) {
+                const tr = this._getBlockTimeRange(keep);
+                startTime = tr.startTime; endTime = tr.endTime;
+            }
+            if (startTime != null && endTime != null) {
+                this.loopStartTime = startTime; this.loopEndTime = endTime;
+                this.combinedStartTime = startTime; this.combinedEndTime = endTime;
+            }
+            // Удаляем чипы и пересоздаем UI под одиночный луп
+            if (this.linkedChip) { this.linkedChip.remove(); this.linkedChip = null; }
+            if (this.firstChip) { this.firstChip.remove(); this.firstChip = null; }
+            this._createLoopButtonForCurrentBlock();
+        }
     }
 }
 
