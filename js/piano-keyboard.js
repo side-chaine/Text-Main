@@ -238,14 +238,13 @@ class PianoKeyboard {
             const pianoBtn = document.getElementById('piano-keyboard-btn');
             if (pianoBtn) {
                 console.log('🎹 Кнопка найдена');
+                // 🔒 FROZEN: Временно отключаем функциональность Pitch, оставляя кнопку без действия
                 pianoBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    this.toggle();
+                    console.log('Pitch (piano-keyboard) временно отключен');
                 });
-                
-                pianoBtn.style.background = '#4CAF50';
-                pianoBtn.style.color = '#ffffff';
+                pianoBtn.style.opacity = '0.75';
                 return true;
             }
             return false;

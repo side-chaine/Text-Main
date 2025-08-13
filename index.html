@@ -918,7 +918,7 @@
                     
                     <!-- КОЛОНКА 3: ПОИСК/ЗАГРУЗКА -->
                     <div class="catalog-column smart-search-column">
-                        <h3>🔍 Smart Search / Upload</h3>
+                        <div style="height:8px"></div>
                         <div class="search-upload-toggle">
                             <button class="toggle-btn active" data-mode="search">Поиск</button>
                             <button class="toggle-btn" data-mode="upload">Upload Track</button>
@@ -935,7 +935,7 @@
                                     <h4>📁 Загрузка нового трека</h4>
                                 </div>
                                 
-                                <div class="upload-grid">
+                                <div class="upload-grid compact">
                                     <!-- INSTRUMENTAL CELL -->
                                     <div class="upload-cell" data-type="instrumental">
                                         <div class="upload-icon">🎵</div>
@@ -958,6 +958,22 @@
                                         <div class="drop-text">Перетащите .txt или .rtf файл</div>
                                         <input type="file" id="lyrics-input" class="file-input" accept=".txt,.rtf">
                                         <label for="lyrics-input" class="file-label">Lyrics</label>
+                                    </div>
+
+                                    <!-- JSON MARKERS CELL -->
+                                    <div class="upload-cell" data-type="json">
+                                        <div class="upload-icon">📊</div>
+                                        <div class="drop-text">Перетащите .json с маркерами</div>
+                                        <input type="file" id="json-input" class="file-input" accept=".json">
+                                        <label for="json-input" class="file-label">Markers JSON (optional)</label>
+                                    </div>
+
+                                    <!-- STEMS CELL (placeholder) -->
+                                    <div class="upload-cell disabled" data-type="stems" title="Скоро">
+                                        <div class="upload-icon">🧬</div>
+                                        <div class="drop-text">STEMS (скоро)</div>
+                                        <input type="file" id="stems-input" class="file-input" style="display:none">
+                                        <label for="stems-input" class="file-label">Stems (N/A)</label>
                                     </div>
                                 </div>
                                 

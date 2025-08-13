@@ -867,3 +867,22 @@
         transform: translateY(0);
     }
 } 
+
+/* Compact upload grid */
+.upload-grid.compact {
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+}
+.upload-grid.compact .upload-cell {
+	min-height: 120px;
+	padding: 10px;
+}
+.upload-grid.compact .file-label {
+	font-size: 0.8em;
+}
+.upload-grid.compact .drop-text {
+	font-size: 0.8em;
+}
+.smart-search-column > h3 { display: none; }
+
+.upload-cell.disabled { opacity: 0.5; pointer-events: none; } 

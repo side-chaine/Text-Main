@@ -33,80 +33,57 @@ class CatalogV2 {
     }
     
     initDatabase() {
-        // Подключаемся к уже существующей базе данных
-        const request = indexedDB.open('TextAppDB', 5);
-        request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            try {
-                if (!db.objectStoreNames.contains('tracks')) {
-                    const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
-                    trackStore.createIndex('title', 'title', { unique: false });
-                }
-                if (!db.objectStoreNames.contains('app_state')) {
-                    db.createObjectStore('app_state', { keyPath: 'key' });
-                }
-                if (!db.objectStoreNames.contains('temp_audio_files')) {
-                    db.createObjectStore('temp_audio_files', { keyPath: 'id' });
-                }
-                console.log('🎵 CatalogV2: Stores ensured in onupgradeneeded');
-            } catch (e) {
-                console.warn('CatalogV2: onupgradeneeded issue:', e);
+        const DB_NAME = 'TextAppDB';
+        const DB_VERSION = 5;
+        const openMain = () => indexedDB.open(DB_NAME, DB_VERSION);
+        const openRecovery = (name) => indexedDB.open(name, 1);
+
+        const request = openMain();
+        request.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('tracks')) {
+                const s = db.createObjectStore('tracks', { keyPath: 'id' });
+                s.createIndex('title', 'title', { unique: false });
             }
+            if (!db.objectStoreNames.contains('app_state')) db.createObjectStore('app_state', { keyPath: 'key' });
+            if (!db.objectStoreNames.contains('temp_audio_files')) db.createObjectStore('temp_audio_files', { keyPath: 'id' });
         };
-        
         request.onsuccess = (event) => {
             this.db = event.target.result;
             console.log('🎵 CatalogV2: База данных подключена');
             this.loadTracksFromDB();
         };
-        
-        request.onerror = (event) => {
-            console.error('❌ CatalogV2: Ошибка подключения к базе данных:', event.target.error);
+        request.onerror = () => {
+            console.warn('❌ CatalogV2: Ошибка подключения. Пробуем пересоздать базу...');
+            const del = indexedDB.deleteDatabase(DB_NAME);
+            del.onsuccess = () => {
+                const retry = openMain();
+                retry.onupgradeneeded = request.onupgradeneeded;
+                retry.onsuccess = (ev2) => { this.db = ev2.target.result; this.loadTracksFromDB(); };
+                retry.onerror = () => {
+                    const recovery = 'TextAppDB_Recovery_' + Date.now();
+                    const rec = openRecovery(recovery);
+                    rec.onupgradeneeded = (e3) => {
+                        const db = e3.target.result;
+                        const s = db.createObjectStore('tracks', { keyPath: 'id' });
+                        s.createIndex('title', 'title', { unique: false });
+                        db.createObjectStore('app_state', { keyPath: 'key' });
+                        db.createObjectStore('temp_audio_files', { keyPath: 'id' });
+                    };
+                    rec.onsuccess = (e3) => { this.db = e3.target.result; this.loadTracksFromDB(); };
+                    rec.onerror = (e3) => console.error('💥 CatalogV2: Recovery DB open failed:', e3);
+                };
+            };
         };
     }
     
     async loadTracksFromDB() {
         if (!this.db) {
             console.error('❌ CatalogV2: База данных не инициализирована');
-            // Попробуем инициализировать и повторить
-            this.initDatabase();
-            setTimeout(() => {
-                if (this.db) this.loadTracksFromDB();
-            }, 200);
             return;
         }
         
         try {
-            // Проверяем наличие store перед транзакцией
-            if (!this.db.objectStoreNames.contains('tracks')) {
-                console.warn('CatalogV2: store "tracks" отсутствует. Переоткрываю БД с onupgradeneeded...');
-                await new Promise((resolve, reject) => {
-                    const reopen = indexedDB.open('TextAppDB', 5);
-                    reopen.onupgradeneeded = (e) => {
-                        const db = e.target.result;
-                        if (!db.objectStoreNames.contains('tracks')) {
-                            const trackStore = db.createObjectStore('tracks', { keyPath: 'id' });
-                            trackStore.createIndex('title', 'title', { unique: false });
-                        }
-                        if (!db.objectStoreNames.contains('app_state')) {
-                            db.createObjectStore('app_state', { keyPath: 'key' });
-                        }
-                        if (!db.objectStoreNames.contains('temp_audio_files')) {
-                            db.createObjectStore('temp_audio_files', { keyPath: 'id' });
-                        }
-                    };
-                    reopen.onsuccess = (e) => {
-                        this.db = e.target.result;
-                        resolve();
-                    };
-                    reopen.onerror = (e) => reject(e);
-                });
-                // Повторная проверка после переоткрытия
-                if (!this.db.objectStoreNames.contains('tracks')) {
-                    console.error('❌ CatalogV2: После переоткрытия store "tracks" всё ещё отсутствует');
-                    return;
-                }
-            }
             const transaction = this.db.transaction(['tracks'], 'readonly');
             const store = transaction.objectStore('tracks');
             const request = store.getAll();
@@ -174,7 +151,6 @@ class CatalogV2 {
                                 <div class="track-actions">
                                     <button class="track-action-btn play-btn" title="Играть">▶</button>
                                     <button class="track-action-btn add-btn" title="Добавить в плейлист">➕</button>
-                                    <button class="track-action-btn json-btn" title="Добавить JSON">🧩</button>
                                 </div>
                             </div>
                         `).join('')}
@@ -232,45 +208,26 @@ class CatalogV2 {
                     const rect = container.getBoundingClientRect();
                     const clickX = e.clientX;
                     const clickY = e.clientY;
-                    const inRightTopCorner = clickX > rect.right - 40 && clickY < rect.top + 40;
-                    if (inRightTopCorner) {
+                    
+                    // Область крестика (top: 15px, right: 20px, размер: 35px)
+                    const closeAreaLeft = rect.right - 20 - 35;
+                    const closeAreaTop = rect.top + 15;
+                    const closeAreaRight = rect.right - 20;
+                    const closeAreaBottom = rect.top + 15 + 35;
+                    
+                    if (clickX >= closeAreaLeft && clickX <= closeAreaRight &&
+                        clickY >= closeAreaTop && clickY <= closeAreaBottom) {
                         this.close();
+                        return;
                     }
+                }
+                
+                // Закрытие по клику на фон
+                if (e.target === this.overlay) {
+                    this.close();
                 }
             });
         }
- 
-        // Делегирование кликов по трекам (play/plus/json)
-        this.overlay.addEventListener('click', (e) => {
-            const playBtn = e.target.closest('.play-btn');
-            const addBtn = e.target.closest('.add-btn');
-            const jsonBtn = e.target.closest('.json-btn');
-            const trackItem = e.target.closest('.track-item');
-            
-            if (playBtn) {
-                this.playTrack(playBtn);
-                return;
-            }
-            if (addBtn) {
-                this.addToPlaylist(addBtn);
-                return;
-            }
-            if (jsonBtn && trackItem) {
-                const trackId = parseInt(trackItem.dataset.trackId);
-                if (window.trackCatalog && typeof window.trackCatalog._importMarkersForSpecificTrack === 'function') {
-                    window.trackCatalog._importMarkersForSpecificTrack(trackId);
-                } else {
-                    console.warn('CatalogV2: trackCatalog._importMarkersForSpecificTrack недоступен');
-                }
-                return;
-            }
-        });
-
-        // Переключатели вкладок
-        const tabs = this.overlay.querySelectorAll('.catalog-v2-tabs .tab');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => this.switchTab(tab));
-        });
         
         // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
@@ -322,13 +279,15 @@ class CatalogV2 {
         const fileInputs = {
             instrumental: document.getElementById('instrumental-input'),
             vocal: document.getElementById('vocal-input'),
-            lyrics: document.getElementById('lyrics-input')
+            lyrics: document.getElementById('lyrics-input'),
+            json: document.getElementById('json-input')
         };
         
         const uploadCells = {
             instrumental: document.querySelector('.upload-cell[data-type="instrumental"]'),
             vocal: document.querySelector('.upload-cell[data-type="vocal"]'),
-            lyrics: document.querySelector('.upload-cell[data-type="lyrics"]')
+            lyrics: document.querySelector('.upload-cell[data-type="lyrics"]'),
+            json: document.querySelector('.upload-cell[data-type="json"]')
         };
         
         const saveButton = document.getElementById('upload-save');
@@ -532,8 +491,34 @@ class CatalogV2 {
             // Обновляем UI ячейки
             this.updateCellUI(cell, file);
             
-            // Сохраняем файл в сессии
-            this.uploadSession[type] = file;
+            // Сохраняем файл в сессию
+            if (type === 'instrumental') {
+                this.uploadSession.instrumental = file;
+            } else if (type === 'vocal') {
+                this.uploadSession.vocal = file;
+            } else if (type === 'lyrics') {
+                this.uploadSession.lyrics = file;
+            } else if (type === 'json') {
+                this.uploadSession.json = file;
+                // Пробуем прочитать JSON и валидировать
+                this.readFileAsText(file).then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        if (Array.isArray(data)) {
+                            this.uploadSession.jsonMarkers = data;
+                        } else if (data && Array.isArray(data.markers)) {
+                            this.uploadSession.jsonMarkers = data.markers;
+                        } else {
+                            this.showNotification('❌ JSON должен содержать массив markers');
+                            this.uploadSession.jsonMarkers = null;
+                        }
+                    } catch (e) {
+                        console.error('JSON parse error:', e);
+                        this.showNotification('❌ Некорректный JSON файл');
+                        this.uploadSession.jsonMarkers = null;
+                    }
+                });
+            }
             
             // Обновляем состояние кнопки сохранения
             this.updateSaveButton();
@@ -689,7 +674,9 @@ class CatalogV2 {
                 // 🎯 ВАЖНО: Добавляем пустой массив блоков для последующего редактирования
                 blocksData: [],
                 lyrics: lyricsOriginalContent, // Изначально lyrics = оригинальному тексту
-                lastModified: new Date().toISOString()
+                lastModified: new Date().toISOString(),
+                // Если приложены маркеры JSON — сохраняем их сразу
+                syncMarkers: Array.isArray(this.uploadSession?.jsonMarkers) ? this.uploadSession.jsonMarkers : []
             };
             
             console.log('📝 CatalogV2: Данные трека готовы:', trackTitle);
@@ -703,14 +690,21 @@ class CatalogV2 {
             window.trackCatalog.tracks.push(savedTrack);
             this.tracks.push(savedTrack);
             console.log('✅ CatalogV2: Трек добавлен в локальный массив');
-            
+
+            // Если есть маркеры — применяем в UI сразу
+            try {
+                if (savedTrack.syncMarkers && savedTrack.syncMarkers.length > 0 && window.markerManager) {
+                    window.markerManager.setMarkers(savedTrack.syncMarkers);
+                }
+            } catch (e) { console.warn('Не удалось применить маркеры из JSON сразу:', e); }
+
             // 🎯 ВАЖНО: Добавляем трек в результаты поиска, а НЕ в "Мою музыку"
             this.addTrackToSearchResults(savedTrack);
             console.log('✅ CatalogV2: Трек добавлен в результаты поиска');
             
             // Показываем уведомление
             this.showNotification(`✅ Трек "${trackTitle}" успешно сохранен!`);
-            console.log('🔔 CatalogV2: ✅ Трек ' + trackTitle + ' успешно сохранен!');
+            console.log('🔔 CatalogV2: ✅ Трек "' + trackTitle + '" успешно сохранен!');
             
             // Очищаем форму
             this.cancelUpload();
@@ -758,7 +752,6 @@ class CatalogV2 {
             <div class="track-actions">
                 <button class="track-action-btn play-btn" data-track-id="${track.id}">▶</button>
                 <button class="track-action-btn add-btn" data-track-id="${track.id}">➕</button>
-                <button class="track-action-btn json-btn" data-track-id="${track.id}">🧩</button>
             </div>
         `;
         
@@ -915,15 +908,17 @@ class CatalogV2 {
     
     open() {
         if (!this.overlay) return;
+        
+        this.overlay.classList.remove('hidden');
         this.isOpen = true;
-        this.overlay.style.display = 'block';
-        document.body.classList.add('catalog-open');
-        // При каждом открытии подтягиваем актуальные треки из БД
-        this.loadTracksFromDB();
+        
+        console.log('📁 CatalogV2: Overlay открыт');
     }
     
     close() {
         if (!this.overlay) return;
+        
+        this.overlay.classList.add('hidden');
         this.isOpen = false;
         
         console.log('🔄 CatalogV2: Overlay закрыт');
