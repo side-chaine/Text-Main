@@ -201,7 +201,13 @@ class App {
         ];
         this.karaokeBackgroundManager = new KaraokeBackgroundManager(karaokeImages);
 
-        // this.initCatalogV2(); // УБРАНО: инициализация теперь в index.html
+        // Инициализация менеджера фона для репетиции (статичный фон, без слайдшоу)
+        const rehearsalImages = [
+            'Rehearsal/rehearsal-bg-1.jpg',
+            'Rehearsal/rehearsal-bg-2.jpg',
+            'Rehearsal/rehearsal-bg-3.jpg'
+        ];
+        this.rehearsalBackgroundManager = new RehearsalBackgroundManager(rehearsalImages, 0);
     }
     
     initCatalogV2() {
@@ -921,6 +927,8 @@ class App {
         this.textStyleManager.setStyle('karaoke');
         this._setLyricsContainerStyle('style-karaoke');
         this.blockLoopControl.deactivate();
+        // Фоны
+        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.stop();
         this.karaokeBackgroundManager.start();
         this._hideLiveFeedConcept();
         
@@ -948,7 +956,9 @@ class App {
         
         this.karaokeBackgroundManager.stop();
         // Защита от артефактов фона после караоке
-        try { document.body.classList.remove('karaoke-active'); document.body.style.backgroundImage = ''; } catch(_) {}
+        try { document.body.classList.remove('karaoke-active'); } catch(_) {}
+        // Включаем фон репетиции (статичный)
+        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.start();
         this.textStyleManager.setStyle('rehearsal');
         this._setLyricsContainerStyle(null);
         this.blockLoopControl.activate();
@@ -972,6 +982,7 @@ class App {
     _activateLiveMode() {
         console.log('Activating live mode');
         this.karaokeBackgroundManager.stop();
+        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.stop();
         this.textStyleManager.setStyle('live');
         this._setLyricsContainerStyle('style-live');
         this.blockLoopControl.deactivate();

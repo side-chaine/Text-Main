@@ -8,9 +8,15 @@
 
 /* Режим репетиции — гарантированный фон и сброс картинок караоке */
 body.mode-rehearsal {
-	background-image: none !important;
 	background-color: #0f0f15 !important;
 	background-attachment: scroll !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+}
+
+/* Активный фон для репетиции */
+body.rehearsal-active {
+	background-size: cover !important;
 	background-position: center center !important;
 	background-repeat: no-repeat !important;
 } 
