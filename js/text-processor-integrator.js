@@ -6,6 +6,7 @@
     console.log("TextProcessorIntegrator: v2.1 инициализация");
     let integrationAttempted = false;
     let integrationSuccessful = false;
+    let retryAttempts = 0;
 
     function runIntegration() {
         if (integrationAttempted) {
@@ -14,11 +15,15 @@
         }
         integrationAttempted = true;
 
-        console.log("TextProcessorIntegrator: Попытка интеграции улучшенных обработчиков текста...");
+        console.debug("TextProcessorIntegrator: Попытка интеграции улучшенных обработчиков текста...");
 
         if (typeof window.LyricsDisplay === 'undefined' || typeof window.EnhancedTextProcessor === 'undefined') {
-            console.warn("TextProcessorIntegrator: LyricsDisplay или EnhancedTextProcessor еще не загружены. Повторная попытка через 500мс.");
-            setTimeout(runIntegration, 500); // Повторная попытка, если компоненты еще не загружены
+            retryAttempts += 1;
+            if (retryAttempts > 10) {
+                console.debug("TextProcessorIntegrator: Превышен лимит попыток. Интегратор временно отключен.");
+                return;
+            }
+            setTimeout(runIntegration, 800); // Больше интервал и ограничение по количеству
             return;
         }
 
