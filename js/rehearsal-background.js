@@ -9,12 +9,26 @@ class RehearsalBackgroundManager {
 		this._currentBlockIndex = null;
 		this._boundHandler = null;
 		this._currentBlockId = null;
+		this._cache = new Map(); // src -> HTMLImageElement (preloaded)
+	}
+
+	_preloadAll() {
+		if (!Array.isArray(this.imagePaths)) return;
+		this.imagePaths.forEach(src => {
+			if (this._cache.has(src)) return;
+			const img = new Image();
+			img.decoding = 'async';
+			img.loading = 'eager';
+			img.src = src;
+			this._cache.set(src, img);
+		});
 	}
 
 	start() {
 		if (!this.imagePaths || this.imagePaths.length === 0) return;
 		this.body.classList.add('rehearsal-active');
 		this.isActive = true;
+		this._preloadAll();
 		this._setBackground();
 		if (this.interval && this.interval > 0 && this.imagePaths.length > 1) {
 			this.timerId = setInterval(this._setBackground.bind(this), this.interval);
@@ -39,14 +53,25 @@ class RehearsalBackgroundManager {
 		}
 		this.lastImageIndex = nextIndex;
 		const imagePath = this.imagePaths[nextIndex];
-		const img = new Image();
-		img.onload = () => {
+		let img = this._cache.get(imagePath);
+		if (!img) {
+			img = new Image();
+			img.decoding = 'async';
+			img.loading = 'eager';
+			img.src = imagePath;
+			this._cache.set(imagePath, img);
+		}
+		const apply = () => {
 			if (!this.isActive || !this.body.classList.contains('mode-rehearsal')) return;
 			this.body.style.setProperty('background-image', `url('${imagePath}')`, 'important');
 			console.log(`✅ Rehearsal Background: set ${imagePath}`);
 		};
-		img.onerror = () => console.error(`❌ Rehearsal Background: failed to load ${imagePath}`);
-		img.src = imagePath;
+		if (img.complete && img.naturalWidth > 0) {
+			apply();
+		} else {
+			img.onload = apply;
+			img.onerror = () => console.error(`❌ Rehearsal Background: failed to load ${imagePath}`);
+		}
 	}
 
 	/**
@@ -60,8 +85,7 @@ class RehearsalBackgroundManager {
 				if (!lyricsDisplay || !Array.isArray(lyricsDisplay.textBlocks) || lyricsDisplay.textBlocks.length === 0) return;
 				// Не менять при лупе или seek
 				if (blockLoopControl && (blockLoopControl.isLooping || blockLoopControl.isSeekingInProgress)) return;
-				// Только во время воспроизведения
-				if (!audioEngine || audioEngine.isPlaying !== true) return;
+				// Можно менять фон даже на паузе; блокируем только при loop/seek
 				const lineIndex = e.detail?.lineIndex;
 				if (typeof lineIndex !== 'number') return;
 				// Работаем по разделённым блокам (учитываем разбиение >8 строк)
