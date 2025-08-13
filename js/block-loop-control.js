@@ -53,6 +53,9 @@ class BlockLoopControl {
         // Инициализируем DragBoundaryController
         this.dragBoundaryController = new DragBoundaryController(this, this.lyricsDisplay);
         
+        // Память пользовательских границ по блокам: blockId -> { startBoundary, endBoundary }
+        this.blockBoundaryMemory = new Map();
+        
         // Привязываем контекст для обработчиков
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
         this.handleBlockChange = this.handleBlockChange.bind(this);
@@ -294,7 +297,9 @@ class BlockLoopControl {
                     mode = 'start-only';
                 }
             }
-            this.dragBoundaryController.activate(block, blockElement, null, { mode });
+            // Восстанавливаем сохранённые границы для блока (если есть)
+            const remembered = this._getRememberedBoundaries(block.id);
+            this.dragBoundaryController.activate(block, blockElement, remembered || null, { mode });
             console.log('BlockLoopControl: Создана кнопка для блока:', block.name);
         }
 
@@ -1094,6 +1099,14 @@ class BlockLoopControl {
         this.userBoundaries = { ...boundaries };
         console.log('🎯 USER BOUNDARIES SET: hasUserDefinedBoundaries = true');
         
+        // Сохраняем границы для текущего блока (память линий)
+        try {
+            const activeBlockId = this.lyricsDisplay?.currentActiveBlock?.id;
+            if (activeBlockId != null && typeof boundaries.startBoundary === 'number' && typeof boundaries.endBoundary === 'number') {
+                this._rememberBoundariesForBlock(activeBlockId, { startBoundary: boundaries.startBoundary, endBoundary: boundaries.endBoundary });
+            }
+        } catch(_) {}
+        
         // 🎯 КРИТИКАЛЬНО: В multi-loop корректируем ТОЛЬКО нужную сторону и синхронизируем combined*
         const activeBlock = this.lyricsDisplay?.currentActiveBlock;
         const isMulti = this.isMultiLoopEnabled && this.linkedBlock;
@@ -1502,6 +1515,14 @@ class BlockLoopControl {
         if (typeof this.dragBoundaryController.setMode === 'function') {
             this.dragBoundaryController.setMode(mode);
         }
+    }
+
+    _rememberBoundariesForBlock(blockId, { startBoundary, endBoundary }) {
+        this.blockBoundaryMemory.set(blockId, { startBoundary, endBoundary });
+    }
+
+    _getRememberedBoundaries(blockId) {
+        return this.blockBoundaryMemory.get(blockId) || null;
     }
 }
 
