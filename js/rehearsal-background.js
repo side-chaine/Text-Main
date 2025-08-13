@@ -5,11 +5,13 @@ class RehearsalBackgroundManager {
 		this.timerId = null;
 		this.body = document.body;
 		this.lastImageIndex = -1;
+		this.isActive = false;
 	}
 
 	start() {
 		if (!this.imagePaths || this.imagePaths.length === 0) return;
 		this.body.classList.add('rehearsal-active');
+		this.isActive = true;
 		this._setBackground();
 		if (this.interval && this.interval > 0 && this.imagePaths.length > 1) {
 			this.timerId = setInterval(this._setBackground.bind(this), this.interval);
@@ -19,10 +21,12 @@ class RehearsalBackgroundManager {
 	stop() {
 		if (this.timerId) { clearInterval(this.timerId); this.timerId = null; }
 		this.body.classList.remove('rehearsal-active');
+		this.isActive = false;
 		// Не очищаем backgroundImage здесь, так как режимы сами управляют сбросом
 	}
 
 	_setBackground() {
+		if (!this.isActive || !this.body.classList.contains('mode-rehearsal')) return;
 		let nextIndex;
 		do {
 			nextIndex = Math.floor(Math.random() * this.imagePaths.length);
@@ -31,6 +35,7 @@ class RehearsalBackgroundManager {
 		const imagePath = this.imagePaths[nextIndex];
 		const img = new Image();
 		img.onload = () => {
+			if (!this.isActive || !this.body.classList.contains('mode-rehearsal')) return;
 			this.body.style.setProperty('background-image', `url('${imagePath}')`, 'important');
 			console.log(`✅ Rehearsal Background: set ${imagePath}`);
 		};

@@ -5,6 +5,7 @@ class KaraokeBackgroundManager {
         this.timerId = null;
         this.body = document.body;
         this.lastImageIndex = -1; // Чтобы первая картинка не повторялась
+        this.isActive = false;
     }
 
     start() {
@@ -12,6 +13,7 @@ class KaraokeBackgroundManager {
         if (!this.imagePaths || this.imagePaths.length === 0) return;
         
         this.body.classList.add('karaoke-active');
+        this.isActive = true;
         
         // Change background immediately
         this._changeBackground();
@@ -26,12 +28,19 @@ class KaraokeBackgroundManager {
             clearInterval(this.timerId);
             this.timerId = null;
         }
+        this.isActive = false;
         this.body.classList.remove('karaoke-active');
         // Optionally reset to a default background
-        this.body.style.backgroundImage = '';
+        // Сбросим фон только если репетиция не активна, чтобы не мешать её менеджеру
+        if (!this.body.classList.contains('rehearsal-active')) {
+            this.body.style.backgroundImage = '';
+        }
     }
 
     _changeBackground() {
+        if (!this.isActive || !this.body.classList.contains('mode-karaoke')) {
+            return; // Не менять фон, если не в караоке
+        }
         if (this.imagePaths.length === 0) {
             console.warn('Karaoke Background Manager: No images to display.');
             return;
@@ -49,6 +58,7 @@ class KaraokeBackgroundManager {
         // Preload the image to ensure smooth transition
         const img = new Image();
         img.onload = () => {
+            if (!this.isActive || !this.body.classList.contains('mode-karaoke')) return;
             this.body.style.setProperty('background-image', `url('${imagePath}')`, 'important');
             console.log(`✅ Karaoke Background Manager: SUCCESSFULLY set background to ${imagePath}`);
         };
