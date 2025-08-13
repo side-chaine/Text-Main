@@ -295,6 +295,25 @@ class BlockLoopControl {
         // Добавляем кнопку рядом с блоком
         this._positionLoopButton(blockElement);
         
+        // Сохраняем привязки DOM
+        this.currentBlockElement = blockElement;
+        this.lastRenderedBlockId = block.id;
+
+        // Активируем DragBoundaryController с восстановлением границ и корректным режимом
+        if (this.dragBoundaryController && this.isActive) {
+            let mode = 'both';
+            if (this.isLooping && this.isMultiLoopEnabled) {
+                if (this.linkedBlock && block.id === this.linkedBlock.id) {
+                    mode = 'end-only';
+                } else if (this.currentLoopBlock && block.id === this.currentLoopBlock.id) {
+                    mode = 'start-only';
+                }
+            }
+            const remembered = this._getRememberedBoundaries(block.id);
+            this.dragBoundaryController.activate(block, blockElement, remembered || null, { mode });
+            console.log('BlockLoopControl: Создана кнопка для блока:', block.name);
+        }
+
         // Отрисовка поезда вагончиков (всегда в репетиции)
         this._renderLoopTrain();
         
@@ -1626,9 +1645,9 @@ class BlockLoopControl {
             const container = document.createElement('div');
             container.className = 'loop-train';
             container.style.position = 'absolute';
-            container.style.top = '-28px';
-            container.style.left = '8px';
-            container.style.right = '8px';
+            container.style.top = '0px';
+            container.style.left = '50%';
+            container.style.transform = 'translateX(-50%)';
             container.style.display = 'flex';
             container.style.gap = '6px';
             container.style.alignItems = 'center';

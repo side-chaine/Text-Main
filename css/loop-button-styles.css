@@ -263,12 +263,12 @@
 .loop-chip:disabled { cursor: default; filter: saturate(0.4); } 
 
 /* ====== Поезд вагончиков (V2) ====== */
-.loop-train { }
+.loop-train { margin-top: -28px; }
 .loop-wagon {
 	background: rgba(255,255,255,0.08);
 	border: 1px solid rgba(255,255,255,0.3);
 	color: rgba(255,255,255,0.95);
-	min-width: 28px;
+	min-width: 26px;
 	height: 22px;
 	border-radius: 10px;
 	font-weight: 700;
