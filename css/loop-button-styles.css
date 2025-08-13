@@ -204,3 +204,26 @@
     border-left: 4px solid #FF8C00;
     box-shadow: 0 2px 8px rgba(255, 140, 0, 0.2);
 } 
+
+.block-loop-plus {
+ 	margin-left: 8px;
+ 	width: 18px;
+ 	height: 18px;
+ 	border-radius: 50%;
+ 	border: 1px solid rgba(255,255,255,0.6);
+ 	color: rgba(255,255,255,0.95);
+ 	background: rgba(255,255,255,0.1);
+ 	font-weight: 700;
+ 	font-size: 12px;
+ 	line-height: 16px;
+ 	display: inline-flex;
+ 	align-items: center;
+ 	justify-content: center;
+ 	cursor: pointer;
+ 	opacity: 0;
+ 	transform: translateY(-4px);
+ 	transition: opacity 0.25s ease, transform 0.25s ease;
+ }
+ .block-loop-plus:hover { background: rgba(255,255,255,0.2); }
+ .block-loop-btn.active .block-loop-plus { opacity: 1; transform: translateY(0); }
+ .block-loop-plus.hidden { display: none; } 
