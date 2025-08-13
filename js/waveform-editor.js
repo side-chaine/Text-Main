@@ -129,6 +129,18 @@ class WaveformEditor {
                 return false;
             }
         });
+
+        document.addEventListener('blocks-applied', (e) => {
+            try {
+                if (this.markerManager) {
+                    this.markerManager.updateMarkerColors();
+                }
+                this._drawWaveform();
+                console.log('WaveformEditor: blocks-applied handled', e.detail);
+            } catch (err) {
+                console.warn('WaveformEditor: failed to handle blocks-applied', err);
+            }
+        });
     }
     
     /**
@@ -2878,16 +2890,27 @@ class WaveformEditor {
             if (track.lyricsOriginalContent.trim().startsWith('{\\rtf')) {
                 console.log('WaveformEditor: Парсим RTF перед передачей в редактор блоков');
                 try {
-                    // Используем RTF парсер для получения чистого текста
-                    if (window.trackCatalog && window.trackCatalog.rtfAdapter) {
-                        currentLyrics = await window.trackCatalog.rtfAdapter.parse(track.lyricsOriginalContent);
-                        console.log('WaveformEditor: RTF успешно обработан, длина:', currentLyrics.length);
-                        
-                        // 🔍 ДЕТАЛЬНАЯ ОТЛАДКА: проверяем пустые строки после парсинга
-                        const lines = currentLyrics.split('\n');
-                        const emptyLines = lines.filter(line => line.trim() === '').length;
-                        console.log(`🔍 WaveformEditor: После RTF парсинга: всего строк=${lines.length}, пустых строк=${emptyLines}`);
-                        console.log('🔍 WaveformEditor: Первые 10 строк после парсинга:', lines.slice(0, 10));
+                    // Специальный упрощённый парсер для редактора блоков: сохраняем пустые строки как границы
+                    if (typeof track.lyricsOriginalContent === 'string') {
+                        const raw = track.lyricsOriginalContent;
+                        // Сначала превращаем двойные \par в двойные переносы
+                        let txt = raw
+                            .replace(/\\par\b\s*\\par\b/g, '\n\n')
+                            .replace(/\\line\b\s*\\line\b/g, '\n\n');
+                        // Затем одиночные \par/\line в одиночные переносы
+                        txt = txt.replace(/\\par\b/g, '\n').replace(/\\line\b/g, '\n');
+                        // Удаляем управляющие последовательности, не затрагивая переводы строк
+                        txt = txt
+                            .replace(/\{\\[^}]*\}/g, '')
+                            .replace(/\\u-?\d+\s?/g, '')
+                            .replace(/\\'[0-9a-fA-F]{2}/g, '')
+                            .replace(/\\[a-zA-Z]+-?\d*\s?/g, '')
+                            .replace(/[{}]/g, '')
+                            .replace(/\r\n|\r/g, '\n');
+                        // Нормализуем: 3+ переносов -> 2 переноса
+                        txt = txt.replace(/\n{3,}/g, '\n\n');
+                        currentLyrics = txt.trim();
+                        console.log('WaveformEditor: SIMPLE-RTF parsed for BlockEditor, length:', currentLyrics.length);
                     } else {
                         // Fallback к базовой очистке RTF
                         currentLyrics = this._basicRtfCleanup(track.lyricsOriginalContent);
@@ -2933,7 +2956,15 @@ class WaveformEditor {
                         const updatedLyrics = window.trackCatalog._convertBlocksToPlainText(editedBlocks);
                         console.log('WaveformEditor: Обновляем текст трека...');
                         window.trackCatalog.updateTrackLyrics(this.currentTrackId, updatedLyrics);
-                        
+
+                        // 🎯 СРАЗУ ПРИМЕНЯЕМ БЛОКИ К ОТОБРАЖЕНИЮ, ЧТОБЫ МАРКЕРЫ ЗНАЛИ ТИПЫ
+                        if (window.lyricsDisplay && typeof window.lyricsDisplay.loadImportedBlocks === 'function') {
+                            await window.lyricsDisplay.loadImportedBlocks(editedBlocks, true);
+                        }
+                        if (window.markerManager && typeof window.markerManager.updateMarkerColors === 'function') {
+                            window.markerManager.updateMarkerColors();
+                        }
+
                         this._showNotification('Текст и блоки сохранены успешно!', 'success');
                         
                         // 🎯 ВОЗВРАЩАЕМ РЕЗУЛЬТАТ ДЛЯ АВТООТКРЫТИЯ SYNC EDITOR
