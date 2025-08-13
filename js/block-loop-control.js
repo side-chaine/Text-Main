@@ -592,7 +592,9 @@ class BlockLoopControl {
 
         // Если не нашли следующий блок, используем продолжительность трека
         if (!endMarker && this.audioEngine) {
-            const duration = this.audioEngine.getDuration();
+            const duration = (typeof this.audioEngine.getDuration === 'function')
+                ? this.audioEngine.getDuration()
+                : (this.audioEngine.duration || 0);
             if (duration > 0) {
                 endMarker = { time: duration };
                 console.log(`BlockLoopControl: Using track duration ${duration.toFixed(2)}s as end marker (no next block found)`);

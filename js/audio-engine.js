@@ -330,6 +330,20 @@ class AudioEngine {
     }
     
     /**
+     * Возвращает длительность текущего трека (секунды)
+     * Безопасный fallback: сперва internal duration, затем из audio элемента
+     */
+    getDuration() {
+        if (typeof this.duration === 'number' && this.duration > 0) {
+            return this.duration;
+        }
+        if (this.instrumentalAudio && typeof this.instrumentalAudio.duration === 'number') {
+            return this.instrumentalAudio.duration || 0;
+        }
+        return 0;
+    }
+
+    /**
      * Set loop points for playback
      * @param {number} startTime - start time in seconds
      * @param {number} endTime - end time in seconds
