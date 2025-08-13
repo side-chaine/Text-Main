@@ -12,6 +12,7 @@ class ModalBlockEditor {
         this.redoStack = [];
         this.maxHistory = 100;
         this.initialSnapshot = null;
+        this.isRestoring = false; // не писать историю при восстановлении
 
         // Кнопки Undo/Redo
         this.undoBtn = null;
@@ -306,7 +307,6 @@ class ModalBlockEditor {
         // Удален вызов this._addDeleteButtonToBlock(newBlock);
         
         this.blockListArea.appendChild(newBlock);
-        this._pushSnapshot('create-block');
         return newBlock;
     }
     
@@ -383,10 +383,10 @@ class ModalBlockEditor {
         }
         this._updateButtonStates(); 
 
-        // Сбрасываем историю и делаем начальный снимок
-        this.historyStack = [];
+        // Сбрасываем историю и делаем начальный снимок как базовое состояние
         this.redoStack = [];
         this.initialSnapshot = this._serialize();
+        this.historyStack = [this.initialSnapshot];
         this._updateUndoRedoButtons();
     }
 
@@ -561,6 +561,8 @@ class ModalBlockEditor {
             newBlock.setAttribute('contenteditable', 'true');
             newBlock.focus();
         }
+        // Записываем историю только для пользовательского добавления
+        this._pushSnapshot('create-block');
     }
 
     async _handleSave() {
@@ -939,14 +941,18 @@ class ModalBlockEditor {
 
     _applySerialized(serialized) {
         const blocks = JSON.parse(serialized);
-        this.blockListArea.innerHTML = '';
-        blocks.forEach(b => this._createAndSetupBlock(b.content, undefined, b.type));
-        // _createAndSetupBlock делает pushSnapshot; это лишнее при apply — удалим последний снапшот
-        this.historyStack.pop();
+        this.isRestoring = true;
+        try {
+            this.blockListArea.innerHTML = '';
+            blocks.forEach(b => this._createAndSetupBlock(b.content, undefined, b.type));
+        } finally {
+            this.isRestoring = false;
+        }
         this._updateButtonStates();
     }
 
     _pushSnapshot(reason = '') {
+        if (this.isRestoring) return; // не писать историю во время восстановления
         const snap = this._serialize();
         if (this.historyStack.length === 0 || this.historyStack[this.historyStack.length - 1] !== snap) {
             this.historyStack.push(snap);
@@ -958,7 +964,7 @@ class ModalBlockEditor {
     }
 
     undo() {
-        if (this.historyStack.length < 2) return; // последняя инициализация + текущее
+        if (this.historyStack.length < 2) return; // нужен хотя бы один предыдущий снапшот
         const current = this.historyStack.pop();
         this.redoStack.push(current);
         const prev = this.historyStack[this.historyStack.length - 1];
