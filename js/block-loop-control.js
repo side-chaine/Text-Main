@@ -478,11 +478,8 @@ class BlockLoopControl {
         this.combinedEndTime = this.loopEndTime;
         this.isMultiLoopEnabled = false;
         this.linkedBlock = null;
-        // Плюсик под кнопкой
-        if (this.currentBlockElement) {
-            this._ensurePlusButton(this.currentBlockElement, block);
-        }
-
+        // Плюсик отключён в новой концепции поезда
+ 
         console.log(`BlockLoopControl: Зацикливание активно ${this.loopStartTime}s - ${this.loopEndTime}s (без прерывания воспроизведения)`);
     }
     
@@ -813,6 +810,9 @@ class BlockLoopControl {
     handleBlockChange(event) {
         if (!this.isActive) return;
         
+        // Обновляем мягкую подсветку текущего вагона
+        try { this._updateTrainPlayingHighlight(); } catch(_) {}
+        
         const currentLoopBlock = this.currentLoopBlock;
         const newActiveBlock = this.lyricsDisplay.currentActiveBlock;
         
@@ -1019,6 +1019,8 @@ class BlockLoopControl {
         if (!this.isActive) return;
         
         console.log('BlockLoopControl: Обновление для текущего блока');
+        // Обновляем подсветку поезда
+        try { this._updateTrainPlayingHighlight(); } catch(_) {}
         
         // 🎯 КРИТИЧЕСКАЯ ПРОВЕРКА: Если луп активен, проверяем пользовательские границы DragBoundaryController
         if (this.isLooping && this.dragBoundaryController && this.dragBoundaryController.isActive) {
@@ -1425,31 +1427,8 @@ class BlockLoopControl {
 
     // Создаёт/обновляет плюсик под кнопкой Stop
     _ensurePlusButton(blockElement, block) {
-        if (!blockElement) return;
-        if (!this.loopButton) return;
-        const hasNext = this._hasNextBlock(block);
-        if (!hasNext) { if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; } return; }
-        if (!this.plusButton) {
-            const btn = document.createElement('button');
-            btn.className = 'block-loop-plus-btn';
-            btn.textContent = '+';
-            btn.title = 'Добавить следующий блок в луп';
-            btn.onclick = () => this._attachNextBlock(block);
-            this.plusButton = btn;
-            // позиционируем по центру под основной кнопкой
-            btn.style.position = 'absolute';
-            btn.style.top = '46px';
-            btn.style.right = '10px';
-            btn.style.transform = 'translateY(4px)';
-            btn.style.opacity = '0.0';
-            btn.style.transition = 'opacity 150ms ease, transform 150ms ease';
-            blockElement.appendChild(btn);
-            // плавное появление
-            requestAnimationFrame(() => { btn.style.opacity = '1'; btn.style.transform = 'translateY(0)'; });
-            if (this.isMultiLoopEnabled) {
-                btn.classList.add('active');
-            }
-        }
+        // Новая концепция поезда: плюсик не используется
+        if (this.plusButton) { this.plusButton.remove(); this.plusButton = null; }
     }
 
     _hasNextBlock(block) {
