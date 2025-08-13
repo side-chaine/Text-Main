@@ -7,6 +7,16 @@ class ModalBlockEditor {
         this.cancelBtn = this.container.querySelector('#cancel-edit-modal-btn'); // Используем новый ID
         this.statusElement = this.container.querySelector('#block-editor-status');
 
+        // История действий (Undo/Redo)
+        this.historyStack = [];
+        this.redoStack = [];
+        this.maxHistory = 100;
+        this.initialSnapshot = null;
+
+        // Кнопки Undo/Redo
+        this.undoBtn = null;
+        this.redoBtn = null;
+
         // Ссылки на кнопки будут инициализированы в show() в первый раз
         this.editModeToggleBtn = null;
         this.deleteSelectedBlockBtn = null; 
@@ -51,12 +61,37 @@ class ModalBlockEditor {
         // Этот метод будет вызван из show() один раз
         this.editModeToggleBtn = this.container.querySelector('#edit-mode-toggle-btn');
         this.deleteSelectedBlockBtn = this.container.querySelector('#delete-selected-block-btn');
+        this.undoBtn = this.container.querySelector('#undo-block-btn');
+        this.redoBtn = this.container.querySelector('#redo-block-btn');
 
         if (this.editModeToggleBtn) {
             this.editModeToggleBtn.addEventListener('click', () => this._toggleEditMode());
         }
         if (this.deleteSelectedBlockBtn) {
             this.deleteSelectedBlockBtn.addEventListener('click', () => this._deleteSelectedBlockHandler());
+        }
+        if (this.undoBtn) {
+            this.undoBtn.addEventListener('click', () => this.undo());
+        }
+        if (this.redoBtn) {
+            this.redoBtn.addEventListener('click', () => this.redo());
+        }
+
+        // Хоткеи: Ctrl/⌘+Z, Ctrl/⌘+Shift+Z
+        if (!this._hotkeysBound) {
+            this._hotkeysBound = true;
+            document.addEventListener('keydown', (e) => {
+                if (this.container.classList.contains('hidden')) return;
+                const isCmd = e.metaKey || e.ctrlKey;
+                if (!isCmd) return;
+                if (e.key.toLowerCase() === 'z' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.undo();
+                } else if (e.key.toLowerCase() === 'z' && e.shiftKey) {
+                    e.preventDefault();
+                    this.redo();
+                }
+            });
         }
         this.buttonsBound = true;
     }
@@ -246,6 +281,7 @@ class ModalBlockEditor {
         
         this._updateButtonStates();
         console.log('Blocks merged. Kept:', blockToKeep, 'Removed:', blockToRemove);
+        this._pushSnapshot('merge-blocks');
     }
 
     _setBlockEditable(block, editable) {
@@ -270,6 +306,7 @@ class ModalBlockEditor {
         // Удален вызов this._addDeleteButtonToBlock(newBlock);
         
         this.blockListArea.appendChild(newBlock);
+        this._pushSnapshot('create-block');
         return newBlock;
     }
     
@@ -345,6 +382,12 @@ class ModalBlockEditor {
             this.blockStylesApplied = true;
         }
         this._updateButtonStates(); 
+
+        // Сбрасываем историю и делаем начальный снимок
+        this.historyStack = [];
+        this.redoStack = [];
+        this.initialSnapshot = this._serialize();
+        this._updateUndoRedoButtons();
     }
 
     _applyBlockTypeStyles() {
@@ -473,6 +516,7 @@ class ModalBlockEditor {
             // Можно обновлять и текст кнопки, если это потребуется для нового дизайна
             // this.editModeToggleBtn.innerHTML = this.isEditModeActive ? 'ГОТОВО' : '&#9998;'; 
         }
+        this._updateUndoRedoButtons();
     }
 
     show() {
@@ -546,6 +590,11 @@ class ModalBlockEditor {
                 console.log('ModalBlockEditor: Save callback result:', result);
                 this.hide();
 
+                // Очистим историю после успешного сохранения
+                this.historyStack = [];
+                this.redoStack = [];
+                this.initialSnapshot = null;
+
                 // 🎯 АВТОМАТИЧЕСКИ ОТКРЫВАЕМ SYNC EDITOR ПОСЛЕ СОХРАНЕНИЯ
                 try {
                     if (window.waveformEditor && typeof window.waveformEditor.show === 'function') {
@@ -609,6 +658,16 @@ class ModalBlockEditor {
         if (this.onCancel) {
             this.onCancel();
         }
+        // Восстанавливаем исходное состояние, если было
+        try {
+            if (this.initialSnapshot) {
+                this._applySerialized(this.initialSnapshot);
+            }
+        } catch (_) {}
+        this.historyStack = [];
+        this.redoStack = [];
+        this.initialSnapshot = null;
+        this._updateUndoRedoButtons();
         this.hide();
     }
 
@@ -654,6 +713,7 @@ class ModalBlockEditor {
                     // Логика выбора следующего/предыдущего блока может быть добавлена здесь
                     // Пока просто сбрасываем выделение
                 }
+                this._pushSnapshot('delete-block');
             } else {
                 this.statusElement.textContent = 'Нельзя удалить единственный текстовый блок.';
                 setTimeout(() => { 
@@ -786,7 +846,7 @@ class ModalBlockEditor {
         }
         blockElement.setAttribute('data-block-type', type);
         console.log(`Block type set to "${type}" for block:`, blockElement);
-        // TODO: Позже добавить _pushStateToHistory(); 
+        this._pushSnapshot('set-type');
         // TODO: Добавить визуальное отображение (фон/надпись) на самом блоке
     }
     
@@ -866,6 +926,63 @@ class ModalBlockEditor {
         // Проверяем, есть ли в блоках временные маркеры синхронизации
         // Пока возвращаем false, так как блоки только что созданы и не содержат маркеров
         return false;
+    }
+
+    // ==== История/Снапшоты ====
+    _serialize() {
+        const blocks = Array.from(this.blockListArea.querySelectorAll('.text-block')).map(el => ({
+            content: el.innerText,
+            type: el.getAttribute('data-block-type') || 'verse'
+        }));
+        return JSON.stringify(blocks);
+    }
+
+    _applySerialized(serialized) {
+        const blocks = JSON.parse(serialized);
+        this.blockListArea.innerHTML = '';
+        blocks.forEach(b => this._createAndSetupBlock(b.content, undefined, b.type));
+        // _createAndSetupBlock делает pushSnapshot; это лишнее при apply — удалим последний снапшот
+        this.historyStack.pop();
+        this._updateButtonStates();
+    }
+
+    _pushSnapshot(reason = '') {
+        const snap = this._serialize();
+        if (this.historyStack.length === 0 || this.historyStack[this.historyStack.length - 1] !== snap) {
+            this.historyStack.push(snap);
+            if (this.historyStack.length > this.maxHistory) this.historyStack.shift();
+            this.redoStack = [];
+            // console.debug('Undo snapshot saved:', reason);
+            this._updateUndoRedoButtons();
+        }
+    }
+
+    undo() {
+        if (this.historyStack.length < 2) return; // последняя инициализация + текущее
+        const current = this.historyStack.pop();
+        this.redoStack.push(current);
+        const prev = this.historyStack[this.historyStack.length - 1];
+        this._applySerialized(prev);
+        this._updateUndoRedoButtons();
+        this.statusElement.textContent = '↶ Отменено действие';
+        setTimeout(() => this.statusElement.textContent = this.isEditModeActive ? 'Режим редактирования текста активен.' : 'Режим выбора блоков.', 1200);
+    }
+
+    redo() {
+        if (this.redoStack.length === 0) return;
+        const snap = this.redoStack.pop();
+        this.historyStack.push(snap);
+        this._applySerialized(snap);
+        this._updateUndoRedoButtons();
+        this.statusElement.textContent = '↷ Повтор действия';
+        setTimeout(() => this.statusElement.textContent = this.isEditModeActive ? 'Режим редактирования текста активен.' : 'Режим выбора блоков.', 1200);
+    }
+
+    _updateUndoRedoButtons() {
+        const canUndo = this.historyStack.length > 1;
+        const canRedo = this.redoStack.length > 0;
+        if (this.undoBtn) this.undoBtn.disabled = !canUndo;
+        if (this.redoBtn) this.redoBtn.disabled = !canRedo;
     }
 }
 

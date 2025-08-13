@@ -593,15 +593,15 @@ class BlockLoopControl {
             return;
         }
         
-        // Детальная диагностика каждые 10 проверок
-        if (this.diagnosticCounter % 10 === 0) {
+        // Детальная диагностика реже, каждые 30 проверок
+        if (this.diagnosticCounter % 30 === 0) {
             const audioState = this.audioEngine.isPlaying ? 'playing' : 'paused';
-            console.log(`🔍 LOOP DIAGNOSTIC #${this.diagnosticCounter}:`);
-            console.log(`     Current: ${currentTime.toFixed(3)}s`);
-            console.log(`     Loop Range: ${this.loopStartTime?.toFixed(3)}s - ${this.loopEndTime?.toFixed(3)}s`);
-            console.log(`     End Threshold: ${(this.loopEndTime - 0.05).toFixed(3)}s`);
-            console.log(`     Time Since Last Jump: ${(Date.now() - this.lastJumpTime) / 1000}s`);
-            console.log(`     Audio State: ${audioState}`);
+            console.debug(`🔍 LOOP DIAGNOSTIC #${this.diagnosticCounter}:`);
+            console.debug(`     Current: ${currentTime.toFixed(3)}s`);
+            console.debug(`     Loop Range: ${this.loopStartTime?.toFixed(3)}s - ${this.loopEndTime?.toFixed(3)}s`);
+            console.debug(`     End Threshold: ${(this.loopEndTime - 0.05).toFixed(3)}s`);
+            console.debug(`     Time Since Last Jump: ${(Date.now() - this.lastJumpTime) / 1000}s`);
+            console.debug(`     Audio State: ${audioState}`);
         }
         
         // ⚡ КРИТИЧЕСКОЕ УСИЛЕНИЕ: Расширенные "ворота" для надежного срабатывания
@@ -1212,12 +1212,12 @@ class BlockLoopControl {
         if (!this.diagnosticCounter) this.diagnosticCounter = 0;
         this.diagnosticCounter++;
         
-        if (this.diagnosticCounter % 10 === 0) {
-            console.log(`✅ AUTO RECOVERY: Loop health OK (check #${this.diagnosticCounter})`);
-            console.log(`   Loop active: ${this.isLooping}`);
-            console.log(`   Current time: ${currentTime.toFixed(1)}s`);
+        if (this.diagnosticCounter % 30 === 0) {
+            console.debug(`✅ AUTO RECOVERY: Loop health OK (check #${this.diagnosticCounter})`);
+            console.debug(`   Loop active: ${this.isLooping}`);
+            console.debug(`   Current time: ${currentTime.toFixed(1)}s`);
             if (this.isLooping) {
-                console.log(`   Loop range: ${this.loopStartTime?.toFixed(1)}s - ${this.loopEndTime?.toFixed(1)}s`);
+                console.debug(`   Loop range: ${this.loopStartTime?.toFixed(1)}s - ${this.loopEndTime?.toFixed(1)}s`);
             }
         }
     }
