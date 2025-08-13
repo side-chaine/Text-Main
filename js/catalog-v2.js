@@ -709,11 +709,29 @@ class CatalogV2 {
             // Очищаем форму
             this.cancelUpload();
             
-            // 🎯 НОВОЕ: Автоматически открываем редактор блоков для нового трека
-            console.log('🎯 CatalogV2: Открываем редактор блоков для обработки трека');
-            setTimeout(() => {
-                this.openBlockEditorForTrack(savedTrack);
-            }, 500); // Небольшая задержка для завершения UI обновлений
+            // 🎯 ЛОГИКА: если есть JSON маркеры — редактор блоков не открываем
+            const hasJsonMarkers = Array.isArray(savedTrack?.syncMarkers) && savedTrack.syncMarkers.length > 0;
+            if (hasJsonMarkers) {
+                console.log('✅ CatalogV2: JSON маркеры присутствуют, пропускаем редактор блоков и запускаем трек');
+                try {
+                    // Закрываем каталог и запускаем трек
+                    this.close();
+                    if (window.trackCatalog && typeof window.trackCatalog.loadTrack === 'function') {
+                        const originalTrackIndex = window.trackCatalog.tracks.findIndex(t => t.id === savedTrack.id);
+                        if (originalTrackIndex !== -1) {
+                            window.trackCatalog.loadTrack(originalTrackIndex);
+                        }
+                    }
+                } catch (e) {
+                    console.warn('CatalogV2: Не удалось автозапустить трек с JSON маркерами:', e);
+                }
+            } else {
+                // Иначе — старое поведение: открыть редактор блоков
+                console.log('🎯 CatalogV2: Открываем редактор блоков для обработки трека');
+                setTimeout(() => {
+                    this.openBlockEditorForTrack(savedTrack);
+                }, 500);
+            }
             
         } catch (error) {
             console.error('❌ CatalogV2: Ошибка при сохранении трека:', error);
