@@ -923,3 +923,10 @@
 .upload-cell.file-selected .upload-icon, 
 .upload-cell.file-selected .drop-text { display: none; }
 .upload-cell .file-name { font-size: 0.7em; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } 
+
+/* Без подсказок: делаем заголовок-лейбл более крупным и заметным */
+.upload-grid.compact .file-label {
+ 	font-size: 0.9em;
+ 	letter-spacing: 0.2px;
+ }
+ .upload-cell .upload-icon { margin-bottom: 6px; } 
