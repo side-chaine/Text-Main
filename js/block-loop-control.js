@@ -17,11 +17,11 @@ class BlockLoopControl {
         this.loopEndTime = null;   // null вместо 0 - чтобы отличать неустановленное значение
         this.lastJumpTime = 0;      // Защита от частых прыжков
         this.diagnosticCounter = 0;  // Счетчик для логирования
- 
-         // 🎯 НОВЫЙ ФЛАГ: Отслеживание пользовательских границ
-         this.hasUserDefinedBoundaries = false;
-         this.userBoundaries = null; // Сохраняем пользовательские границы
- 
+        
+        // 🎯 НОВЫЙ ФЛАГ: Отслеживание пользовательских границ
+        this.hasUserDefinedBoundaries = false;
+        this.userBoundaries = null; // Сохраняем пользовательские границы
+        
          // 🎯 MULTI-LOOP (MVP: +1 блок)
          this.isMultiLoopEnabled = false;   // общий флаг
          this.linkedBlock = null;           // следующий блок
@@ -312,7 +312,7 @@ class BlockLoopControl {
             // Синхронизируем визуальное состояние Stop сразу после пересоздания DOM
             this._updateButtonState(true);
         }
-
+        
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
     }
     
@@ -486,7 +486,7 @@ class BlockLoopControl {
         this.loopStartTime = null;
         this.loopEndTime = null;
         this.lastJumpTime = 0; // Сбрасываем защиту от прыжков
-
+        
         // 🔧 ИСПРАВЛЕНИЕ: Сбрасываем пользовательские границы при остановке лупа
         this.hasUserDefinedBoundaries = false;
         this.userBoundaries = null;
@@ -918,7 +918,7 @@ class BlockLoopControl {
                 window.app.rehearsalBackgroundManager.setRandomBackgroundSmooth();
             }
         } catch(_) {}
-
+        
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
             // Ранний guard: при активном multi-loop держим луп при переходах first↔linked
@@ -1116,11 +1116,11 @@ class BlockLoopControl {
             // Редкий случай передачи времён напрямую — распределяем по режиму
             if (isMulti && activeBlock) {
                 if (activeBlock.id === this.currentLoopBlock?.id && (mode === 'start-only' || mode === 'both')) {
-                    this.loopStartTime = boundaries.startTime;
+            this.loopStartTime = boundaries.startTime;
                     this.combinedStartTime = this.loopStartTime;
                 }
                 if (activeBlock.id === this.linkedBlock?.id && (mode === 'end-only' || mode === 'both')) {
-                    this.loopEndTime = boundaries.endTime;
+            this.loopEndTime = boundaries.endTime;
                     this.combinedEndTime = this.loopEndTime;
                 }
             } else {
@@ -1135,17 +1135,17 @@ class BlockLoopControl {
             // Индексы строк → времена
             const startTime = this._findTimeByLine(boundaries.startBoundary);
             const endTime = this._findTimeByLine(boundaries.endBoundary + 1);
-
+            
             if (isMulti && activeBlock) {
                 if (activeBlock.id === this.currentLoopBlock?.id && (mode === 'start-only' || mode === 'both')) {
                     if (startTime !== null) {
-                        this.loopStartTime = startTime;
+                this.loopStartTime = startTime;
                         this.combinedStartTime = this.loopStartTime;
                     }
                 }
                 if (activeBlock.id === this.linkedBlock?.id && (mode === 'end-only' || mode === 'both')) {
                     if (endTime !== null) {
-                        this.loopEndTime = endTime;
+                this.loopEndTime = endTime;
                         this.combinedEndTime = this.loopEndTime;
                     }
                 }
@@ -1518,11 +1518,16 @@ class BlockLoopControl {
     }
 
     _rememberBoundariesForBlock(blockId, { startBoundary, endBoundary }) {
-        this.blockBoundaryMemory.set(blockId, { startBoundary, endBoundary });
+        this.blockBoundaryMemory.set(blockId, { startBoundary, endBoundary, start: startBoundary, end: endBoundary });
     }
 
     _getRememberedBoundaries(blockId) {
-        return this.blockBoundaryMemory.get(blockId) || null;
+        const b = this.blockBoundaryMemory.get(blockId);
+        if (!b) return null;
+        const start = typeof b.start === 'number' ? b.start : b.startBoundary;
+        const end = typeof b.end === 'number' ? b.end : b.endBoundary;
+        if (typeof start === 'number' && typeof end === 'number') return { start, end };
+        return null;
     }
 }
 
