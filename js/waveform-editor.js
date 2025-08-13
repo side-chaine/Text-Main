@@ -2909,6 +2909,11 @@ class WaveformEditor {
                             .replace(/\r\n|\r/g, '\n');
                         // Нормализуем: 3+ переносов -> 2 переноса
                         txt = txt.replace(/\n{3,}/g, '\n\n');
+                        // Удаляем слэш в конце строк и строки, состоящие только из слэша
+                        txt = txt.replace(/\\\s*$/gm, ''); // trailing backslash at EOL
+                        txt = txt.replace(/^\s*\\\s*$/gm, ''); // lines that are only backslash
+                        // Если встречается "\\\n" считаем это «пустой разделитель» -> просто перевод строки
+                        txt = txt.replace(/\\\s*\n/g, '\n');
                         currentLyrics = txt.trim();
                         console.log('WaveformEditor: SIMPLE-RTF parsed for BlockEditor, length:', currentLyrics.length);
                     } else {
