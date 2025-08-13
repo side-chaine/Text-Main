@@ -389,71 +389,70 @@ class TrackCatalog {
     }
     
     async _loadTracksFromDB() {
-        if (!this.db) {
-            console.error('База данных не инициализирована');
-            return;
-        }
-        
         try {
-        const transaction = this.db.transaction(['tracks'], 'readonly');
-        const store = transaction.objectStore('tracks');
-        const request = store.getAll();
-        
-        request.onsuccess = () => {
-                console.log(`Загружено ${request.result.length} треков из базы данных`);
-                this.tracks = request.result || [];
-                
-                // Проверяем на дубликаты по ID (в случае, если они как-то появились)
-                const uniqueIds = new Set();
-                this.tracks = this.tracks.filter(track => {
-                    if (uniqueIds.has(track.id)) {
-                        console.warn(`Найден дубликат трека с ID ${track.id}, удаляем дублирующую запись`);
-                        return false;
-                    }
-                    uniqueIds.add(track.id);
-                    return true;
-                });
-                
-                // Сортируем треки по дате добавления (если есть) или по ID
-                this.tracks.sort((a, b) => {
-                    if (a.dateAdded && b.dateAdded) {
-                        return new Date(b.dateAdded) - new Date(a.dateAdded); // От новых к старым
-                    }
-                    return b.id - a.id; // По убыванию ID, если нет даты
-                });
-                
-                // Проверяем корректность currentTrackIndex после загрузки
-                if (this.currentTrackIndex >= this.tracks.length) {
-                    console.warn('Текущий индекс трека больше количества треков, сбрасываем');
-                    this.currentTrackIndex = this.tracks.length > 0 ? 0 : -1;
+            if (!this.db) { console.error('TrackCatalog: DB is not initialized'); return; }
+            const tx = this.db.transaction(['tracks'], 'readonly');
+            const store = tx.objectStore('tracks');
+            const req = store.getAll();
+            req.onsuccess = async () => {
+                const result = req.result || [];
+                this.tracks = result;
+                console.log(`TrackCatalog: Loaded ${this.tracks.length} tracks from DB`);
+                if (this.tracks.length === 0) {
+                    await this._tryMigrateFromFallbackDBs();
+                    // reload
+                    try {
+                        const tx2 = this.db.transaction(['tracks'], 'readonly');
+                        const st2 = tx2.objectStore('tracks');
+                        const rq2 = st2.getAll();
+                        await new Promise((res, rej) => { rq2.onsuccess = res; rq2.onerror = rej; });
+                        this.tracks = rq2.result || [];
+                        console.log(`TrackCatalog: After migrate loaded ${this.tracks.length} tracks`);
+                    } catch (e) { console.warn('TrackCatalog: reload after migrate failed', e); }
                 }
-                
-                // Обновляем UI
-            this._renderTrackList();
-                
-                // Показываем приветственный экран, если треков нет
-                if (this.tracks.length === 0 && window.app && typeof window.app._showWelcomeIfNoTracks === 'function') {
-                    window.app._showWelcomeIfNoTracks();
-                }
-                
-                // Уведомляем другие компоненты о загрузке треков
-                document.dispatchEvent(new CustomEvent('tracks-loaded', { 
-                    detail: { 
-                        tracksCount: this.tracks.length 
-                    } 
-                }));
-            };
-            
-            request.onerror = (event) => {
-                console.error('Ошибка загрузки треков из базы данных:', event.target.error);
-                // В случае ошибки, сбрасываем локальный массив треков
-                this.tracks = [];
                 this._renderTrackList();
             };
-        } catch (error) {
-            console.error('Исключение при загрузке треков:', error);
-            this.tracks = [];
-            this._renderTrackList();
+            req.onerror = (e) => {
+                console.error('TrackCatalog: Failed to load tracks from DB', e);
+            };
+        } catch (e) {
+            console.error('TrackCatalog: Unexpected error while loading tracks', e);
+        }
+    }
+
+    async _tryMigrateFromFallbackDBs() {
+        const current = (window.__DB_NAME || 'TextAppDB');
+        const candidates = ['TextAppDB', 'TextAppDB_DEV'].filter(n => n !== current);
+        for (const name of candidates) {
+            try {
+                const srcDb = await new Promise((resolve, reject) => {
+                    const req = indexedDB.open(name);
+                    req.onsuccess = (e) => resolve(e.target.result);
+                    req.onerror = () => reject(new Error('open failed'));
+                });
+                if (!srcDb || !srcDb.objectStoreNames.contains('tracks')) { try { srcDb.close(); } catch(_){}; continue; }
+                const readAll = (db, storeName) => new Promise((resolve) => {
+                    if (!db.objectStoreNames.contains(storeName)) { resolve([]); return; }
+                    const tx = db.transaction([storeName], 'readonly');
+                    const st = tx.objectStore(storeName);
+                    const rq = st.getAll();
+                    rq.onsuccess = () => resolve(rq.result || []);
+                    rq.onerror = () => resolve([]);
+                });
+                const oldTracks = await readAll(srcDb, 'tracks');
+                if (!oldTracks || oldTracks.length === 0) { try { srcDb.close(); } catch(_){}; continue; }
+                console.log(`📦 TrackCatalog: Migrating ${oldTracks.length} tracks from ${name}`);
+                try {
+                    const tx = this.db.transaction(['tracks'], 'readwrite');
+                    const dst = tx.objectStore('tracks');
+                    oldTracks.forEach(t => { try { dst.put(t); } catch(_) {} });
+                    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; tx.onabort = rej; });
+                } catch (e) { console.warn('TrackCatalog: write after migrate failed', e); }
+                try { srcDb.close(); } catch(_){}
+                return;
+            } catch (e) {
+                console.debug(`TrackCatalog: migrate from ${name} skipped`, e?.message || e);
+            }
         }
     }
     

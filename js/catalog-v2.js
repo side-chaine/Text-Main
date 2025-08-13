@@ -93,10 +93,24 @@ class CatalogV2 {
             const store = transaction.objectStore('tracks');
             const request = store.getAll();
             
-            request.onsuccess = () => {
+            request.onsuccess = async () => {
                 this.tracks = request.result || [];
                 console.log(`🎵 CatalogV2: Загружено ${this.tracks.length} треков`);
                 
+                // Если треков нет — пробуем миграцию из fallback баз
+                if (this.tracks.length === 0) {
+                    await this._tryMigrateFromFallbackDBs();
+                    // Повторная загрузка после миграции
+                    try {
+                        const tx2 = this.db.transaction(['tracks'], 'readonly');
+                        const st2 = tx2.objectStore('tracks');
+                        const req2 = st2.getAll();
+                        await new Promise((res, rej) => { req2.onsuccess = res; req2.onerror = rej; });
+                        this.tracks = req2.result || [];
+                        console.log(`🎵 CatalogV2: После миграции загружено ${this.tracks.length} треков`);
+                    } catch (e) { console.warn('CatalogV2: reload after migrate failed', e); }
+                }
+
                 // 🎯 Обновляем "Мою музыку" при первой загрузке
                 this.renderMyMusic();
                 
@@ -119,8 +133,60 @@ class CatalogV2 {
             request.onerror = () => {
                 console.error('❌ CatalogV2: Ошибка загрузки треков');
             };
-        } catch (error) {
-            console.error('❌ CatalogV2: Ошибка при работе с базой данных:', error);
+        } catch (e) {
+            console.error('❌ CatalogV2: Непредвиденная ошибка при загрузке треков', e);
+        }
+    }
+
+    async _tryMigrateFromFallbackDBs() {
+        // Кандидаты: старая прод/дев база. Исключаем текущую
+        const current = (window.__DB_NAME || 'TextAppDB');
+        const candidates = ['TextAppDB', 'TextAppDB_DEV'].filter(n => n !== current);
+        if (candidates.length === 0) return;
+        for (const name of candidates) {
+            try {
+                const srcDb = await new Promise((resolve, reject) => {
+                    const req = indexedDB.open(name);
+                    req.onsuccess = (e) => resolve(e.target.result);
+                    req.onerror = () => reject(new Error('open failed'));
+                    req.onblocked = () => reject(new Error('open blocked'));
+                });
+                if (!srcDb || !srcDb.objectStoreNames.contains('tracks')) { try { srcDb.close(); } catch(_){}; continue; }
+
+                const readAll = (db, storeName) => new Promise((resolve) => {
+                    if (!db.objectStoreNames.contains(storeName)) { resolve([]); return; }
+                    const tx = db.transaction([storeName], 'readonly');
+                    const st = tx.objectStore(storeName);
+                    const rq = st.getAll();
+                    rq.onsuccess = () => resolve(rq.result || []);
+                    rq.onerror = () => resolve([]);
+                });
+
+                const oldTracks = await readAll(srcDb, 'tracks');
+                const oldMy = await readAll(srcDb, 'my_music');
+                const hasData = (oldTracks && oldTracks.length) || (oldMy && oldMy.length);
+                if (!hasData) { try { srcDb.close(); } catch(_){}; continue; }
+
+                console.log(`📦 CatalogV2: Мигрирую из базы ${name}: tracks=${oldTracks.length}, my_music=${oldMy.length||0}`);
+                // Запись в текущую БД
+                try {
+                    const tx = this.db.transaction(['tracks','my_music'], 'readwrite');
+                    const dstTracks = tx.objectStore('tracks');
+                    const dstMy = tx.objectStore('my_music');
+                    (oldTracks || []).forEach(t => { try { dstTracks.put(t); } catch(_) {} });
+                    (oldMy || []).forEach(m => { try { dstMy.put(m); } catch(_) {} });
+                    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; tx.onabort = rej; });
+                } catch (e) {
+                    console.warn('CatalogV2: запись после миграции не удалась', e);
+                }
+
+                try { srcDb.close(); } catch(_){}
+                // Загружаем my_music после миграции
+                await this.loadMyMusicFromDB();
+                return; // мигрировали из первой найденной базы
+            } catch (e) {
+                console.debug(`CatalogV2: migrate from ${name} skipped`, e?.message || e);
+            }
         }
     }
     
