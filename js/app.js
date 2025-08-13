@@ -919,7 +919,6 @@ class App {
     _activateKaraokeMode() {
         console.log('Activating karaoke mode');
         
-        // Деактивируем Live режим если он активен
         if (window.liveMode && window.liveMode.isActive) {
             window.liveMode.deactivate();
         }
@@ -927,19 +926,17 @@ class App {
         this.textStyleManager.setStyle('karaoke');
         this._setLyricsContainerStyle('style-karaoke');
         this.blockLoopControl.deactivate();
-        // Фоны
         if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.stop();
-        this.karaokeBackgroundManager.start();
         this._hideLiveFeedConcept();
         
-        // Скрываем BPM контроли в режиме караоке
         if (this.bpmControls) {
             this.bpmControls.style.display = 'none';
         }
         
-        // CSS классы для режимов
+        // Сначала классы режима, потом запуск фона
         document.body.classList.add('mode-karaoke');
         document.body.classList.remove('mode-concert', 'mode-rehearsal', 'mode-live');
+        this.karaokeBackgroundManager.start();
     }
     
     /**
@@ -949,30 +946,26 @@ class App {
     _activateRehearsalMode() {
         console.log('Activating rehearsal mode');
         
-        // Деактивируем Live режим если он активен
         if (window.liveMode && window.liveMode.isActive) {
             window.liveMode.deactivate();
         }
         
         this.karaokeBackgroundManager.stop();
-        // Защита от артефактов фона после караоке
         try { document.body.classList.remove('karaoke-active'); } catch(_) {}
-        // Включаем фон репетиции (статичный)
-        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.start();
         this.textStyleManager.setStyle('rehearsal');
         this._setLyricsContainerStyle(null);
         this.blockLoopControl.activate();
         this._hideLiveFeedConcept();
         
-        // Показываем BPM контроли в режиме репетиции
         if (this.bpmControls) {
             this.bpmControls.style.display = 'flex';
         }
         this._updateBPMDisplay();
         
-        // CSS классы для режимов
+        // Сначала классы режима, потом запуск фона
         document.body.classList.add('mode-rehearsal');
         document.body.classList.remove('mode-concert', 'mode-karaoke', 'mode-live');
+        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.start();
     }
     
     /**
