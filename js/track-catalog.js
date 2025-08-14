@@ -1470,14 +1470,14 @@ class TrackCatalog {
             
             // 🚀 АВТОПЛЕЙ: по опции
             if (options && options.autoplay) {
-                console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
-                setTimeout(async () => {
-                    try {
-                        await audioEngine.play();
-                        console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
-                    } catch (playError) {
-                        console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
-                    }
+            console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
+            setTimeout(async () => {
+                try {
+                    await audioEngine.play();
+                    console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
+                } catch (playError) {
+                    console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
+                }
                 }, 200);
             }
             
@@ -1492,8 +1492,12 @@ class TrackCatalog {
                 const instrumentalUrl = track.instrumentalUrl || track.audioUrl;
                 const vocalsUrl = track.vocalsUrl;
 
-                if (instrumentalUrl || vocalsUrl) {
-                    window.waveformEditor.loadDualWaveforms(instrumentalUrl, vocalsUrl)
+                // Используем безопасные URL из гибридного движка, если они уже подготовлены
+                const instrumentalUrlForEditor = (audioEngine && audioEngine.hybridEngine && audioEngine.hybridEngine.instrumentalUrl) || instrumentalUrl;
+                const vocalsUrlForEditor = (audioEngine && audioEngine.hybridEngine && audioEngine.hybridEngine.vocalsUrl) || vocalsUrl;
+
+                if (instrumentalUrlForEditor || vocalsUrlForEditor) {
+                    window.waveformEditor.loadDualWaveforms(instrumentalUrlForEditor, vocalsUrlForEditor)
                         .then(() => console.log('WaveformEditor: Обе дорожки успешно загружены.'))
                         .catch(error => console.error('TrackCatalog: Ошибка при загрузке двойных волновых форм:', error));
                 }
