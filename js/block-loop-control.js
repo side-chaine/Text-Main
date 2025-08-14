@@ -86,6 +86,38 @@ class BlockLoopControl {
         
         // Запускаем систему автоматического восстановления
         this._startAutoRecoverySystem();
+
+        // Перерисовка поезда при ресайзе окна
+        this._onResize = () => {
+            try { this._renderLoopTrain(); } catch(_) {}
+        };
+        window.addEventListener('resize', this._onResize);
+
+        // Слежение за скроллом для корректной позиции портала поезда
+        this._onScroll = () => {
+            try { this._updateTrainPortalPosition(); } catch(_) {}
+        };
+        window.addEventListener('scroll', this._onScroll, { passive: true });
+
+        // Наблюдаем за каталогом и сменой режимов
+        this._ensureOverlayAndModeObservers();
+
+        // Быстрый поллинг на первые секунды: показать поезд сразу после появления блоков
+        let pollCount = 0;
+        this._trainReadyPoll = setInterval(() => {
+            pollCount += 1;
+            const isRehearsal = document.body.classList.contains('mode-rehearsal');
+            const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+            if (isRehearsal && hasBlocks) {
+                try { this._renderLoopTrain(); } catch(_) {}
+                clearInterval(this._trainReadyPoll);
+                this._trainReadyPoll = null;
+            }
+            if (pollCount >= 60) { // максимум ~6 секунд
+                clearInterval(this._trainReadyPoll);
+                this._trainReadyPoll = null;
+            }
+        }, 100);
     }
     
     /**
@@ -115,6 +147,24 @@ class BlockLoopControl {
         
         // Отписываемся от событий
         this._removeEventListeners();
+
+        if (this._onResize) {
+            window.removeEventListener('resize', this._onResize);
+            this._onResize = null;
+        }
+        if (this._onScroll) {
+            window.removeEventListener('scroll', this._onScroll);
+            this._onScroll = null;
+        }
+        if (this._trainReadyPoll) {
+            clearInterval(this._trainReadyPoll);
+            this._trainReadyPoll = null;
+        }
+
+        // Полная очистка портала-поезда и наблюдателей
+        try { this._destroyLoopTrain(); } catch(_) {}
+        if (this._catalogObserver) { try { this._catalogObserver.disconnect(); } catch(_) {} this._catalogObserver = null; }
+        if (this._bodyClassObserver) { try { this._bodyClassObserver.disconnect(); } catch(_) {} this._bodyClassObserver = null; }
     }
     
     /**
@@ -369,9 +419,12 @@ class BlockLoopControl {
         // Добавляем кнопку в правый верхний угол блока
         blockElement.style.position = 'relative';
         this.loopButton.style.position = 'absolute';
-        this.loopButton.style.top = '10px';
+        // Переносим кнопку в правый НИЖНИЙ угол, чтобы не перекрывалась вагончиками
         this.loopButton.style.right = '10px';
-        this.loopButton.style.zIndex = '1000';
+        this.loopButton.style.bottom = '10px';
+        this.loopButton.style.top = '';
+        // Повышаем z-index на случай наложения
+        this.loopButton.style.zIndex = '1016';
         
         blockElement.appendChild(this.loopButton);
     }
@@ -1622,59 +1675,232 @@ class BlockLoopControl {
 
     // ====== V2: Поезд вагончиков ======
     _renderLoopTrain() {
+        // Отображаем поезд только в режиме репетиции и только когда есть блоки
+        const isRehearsal = document.body.classList.contains('mode-rehearsal');
+        const catalogOverlay = document.getElementById('catalog-v2-overlay') || document.querySelector('#catalog-v2-overlay, .catalog-v2-overlay');
+        const catalogOpen = catalogOverlay && !(catalogOverlay.classList.contains('hidden') || catalogOverlay.style.display === 'none');
+        if (!isRehearsal || catalogOpen) { this._destroyLoopTrain(); return; }
+
         const blockElement = this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
-        if (!blockElement) return;
+        if (!blockElement) { this._hideTrainContainer(); return; }
         const blocks = this._getProcessedBlocks();
-        if (!blocks || blocks.length === 0) return;
+        if (!blocks || blocks.length === 0) { this._hideTrainContainer(); return; }
+
+        // Гарантируем корректный контекст позиционирования и отсутствие клиппинга
+        try {
+            blockElement.style.position = blockElement.style.position || 'relative';
+            blockElement.style.overflow = 'visible';
+        } catch(_) {}
 
         if (!this.loopTrainContainer) {
             const container = document.createElement('div');
             container.className = 'loop-train';
-            container.style.position = 'absolute';
-            container.style.top = '0px';
-            container.style.left = '50%';
-            container.style.transform = 'translateX(-50%)';
+            // Рендерим как портал поверх всех слоёв
+            container.style.position = 'fixed';
+            const rect = blockElement.getBoundingClientRect();
+            container.style.top = `${Math.max(0, rect.top - 28)}px`;
+            // Растягиваем на всю ширину окна
+            container.style.left = '0px';
+            container.style.right = '0px';
+            container.style.transform = '';
             container.style.display = 'flex';
             container.style.gap = '6px';
             container.style.alignItems = 'center';
             container.style.justifyContent = 'flex-start';
             container.style.pointerEvents = 'auto';
-            container.style.padding = '2px 10px';
+            container.style.padding = '2px 12px';
             container.style.borderRadius = '12px';
             container.style.background = 'rgba(20,20,20,0.35)';
             container.style.border = '1px solid rgba(255,255,255,0.25)';
             container.style.backdropFilter = 'blur(4px)';
             container.style.webkitBackdropFilter = 'blur(4px)';
-            container.style.zIndex = '1015';
-            blockElement.appendChild(container);
+            // Поверх всех верхних панелей/оверлеев
+            container.style.zIndex = '99999';
+            document.body.appendChild(container);
             this.loopTrainContainer = container;
         } else {
-            // Если родитель сменился — переносим контейнер в новый активный блок
-            if (this.loopTrainContainer.parentElement !== blockElement) {
+            // Гарантируем, что контейнер — портал в body
+            if (this.loopTrainContainer.parentElement !== document.body) {
                 try { this.loopTrainContainer.remove(); } catch(_) {}
-                blockElement.appendChild(this.loopTrainContainer);
+                document.body.appendChild(this.loopTrainContainer);
             }
+            // сохраняем текущий скролл, чтобы не скакал при ререндере
+            this.loopTrainScrollLeft = this.loopTrainContainer.scrollLeft;
+            // На всякий случай повышаем z-index на последующих рендерах
+            this.loopTrainContainer.style.zIndex = '99999';
             this.loopTrainContainer.innerHTML = '';
+            // Обновляем позицию по активному блоку
+            this._updateTrainPortalPosition(blockElement);
+            // Покажем, если ранее был скрыт
+            this.loopTrainContainer.style.display = 'flex';
         }
 
+        // Адаптивная ширина вагонов под общую доступную ширину (минимизируем скролл)
+        const horizontalPadding = 24; // соответствует 12px внутренним отступам слева/справа
+        const gapPx = 6;
+        // Во всю ширину окна, чтобы исключить горизонтальный скролл и использовать всю площадь
+        const viewportWidth = Math.max(320, window.innerWidth || document.documentElement.clientWidth || 800);
+        const availableWidth = Math.max(220, viewportWidth - horizontalPadding * 2);
+        const totalGaps = gapPx * Math.max(0, blocks.length - 1);
+        const rawPerWagon = Math.floor((availableWidth - totalGaps) / blocks.length);
+        // Заполняем всю ширину: жёстких минимумов нет; все вагоны всегда помещаются
+        let perWagon = Math.max(48, rawPerWagon);
+        // Ширину контейнера не задаём явно — left/right растягивают на весь вьюпорт
+        this.loopTrainContainer.style.width = '';
+
         for (let i = 0; i < blocks.length; i += 1) {
+            const block = blocks[i];
             const wagon = document.createElement('button');
             wagon.className = 'loop-wagon';
             wagon.dataset.index = String(i);
-            wagon.textContent = String(i + 1);
-            wagon.title = blocks[i].name || `Block ${i + 1}`;
-            // Пока без логики диапазона — просто навигация по клику (минимум)
+            wagon.style.width = `${perWagon}px`;
+
+            // Индекс (номер вагона)
+            const idx = document.createElement('span');
+            idx.className = 'loop-wagon__index';
+            idx.textContent = String(i + 1);
+
+            // Первая строка блока
+            let firstLineText = '';
+            try {
+                const firstIndex = Array.isArray(block.lineIndices) ? block.lineIndices[0] : null;
+                if (typeof firstIndex === 'number' && this.lyricsDisplay && Array.isArray(this.lyricsDisplay.lyrics)) {
+                    firstLineText = this.lyricsDisplay.lyrics[firstIndex] || '';
+                }
+            } catch (_) {}
+            const titleEl = document.createElement('span');
+            titleEl.className = 'loop-wagon__title';
+            const fullText = firstLineText || (block.name || `Block ${i + 1}`);
+            titleEl.textContent = fullText;
+            // Кастомная подсказка (вверх), чтобы не смешивалась с текстом
+            wagon.setAttribute('data-title', fullText);
+
+            // Тип блока → аккуратная цветовая тема вагона
+            const name = (block.name || '').toLowerCase();
+            if (/(verse|куплет)/.test(name)) {
+                wagon.classList.add('loop-wagon--verse');
+            } else if (/(chorus|припев)/.test(name)) {
+                wagon.classList.add('loop-wagon--chorus');
+            } else if (/(bridge|бридж)/.test(name)) {
+                wagon.classList.add('loop-wagon--bridge');
+            }
+
+            // Вставляем элементы внутрь кнопки
+            wagon.appendChild(idx);
+            wagon.appendChild(titleEl);
+
+            // Умное сокращение по фактической ширине (на основе измерения)
+            try { this._trimTitleToFit(titleEl, fullText); } catch(_) {}
+
+            // Пока без логики диапазона — только навигация по клику
             wagon.onclick = () => {
-                const target = blocks[i];
-                const tr = this._getBlockTimeRange(target);
+                const tr = this._getBlockTimeRange(block);
                 if (tr && typeof tr.startTime === 'number') {
                     try { this.audioEngine.setCurrentTime(tr.startTime); } catch (e) {}
                 }
             };
+
             this.loopTrainContainer.appendChild(wagon);
         }
 
+        // восстановим скролл если был
+        if (typeof this.loopTrainScrollLeft === 'number') {
+            this.loopTrainContainer.scrollLeft = this.loopTrainScrollLeft;
+        }
+
         this._updateTrainPlayingHighlight();
+        // и плавно центрируем активный вагон
+        try { this._scrollActiveWagonIntoView(); } catch(_) {}
+    }
+
+    _hideTrainContainer() {
+        if (this.loopTrainContainer) this.loopTrainContainer.style.display = 'none';
+    }
+
+    _destroyLoopTrain() {
+        if (this.loopTrainContainer) {
+            try { this.loopTrainContainer.remove(); } catch(_) {}
+            this.loopTrainContainer = null;
+        }
+    }
+
+    // Наблюдаем за каталогом и сменой классов body, чтобы правильно скрывать/показывать поезд
+    _ensureOverlayAndModeObservers() {
+        // Каталог (overlay)
+        try {
+            const overlay = document.getElementById('catalog-v2-overlay') || document.querySelector('#catalog-v2-overlay, .catalog-v2-overlay');
+            if (overlay && !this._catalogObserver) {
+                this._catalogObserver = new MutationObserver(() => {
+                    const isHidden = overlay.classList.contains('hidden') || overlay.style.display === 'none';
+                    // Если каталог открыт — поезд убираем полностью, чтобы он не "ехал" в каталоге
+                    if (!isHidden) {
+                        this._hideTrainContainer();
+                        return;
+                    }
+                    // Каталог закрыт: если мы в репетиции и есть блоки — мгновенно перерисовать поезд
+                    const isRehearsal = document.body.classList.contains('mode-rehearsal');
+                    const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+                    if (isRehearsal && hasBlocks) {
+                        this._renderLoopTrain();
+                    } else {
+                        this._destroyLoopTrain();
+                    }
+                });
+                this._catalogObserver.observe(overlay, { attributes: true, attributeFilter: ['class', 'style'] });
+            }
+        } catch(_) {}
+
+        // Классы body (смена режима)
+        try {
+            if (!this._bodyClassObserver) {
+                this._bodyClassObserver = new MutationObserver(() => {
+                    const isRehearsal = document.body.classList.contains('mode-rehearsal');
+                    if (isRehearsal) {
+                        const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+                        if (hasBlocks) this._renderLoopTrain(); else this._destroyLoopTrain();
+                    } else {
+                        this._destroyLoopTrain();
+                    }
+                });
+                this._bodyClassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            }
+        } catch(_) {}
+    }
+
+    // Обновляет позицию портала-поезда над активным блоком
+    _updateTrainPortalPosition(blockEl) {
+        if (!this.loopTrainContainer) return;
+        const el = blockEl || this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
+        if (!el) return;
+        try {
+            const rect = el.getBoundingClientRect();
+            this.loopTrainContainer.style.top = `${Math.max(0, rect.top - 28)}px`;
+        } catch(_) {}
+    }
+
+    /**
+     * Усекает текст заголовка вагона так, чтобы он поместился в доступную ширину.
+     * Сохраняем начало фразы и добавляем многоточие (быстро и читабельно).
+     */
+    _trimTitleToFit(element, fullText) {
+        if (!element || !fullText) return;
+        // Быстрый путь: если уже помещается, выходим
+        if (element.scrollWidth <= element.clientWidth) return;
+        let left = 4; // минимум видимых символов
+        let right = fullText.length;
+        let best = '';
+        // Бинарный поиск по длине для end-ellipsis
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            element.textContent = fullText.slice(0, mid) + '…';
+            if (element.scrollWidth <= element.clientWidth) {
+                best = element.textContent;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (best) element.textContent = best; else element.textContent = fullText;
     }
 
     _updateTrainPlayingHighlight() {
@@ -1688,7 +1914,23 @@ class BlockLoopControl {
         wagons.forEach(w => w.classList.remove('playing'));
         if (idx >= 0 && idx < wagons.length) {
             wagons[idx].classList.add('playing');
+            // автоцентрируем текущий вагон
+            this._scrollActiveWagonIntoView(idx);
         }
+    }
+
+    // Центрирование активного вагона в области видимости
+    _scrollActiveWagonIntoView(idx) {
+        if (!this.loopTrainContainer) return;
+        const wagons = this.loopTrainContainer.querySelectorAll('.loop-wagon');
+        if (!wagons || wagons.length === 0) return;
+        let index = typeof idx === 'number' ? idx : Array.from(wagons).findIndex(w => w.classList.contains('playing'));
+        if (index < 0) return;
+        const wagon = wagons[index];
+        const container = this.loopTrainContainer;
+        const targetLeft = wagon.offsetLeft - (container.clientWidth - wagon.clientWidth) / 2;
+        const clamped = Math.max(0, Math.min(targetLeft, container.scrollWidth - container.clientWidth));
+        container.scrollTo({ left: clamped, behavior: 'smooth' });
     }
 }
 

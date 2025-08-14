@@ -3372,6 +3372,17 @@ class WaveformEditor {
      */
     async loadDualWaveforms(instrumentalUrl, vocalsUrl) {
         console.log(`WaveformEditor: Загрузка двойных волновых форм. Инструментал: ${instrumentalUrl}, Вокал: ${vocalsUrl}`);
+        // Авто-подмена blob:null на безопасные URL из audioEngine.hybridEngine
+        if (this.audioEngine && this.audioEngine.hybridEngine) {
+            if (instrumentalUrl && instrumentalUrl.includes('blob:null/')) {
+                const safeI = this.audioEngine.hybridEngine.instrumentalUrl;
+                if (safeI) instrumentalUrl = safeI;
+            }
+            if (vocalsUrl && vocalsUrl.includes('blob:null/')) {
+                const safeV = this.audioEngine.hybridEngine.vocalsUrl;
+                if (safeV) vocalsUrl = safeV;
+            }
+        }
         
         // Сбрасываем предыдущие данные
         this.instrumentalAudioData = null;

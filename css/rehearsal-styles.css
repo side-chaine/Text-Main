@@ -32,22 +32,3 @@ body.rehearsal-active {
 	opacity: 0;
 	transition: opacity 0.8s ease-in-out;
 } 
-
-/* Плюсик для расширения лупа */
-.block-loop-plus-btn {
-	position:absolute;
-	background: rgba(255,165,0,0.15);
-	border: 1px solid rgba(255,165,0,0.6);
-	color:#ffa500;
-	border-radius: 12px;
-	width: 24px; height: 24px;
-	line-height: 22px;
-	text-align:center;
-	font-weight:700;
-	cursor:pointer;
-	backdrop-filter: blur(2px);
-}
-.block-loop-plus-btn.hidden{ display:block; pointer-events:auto; }
-
-/* Подсветка блоков в мульти-лупе */
-.loop-active{ outline: 4px solid rgba(255,165,0,0.6); border-radius: 12px; box-shadow: 0 0 12px rgba(255,165,0,0.4) inset; } 
