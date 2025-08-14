@@ -327,6 +327,9 @@ class BlockLoopControl {
             }
         }
         
+        // На всякий случай обновим подсветку вагона
+        this._updateTrainPlayingHighlight();
+        
         console.log('BlockLoopControl: Кнопка создана для блока:', block.name);
     }
     
@@ -1009,6 +1012,8 @@ class BlockLoopControl {
         // Создаем кнопку для нового блока
         console.log(`🔧 CREATING LOOP BUTTON: For new active block`);
         this._createLoopButtonForCurrentBlock();
+        // Ререндер поезда на смене блока
+        try { this._renderLoopTrain(); } catch(_) {}
     }
     
     /**
@@ -1101,6 +1106,8 @@ class BlockLoopControl {
         
         // Создаем кнопку для нового блока
         this._createLoopButtonForCurrentBlock();
+        // Ререндер поезда при обновлении
+        try { this._renderLoopTrain(); } catch(_) {}
     }
     
     /**
@@ -1624,7 +1631,7 @@ class BlockLoopControl {
             const container = document.createElement('div');
             container.className = 'loop-train';
             container.style.position = 'absolute';
-            container.style.top = '-28px';
+            container.style.top = '6px';
             container.style.left = '50%';
             container.style.transform = 'translateX(-50%)';
             container.style.display = 'flex';
