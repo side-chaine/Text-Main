@@ -1,0 +1,59 @@
+# LooP Learn — Execution Rules & Roadmap (Cursor)
+
+Документ фиксирует правила реализации LooP Learn (train, луп блоков) и разбивку задач на инкременты. Используется Cursor-агентом для приоритезации и консистентности между PR.
+
+## Базовые правила (обязательно)
+- Аудио-данные для волн/синхрона: запрещён `blob:`. Используем только безопасные URL/ArrayBuffer, генерируемые аудио-движком.
+- Централизация загрузки аудио: единый адаптер/очередь декодирования с лимитом параллелизма и retry/backoff.
+- Контракт жизненного цикла модулей: `init → activate → deactivate → dispose`. Любые listeners/observers/timers обязаны удаляться в `deactivate()`/`dispose()`.
+- Логи и метрики: события `AUDIO_FETCH_START/END`, `AUDIO_DECODE_START/END`, `TRACK_LOAD_RESULT` + `performance.mark/measure` для критичных участков. Вывод управляется флагом дебага.
+- Train UI: портал поверх всех слоёв, скрывать при открытом каталоге, full‑width без горизонтального скролла, авто‑центр активного вагона (bias ≈ 60%), тултипы только сверху, минимальная высота под разные DPI.
+- Производительность UI: debounce/throttle для `resize/scroll` 100–150 мс; избегать лишних reflow/paint.
+
+## Инкременты (PR‑серии)
+
+### PR‑A: Audio Source Adapter + безопасная загрузка
+**Цель:** устранить гонки и «пропадающий вокал»; запретить `blob:` для волны/синка.
+- Файлы: `js/audio-source-adapter.js`, `js/audio-engine.js`, `js/waveform-editor.js`, `js/logger.js`, `js/constants.js`.
+- Требования:
+  - Адаптер: normalize(input) → { safeUrl?, arrayBufferPromise, mime, sha }.
+  - Очередь декодирования с параллелизмом=2, retry с backoff (например, 250/500/1000 мс).
+  - `AudioEngine.loadTrack(trackId)` → Promise<{ instrumentalReady:boolean, vocalReady:boolean, issues:string[] }>.
+  - `WaveformEditor` принимает только safe URL/ArrayBuffer; при `blob:` — явный fallback + лог предупреждения.
+- Тесты:
+  - Unit (Jest): адаптер normalize/декодер/ретраи.
+  - Smoke: загрузка трека → обе дорожки в ready.
+
+### PR‑B: Lifecycle & cleanup
+**Цель:** исключить утечки обработчиков и дублирующиеся подписки.
+- Файлы: `js/block-loop-control.js`, `js/lyrics-display.js`, `js/waveform-editor.js`, `js/app.js` (точки активации), `js/logger.js`.
+- Требования:
+  - Единый контракт `init/activate/deactivate/dispose` во всех модулях выше.
+  - Полный cleanup listeners/observers/intervals/timeouts во время `deactivate()/dispose()`.
+  - Метрики времени активации/деактивации.
+- Тесты:
+  - Unit: корректный вызов cleanup при смене режимов.
+
+### PR‑C: UI/UX полиш для train
+**Цель:** стабильный и ровный UX репетиции.
+- Файлы: `js/block-loop-control.js`, `css/loop-button-styles.css`.
+- Требования:
+  - Debounce/throttle для `resize/scroll` (100–150 мс).
+  - Минимальная высота train; адаптив под разные DPI.
+  - Авто‑центр активного вагона с bias ≈ 60% ширины.
+  - Тултипы строго сверху; не перекрывать текст сцены.
+- Тесты:
+  - E2E smoke: train скрыт в каталоге; появляется в rehearsal; авто‑центр работает; кнопка Loop не перекрывается.
+
+## Definition of Done (LooP Learn)
+- Тесты (unit/e2e) проходят; линтеры без ошибок.
+- Нет `console.log` в прод‑коде; есть `logger`/events.
+- Производительность: нет утечек слушателей/таймеров; метрики замерены.
+- Совместимость: Safari/Chromium (проверка safe URL без blob).
+- Документация PR: краткое описание изменений, сценарии тестирования, скриншоты при необходимости.
+
+## Быстрые заметки по интеграции
+- Train должен не отображаться при открытом каталоге (`#catalog-v2-overlay`) и обновляться сразу после загрузки нового трека.
+- Позиция Loop/Stop — правый нижний угол активного блока; не перекрывать поезд.
+- Цветовая индикация вагонов: куплет/припев/бридж — нежные фоны и контрастные бордеры, без «аляповатости».
+
