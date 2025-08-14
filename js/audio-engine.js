@@ -227,6 +227,12 @@ class AudioEngine {
             if (vocalsUrl) {
             this.vocalsAudio = new Audio();
             this.vocalsAudio.crossOrigin = "anonymous";
+            // При любой готовности пробуем стартовать вокал синхронно, если инструментал уже играет
+            try {
+                this.vocalsAudio.addEventListener('canplay', () => {
+                    try { this._tryStartVocalsIfPossible('canplay'); } catch(_) {}
+                });
+            } catch(_) {}
             
             if (vocalsUrl.startsWith('blob:')) this.activeBlobUrls.push(vocalsUrl);
 
@@ -282,6 +288,8 @@ class AudioEngine {
                         this.vocalsSourceNode = this.audioContext.createMediaElementSource(this.vocalsAudio);
                         this.vocalsSourceNode.connect(this.vocalsGain);
                         console.log('🎤 ВОКАЛ ПОДКЛЮЧЕН к аудио-контексту');
+                        // Если уже идёт воспроизведение — запускаем вокал синхронно
+                        this._tryStartVocalsIfPossible('connected-then');
                     } catch (error) {
                         console.error('❌ Ошибка подключения вокала к Web Audio:', error);
                         this.vocalsAudio = null;
@@ -527,9 +535,14 @@ class AudioEngine {
                             if (window.app && window.app.enableVocalControls) {
                                 window.app.enableVocalControls();
                             }
+                            // И сразу пробуем стартовать вокал синхронно
+                            try { this._tryStartVocalsIfPossible('fallback-connect'); } catch(_) {}
                         } catch (error) {
                             console.error('❌ Экстренное подключение вокала не удалось:', error);
                         }
+                    } else {
+                        // Даже если нода уже подключена/готова, пробуем стартовать
+                        try { this._tryStartVocalsIfPossible('fallback-deferred'); } catch(_) {}
                     }
                 }, 100);
             }
@@ -832,6 +845,28 @@ class AudioEngine {
         } catch (error) {
             console.error('❌ БЕЗОПАСНЫЙ URL: Ошибка конвертации:', error);
             return originalUrl; // Возвращаем исходный URL в случае ошибки
+        }
+    }
+
+    /**
+     * Пытается запустить вокал синхронно с инструменталом, если всё готово
+     * @param {string} reason - источник вызова (для логов)
+     * @private
+     */
+    async _tryStartVocalsIfPossible(reason = 'unknown') {
+        try {
+            if (!this.vocalsAudio || !this.instrumentalAudio) return;
+            if (!this.vocalsSourceNode) return; // ждём подключения к WebAudio
+            if (!this.isPlaying) return; // стартуем только если инструментал уже играет
+            // Ждём готовности данных вокала
+            if (this.vocalsAudio.readyState < 2) return; // нет достаточных данных
+
+            // Синхронизируем и запускаем
+            this.vocalsAudio.currentTime = this.instrumentalAudio.currentTime;
+            await this.vocalsAudio.play();
+            console.log(`🎤 ВОКАЛ: Автостарт синхронно (${reason})`);
+        } catch (e) {
+            console.warn(`⚠️ ВОКАЛ: Не удалось автостартовать (${reason}):`, e);
         }
     }
 }
