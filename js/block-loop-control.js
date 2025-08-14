@@ -1631,7 +1631,7 @@ class BlockLoopControl {
             const container = document.createElement('div');
             container.className = 'loop-train';
             container.style.position = 'absolute';
-            container.style.top = '6px';
+            container.style.top = '0px';
             container.style.left = '50%';
             container.style.transform = 'translateX(-50%)';
             container.style.display = 'flex';
@@ -1649,6 +1649,11 @@ class BlockLoopControl {
             blockElement.appendChild(container);
             this.loopTrainContainer = container;
         } else {
+            // Если родитель сменился — переносим контейнер в новый активный блок
+            if (this.loopTrainContainer.parentElement !== blockElement) {
+                try { this.loopTrainContainer.remove(); } catch(_) {}
+                blockElement.appendChild(this.loopTrainContainer);
+            }
             this.loopTrainContainer.innerHTML = '';
         }
 
