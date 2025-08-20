@@ -67,6 +67,9 @@ class BlockLoopControl {
         this.handleLoopSeek = this.handleLoopSeek.bind(this);
         
         console.log('🎛️ BlockLoopControl initialized with seeking flag and seek buffer');
+
+        // Флаг открытого Sync Editor (гибридный режим) — поезд скрываем полностью
+        this._isSyncEditorOpen = false;
     }
     
     /**
@@ -86,6 +89,110 @@ class BlockLoopControl {
         
         // Запускаем систему автоматического восстановления
         this._startAutoRecoverySystem();
+
+        // Перерисовка поезда при ресайзе окна
+        this._onResize = () => {
+            try { this._renderLoopTrain(); } catch(_) {}
+        };
+        window.addEventListener('resize', this._onResize);
+
+        // Слежение за скроллом с лёгким дебаунсом
+        this._onScroll = () => {
+            clearTimeout(this._trainPosTimer);
+            this._trainPosTimer = setTimeout(() => {
+                try { this._updateTrainPortalPosition(); } catch(_) {}
+            }, 120);
+        };
+        window.addEventListener('scroll', this._onScroll, { passive: true });
+
+        // Наблюдаем за каталогом и сменой режимов
+        this._ensureOverlayAndModeObservers();
+
+        // Мягкое сокрытие/появление поезда при смене режимов, чтобы избежать скачков
+        this._onModeChanged = (e) => {
+            const detail = (e && e.detail) || {};
+            const from = detail.from;
+            const to = detail.to;
+            if (to === 'live' || to === 'concert') {
+                try { this._hideTrainContainer(); } catch(_) {}
+            } else if ((from === 'live' || from === 'concert') && (to === 'karaoke' || to === 'rehearsal')) {
+                clearTimeout(this._trainPosTimer);
+                this._trainPosTimer = setTimeout(() => {
+                    try {
+                        this._renderLoopTrain();
+                        this._updateTrainPortalPosition();
+                    } catch(_) {}
+                }, 140);
+                // Несколько упреждающих репозиций в первые ~400мс после смены режима
+                try {
+                    const kicks = [40, 120, 240, 360];
+                    kicks.forEach(ms => setTimeout(() => {
+                        try { this._updateTrainPortalPosition(); } catch(_) {}
+                    }, ms));
+                } catch(_) {}
+            }
+        };
+        window.addEventListener('mode-changed', this._onModeChanged);
+
+        // Событие телепромптера (концерт/лайв): обновить позицию немедленно
+        this._onTeleprompterScroll = () => {
+            try {
+                this._updateTrainPortalPosition();
+                this._updateTrainPortalPositionUntilStable();
+            } catch(_) {}
+        };
+        window.addEventListener('lyrics-teleprompter-scroll', this._onTeleprompterScroll);
+
+        // События Sync Editor: скрываем поезд при открытии, возвращаем при закрытии
+        this._onSyncOpened = () => {
+            this._isSyncEditorOpen = true;
+            try { this._hideTrainContainer(); } catch(_) {}
+            // Во время Sync Editor убираем слушатели скролла/ресайза
+            try {
+                if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); }
+                if (this._onResize) { window.removeEventListener('resize', this._onResize); }
+            } catch(_) {}
+        };
+        this._onSyncClosed = () => {
+            this._isSyncEditorOpen = false;
+            // Небольшая задержка для стабилизации layout, затем ререндер и стабильное позиционирование
+            setTimeout(() => {
+                try {
+                    // Если после Sync активна караоке-имитация — не показывать поезд
+                    const isWaveformActive = document.body.classList.contains('waveform-active');
+                    const isKaraoke = document.body.classList.contains('mode-karaoke');
+                    if (!isWaveformActive && !isKaraoke) {
+                        this._renderLoopTrain();
+                    } else {
+                        this._hideTrainContainer();
+                    }
+                    this._updateTrainPortalPosition();
+                    this._updateTrainPortalPositionUntilStable();
+                    // Возвращаем слушатели после закрытия редактора
+                    if (this._onResize) { window.addEventListener('resize', this._onResize); }
+                    if (this._onScroll) { window.addEventListener('scroll', this._onScroll, { passive: true }); }
+                } catch(_) {}
+            }, 60);
+        };
+        window.addEventListener('sync-editor-opened', this._onSyncOpened);
+        window.addEventListener('sync-editor-closed', this._onSyncClosed);
+
+        // Быстрый поллинг на первые секунды: показать поезд сразу после появления блоков
+        let pollCount = 0;
+        this._trainReadyPoll = setInterval(() => {
+            pollCount += 1;
+            const isRehearsal = document.body.classList.contains('mode-rehearsal');
+            const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+            if (isRehearsal && hasBlocks) {
+                try { this._renderLoopTrain(); } catch(_) {}
+                clearInterval(this._trainReadyPoll);
+                this._trainReadyPoll = null;
+            }
+            if (pollCount >= 60) { // максимум ~6 секунд
+                clearInterval(this._trainReadyPoll);
+                this._trainReadyPoll = null;
+            }
+        }, 100);
     }
     
     /**
@@ -115,6 +222,41 @@ class BlockLoopControl {
         
         // Отписываемся от событий
         this._removeEventListeners();
+
+        if (this._onResize) {
+            window.removeEventListener('resize', this._onResize);
+            this._onResize = null;
+        }
+        if (this._onScroll) {
+            window.removeEventListener('scroll', this._onScroll);
+            this._onScroll = null;
+        }
+        if (this._onModeChanged) {
+            window.removeEventListener('mode-changed', this._onModeChanged);
+            this._onModeChanged = null;
+        }
+        if (this._onTeleprompterScroll) {
+            window.removeEventListener('lyrics-teleprompter-scroll', this._onTeleprompterScroll);
+            this._onTeleprompterScroll = null;
+        }
+        if (this._onSyncOpened) {
+            window.removeEventListener('sync-editor-opened', this._onSyncOpened);
+            this._onSyncOpened = null;
+        }
+        if (this._onSyncClosed) {
+            window.removeEventListener('sync-editor-closed', this._onSyncClosed);
+            this._onSyncClosed = null;
+        }
+        if (this._trainReadyPoll) {
+            clearInterval(this._trainReadyPoll);
+            this._trainReadyPoll = null;
+        }
+
+        // Полная очистка портала-поезда и наблюдателей
+        try { this._destroyLoopTrain(); } catch(_) {}
+        if (this._catalogObserver) { try { this._catalogObserver.disconnect(); } catch(_) {} this._catalogObserver = null; }
+        if (this._bodyClassObserver) { try { this._bodyClassObserver.disconnect(); } catch(_) {} this._bodyClassObserver = null; }
+        if (this._lyricsContainerObserver) { try { this._lyricsContainerObserver.disconnect(); } catch(_) {} this._lyricsContainerObserver = null; }
     }
     
     /**
@@ -140,6 +282,9 @@ class BlockLoopControl {
                 if (!this.isActive) return;
                 try {
                     this._createLoopButtonForCurrentBlock();
+                    // Ранний ререндер и позиционирование портала, чтобы поезд не появлялся наверху
+                    this._renderLoopTrain();
+                    this._updateTrainPortalPosition();
                 } catch (e) {
                     console.warn('BlockLoopControl: Не удалось создать Loop-кнопку по событию lyrics-rendered', e);
                 }
@@ -369,9 +514,12 @@ class BlockLoopControl {
         // Добавляем кнопку в правый верхний угол блока
         blockElement.style.position = 'relative';
         this.loopButton.style.position = 'absolute';
-        this.loopButton.style.top = '10px';
+        // Переносим кнопку в правый НИЖНИЙ угол, чтобы не перекрывалась вагончиками
         this.loopButton.style.right = '10px';
-        this.loopButton.style.zIndex = '1000';
+        this.loopButton.style.bottom = '10px';
+        this.loopButton.style.top = '';
+        // Повышаем z-index на случай наложения
+        this.loopButton.style.zIndex = '1016';
         
         blockElement.appendChild(this.loopButton);
     }
@@ -940,14 +1088,20 @@ class BlockLoopControl {
         
         // Если новый блок и текущий блок лупа существуют
         if (newActiveBlock && this.currentLoopBlock) {
-            // Ранний guard: при активном multi-loop держим луп при переходах first↔linked
-            if (this.isLooping && this.isMultiLoopEnabled && (newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+            // Ранний guard: при активном multi-loop держим луп при переходах по ЛЮБОМУ блоку цепочки
+            if (this.isLooping && this.isMultiLoopEnabled && (
+                (Array.isArray(this.selectedBlocks) && this.selectedBlocks.includes(newActiveBlock.id)) ||
+                newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id)
+            )) {
                 console.log('✅ MULTI-LOOP CONTINUE (early guard): keep looping across linked blocks');
                 this._createLoopButtonForCurrentBlock();
                 return;
             }
-            // ✅ MULTI-LOOP: если перешли на связанный блок, продолжаем без остановки
-            if (this.isLooping && this.isMultiLoopEnabled && (newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+            // ✅ MULTI-LOOP: если активный блок входит в цепочку — продолжаем без остановки
+            if (this.isLooping && this.isMultiLoopEnabled && (
+                (Array.isArray(this.selectedBlocks) && this.selectedBlocks.includes(newActiveBlock.id)) ||
+                newActiveBlock.id === this.currentLoopBlock.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id)
+            )) {
                 console.log('✅ MULTI-LOOP CONTINUE: staying in combined loop across blocks');
                 // Переставляем кнопку на новый активный блок, чтобы она всегда была рядом
                 this._createLoopButtonForCurrentBlock();
@@ -1055,11 +1209,15 @@ class BlockLoopControl {
         
         // Проверяем, изменился ли блок на самом деле
         const newActiveBlock = this.lyricsDisplay?.currentActiveBlock;
-        // ✅ MULTI-LOOP: если активен связанный блок, не трогаем луп
-        if (this.isLooping && this.isMultiLoopEnabled && newActiveBlock && (newActiveBlock.id === this.currentLoopBlock?.id || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id))) {
+        // ✅ MULTИ-LOOP: если активен ЛЮБОЙ блок из выбранной цепочки — не трогаем луп
+        if (this.isLooping && this.isMultiLoopEnabled && newActiveBlock) {
+            const isChainMember = Array.isArray(this.selectedBlocks) && this.selectedBlocks.includes(newActiveBlock.id);
+            const isEdge = (newActiveBlock.id === this.currentLoopBlock?.id) || (this.linkedBlock && newActiveBlock.id === this.linkedBlock.id);
+            if (isChainMember || isEdge) {
             console.log('✅ MULTI-LOOP CONTINUE (update): staying in combined loop across blocks');
             this._createLoopButtonForCurrentBlock();
             return;
+            }
         }
         
         // Если новый блок и текущий блок лупа существуют
@@ -1483,23 +1641,24 @@ class BlockLoopControl {
     }
 
     _recalculateCombinedRange() {
-        // старт всегда из первого блока/границ
-        this.combinedStartTime = (this.loopStartTime ?? this._getBlockTimeRange(this.currentLoopBlock)?.startTime) || 0;
-        // конец — от пользовательских границ второго блока, если заданы, иначе конец второго блока
-        let end = null;
-        if (this.linkedBlock && this.dragBoundaryController) {
-            const b = this.dragBoundaryController.getBoundaries();
-            if (b && typeof b.endBoundary === 'number') {
-                const t = this._findTimeByLine(b.endBoundary + 1);
-                if (t !== null) end = t;
-            }
+        // Если выбран один блок — комбинированный = одиночный
+        if (!Array.isArray(this.selectedBlocks) || this.selectedBlocks.length === 0) {
+            this.combinedStartTime = this.loopStartTime;
+            this.combinedEndTime = this.loopEndTime;
+            return;
         }
-        if (end === null && this.linkedBlock) {
-            const tr = this._getBlockTimeRange(this.linkedBlock);
-            end = tr?.endTime ?? this.loopEndTime;
-        }
-        this.combinedEndTime = end ?? this.loopEndTime;
+        const blocks = this._getProcessedBlocks();
+        const first = blocks.find(b => b.id === this.selectedBlocks[0]) || this.currentLoopBlock;
+        const last = blocks.find(b => b.id === this.selectedBlocks[this.selectedBlocks.length - 1]) || this.linkedBlock;
+        const firstRange = first ? this._getBlockTimeRange(first) : null;
+        const lastRange = last ? this._getBlockTimeRange(last) : null;
+        this.combinedStartTime = (firstRange?.startTime ?? this.loopStartTime) ?? null;
+        this.combinedEndTime = (lastRange?.endTime ?? this.loopEndTime) ?? null;
+        if (this.combinedStartTime != null && this.combinedEndTime != null) {
         console.log(`🔗 Combined loop: ${this.combinedStartTime.toFixed(2)}s - ${this.combinedEndTime.toFixed(2)}s`);
+        } else {
+            console.log('🔗 Combined loop: not ready (null bounds)');
+        }
     }
 
     _getProcessedBlocks() {
@@ -1622,59 +1781,332 @@ class BlockLoopControl {
 
     // ====== V2: Поезд вагончиков ======
     _renderLoopTrain() {
+        // Отображаем поезд только в режиме репетиции и только когда есть блоки
+        const isRehearsal = document.body.classList.contains('mode-rehearsal');
+        const catalogOverlay = document.getElementById('catalog-v2-overlay') || document.querySelector('#catalog-v2-overlay, .catalog-v2-overlay');
+        const catalogOpen = catalogOverlay && !(catalogOverlay.classList.contains('hidden') || catalogOverlay.style.display === 'none');
+        // ФИКС: при активном Sync Editor скрываем поезд даже если событие не дошло (по классу body)
+        const isWaveformActive = document.body.classList.contains('waveform-active');
+        if (!isRehearsal || catalogOpen || this._isSyncEditorOpen || isWaveformActive) { this._hideTrainContainer(); return; }
+
         const blockElement = this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
-        if (!blockElement) return;
+        if (!blockElement) { this._hideTrainContainer(); return; }
         const blocks = this._getProcessedBlocks();
-        if (!blocks || blocks.length === 0) return;
+        if (!blocks || blocks.length === 0) { this._hideTrainContainer(); return; }
+
+        // Гарантируем корректный контекст позиционирования и отсутствие клиппинга
+        try {
+            blockElement.style.position = blockElement.style.position || 'relative';
+            blockElement.style.overflow = 'visible';
+        } catch(_) {}
 
         if (!this.loopTrainContainer) {
             const container = document.createElement('div');
             container.className = 'loop-train';
-            container.style.position = 'absolute';
-            container.style.top = '0px';
-            container.style.left = '50%';
-            container.style.transform = 'translateX(-50%)';
+            // Рендерим как портал поверх всех слоёв
+            container.style.position = 'fixed';
+            // ФИКС: якорим не к блоку, а к контейнеру лирики — стабильная высота в любом стиле
+            try {
+                const lc = document.getElementById('lyrics-container');
+                const lcRect = lc ? lc.getBoundingClientRect() : null;
+                const baseTop = lcRect ? lcRect.top + 6 : blockElement.getBoundingClientRect().top - 28;
+                container.style.top = `${Math.max(0, baseTop)}px`;
+            } catch(_) {
+                const rect = blockElement.getBoundingClientRect();
+                container.style.top = `${Math.max(0, rect.top - 28)}px`;
+            }
+            // Растягиваем на всю ширину окна
+            container.style.left = '0px';
+            container.style.right = '0px';
+            container.style.transform = '';
             container.style.display = 'flex';
             container.style.gap = '6px';
             container.style.alignItems = 'center';
             container.style.justifyContent = 'flex-start';
             container.style.pointerEvents = 'auto';
-            container.style.padding = '2px 10px';
+            container.style.padding = '2px 12px';
             container.style.borderRadius = '12px';
             container.style.background = 'rgba(20,20,20,0.35)';
             container.style.border = '1px solid rgba(255,255,255,0.25)';
             container.style.backdropFilter = 'blur(4px)';
             container.style.webkitBackdropFilter = 'blur(4px)';
-            container.style.zIndex = '1015';
-            blockElement.appendChild(container);
+            // Поверх всех верхних панелей/оверлеев
+            container.style.zIndex = '99999';
+            document.body.appendChild(container);
             this.loopTrainContainer = container;
+            // Устойчивое позиционирование в ближайшие кадры, чтобы не зависал на top=0
+            try { this._updateTrainPortalPositionUntilStable(blockElement); } catch(_) {}
         } else {
-            // Если родитель сменился — переносим контейнер в новый активный блок
-            if (this.loopTrainContainer.parentElement !== blockElement) {
+            // Гарантируем, что контейнер — портал в body
+            if (this.loopTrainContainer.parentElement !== document.body) {
                 try { this.loopTrainContainer.remove(); } catch(_) {}
-                blockElement.appendChild(this.loopTrainContainer);
+                document.body.appendChild(this.loopTrainContainer);
             }
+            // сохраняем текущий скролл, чтобы не скакал при ререндере
+            this.loopTrainScrollLeft = this.loopTrainContainer.scrollLeft;
+            // На всякий случай повышаем z-index на последующих рендерах
+            this.loopTrainContainer.style.zIndex = '99999';
             this.loopTrainContainer.innerHTML = '';
+            // Обновляем позицию относительно контейнера лирики
+            this._updateTrainPortalPosition(blockElement);
+            try { this._updateTrainPortalPositionUntilStable(blockElement); } catch(_) {}
+            // Покажем, если ранее был скрыт
+            this.loopTrainContainer.style.display = 'flex';
         }
 
+        // Адаптивная ширина вагонов под общую доступную ширину (минимизируем скролл)
+        const horizontalPadding = 24; // соответствует 12px внутренним отступам слева/справа
+        const gapPx = 6;
+        // Во всю ширину окна, чтобы исключить горизонтальный скролл и использовать всю площадь
+        const viewportWidth = Math.max(320, window.innerWidth || document.documentElement.clientWidth || 800);
+        const availableWidth = Math.max(220, viewportWidth - horizontalPadding * 2);
+        const totalGaps = gapPx * Math.max(0, blocks.length - 1);
+        const rawPerWagon = Math.floor((availableWidth - totalGaps) / blocks.length);
+        // Заполняем всю ширину: жёстких минимумов нет; все вагоны всегда помещаются
+        let perWagon = Math.max(48, rawPerWagon);
+        // Ширину контейнера не задаём явно — left/right растягивают на весь вьюпорт
+        this.loopTrainContainer.style.width = '';
+
         for (let i = 0; i < blocks.length; i += 1) {
+            const block = blocks[i];
             const wagon = document.createElement('button');
             wagon.className = 'loop-wagon';
             wagon.dataset.index = String(i);
-            wagon.textContent = String(i + 1);
-            wagon.title = blocks[i].name || `Block ${i + 1}`;
-            // Пока без логики диапазона — просто навигация по клику (минимум)
+			wagon.dataset.blockId = block.id || `blk-${i}`;
+            wagon.style.width = `${perWagon}px`;
+
+            // Индекс (номер вагона)
+            const idx = document.createElement('span');
+            idx.className = 'loop-wagon__index';
+            idx.textContent = String(i + 1);
+
+            // Первая строка блока
+            let firstLineText = '';
+            try {
+                const firstIndex = Array.isArray(block.lineIndices) ? block.lineIndices[0] : null;
+                if (typeof firstIndex === 'number' && this.lyricsDisplay && Array.isArray(this.lyricsDisplay.lyrics)) {
+                    firstLineText = this.lyricsDisplay.lyrics[firstIndex] || '';
+                }
+            } catch (_) {}
+            const titleEl = document.createElement('span');
+            titleEl.className = 'loop-wagon__title';
+            const fullText = firstLineText || (block.name || `Block ${i + 1}`);
+            titleEl.textContent = fullText;
+            // Кастомная подсказка (вверх), чтобы не смешивалась с текстом
+            wagon.setAttribute('data-title', fullText);
+
+            // Тип блока → аккуратная цветовая тема вагона
+            const name = (block.name || '').toLowerCase();
+            if (/(verse|куплет)/.test(name)) {
+                wagon.classList.add('loop-wagon--verse');
+            } else if (/(chorus|припев)/.test(name)) {
+                wagon.classList.add('loop-wagon--chorus');
+            } else if (/(bridge|бридж)/.test(name)) {
+                wagon.classList.add('loop-wagon--bridge');
+            }
+
+			// Кнопка-тогглер лупа в конце вагона
+			const toggleBtn = document.createElement('button');
+			toggleBtn.className = 'wagon-loop-toggle';
+			toggleBtn.title = 'Добавить в луп';
+			toggleBtn.onclick = (ev) => {
+				ev.stopPropagation();
+				this._onWagonToggle(block);
+			};
+
+			// Вставляем элементы внутрь кнопки-вагона
+			wagon.appendChild(idx);
+			wagon.appendChild(titleEl);
+			wagon.appendChild(toggleBtn);
+
+            // Умное сокращение по фактической ширине (на основе измерения)
+            try { this._trimTitleToFit(titleEl, fullText); } catch(_) {}
+
+            // Пока без логики диапазона — только навигация по клику
             wagon.onclick = () => {
-                const target = blocks[i];
-                const tr = this._getBlockTimeRange(target);
+                const tr = this._getBlockTimeRange(block);
                 if (tr && typeof tr.startTime === 'number') {
                     try { this.audioEngine.setCurrentTime(tr.startTime); } catch (e) {}
                 }
             };
+
+			// Применяем состояние выделения (цепочки) при рендере
+			if (this.selectedBlocks && this.selectedBlocks.includes(block.id)) {
+				wagon.classList.add('is-in-loop');
+				toggleBtn.classList.add('is-on');
+				toggleBtn.title = 'Убрать из лупа';
+			}
+
             this.loopTrainContainer.appendChild(wagon);
         }
 
+        // восстановим скролл если был
+        if (typeof this.loopTrainScrollLeft === 'number') {
+            this.loopTrainContainer.scrollLeft = this.loopTrainScrollLeft;
+        }
+
         this._updateTrainPlayingHighlight();
+		// Синхронизация стилей выбранных вагонов
+		try { this._updateTrainSelectionStyles(); } catch(_) {}
+        // и плавно центрируем активный вагон
+        try { this._scrollActiveWagonIntoView(); } catch(_) {}
+    }
+
+    _hideTrainContainer() {
+        if (this.loopTrainContainer) this.loopTrainContainer.style.display = 'none';
+    }
+
+    _destroyLoopTrain() {
+        if (this.loopTrainContainer) {
+            try { this.loopTrainContainer.remove(); } catch(_) {}
+            this.loopTrainContainer = null;
+        }
+    }
+
+    // Наблюдаем за каталогом и сменой классов body, чтобы правильно скрывать/показывать поезд
+    _ensureOverlayAndModeObservers() {
+        // Каталог (overlay)
+        try {
+            const overlay = document.getElementById('catalog-v2-overlay') || document.querySelector('#catalog-v2-overlay, .catalog-v2-overlay');
+            if (overlay && !this._catalogObserver) {
+                this._catalogObserver = new MutationObserver(() => {
+                    const isHidden = overlay.classList.contains('hidden') || overlay.style.display === 'none';
+                    // Если каталог открыт — поезд убираем полностью, чтобы он не "ехал" в каталоге
+                    if (!isHidden) {
+                        this._hideTrainContainer();
+                        return;
+                    }
+                    // Каталог закрыт: если мы в репетиции и есть блоки — мгновенно перерисовать поезд
+                    const isRehearsal = document.body.classList.contains('mode-rehearsal');
+                    const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+                    if (isRehearsal && hasBlocks) {
+                        this._renderLoopTrain();
+                    } else {
+                        this._destroyLoopTrain();
+                    }
+                });
+                this._catalogObserver.observe(overlay, { attributes: true, attributeFilter: ['class', 'style'] });
+            }
+        } catch(_) {}
+
+        // Классы body (смена режима)
+        try {
+            if (!this._bodyClassObserver) {
+                this._bodyClassObserver = new MutationObserver(() => {
+                    const isRehearsal = document.body.classList.contains('mode-rehearsal');
+                    if (isRehearsal) {
+                        const hasBlocks = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+                        if (hasBlocks) this._renderLoopTrain(); else this._destroyLoopTrain();
+                    } else {
+                        this._destroyLoopTrain();
+                    }
+                });
+                this._bodyClassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            }
+        } catch(_) {}
+
+        // Наблюдаем за изменениями стилей контейнера лирики — влияет на топ активного блока
+        try {
+            const lc = document.getElementById('lyrics-container');
+            if (lc && !this._lyricsContainerObserver) {
+                this._lyricsContainerObserver = new MutationObserver(() => {
+                    // Срабатывает при смене класса style-*
+                    const isRehearsal = document.body.classList.contains('mode-rehearsal');
+                    if (this._isSyncEditorOpen) { this._hideTrainContainer(); return; }
+                    if (!isRehearsal) { this._destroyLoopTrain(); return; }
+                    // Даем стилям примениться, затем стабильно позиционируем
+                    setTimeout(() => {
+                        try {
+                            this._renderLoopTrain();
+                            this._updateTrainPortalPosition();
+                            this._updateTrainPortalPositionUntilStable();
+                        } catch(_) {}
+                    }, 30);
+                });
+                this._lyricsContainerObserver.observe(lc, { attributes: true, attributeFilter: ['class', 'style'] });
+            }
+        } catch(_) {}
+    }
+
+    // Обновляет позицию портала-поезда над активным блоком
+    _updateTrainPortalPosition(blockEl) {
+        if (!this.loopTrainContainer) return;
+        // ФИКС: привязка к #lyrics-container для устойчивости между стилями/режимами
+        try {
+            const lc = document.getElementById('lyrics-container');
+            if (lc) {
+                const lcRect = lc.getBoundingClientRect();
+                const baseTop = Math.max(0, lcRect.top + 6);
+                this.loopTrainContainer.style.top = `${baseTop}px`;
+                return;
+            }
+        } catch(_) {}
+        // Fallback на активный блок
+        const el = blockEl || this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
+        if (!el) return;
+        try {
+            const rect = el.getBoundingClientRect();
+            this.loopTrainContainer.style.top = `${Math.max(0, rect.top - 28)}px`;
+        } catch(_) {}
+    }
+
+    // Многокадровое обновление позиции до стабилизации layout, чтобы поезд не зависал на верхней кромке
+    _updateTrainPortalPositionUntilStable(blockEl) {
+        if (!this.loopTrainContainer) return;
+        let attempts = 0;
+        const maxAttempts = 20; // ~20 кадров (~330-400мс)
+        const tick = () => {
+            if (!this.loopTrainContainer) return;
+            try {
+                const lc = document.getElementById('lyrics-container');
+                if (lc) {
+                    const lcRect = lc.getBoundingClientRect();
+                    const newTop = Math.max(0, lcRect.top + 6);
+                    const prevTop = parseFloat(this.loopTrainContainer.style.top || '0');
+                    if (Math.abs(prevTop - newTop) > 0.5) {
+                        this.loopTrainContainer.style.top = `${newTop}px`;
+                    }
+                } else {
+                    const el = blockEl || this.currentBlockElement || this._findBlockDOMElement(this.lyricsDisplay.currentActiveBlock);
+                    if (el) {
+                        const rect = el.getBoundingClientRect();
+                        const newTop = Math.max(0, rect.top - 28);
+                        const prevTop = parseFloat(this.loopTrainContainer.style.top || '0');
+                        if (Math.abs(prevTop - newTop) > 0.5) {
+                            this.loopTrainContainer.style.top = `${newTop}px`;
+                        }
+                    }
+                }
+            } catch(_) {}
+            attempts += 1;
+            if (attempts < maxAttempts) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    }
+
+    /**
+     * Усекает текст заголовка вагона так, чтобы он поместился в доступную ширину.
+     * Сохраняем начало фразы и добавляем многоточие (быстро и читабельно).
+     */
+    _trimTitleToFit(element, fullText) {
+        if (!element || !fullText) return;
+        // Быстрый путь: если уже помещается, выходим
+        if (element.scrollWidth <= element.clientWidth) return;
+        let left = 4; // минимум видимых символов
+        let right = fullText.length;
+        let best = '';
+        // Бинарный поиск по длине для end-ellipsis
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            element.textContent = fullText.slice(0, mid) + '…';
+            if (element.scrollWidth <= element.clientWidth) {
+                best = element.textContent;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (best) element.textContent = best; else element.textContent = fullText;
     }
 
     _updateTrainPlayingHighlight() {
@@ -1688,7 +2120,127 @@ class BlockLoopControl {
         wagons.forEach(w => w.classList.remove('playing'));
         if (idx >= 0 && idx < wagons.length) {
             wagons[idx].classList.add('playing');
+            // автоцентрируем текущий вагон
+            this._scrollActiveWagonIntoView(idx);
         }
+    }
+
+    // Обновление визуала выбранных вагонов (цепочки)
+    _updateTrainSelectionStyles() {
+        if (!this.loopTrainContainer) return;
+        const wagons = this.loopTrainContainer.querySelectorAll('.loop-wagon');
+        wagons.forEach(w => {
+            const id = w.dataset.blockId;
+            const on = this.selectedBlocks && id && this.selectedBlocks.includes(id);
+            w.classList.toggle('is-in-loop', !!on);
+            const btn = w.querySelector('.wagon-loop-toggle');
+            if (btn) {
+                btn.classList.toggle('is-on', !!on);
+                btn.title = on ? 'Убрать из лупа' : 'Добавить в луп';
+            }
+        });
+    }
+
+    // Клик по тогглеру вагона
+    _onWagonToggle(block) {
+        if (!block || !block.id) return;
+        if (!Array.isArray(this.selectedBlocks)) this.selectedBlocks = [];
+        // Если луп не включен — включаем на выбранном блоке
+        if (!this.isLooping) {
+            this.selectedBlocks = [block.id];
+            this.startLooping(block);
+            this._updateTrainSelectionStyles();
+            return;
+        }
+        // Правило непрерывной цепочки (только расширение по краям или снятие краёв)
+        const chain = this.selectedBlocks.slice();
+        if (chain.length === 0) chain.push(this.currentLoopBlock?.id || block.id);
+        const blocks = this._getProcessedBlocks();
+        const idToIndex = new Map(blocks.map((b, i) => [b.id, i]));
+        const bIdx = idToIndex.get(block.id);
+        const firstIdx = idToIndex.get(chain[0]);
+        const lastIdx = idToIndex.get(chain[chain.length - 1]);
+        if (bIdx == null || firstIdx == null || lastIdx == null) return;
+        // Снятие с краёв
+        if (block.id === chain[0] || block.id === chain[chain.length - 1]) {
+            if (chain.length === 1) {
+                // Один блок → выключаем луп полностью
+                this.stopLooping();
+                this.selectedBlocks = [];
+                this.isMultiLoopEnabled = false;
+                this.linkedBlock = null;
+                this.combinedStartTime = null;
+                this.combinedEndTime = null;
+            } else if (block.id === chain[0]) {
+                chain.shift();
+                this.selectedBlocks = chain;
+            } else {
+                chain.pop();
+                this.selectedBlocks = chain;
+            }
+            this._syncTrainEdges();
+            this._recalculateCombinedRange();
+            // После изменения цепочки обнуляем пользовательские границы (они относились к прошлой конфигурации)
+            this.hasUserDefinedBoundaries = false;
+            this.userBoundaries = null;
+            // Обновляем рабочие времена, чтобы прыжок ориентировался на новый комбинированный диапазон
+            if (this.isLooping && this.isMultiLoopEnabled && this.combinedStartTime != null && this.combinedEndTime != null) {
+                this.loopStartTime = this.combinedStartTime;
+                this.loopEndTime = this.combinedEndTime;
+            }
+            this._createLoopButtonForCurrentBlock();
+            this._updateTrainSelectionStyles();
+            return;
+        }
+        // Расширение по краям
+        if (bIdx === lastIdx + 1) {
+            chain.push(block.id);
+            this.selectedBlocks = chain;
+            this.isMultiLoopEnabled = this.selectedBlocks.length > 1;
+            this._syncTrainEdges();
+            this._recalculateCombinedRange();
+            this.hasUserDefinedBoundaries = false;
+            this.userBoundaries = null;
+            if (this.isLooping && this.combinedStartTime != null && this.combinedEndTime != null) {
+                // Применяем общий диапазон немедленно
+                this.loopStartTime = this.combinedStartTime;
+                this.loopEndTime = this.combinedEndTime;
+            }
+            this._createLoopButtonForCurrentBlock();
+            this._updateTrainSelectionStyles();
+            return;
+        }
+        if (bIdx === firstIdx - 1) {
+            chain.unshift(block.id);
+            this.selectedBlocks = chain;
+            this.isMultiLoopEnabled = this.selectedBlocks.length > 1;
+            this._syncTrainEdges();
+            this._recalculateCombinedRange();
+            this.hasUserDefinedBoundaries = false;
+            this.userBoundaries = null;
+            if (this.isLooping && this.combinedStartTime != null && this.combinedEndTime != null) {
+                this.loopStartTime = this.combinedStartTime;
+                this.loopEndTime = this.combinedEndTime;
+            }
+            this._createLoopButtonForCurrentBlock();
+            this._updateTrainSelectionStyles();
+            return;
+        }
+        // Иначе игнор (неразрывность)
+    }
+
+    // Центрирование активного вагона в области видимости
+    _scrollActiveWagonIntoView(idx) {
+        if (!this.loopTrainContainer) return;
+        const wagons = this.loopTrainContainer.querySelectorAll('.loop-wagon');
+        if (!wagons || wagons.length === 0) return;
+        let index = typeof idx === 'number' ? idx : Array.from(wagons).findIndex(w => w.classList.contains('playing'));
+        if (index < 0) return;
+        const wagon = wagons[index];
+        const container = this.loopTrainContainer;
+        const targetLeft = wagon.offsetLeft - (container.clientWidth - wagon.clientWidth) / 2;
+        const clamped = Math.max(0, Math.min(targetLeft, container.scrollWidth - container.clientWidth));
+        container.scrollTo({ left: clamped, behavior: 'smooth' });
     }
 }
 

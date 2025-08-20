@@ -1115,7 +1115,9 @@ class LyricsDisplay {
         }
 
         // ДОБАВЛЕНО: Разделяем большие блоки на части
-        const processedBlocks = this._splitLargeBlocks(this.textBlocks);
+        // Санитизация блоков относительно текущего текста, затем деление больших блоков
+        const baseBlocks = this._sanitizeBlocks(this.textBlocks);
+        const processedBlocks = this._splitLargeBlocks(baseBlocks);
 
         console.log(`Rehearsal: Current line: ${this.currentLine}, Total blocks: ${processedBlocks.length}`);
         console.log('Rehearsal: DETAILED Block structure:');
@@ -1289,21 +1291,23 @@ class LyricsDisplay {
             console.log(`Rehearsal: Preview lines:`, previewLines);
             
             previewLines.forEach((lineIndex, idx) => {
-                const previewLine = document.createElement('div');
-                previewLine.className = 'rehearsal-preview-line';
-                previewLine.dataset.index = lineIndex; // чтобы DragBoundary мог адресоваться к строке превью
-                previewLine.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
-                
-                if (idx === 0) {
-                    // Особый стиль для первой строки превью (делаем полужирным и увеличиваем размер)
-                    previewLine.classList.add('preview-continuation-first-line');
+                if (this.lyrics[lineIndex]) {
+                    const previewLine = document.createElement('div');
+                    previewLine.className = 'rehearsal-preview-line';
+                    previewLine.innerHTML = this._parseParenthesesForDuet(this.lyrics[lineIndex]);
+                    
+                    // ДОБАВЛЕНО: Увеличиваем первую строку в превью продолжений
+                    if (nextBlock.isContinuation && idx === 0) {
+                        previewLine.classList.add('preview-continuation-first-line');
+                    }
+                    // ДОБАВЛЕНО: Выделяем оранжевым первую строку обычного следующего блока
+                    else if (!nextBlock.isContinuation && idx === 0) {
+                        previewLine.classList.add('next-block-first-line');
+                    }
+                    
+                    previewContainer.appendChild(previewLine);
+                    console.log(`Rehearsal: Adding preview line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
                 }
-                
-                // Добавляем специальный класс для следующего блока
-                previewLine.classList.add('next-block-first-line');
-                
-                previewContainer.appendChild(previewLine);
-                console.log(`Rehearsal: Adding preview line ${lineIndex}: "${this.lyrics[lineIndex]}"`);
             });
             
             lyricsContainer.appendChild(previewContainer);
@@ -1383,6 +1387,32 @@ class LyricsDisplay {
         });
         
         return processedBlocks;
+    }
+
+    // НОВОЕ: Санитизация входных блоков — убираем пустые/дубликаты и выходим за пределы текста
+    _sanitizeBlocks(blocks) {
+        const lyricsLen = Array.isArray(this.lyrics) ? this.lyrics.length : 0;
+        const seen = new Set();
+        const result = [];
+        (blocks || []).forEach((blk, idx) => {
+            if (!blk || !Array.isArray(blk.lineIndices) || blk.lineIndices.length === 0) {
+                return; // пустой блок
+            }
+            // сортируем и уникализируем индексы, оставляем только валидные в пределах текста
+            const sorted = [...blk.lineIndices].sort((a,b)=>a-b)
+                .filter((v,i,arr)=> (i===0 || v!==arr[i-1]) && v>=0 && v<lyricsLen);
+            if (sorted.length === 0) return;
+            // используем ключ по диапазону для отбраковки полных дублей
+            const key = `${sorted[0]}-${sorted[sorted.length-1]}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+            result.push({
+                id: blk.id || `blk-${idx}-${sorted[0]}`,
+                name: blk.name || `Block ${idx+1}`,
+                lineIndices: sorted
+            });
+        });
+        return result;
     }
 
     _renderStandardLines() {
@@ -2257,6 +2287,10 @@ class LyricsDisplay {
                     behavior: 'auto', // 'auto' для мгновенного скролла
                 });
             }
+            // Сообщаем поезду обновить позицию немедленно (без ожидания первой строки)
+            try {
+                window.dispatchEvent(new CustomEvent('lyrics-teleprompter-scroll'));
+            } catch(_) {}
             return; // Выходим после обработки концертного режима
         }
         
@@ -2694,6 +2728,11 @@ class LyricsDisplay {
                 console.log(`Block ${blockIndex} loaded: id="${block.id}", name="${block.name}", lines=${block.lineIndices?.length || 0}`);
             });
             
+            // Санитизация импортированных блоков ДО рендера, чтобы устранить пустые/дубли и неверные индексы
+            try {
+                this.textBlocks = this._sanitizeBlocks(this.textBlocks);
+            } catch(_) {}
+
             this.currentLine = 0; // Reset current line
             this.currentlyFocusedBlockId = null; // Reset focused block
 

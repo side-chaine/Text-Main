@@ -8,6 +8,11 @@
 
 ## Краткосрочные цели (1-3 месяца)
 
+### 0. LooP Learn — исполнение (см. `.cursor/rules/loop-learn-roadmap.mdc`)
+- [~] PR‑A: Audio Source Adapter + безопасная загрузка (адаптер, очередь декодирования, запрет `blob:` для волны/синка, unit+smoke тесты)
+- [ ] PR‑B: Lifecycle & cleanup (единый контракт `init/activate/deactivate/dispose`, метрики)
+- [ ] PR‑C: UI/UX полиш train (debounce/throttle, минимальная высота, авто‑центр 60%, тултипы сверху, e2e smoke)
+
 ### 1. Улучшение обработки текста
 - [ ] Расширенный набор анимаций текста (скольжение, подсветка, мерцание)
   - Библиотека: gsap или anime.js
