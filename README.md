@@ -1,46 +1,67 @@
 cat > README.md <<'EOF'
 # beLive
 
-**beLive** — инновационное музыкальное приложение для репетиции, совместного исполнения и визуального погружения в трек.
+**beLive** — an experimental music web app for rehearsal, collaborative performance and visual immersion.
 
-**Кратко:** beLive помогает музыкантам и любителям улучшать треки, репетировать и петь вместе — с продвинутой обработкой аудио, визуальными аватарами и AI-фичами в планах.
-
-## Elevator pitch
-beLive — гибрид карманной студии и социальной караоке-платформы: сольные и коллективные сессии, визуальные аватары, синхронизация текста и умные музыкальные рекомендации. Цель — сделать совместное музицирование простым, увлекательным и масштабируемым.
-
-## Что есть сейчас (MVP)
-- Веб-интерфейс и набор POC (в `test/`) с аватарами и медиа-функциями (MediaPipe, фон, наложение).
-- CI: DCO проверка коммитов.
-- Автодеплой на GitHub Pages (workflow `deploy-pages.yml`).
-- Branch protection: обязательные статус-чеки (DCO, deploy).
-
-## Ключевые фичи (планируемые / в разработке)
-- **Караоке & комнаты**: личные и публичные комнаты, возможность присоединяться к сессиям и петь вместе (в будущем — синхронные комнаты).
-- **Аватар-студия**: интерактивные комнаты/лента, предпросмотры исполнителей и треков.
-- **AI-инструменты (в планах):** рекомендации, автоматическая гармонизация, корректировка тона, авто-мастеринг.
-- **Real-time:** WebRTC / WebSocket для совместного исполнения (план).
-
-## Технологии
-- Основной код: **JavaScript** (+ тестовые HTML демки), CSS.
-- CI/CD: GitHub Actions (DCO, deploy → Pages).
-- В планах: постепенная миграция UI в React + Tailwind.
-
-## Как быстро запустить локально
-1. Открой `index.html` в браузере для быстрой проверки заглушки / демо.
-2. Открой POC из `test/` (например, `test/live-avatar-poc.html`) — многие демки запускаются без сервера.
-
-## Тесты и наработки
-- Демки: `test/` — POC с аватаром, визуализацией и прочим.
-- Скриншоты и материалы: `Karaoke/`, `Rehearsal/`, `img/`.
-
-## Временные решения / заметки (важно)
-- Pages сейчас использует ветку `gh-pages` и/или workflow → временная заглушка. Перед публичным релизом лучше обновить источник на сборку (workflow).
-- В репозитории есть большие логи и приватные тесты. На финальном этапе нужно решить: вынести в отдельную ветку `private-tests`, добавить `.gitignore` или перенести в внешнее хранилище.
-
-## Как участвовать / CONTRIBUTING
-См. `CONTRIBUTING.md` (в разработке). Пока: форк → ветка → PR. Все PR должны быть Signed-off (`Signed-off-by:`) — DCO включена.
+**Short pitch:** beLive helps musicians and music fans practice, tune, and perform songs solo or together — providing advanced audio handling, avatar-driven visual experiences and future AI features.
 
 ---
 
-*Примечание:* это рабочая версия README. Финальная маркетинговая формулировка и скриншоты добавим после согласования дорожной карты и проверки Pages.
+## Elevator pitch
+beLive blends a compact studio workflow with a social karaoke experience: solo and group sessions, live avatars and synchronized lyrics, with planned AI-powered recommendations and production tools.
+
+---
+
+## Current status (MVP)
+- Web interface and proofs-of-concept (POCs) in `test/` demonstrating avatar/MediaPipe demos and visual effects.
+- CI: DCO (Developer Certificate of Origin) check enabled for PRs.
+- Automatic deploy to GitHub Pages via GitHub Actions (`.github/workflows/deploy-pages.yml`).
+- Branch protection configured: required status checks include DCO and deploy.
+
+---
+
+## Key features (planned / in progress)
+- **Karaoke & Rooms:** personal and public rooms with the ability to join live sessions. (Synchronous rooms planned.)
+- **Avatar Studio:** interactive room feed — preview performers and tracks; avatars embedded in UI for immersive performance.
+- **AI tools (planned):** intelligent recommendations, pitch correction, auto-harmonization and auto-mastering.
+- **Real-time (future):** low-latency collaboration via WebRTC / WebSockets.
+
+---
+
+## Quick start (local)
+1. Open `index.html` in a browser for a quick preview (Pages demo / placeholder).  
+2. Try POC demos in `test/` (e.g. `test/live-avatar-poc.html`) — many run without a build system.  
+3. If/when a `package.json` is added, follow typical `npm install` / `npm run dev` flow (to be documented).
+
+---
+
+## Repo structure (high-level)
+- `index.html` — current Pages entry / placeholder.
+- `js/`, `css/` — main application code (JS-heavy).
+- `test/` — POCs and demos (useful for visual verification).
+- `Karaoke/`, `Rehearsal/`, `img/` — screenshots and design assets.
+- `Log/` — runtime logs (should be reviewed and moved if sensitive).
+
+---
+
+## Temporary decisions / notes (important)
+- GitHub Pages currently serves a placeholder from `gh-pages` or the deploy workflow. For production we should switch to a CI-built artifact.
+- There are big log files and private test artifacts in this repo. Recommended: move logs and sensitive files to a `private-tests` branch or external storage, and add `.gitignore` to prevent new large logs being committed.
+- This README is a working version; we'll refine marketing copy and add screenshots after roadmap decisions.
+
+---
+
+## Contributing
+See `CONTRIBUTING.md` for contribution guidelines. Short: fork → new branch → PR. All PRs must be DCO-signed (add `Signed-off-by:` or use `--signoff`).
+
+---
+
+## License
+This project is licensed under the MIT License — see `LICENSE`.
+
+---
+
+## Contact
+Owner / Author: **Nikita Cheremisinov** — GitHub: [@side-chaine](https://github.com/side-chaine)
+
 EOF
