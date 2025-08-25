@@ -1867,14 +1867,23 @@ class WaveformEditor {
             
             // Добавляем слушатель для центровки при каждом изменении активной строки
             this._syncEditorCenteringHandler = () => {
-                // Не центрировать в режиме репетиции
+                // Исправление: если пришли из репетиции, но открыли Sync — принудительно ведём себя как караоке/концерт
                 const isRehearsal = (document.body && document.body.classList.contains('mode-rehearsal')) ||
                                     (window.textStyleManager && window.textStyleManager.currentStyleId === 'rehearsal');
-                if (!isRehearsal) {
+                const treatAsTeleprompter = document.body.classList.contains('mode-karaoke') || document.body.classList.contains('mode-concert');
+                if (!isRehearsal || treatAsTeleprompter) {
                     this._centerActiveLineInSyncEditor();
                 }
             };
             document.addEventListener('active-line-changed', this._syncEditorCenteringHandler);
+            // На всякий случай включаем авто-скролл у дисплея
+            try { if (window.lyricsDisplay) window.lyricsDisplay.autoScrollEnabled = true; } catch(_) {}
+            // Дополнительно: при скролле колесом в редакторе — не разрешаем lyricsDisplay перехватывать авто-скролл
+            try {
+                if (window.lyricsDisplay) {
+                    window.lyricsDisplay.autoScrollEnabled = true;
+                }
+            } catch(_) {}
             
             // Сбрасываем состояние центрированного плейхеда при открытии редактора
             this._resetCenteredPlayheadState();
@@ -1931,7 +1940,8 @@ class WaveformEditor {
                         setTimeout(() => {
                             const isRehearsal = (document.body && document.body.classList.contains('mode-rehearsal')) ||
                                                 (window.textStyleManager && window.textStyleManager.currentStyleId === 'rehearsal');
-                            if (!isRehearsal) {
+                            const treatAsTeleprompter = document.body.classList.contains('mode-karaoke') || document.body.classList.contains('mode-concert');
+                            if (!isRehearsal || treatAsTeleprompter) {
                                 this._centerActiveLineInSyncEditor();
                             } else {
                                 console.log('Sync Editor: Initial centering suppressed in rehearsal mode');
@@ -1946,14 +1956,14 @@ class WaveformEditor {
                 }
                 
                 // Создаем и диспатчим событие открытия редактора
-                const event = new CustomEvent('sync-editor-opened', { 
+            const event = new CustomEvent('sync-editor-opened', { 
                     detail: {
                         isLoopEnabled: this.isLoopEnabled,
                         loopStart: this.loopStart,
                         loopEnd: this.loopEnd
                     }
                 });
-                document.dispatchEvent(event);
+            document.dispatchEvent(event);
                 console.log('WaveformEditor: Dispatched sync-editor-opened event', event.detail);
             });
             
@@ -3372,6 +3382,17 @@ class WaveformEditor {
      */
     async loadDualWaveforms(instrumentalUrl, vocalsUrl) {
         console.log(`WaveformEditor: Загрузка двойных волновых форм. Инструментал: ${instrumentalUrl}, Вокал: ${vocalsUrl}`);
+        // Авто-подмена blob:null на безопасные URL из audioEngine.hybridEngine
+        if (this.audioEngine && this.audioEngine.hybridEngine) {
+            if (instrumentalUrl && instrumentalUrl.includes('blob:null/')) {
+                const safeI = this.audioEngine.hybridEngine.instrumentalUrl;
+                if (safeI) instrumentalUrl = safeI;
+            }
+            if (vocalsUrl && vocalsUrl.includes('blob:null/')) {
+                const safeV = this.audioEngine.hybridEngine.vocalsUrl;
+                if (safeV) vocalsUrl = safeV;
+            }
+        }
         
         // Сбрасываем предыдущие данные
         this.instrumentalAudioData = null;

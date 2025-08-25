@@ -179,7 +179,10 @@ class MarkerManager {
         
         // Определяем тип блока для строки и соответствующий цвет
         const blockType = this._getBlockTypeForLine(lineIndex);
-        const markerColor = this._getColorForBlockType(blockType);
+        // Цвет назначаем только для известных типов, иначе оставляем undefined
+        const markerColor = (blockType && blockType !== 'unknown')
+            ? this._getColorForBlockType(blockType)
+            : undefined;
         
         // Create marker object
         const marker = {
@@ -231,7 +234,10 @@ class MarkerManager {
         // Ищем блок, содержащий данную строку
         for (const block of this.lyricsDisplay.textBlocks) {
             if (block.lineIndices && block.lineIndices.includes(lineIndex)) {
-                return block.type || 'unknown';
+                // Разрешённые типы
+                const allowed = new Set(['verse','chorus','bridge']);
+                if (block.type && allowed.has(block.type)) return block.type;
+                return 'unknown';
             }
         }
         
@@ -251,7 +257,7 @@ class MarkerManager {
             'bridge': '#6f42c1',    // Фиолетовый для бриджей
         };
         
-        return colorMap[blockType] || '#4CAF50'; // По умолчанию зеленый (куплет)
+        return colorMap[blockType]; // Без дефолта, чтобы не ломать соответствие
     }
     
     /**
@@ -281,8 +287,8 @@ class MarkerManager {
         
         this._notifySubscribers('markerUpdated', this.markers[index]);
         
-        // Update UI to highlight lines with markers
-        this._updateLineMarkersUI();
+        // Пересчитываем цвета в привязке к блокам и обновляем UI
+        this.updateMarkerColors();
         
         return this.markers[index];
     }

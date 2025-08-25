@@ -351,6 +351,27 @@ class App {
             alignBtn.addEventListener('click', () => this._handleWordAlignment());
         }
 
+        // Возврат после закрытия Sync: откатываем временную «карате-имитацию»
+        document.addEventListener('sync-editor-closed', () => {
+            try {
+                if (this._syncCameFromRehearsal) {
+                    // Возвращаем полноценный режим репетиции
+                    document.body.classList.remove('mode-karaoke');
+                    document.body.classList.add('mode-rehearsal');
+                    try { this.textStyleManager.setStyle('rehearsal'); } catch(_) {}
+                    try { this._setLyricsContainerStyle(null); } catch(_) {}
+                    try { this.blockLoopControl && this.blockLoopControl.activate(); } catch(_) {}
+                    try {
+                        if (this.bpmControls) this.bpmControls.style.display = 'flex';
+                        this._updateBPMDisplay();
+                        if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.start();
+                    } catch(_) {}
+                    this._emitModeChanged('karaoke', 'rehearsal');
+                    this._syncCameFromRehearsal = false;
+                }
+            } catch(_) {}
+        });
+
         // 🔧 ИСПРАВЛЕНО: Убрал дублированный код, используем централизованный метод
         this._initTransportToggle();
 
@@ -593,6 +614,21 @@ class App {
                     }
                     
                     // Открываем редактор
+                    // ФИКС: Если входим из репетиции — имитируем «каравоке-вход» для стилей/классов/скролла
+                    const cameFromRehearsal = document.body.classList.contains('mode-rehearsal');
+                    if (cameFromRehearsal) {
+                        try {
+                            this._syncCameFromRehearsal = true;
+                            // Временно переключаем класс body на караоке, чтобы телепромптер в Sync вел себя корректно
+                            document.body.classList.remove('mode-rehearsal');
+                            document.body.classList.add('mode-karaoke');
+                            // Настраиваем визуальный стиль под караоке
+                            this.textStyleManager.setStyle('karaoke');
+                            this._setLyricsContainerStyle('style-karaoke');
+                            // Сообщаем слушателям о временной смене
+                            this._emitModeChanged('rehearsal', 'karaoke');
+                        } catch(_) {}
+                    }
                     this.waveformEditor.show();
                     
                 } catch (error) {
@@ -813,6 +849,7 @@ class App {
      */
     _activateConcertMode() {
         console.log('Activating concert mode');
+        const previousMode = this._getCurrentMode?.() || this._detectBodyMode?.() || null;
         
         // Деактивируем Live режим если он активен
         if (window.liveMode && window.liveMode.isActive) {
@@ -833,6 +870,7 @@ class App {
         // CSS классы для режимов
         document.body.classList.add('mode-concert');
         document.body.classList.remove('mode-rehearsal', 'mode-karaoke', 'mode-live');
+        try { this._emitModeChanged(previousMode, 'concert'); } catch(_) {}
     }
     
     /**
@@ -841,6 +879,7 @@ class App {
      */
     _activateKaraokeMode() {
         console.log('Activating karaoke mode');
+        const previousMode = this._getCurrentMode?.() || this._detectBodyMode?.() || null;
         
         if (window.liveMode && window.liveMode.isActive) {
             window.liveMode.deactivate();
@@ -860,6 +899,9 @@ class App {
         document.body.classList.add('mode-karaoke');
         document.body.classList.remove('mode-concert', 'mode-rehearsal', 'mode-live');
         this.karaokeBackgroundManager.start();
+
+        // Сообщаем о смене режима
+        try { this._emitModeChanged(previousMode, 'karaoke'); } catch(_) {}
     }
     
     /**
@@ -868,6 +910,7 @@ class App {
      */
     _activateRehearsalMode() {
         console.log('Activating rehearsal mode');
+        const previousMode = this._getCurrentMode?.() || this._detectBodyMode?.() || null;
         
         if (window.liveMode && window.liveMode.isActive) {
             window.liveMode.deactivate();
@@ -875,9 +918,50 @@ class App {
         
         this.karaokeBackgroundManager.stop();
         try { document.body.classList.remove('karaoke-active'); } catch(_) {}
-        this.textStyleManager.setStyle('rehearsal');
-        this._setLyricsContainerStyle(null);
-        this.blockLoopControl.activate();
+
+        // ГЕЙТИНГ: ждём готовности текста/маркеров, чтобы исключить «смешанные» блоки при быстрых переключениях
+        const startTs = Date.now();
+        const maxWaitMs = 1500;
+        const tryActivate = () => {
+            const lyricsReady = Array.isArray(this.lyricsDisplay?.lyrics) && this.lyricsDisplay.lyrics.length > 0;
+            const markersCount = (this.markerManager && typeof this.markerManager.getMarkers === 'function') ? (this.markerManager.getMarkers() || []).length : 0;
+            const blocksReady = Array.isArray(this.lyricsDisplay?.textBlocks) && this.lyricsDisplay.textBlocks.length > 0;
+            if (lyricsReady && (markersCount === 0 || blocksReady)) {
+                // Санитизация на всякий случай перед активацией
+                try {
+                    if (this.lyricsDisplay && Array.isArray(this.lyricsDisplay.textBlocks)) {
+                        const sanitized = this.lyricsDisplay._sanitizeBlocks(this.lyricsDisplay.textBlocks);
+                        this.lyricsDisplay.textBlocks = sanitized;
+                    }
+                } catch(_) {}
+                this.textStyleManager.setStyle('rehearsal');
+                this._setLyricsContainerStyle(null);
+                this.blockLoopControl.activate();
+                // Смена фона и BPM контролов
+                if (this.bpmControls) { this.bpmControls.style.display = 'flex'; }
+                this._updateBPMDisplay();
+            } else if (Date.now() - startTs < maxWaitMs) {
+                setTimeout(tryActivate, 120);
+                return;
+            } else {
+                // Fallback: активируем даже без блоков, но сразу форсируем перерендер позже
+                this.textStyleManager.setStyle('rehearsal');
+                this._setLyricsContainerStyle(null);
+                this.blockLoopControl.activate();
+                setTimeout(() => {
+                    try {
+                        if (this.lyricsDisplay && Array.isArray(this.lyricsDisplay.textBlocks)) {
+                            const sanitized = this.lyricsDisplay._sanitizeBlocks(this.lyricsDisplay.textBlocks);
+                            this.lyricsDisplay.textBlocks = sanitized;
+                            if (this.lyricsDisplay.currentStyle?.id === 'rehearsal') {
+                                this.lyricsDisplay.activateRehearsalDisplay();
+                            }
+                        }
+                    } catch(_) {}
+                }, 200);
+            }
+        };
+        tryActivate();
         this._hideLiveFeedConcept();
         
         if (this.bpmControls) {
@@ -893,6 +977,9 @@ class App {
             // Привяжем смену фона к смене блоков (только если не луп и не seek)
             this.rehearsalBackgroundManager.bindToBlockChanges(this.lyricsDisplay, this.blockLoopControl, this.audioEngine);
         }
+
+        // Сообщаем о смене режима
+        try { this._emitModeChanged(previousMode, 'rehearsal'); } catch(_) {}
     }
     
     /**
@@ -901,6 +988,7 @@ class App {
      */
     _activateLiveMode() {
         console.log('Activating live mode');
+        const previousMode = this._getCurrentMode?.() || this._detectBodyMode?.() || null;
         this.karaokeBackgroundManager.stop();
         if (this.rehearsalBackgroundManager) this.rehearsalBackgroundManager.stop();
         this.textStyleManager.setStyle('live');
@@ -937,6 +1025,9 @@ class App {
         // CSS классы для режимов
         document.body.classList.add('mode-live');
         document.body.classList.remove('mode-concert', 'mode-karaoke', 'mode-rehearsal');
+
+        // Сообщаем о смене режима
+        try { this._emitModeChanged(previousMode, 'live'); } catch(_) {}
     }
     
     /**
@@ -971,6 +1062,39 @@ class App {
         } catch (error) {
             console.error('Error initializing LiveMode:', error);
         }
+    }
+
+    /**
+     * Определяет текущий режим по классам body
+     * @private
+     */
+    _detectBodyMode() {
+        const b = document.body.classList;
+        if (b.contains('mode-rehearsal')) return 'rehearsal';
+        if (b.contains('mode-karaoke')) return 'karaoke';
+        if (b.contains('mode-live')) return 'live';
+        if (b.contains('mode-concert')) return 'concert';
+        return null;
+    }
+
+    /**
+     * Возвращает режим, который приложение считает активным (если есть трекинг)
+     * @private
+     */
+    _getCurrentMode() {
+        try { return this.currentMode || null; } catch(_) { return null; }
+    }
+
+    /**
+     * Эмитит событие смены режима
+     * @param {string|null} from
+     * @param {string} to
+     * @private
+     */
+    _emitModeChanged(from, to) {
+        try { this.currentMode = to; } catch(_) {}
+        const evt = new CustomEvent('mode-changed', { detail: { from, to } });
+        window.dispatchEvent(evt);
     }
 
     /**

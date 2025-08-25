@@ -1365,8 +1365,20 @@ class TrackCatalog {
     async loadTrack(index, options = {}) {
         if (index < 0 || index >= this.tracks.length) return;
         
+        const prevTrackId = (this.currentTrackIndex >= 0 && this.currentTrackIndex < this.tracks.length)
+            ? (this.tracks[this.currentTrackIndex] && this.tracks[this.currentTrackIndex].id) : null;
         const track = this.tracks[index];
         this.currentTrackIndex = index;
+
+        // Единый сигнал о смене трека — чтобы компоненты очистились до загрузки нового
+        try {
+            document.dispatchEvent(new CustomEvent('before-track-change', { detail: { fromTrackId: prevTrackId, toTrackId: track.id } }));
+        } catch(_) {}
+
+        // Жёсткая очистка текста/поезда во избежание "смешанных" блоков
+        try { if (window.app && window.app.blockLoopControl) { window.app.blockLoopControl.deactivate(); } } catch(_) {}
+        try { if (window.lyricsDisplay && typeof window.lyricsDisplay.clearAllTextBlocks === 'function') { window.lyricsDisplay.clearAllTextBlocks(); } } catch(_) {}
+        try { if (window.lyricsDisplay && typeof window.lyricsDisplay.fullReset === 'function') { window.lyricsDisplay.fullReset(); } } catch(_) {}
 
         // ПОКАЗЫВАЕМ ИНДИКАТОР ЗАГРУЗКИ
         const loadingOverlay = document.getElementById('loading-overlay');
@@ -1464,20 +1476,27 @@ class TrackCatalog {
                 if (window.stateManager) {
                     window.stateManager.forceTextRerender();
                 }
+                // После финального рендера — доп.санитизация блоков (устранить «пустые/смешанные»)
+                try {
+                    if (window.lyricsDisplay && Array.isArray(window.lyricsDisplay.textBlocks)) {
+                        const sanitized = window.lyricsDisplay._sanitizeBlocks(window.lyricsDisplay.textBlocks);
+                        window.lyricsDisplay.textBlocks = sanitized;
+                    }
+                } catch(_) {}
                 console.timeEnd('⏱️ FINAL_RENDER_TIME');
                 console.timeEnd('⏱️ TOTAL_TRACK_LOAD_TIME'); // Общее время загрузки
             }, 100); // Небольшая задержка для завершения всех операций
             
             // 🚀 АВТОПЛЕЙ: по опции
             if (options && options.autoplay) {
-                console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
-                setTimeout(async () => {
-                    try {
-                        await audioEngine.play();
-                        console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
-                    } catch (playError) {
-                        console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
-                    }
+            console.log('🎵 АВТОПЛЕЙ: Запуск воспроизведения...');
+            setTimeout(async () => {
+                try {
+                    await audioEngine.play();
+                    console.log('✅ АВТОПЛЕЙ: Воспроизведение начато успешно');
+                } catch (playError) {
+                    console.warn('⚠️ АВТОПЛЕЙ: Не удалось запустить автоматическое воспроизведение:', playError);
+                }
                 }, 200);
             }
             
@@ -1492,8 +1511,12 @@ class TrackCatalog {
                 const instrumentalUrl = track.instrumentalUrl || track.audioUrl;
                 const vocalsUrl = track.vocalsUrl;
 
-                if (instrumentalUrl || vocalsUrl) {
-                    window.waveformEditor.loadDualWaveforms(instrumentalUrl, vocalsUrl)
+                // Используем безопасные URL из гибридного движка, если они уже подготовлены
+                const instrumentalUrlForEditor = (audioEngine && audioEngine.hybridEngine && audioEngine.hybridEngine.instrumentalUrl) || instrumentalUrl;
+                const vocalsUrlForEditor = (audioEngine && audioEngine.hybridEngine && audioEngine.hybridEngine.vocalsUrl) || vocalsUrl;
+
+                if (instrumentalUrlForEditor || vocalsUrlForEditor) {
+                    window.waveformEditor.loadDualWaveforms(instrumentalUrlForEditor, vocalsUrlForEditor)
                         .then(() => console.log('WaveformEditor: Обе дорожки успешно загружены.'))
                         .catch(error => console.error('TrackCatalog: Ошибка при загрузке двойных волновых форм:', error));
                 }

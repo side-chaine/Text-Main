@@ -1,8 +1,8 @@
 /* Стили кнопки Loop в стиле модальных кнопок */
 .block-loop-btn {
     position: absolute;
-    top: 10px;
     right: 10px;
+    bottom: 10px; /* перенос в нижний правый угол по умолчанию */
     background: transparent !important;
     color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
@@ -37,8 +37,8 @@
 }
 
 .block-loop-btn.active {
-    top: 10px;
     right: 10px;
+    bottom: 10px;
     min-width: 60px;
     height: 32px;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #a93226 100%) !important;
@@ -225,7 +225,7 @@
 } 
 
 /* Стек чипов под Stop */
-.loop-chips-stack { }
+.loop-chips-stack { display: flex; flex-direction: column; gap: 6px; }
 
 /* Чип блока (квадратик с крестиком) */
 .loop-chip {
@@ -248,22 +248,118 @@
 .loop-chip:disabled { cursor: default; filter: saturate(0.4); } 
 
 /* ====== Поезд вагончиков (V2) ====== */
-.loop-train { margin-top: 0; position: relative; z-index: 1015; }
+.loop-train { margin-top: 0; position: relative; z-index: 9999; }
+/* Поднимаем поезд над содержимым, чтобы верхняя линия лупа не перекрывалась */
+.rehearsal-active-block .loop-train { top: -28px; z-index: 9999; left: 0; right: 0; }
+/* Контейнер-пленка по ширине, скролл по X при большом числе блоков */
+.loop-train { overflow-x: hidden; overflow-y: visible; white-space: nowrap; }
+/* Скрываем стандартную полосу прокрутки (остается скролл мышью/тачем) */
+.loop-train::-webkit-scrollbar { height: 0; }
+
+/* Вагончик: размером с нижние кнопки (ориентир .transport-btn) */
 .loop-wagon {
-	background: rgba(255,255,255,0.12);
-	border: 1px solid rgba(255,255,255,0.45);
-	color: rgba(255,255,255,0.95);
-	min-width: 26px;
-	height: 22px;
-	border-radius: 10px;
-	font-weight: 700;
-	font-size: 12px;
-	line-height: 20px;
-	text-align: center;
-	cursor: pointer;
-	backdrop-filter: blur(5px);
-	-webkit-backdrop-filter: blur(5px);
-	box-shadow: 0 0 10px rgba(0,0,0,0.25) inset;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.95);
+    height: 36px; /* близко к трансп. кнопкам по высоте */
+    min-width: 48px; /* позволяем сжиматься при большом числе блоков */
+    border-radius: 10px;
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25) inset;
+}
+.loop-wagon:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.55); }
+.loop-wagon.playing { border-color: rgba(100,200,255,0.9); box-shadow: 0 0 0 2px rgba(100,200,255,0.55); background: rgba(100,200,255,0.15); }
+
+/* Вагон в составе луп-цепочки */
+.loop-wagon.is-in-loop {
+    background: rgba(255,140,0,0.22);
+    border-color: rgba(255,140,0,0.7);
+}
+
+/* Тогглер в конце вагона */
+.wagon-loop-toggle {
+    margin-left: auto; width: 22px; height: 22px;
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.12); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0.9; transition: background .15s, border-color .15s, opacity .15s;
+}
+.wagon-loop-toggle::before { content: '+'; font-weight: 700; line-height: 1; }
+.wagon-loop-toggle:hover { opacity: 1; background: rgba(255,255,255,0.18); }
+.wagon-loop-toggle.is-on {
+    background: rgba(220, 53, 69, 0.85); border-color: rgba(220,53,69,1);
+}
+.wagon-loop-toggle.is-on::before { content: '×'; font-weight: 800; }
+
+/* Элегантная цветовая кодировка (приглушённые оттенки) */
+.loop-wagon--verse {
+    background: rgba(72, 187, 120, 0.14);
+    border-color: rgba(72, 187, 120, 0.45);
+}
+.loop-wagon--verse:hover { background: rgba(72, 187, 120, 0.18); border-color: rgba(72, 187, 120, 0.6); }
+
+.loop-wagon--chorus {
+    background: rgba(231, 76, 60, 0.14);
+    border-color: rgba(231, 76, 60, 0.45);
+}
+.loop-wagon--chorus:hover { background: rgba(231, 76, 60, 0.18); border-color: rgba(231, 76, 60, 0.6); }
+
+.loop-wagon--bridge {
+    background: rgba(155, 89, 182, 0.16);
+    border-color: rgba(155, 89, 182, 0.45);
+}
+.loop-wagon--bridge:hover { background: rgba(155, 89, 182, 0.2); border-color: rgba(155, 89, 182, 0.6); }
+
+/* Номер блока слева, компактный бейдж */
+.loop-wagon__index {
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.35);
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Первая строка с умным сокращением (одна строка + троеточие) */
+.loop-wagon__title { font-weight: 500; font-size: 13px; line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Кастомная подсказка вверх */
+.loop-wagon[data-title] { position: relative; }
+.loop-wagon[data-title]:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.1;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100000;
+}
+.loop-wagon[data-title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.8);
 }
 .loop-wagon:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.55); }
 .loop-wagon.playing { border-color: rgba(100,200,255,0.9); box-shadow: 0 0 0 2px rgba(100,200,255,0.55); background: rgba(100,200,255,0.15); } 

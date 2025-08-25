@@ -10816,29 +10816,24 @@ body.live-feed-active .live-feed-sidebar .quick-btn {
     transform: scale(0.95);
 }
 
-/* Orange scale buttons in rehearsal mode */
-body.mode-rehearsal .scale-btn {
-    background: #FF8C00 !important;
-    border-color: #FF8C00 !important;
-    font-weight: bold;
-}
-
-body.mode-rehearsal .scale-btn:hover {
-    background: #FF9800 !important;
-    border-color: #FF9800 !important;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
-}
-
+/* Стеклянные кнопки масштаба в режиме репетиции */
+body.mode-rehearsal .scale-btn,
 body.mode-rehearsal .scale-value-btn {
-    background: #FF8C00 !important;
-    border-color: #FF8C00 !important;
-    font-weight: bold;
+    background: rgba(255, 255, 255, 0.10) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+body.mode-rehearsal .scale-btn:hover,
 body.mode-rehearsal .scale-value-btn:hover {
-    background: #FF9800 !important;
-    border-color: #FF9800 !important;
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
 }
 
 /* Hide orange scale buttons in Avatar Studio - keep default blue style */
@@ -10861,11 +10856,15 @@ body.mode-rehearsal .scale-value-btn:hover {
 }
 
 .bmp-btn {
-    background: linear-gradient(135deg, #ff6b35, #ff8c42);
-    border: 1px solid #ff6b35;
-    color: white;
+    /* Стеклянный фон вместо оранжевого */
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     padding: 6px 10px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.85em;
     font-weight: 500;
@@ -10882,9 +10881,10 @@ body.mode-rehearsal .scale-value-btn:hover {
 }
 
 .bmp-btn:hover {
-    background: linear-gradient(135deg, #ff8c42, #ffab73);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.55);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
 }
 
 .bmp-btn:active {
