@@ -1,0 +1,57 @@
+
+cat > .github/workflows/deploy-pages.yml <<'EOF'
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies and build
+        run: |
+          if [ -f package.json ]; then
+            echo "Installing dependencies and building"
+            npm install
+            npm run build
+          else
+            echo "No package.json — skipping Node build"
+          fi
+
+      - name: Prepare pages_output folder
+        shell: bash
+        run: |
+          rm -rf pages_output
+          mkdir -p pages_output
+          if [ -d "${{ env.BUILD_DIR }}" ]; then
+            echo "Copying build dir ${BUILD_DIR} -> pages_output"
+            cp -R "${{ env.BUILD_DIR }}"/* pages_output/ || true
+          else
+            echo "Build dir not found, copying repo root to pages_output (excluding .git and .github)"
+            rsync -a --exclude='.git' --exclude='.github' ./ pages_output/ || true
+          fi
+          echo "pages_output contents:"
+          ls -la pages_output | sed -n '1,200p'
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: pages_output
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1

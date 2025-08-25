@@ -11,6 +11,12 @@ class CatalogV2 {
         this.tracks = [];
         this.db = null;
         this.myMusicIds = new Set();
+        // Плейлисты V1 (в памяти)
+        this.playlists = [];
+        this.isBuildingPlaylist = false;
+        this.currentPlaylist = [];
+        this.currentPlaylistName = 'Новый плейлист';
+        this.editingPlaylistId = null;
         this.uploadSession = {
             instrumental: null,
             vocal: null,
@@ -32,6 +38,9 @@ class CatalogV2 {
         this.setupEventListeners();
         this.initDatabase();
         this.attachSearchHandlers();
+
+        // Инициализируем UI плейлистов (центральная колонка)
+        this._initPlaylistsUI();
     }
     
     initDatabase() {
@@ -56,6 +65,8 @@ class CatalogV2 {
             console.log('🎵 CatalogV2: База данных подключена');
             this.loadTracksFromDB();
             this.loadMyMusicFromDB();
+            // Загружаем сохранённые плейлисты
+            this._loadPlaylistsFromDB();
         };
         request.onerror = () => {
             console.warn('❌ CatalogV2: Ошибка подключения. Пробуем пересоздать базу...');
@@ -266,6 +277,7 @@ class CatalogV2 {
                 <div class="track-actions">
                     <button class="track-action-btn play-btn" data-track-id="${track.id}">▶</button>
                     <button class="track-action-btn add-btn" data-track-id="${track.id}">➕</button>
+                    <button class="track-action-btn delete-btn" data-track-id="${track.id}" title="Удалить трек">✕</button>
                 </div>
             `;
             searchResults.appendChild(el);
@@ -288,33 +300,315 @@ class CatalogV2 {
         });
     }
     
+    // ===== PLAYLISTS V1 (центр) =====
+    _initPlaylistsUI() {
+        try {
+            const panel = this.overlay.querySelector('#playlists-panel');
+            if (!panel) return;
+            panel.innerHTML = `
+                <div class="create-playlist-section">
+                    <button class="create-playlist-btn" id="create-playlist-btn">
+                        <span class="btn-icon">📂</span>
+                        <span class="btn-text">Создать новый плейлист</span>
+                    </button>
+                </div>
+                <div class="playlist-constructor" id="playlist-constructor" style="display:none;">
+                    <div class="constructor-header">
+                        <input type="text" class="playlist-name-input" id="playlist-name-input" placeholder="Название плейлиста..." value="Новый плейлист" />
+                        <div class="constructor-controls">
+                            <button class="constructor-btn confirm-btn" id="confirm-playlist" title="Сохранить">✅</button>
+                            <button class="constructor-btn cancel-btn" id="cancel-playlist" title="Отменить">❌</button>
+                        </div>
+                    </div>
+                    <div class="constructor-tracks" id="constructor-tracks">
+                        <div class="drop-zone-message"><span class="drop-icon">🎵</span><p>Добавляйте треки кнопкой ➕</p></div>
+                    </div>
+                    <div class="constructor-summary">
+                        Треков: <span id="constructor-track-count">0</span>
+                    </div>
+                </div>
+                <div class="saved-playlists" id="saved-playlists"></div>
+            `;
+        } catch(_) {}
+    }
+
+    _startPlaylistBuilding() {
+        this.isBuildingPlaylist = true;
+        this.currentPlaylist = [];
+        this.editingPlaylistId = null;
+        const ctor = this.overlay.querySelector('#playlist-constructor');
+        const btn = this.overlay.querySelector('#create-playlist-btn');
+        const nameInput = this.overlay.querySelector('#playlist-name-input');
+        if (ctor) ctor.style.display = 'flex';
+        if (btn) btn.style.display = 'none';
+        if (nameInput) nameInput.value = this.currentPlaylistName;
+        this._setPlusPulse(true);
+        this._updatePlaylistSummary();
+    }
+
+    _cancelPlaylistBuilding() {
+        this.isBuildingPlaylist = false;
+        this.currentPlaylist = [];
+        const ctor = this.overlay.querySelector('#playlist-constructor');
+        const btn = this.overlay.querySelector('#create-playlist-btn');
+        if (ctor) ctor.style.display = 'none';
+        if (btn) btn.style.display = 'flex';
+        this._setPlusPulse(false);
+    }
+
+    _confirmPlaylist() {
+        if (!this.isBuildingPlaylist || this.currentPlaylist.length === 0) {
+            alert('Добавьте треки в плейлист');
+            return;
+        }
+        const nameEl = this.overlay.querySelector('#playlist-name-input');
+        const name = (nameEl?.value || 'Новый плейлист').trim();
+        if (this.editingPlaylistId) {
+            // Обновление существующего
+            const idx = this.playlists.findIndex(p => p.id === this.editingPlaylistId);
+            if (idx !== -1) {
+                this.playlists[idx] = { id: this.editingPlaylistId, name, tracks: [...this.currentPlaylist] };
+            }
+        } else {
+            // Создание нового
+            const data = { id: Date.now(), name, tracks: [...this.currentPlaylist] };
+            this.playlists.push(data);
+        }
+        this._rerenderSavedPlaylists();
+        this._savePlaylistsToDB();
+        this._cancelPlaylistBuilding();
+    }
+
+    _renderSavedPlaylist(data) {
+        const container = this.overlay.querySelector('#saved-playlists');
+        if (!container) return;
+        const total = data.tracks.length;
+        const el = document.createElement('div');
+        el.className = 'playlist-item';
+        el.dataset.playlistId = String(data.id);
+        el.innerHTML = `
+            <div class="playlist-info">
+                <div class="playlist-title">${data.name}</div>
+                <div class="playlist-meta">${total} треков</div>
+            </div>
+            <div class="playlist-actions">
+                <button class="playlist-action-btn edit-btn" title="Редактировать">✏️</button>
+                <button class="playlist-action-btn play-btn" title="Играть по очереди">▶️</button>
+                <button class="playlist-action-btn delete-btn" title="Удалить">🗑️</button>
+            </div>
+        `;
+        el.querySelector('.edit-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this._openPlaylistEditor(data);
+        });
+        el.querySelector('.play-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this._playPlaylistSequentially(data);
+        });
+        el.querySelector('.delete-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm(`Удалить плейлист "${data.name}"?`)) {
+                el.remove();
+                this.playlists = this.playlists.filter(p => p.id !== data.id);
+                this._savePlaylistsToDB();
+            }
+        });
+        container.prepend(el);
+    }
+
+    _updatePlaylistSummary() {
+        const countEl = this.overlay.querySelector('#constructor-track-count');
+        if (countEl) countEl.textContent = String(this.currentPlaylist.length);
+    }
+
+    _setPlusPulse(on) {
+        try {
+            const selector = '.add-btn, .add-to-playlist-btn, .add-to-setlist-btn';
+            this.overlay.querySelectorAll(selector).forEach(btn => {
+                if (on) btn.classList.add('add-btn-pulse'); else btn.classList.remove('add-btn-pulse');
+            });
+        } catch(_) {}
+    }
+
+    _rerenderSavedPlaylists() {
+        const container = this.overlay.querySelector('#saved-playlists');
+        if (!container) return;
+        container.innerHTML = '';
+        [...this.playlists].reverse().forEach(p => this._renderSavedPlaylist(p));
+    }
+
+    // === Sequential playback (MVP) ===
+    _playPlaylistSequentially(playlist) {
+        if (!playlist || !Array.isArray(playlist.tracks) || playlist.tracks.length === 0) return;
+        let index = 0;
+        const playNext = () => {
+            const t = playlist.tracks[index];
+            if (!t) return;
+            const all = (window.trackCatalog?.tracks || []);
+            const candidate = all.find(x => (x.title || '').startsWith(t.title));
+            if (!candidate) { index = (index + 1) % playlist.tracks.length; return playNext(); }
+            const i = all.indexOf(candidate);
+            window.trackCatalog.loadTrack(i, { autoplay: true, openSyncEditor: false }).then(() => {
+                const ae = window.audioEngine;
+                if (ae?.instrumentalAudio) {
+                    ae.instrumentalAudio.onended = () => {
+                        ae.instrumentalAudio.onended = null;
+                        index = (index + 1) % playlist.tracks.length;
+                        playNext();
+                    };
+                } else {
+                    const duration = candidate.duration || 0;
+                    setTimeout(() => { index = (index + 1) % playlist.tracks.length; playNext(); }, Math.max(500, duration * 1000));
+                }
+            });
+        };
+        playNext();
+    }
+
+    // === Редактор плейлиста (DnD) ===
+    _openPlaylistEditor(playlist) {
+        // Переиспользуем конструктор плейлиста для редактирования
+        this.isBuildingPlaylist = true;
+        this.currentPlaylist = [...playlist.tracks];
+        this.currentPlaylistName = playlist.name;
+        this.editingPlaylistId = playlist.id;
+        const ctor = this.overlay.querySelector('#playlist-constructor');
+        const btn = this.overlay.querySelector('#create-playlist-btn');
+        if (btn) btn.style.display = 'none';
+        if (ctor) {
+            ctor.style.display = 'flex';
+            const nameInput = this.overlay.querySelector('#playlist-name-input');
+            if (nameInput) nameInput.value = this.currentPlaylistName;
+            const list = this.overlay.querySelector('#constructor-tracks');
+            if (list) {
+                list.innerHTML = '';
+                this.currentPlaylist.forEach(entry => {
+                    const row = document.createElement('div');
+                    row.className = 'constructor-track-item';
+                    row.draggable = true;
+                    row.dataset.trackId = entry.id;
+                    row.innerHTML = `<span>${entry.title} - ${entry.artist || ''}</span><button class="remove-track-btn">❌</button>`;
+                    row.querySelector('.remove-track-btn').addEventListener('click', () => {
+                        row.remove();
+                        this.currentPlaylist = this.currentPlaylist.filter(t => t.id !== entry.id);
+                        this._updatePlaylistSummary();
+                    });
+                    list.appendChild(row);
+                });
+                this._enableDnD(list);
+            }
+            this._updatePlaylistSummary();
+        }
+    }
+
+    _enableDnD(listEl) {
+        let dragEl = null;
+        listEl.addEventListener('dragstart', (e) => {
+            const li = e.target.closest('.constructor-track-item');
+            if (!li) return;
+            dragEl = li;
+            li.classList.add('dragging');
+            listEl.classList.add('drag-target');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        listEl.addEventListener('dragend', () => {
+            if (dragEl) dragEl.classList.remove('dragging');
+            listEl.classList.remove('drag-target');
+            dragEl = null;
+            // Обновляем порядок в currentPlaylist
+            const order = Array.from(listEl.querySelectorAll('.constructor-track-item')).map(x => parseInt(x.dataset.trackId));
+            const idToItem = new Map(this.currentPlaylist.map(x => [x.id, x]));
+            this.currentPlaylist = order.map(id => idToItem.get(id)).filter(Boolean);
+        });
+        listEl.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterEl = this._getDragAfterElement(listEl, e.clientY);
+            if (!dragEl) return;
+            if (afterEl == null) listEl.appendChild(dragEl); else listEl.insertBefore(dragEl, afterEl);
+        });
+    }
+
+    _getDragAfterElement(container, y) {
+        const els = [...container.querySelectorAll('.constructor-track-item:not(.dragging)')];
+        return els.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) return { offset, element: child };
+            else return closest;
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    // === Persistence for playlists ===
+    _savePlaylistsToDB() {
+        try {
+            if (!this.db) return;
+            const tx = this.db.transaction('app_state', 'readwrite');
+            const store = tx.objectStore('app_state');
+            store.put({ key: 'playlists_v1', value: this.playlists, lastUpdated: Date.now() });
+        } catch (e) {
+            console.warn('Playlist save failed, fallback to localStorage', e);
+            try { localStorage.setItem('playlists_v1', JSON.stringify(this.playlists)); } catch(_) {}
+        }
+    }
+    _loadPlaylistsFromDB() {
+        try {
+            const tx = this.db.transaction('app_state', 'readonly');
+            const store = tx.objectStore('app_state');
+            const req = store.get('playlists_v1');
+            req.onsuccess = () => {
+                const val = req.result?.value;
+                if (Array.isArray(val)) {
+                    this.playlists = val;
+                    this._rerenderSavedPlaylists();
+                } else {
+                    // fallback from localStorage
+                    try {
+                        const ls = localStorage.getItem('playlists_v1');
+                        if (ls) { this.playlists = JSON.parse(ls); this._rerenderSavedPlaylists(); }
+                    } catch(_) {}
+                }
+            };
+        } catch (e) {
+            console.warn('Playlist load failed, fallback to localStorage', e);
+            try {
+                const ls = localStorage.getItem('playlists_v1');
+                if (ls) { this.playlists = JSON.parse(ls); this._rerenderSavedPlaylists(); }
+            } catch(_) {}
+        }
+    }
+    
     groupTracksByArtist(tracksArray = null) {
         const grouped = {};
-        
-        // Используем переданный массив или this.tracks как fallback
         const tracks = tracksArray || this.tracks;
-        
+
         tracks.forEach(track => {
-            // Пытаемся определить исполнителя из названия или метаданных
             let artist = 'Неизвестный исполнитель';
-            
-            if (track.artist) {
-                artist = track.artist;
-            } else if (track.title) {
-                // Пытаемся извлечь исполнителя из названия (формат "Исполнитель - Песня")
-                const dashIndex = track.title.indexOf(' - ');
-                if (dashIndex > 0) {
-                    artist = track.title.substring(0, dashIndex);
-                }
+            if (track && typeof track.artist === 'string' && track.artist.trim()) {
+                artist = track.artist.trim();
+            } else if (track && typeof track.title === 'string') {
+                artist = this._extractArtistFromTitle(track.title) || artist;
             }
-            
-            if (!grouped[artist]) {
-                grouped[artist] = [];
-            }
+            if (!grouped[artist]) grouped[artist] = [];
             grouped[artist].push(track);
         });
-        
         return grouped;
+    }
+
+    // Универсальный парсер "Исполнитель — Песня" с поддержкой разных тире и пробелов
+    _extractArtistFromTitle(title) {
+        try {
+            // Нормализуем кавычки/пробелы, убираем мусорные хвосты типа [-]
+            const cleaned = String(title)
+                .replace(/\s+\[.*\]$/u, '')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+            // Разделители: -, – (en dash), — (em dash), ‒ (figure dash)
+            const parts = cleaned.split(/\s*[\-–—‒]\s+/u);
+            if (parts.length >= 2 && parts[0].trim().length > 0) {
+                return parts[0].trim();
+            }
+        } catch(_) {}
+        return null;
     }
     
     setupEventListeners() {
@@ -385,6 +679,24 @@ class CatalogV2 {
             
             if (e.target.classList.contains('add-btn')) {
                 this.addToPlaylist(e.target);
+            }
+
+            // Удаление трека из общего каталога (правый столбец)
+            if (e.target.classList.contains('delete-btn')) {
+                const id = parseInt(e.target.dataset.trackId || e.target.closest('.track-item')?.dataset?.trackId);
+                if (!id) return;
+                this.deleteTrackFromCatalog(id);
+            }
+
+            // Плейлисты: делегированные обработчики (через closest, чтобы работали вложенные элементы)
+            if (e.target.closest && e.target.closest('#create-playlist-btn')) {
+                this._startPlaylistBuilding();
+            }
+            if (e.target.closest && e.target.closest('#confirm-playlist')) {
+                this._confirmPlaylist();
+            }
+            if (e.target.closest && e.target.closest('#cancel-playlist')) {
+                this._cancelPlaylistBuilding();
             }
         });
         
@@ -595,20 +907,48 @@ class CatalogV2 {
             return;
         }
         
+        // Режим конструктора плейлиста
+        if (this.isBuildingPlaylist) {
+            // Добавляем в текущий плейлист и помечаем чек‑маркой
+            const entry = { id: track.id, title: track.title, artist: this._extractArtistFromTitle(track.title) || (track.artist || 'Неизвестный исполнитель') };
+            // Уникальность по id
+            if (!this.currentPlaylist.some(t => t.id === entry.id)) {
+                this.currentPlaylist.push(entry);
+                this._updatePlaylistSummary();
+                // Галочка вместо плюса (без мигания)
+                button.textContent = '✅';
+                button.disabled = true;
+                // Добавляем строку в конструктор
+                const list = this.overlay.querySelector('#constructor-tracks');
+                if (list) {
+                    const row = document.createElement('div');
+                    row.className = 'constructor-track-item';
+                    row.innerHTML = `<span>${entry.title} - ${entry.artist}</span><button class="remove-track-btn">❌</button>`;
+                    row.querySelector('.remove-track-btn').addEventListener('click', () => {
+                        row.remove();
+                        this.currentPlaylist = this.currentPlaylist.filter(t => t.id !== entry.id);
+                        this._updatePlaylistSummary();
+                        // Вернём плюс на соответствующей карточке, если найдём
+                        const btn = this.overlay.querySelector(`.track-item[data-track-id="${entry.id}"] .add-btn`);
+                        if (btn) { btn.textContent = '➕'; btn.disabled = false; }
+                    });
+                    const placeholder = list.querySelector('.drop-zone-message');
+                    if (placeholder) placeholder.style.display = 'none';
+                    list.appendChild(row);
+                }
+            }
+            return;
+        }
+
+        // Обычный режим — добавить в "Мою музыку"
         console.log(`➕ CatalogV2: Добавление трека "${track.title}" в "Мою музыку"`);
         this.addToMyMusic(trackId).then(() => {
             this.renderMyMusic();
             this.showNotification(`✅ Трек "${track.title}" добавлен в "Мою музыку"`);
-        });
-        
-        // Визуальная обратная связь
+            // Короткий фидбек
         button.textContent = '✅';
-        button.disabled = true;
-        
-        setTimeout(() => {
-            button.textContent = '➕';
-            button.disabled = false;
-        }, 2000);
+            setTimeout(() => { button.textContent = '➕'; }, 1200);
+        });
     }
     
     handleFileSelect(type, file, cell) {
@@ -905,6 +1245,7 @@ class CatalogV2 {
             <div class="track-actions">
                 <button class="track-action-btn play-btn" data-track-id="${track.id}">▶</button>
                 <button class="track-action-btn add-btn" data-track-id="${track.id}">➕</button>
+                <button class="track-action-btn delete-btn" data-track-id="${track.id}" title="Удалить трек">✕</button>
             </div>
         `;
         
@@ -925,6 +1266,32 @@ class CatalogV2 {
             trackElement.style.opacity = '1';
             trackElement.style.transform = 'translateY(0)';
         }, 100);
+    }
+
+    // 🗑️ Удаление трека из общего каталога (IndexedDB + UI)
+    async deleteTrackFromCatalog(trackId) {
+        try {
+            if (!confirm('Удалить трек из каталога?')) return;
+            // Удаление из основной БД треков
+            if (window.trackCatalog && typeof window.trackCatalog.deleteTrack === 'function') {
+                // deleteTrack не возвращает Promise — запускаем и сразу обновляем UI
+                window.trackCatalog.deleteTrack(trackId);
+            }
+            // Удаляем из "Моей музыки", если присутствует
+            try { await this.removeFromMyMusic(trackId); } catch(_) {}
+            // Немедленное удаление из DOM (правой колонки)
+            try {
+                const item = document.querySelector(`.search-results .track-item[data-track-id="${trackId}"]`);
+                if (item && item.parentElement) item.parentElement.removeChild(item);
+            } catch(_) {}
+            // Отложенная перерисовка (даём IndexedDB завершить операцию)
+            setTimeout(() => this.renderSearchAllTracks(), 200);
+            try { this.renderMyMusic(); } catch(_) {}
+            this.showNotification('✅ Трек удалён');
+        } catch (err) {
+            console.error('❌ CatalogV2: Не удалось удалить трек', err);
+            this.showNotification('❌ Ошибка удаления трека');
+        }
     }
     
     // 🗑️ ФУНКЦИЯ ОЧИСТКИ IndexedDB

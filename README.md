@@ -1,94 +1,67 @@
-# Text - Lyrics Assistant for Musicians
+cat > README.md <<'EOF'
+# beLive
 
-Text is a web-based application designed to help musicians display and follow lyrics while performing or practicing songs. It provides a clean, full-screen lyrics display synchronized with audio playback.
+**beLive** — an experimental music web app for rehearsal, collaborative performance and visual immersion.
 
-## Features
+**Short pitch:** beLive helps musicians and music fans practice, tune, and perform songs solo or together — providing advanced audio handling, avatar-driven visual experiences and future AI features.
 
-### Current Features (v1.0)
-- **Full-screen lyrics display** with teleprompter-style scrolling
-- **Dual track support** for instrumental and vocal tracks
-- **Independent volume controls** for backing track and vocals
-- **Basic transport controls** (play, pause, next/previous track)
-- **Local track catalog** with persistent storage
-- **File upload system** for tracks and lyrics
-- **Keyboard shortcuts** for quick control during performance
+---
 
-### Planned Features
-- Advanced lyrics synchronization (karaoke-style word highlighting)
-- Loop functionality for section practice
-- BPM adjustment for slowing down during practice
-- Pitch/key adjustment (transposition)
-- Track recognition and automatic lyrics fetching
-- Advanced waveform visualization and navigation
+## Elevator pitch
+beLive blends a compact studio workflow with a social karaoke experience: solo and group sessions, live avatars and synchronized lyrics, with planned AI-powered recommendations and production tools.
 
-## Backup & Restore System
+---
 
-The application includes a comprehensive backup and restore system to protect your work:
+## Current status (MVP)
+- Web interface and proofs-of-concept (POCs) in `test/` demonstrating avatar/MediaPipe demos and visual effects.
+- CI: DCO (Developer Certificate of Origin) check enabled for PRs.
+- Automatic deploy to GitHub Pages via GitHub Actions (`.github/workflows/deploy-pages.yml`).
+- Branch protection configured: required status checks include DCO and deploy.
 
-### Backup Features
+---
 
-- **Manual Backups**: Create backups of your tracks at any time
-  - **Metadata-only Backups**: Small JSON files containing track information and markers
-  - **Full Track Backups**: ZIP files containing track metadata, markers, and audio files
-  
-- **Automatic Backups**: System automatically creates backups every 30 minutes
-  - Stores up to 10 most recent automatic backups
-  - Accessible through the Restore dialog
+## Key features (planned / in progress)
+- **Karaoke & Rooms:** personal and public rooms with the ability to join live sessions. (Synchronous rooms planned.)
+- **Avatar Studio:** interactive room feed — preview performers and tracks; avatars embedded in UI for immersive performance.
+- **AI tools (planned):** intelligent recommendations, pitch correction, auto-harmonization and auto-mastering.
+- **Real-time (future):** low-latency collaboration via WebRTC / WebSockets.
 
-### Restoring Data
+---
 
-You can restore your tracks from:
-- Previously downloaded backup files (.json or .zip)
-- Automatic backups stored in the browser
+## Quick start (local)
+1. Open `index.html` in a browser for a quick preview (Pages demo / placeholder).  
+2. Try POC demos in `test/` (e.g. `test/live-avatar-poc.html`) — many run without a build system.  
+3. If/when a `package.json` is added, follow typical `npm install` / `npm run dev` flow (to be documented).
 
-### How to Use
+---
 
-1. **Create Backups**:
-   - Click the "Backup" button in the header
-   - Choose between backing up all tracks (metadata only) or a single track with audio
+## Repo structure (high-level)
+- `index.html` — current Pages entry / placeholder.
+- `js/`, `css/` — main application code (JS-heavy).
+- `test/` — POCs and demos (useful for visual verification).
+- `Karaoke/`, `Rehearsal/`, `img/` — screenshots and design assets.
+- `Log/` — runtime logs (should be reviewed and moved if sensitive).
 
-2. **Restore Tracks**:
-   - Click the "Restore" button in the header
-   - Upload a previously downloaded backup file or select from automatic backups
-   - The system will restore tracks while preserving any existing data
+---
 
-### Security Considerations
+## Temporary decisions / notes (important)
+- GitHub Pages currently serves a placeholder from `gh-pages` or the deploy workflow. For production we should switch to a CI-built artifact.
+- There are big log files and private test artifacts in this repo. Recommended: move logs and sensitive files to a `private-tests` branch or external storage, and add `.gitignore` to prevent new large logs being committed.
+- This README is a working version; we'll refine marketing copy and add screenshots after roadmap decisions.
 
-- Automatic backups are stored securely in the browser's IndexedDB storage
-- Manual backups should be stored in a secure location (cloud storage recommended)
-- For production use on a server, additional server-side backup mechanisms will be implemented
+---
 
-## Usage
+## Contributing
+See `CONTRIBUTING.md` for contribution guidelines. Short: fork → new branch → PR. All PRs must be DCO-signed (add `Signed-off-by:` or use `--signoff`).
 
-### Getting Started
-1. Open the application in a web browser
-2. Click the "Catalog" button to open the track management panel
-3. Upload your tracks and lyrics files
-4. Select a track to begin playback
-
-### Keyboard Shortcuts
-- **Space**: Play/Pause
-- **Ctrl+Left Arrow**: Previous track
-- **Ctrl+Right Arrow**: Next track
-- **Escape**: Close catalog view
-
-## Technical Details
-
-Text is built using modern web technologies:
-- **HTML5**: Structure and semantic markup
-- **CSS3**: Styling and animations
-- **JavaScript**: Core functionality and audio processing
-- **Web Audio API**: Advanced audio handling and manipulation
-- **IndexedDB**: Local persistent storage for track catalog
-
-## Installation
-
-Text runs directly in the browser with no server-side dependencies. Simply open the `index.html` file in a web browser to use the application.
-
-## Development
-
-This project is still in development. Contributions and suggestions are welcome!
+---
 
 ## License
+This project is licensed under the MIT License — see `LICENSE`.
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+---
+
+## Contact
+Owner / Author: **Nikita Cheremisinov** — GitHub: [@side-chaine](https://github.com/side-chaine)
+
+EOF

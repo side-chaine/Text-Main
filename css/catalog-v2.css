@@ -368,6 +368,65 @@
     transform: translateY(-1px);
 }
 
+/* ===== PLAYLISTS (центральная колонка) ===== */
+.create-playlist-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+.create-playlist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+    color: #f0f0f0;
+    cursor: pointer;
+    transition: all .25s ease;
+    backdrop-filter: blur(4px);
+}
+.create-playlist-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+.btn-icon { font-size: 1.1em; }
+
+.playlist-constructor { display: none; flex-direction: column; gap: 10px; }
+.constructor-header { display: flex; gap: 10px; align-items: center; }
+.playlist-name-input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.25);
+    color: #f0f0f0;
+}
+.constructor-controls { display: flex; gap: 8px; }
+.constructor-btn { padding: 8px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05)); color:#f0f0f0; cursor: pointer; }
+.constructor-btn.confirm-btn { background: linear-gradient(135deg, rgba(0,230,118,0.22), rgba(0,230,118,0.10)); border-color: rgba(0,230,118,0.45); color:#eafff4; }
+.constructor-btn.confirm-btn:hover { background: linear-gradient(135deg, #00e676, #4caf50); color:#000; box-shadow: 0 6px 18px rgba(0,230,118,0.35); }
+.constructor-btn.cancel-btn { background: linear-gradient(135deg, rgba(244,67,54,0.25), rgba(244,67,54,0.12)); border-color: rgba(244,67,54,0.45); }
+.constructor-tracks { min-height: 100px; padding: 10px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 10px; }
+.constructor-track-item { display:flex; justify-content: space-between; align-items:center; padding:8px 10px; margin-bottom:6px; background: rgba(255,255,255,0.06); border-radius: 8px; }
+.constructor-track-item .remove-track-btn { background: transparent; border: 1px solid rgba(255,255,255,0.25); color:#f0f0f0; border-radius: 6px; padding:4px 8px; cursor:pointer; }
+.constructor-summary { text-align:right; color:#00e676; }
+
+.saved-playlists { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.playlist-item { display:flex; justify-content: space-between; align-items: center; padding:10px 12px; background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius: 10px; }
+.playlist-actions { display:flex; gap: 8px; }
+.playlist-action-btn { background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05)); color:#f0f0f0; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:6px 10px; cursor:pointer; }
+/* Улучшенный стиль кнопок плейлиста */
+.playlist-action-btn.play-btn { background: linear-gradient(135deg, rgba(0,230,118,0.18), rgba(0,230,118,0.08)); border-color: rgba(0,230,118,0.35); }
+.playlist-action-btn.play-btn:hover { background: linear-gradient(135deg, #00e676, #4caf50); color: #000; box-shadow: 0 6px 16px rgba(0,230,118,0.35); }
+.playlist-action-btn.edit-btn { background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)); }
+
+/* DnD визуальные состояния */
+.constructor-track-item { cursor: grab; }
+.constructor-track-item.dragging { opacity: .6; transform: scale(0.98); cursor: grabbing; }
+.constructor-tracks.drag-target { outline: 2px dashed rgba(0,230,118,0.35); outline-offset: 2px; }
+
 /* ПОЛЕ ПОИСКА */
 .search-input {
     width: 100%;
@@ -574,6 +633,14 @@
     color: #fff;
     border-color: #ff6b35;
     box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+/* Пульсация для плюсиков в режиме построения плейлиста */
+.add-btn.add-btn-pulse { animation: addPulse 1.4s ease-in-out infinite; }
+@keyframes addPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,107,53,0.45); transform: translateY(0); }
+    70% { box-shadow: 0 0 0 10px rgba(255,107,53,0); transform: translateY(-1px); }
+    100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); transform: translateY(0); }
 }
 
 /* UPLOAD MODE СТИЛИ */
